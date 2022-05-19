@@ -8,6 +8,11 @@ body {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    height: 100vvh;
+    width: 100vw;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
 }
 
 ::-webkit-scrollbar {
@@ -41,4 +46,11 @@ body {
 
 .transi-75 {
     transition: 75ms;
+}
+
+canvas {
+    height: 720px;
+    width: 1280px;
+    background: black;
+    margin: 5% auto;
 }
