@@ -6,6 +6,11 @@ class World {
         new Chicken()
     ];
     clouds = new Cloud();
+    backgroundObjects = [
+        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', 0, -20),
+        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', 0, -10),
+        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', 0, 0)
+    ]
 
     canvas;
     ctx;
@@ -18,25 +23,33 @@ class World {
 
 
     draw() {
-
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
-        this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
+        this.addObjectsToMap(this.backgroundObjects);
 
+        this.addToMap(this.character)
 
-        this.enemies.forEach(enemy => {
-            this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
-        });
+        this.addObjectsToMap(this.enemies);
 
-        this.ctx.drawImage(this.clouds.img, this.clouds.x, this.clouds.y, this.clouds.width, this.clouds.height);
-
+        this.addToMap(this.clouds)
 
         // draw() wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function() {
             self.draw();
         });
+    }
 
+
+    addObjectsToMap(objectes) {
+        objectes.forEach(object => {
+            this.addToMap(object);
+        });
+    }
+
+
+    addToMap(mo) {
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
 
     }
 }

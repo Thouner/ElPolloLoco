@@ -7,6 +7,6 @@ function init() {
     world = new World(canvas);
 
 
-    console.log('my character is ', world['character'], ' and ', world.enemies); // console.log('my character is ', world.character); ist das gleiche
-
+    // console.log('my character is ', world['character'], ' and ', world.enemies); 
+    // console.log('my character is ', world.character); ist das gleiche
 }
