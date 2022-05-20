@@ -53,9 +53,10 @@ body {
 canvas {
     /* height: 480px;
     width: 720px; */
-    background: url('/img/5.Fondo/Capas/5.cielo_1920-1080px.png');
+    background: black;
+    /* background: url('/img/5.Fondo/Capas/5.cielo_1920-1080px.png');
     background-size: cover;
     background-attachment: fixed;
-    background-position: center;
+    background-position: center; */
     margin: 5% auto;
 }
