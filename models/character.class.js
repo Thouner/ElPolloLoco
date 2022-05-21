@@ -1,13 +1,27 @@
 class Character extends MovableObject {
-    height = 300
-    width = 210
+    height = 280;
+    width = 280;
+    x = 0;
+    y = 180
+
+    Image_Idle = [
+        'pirat/png/1/1_entity_000_IDLE_000.png',
+        'pirat/png/1/1_entity_000_IDLE_001.png',
+        'pirat/png/1/1_entity_000_IDLE_002.png',
+        'pirat/png/1/1_entity_000_IDLE_003.png',
+        'pirat/png/1/1_entity_000_IDLE_004.png',
+        'pirat/png/1/1_entity_000_IDLE_005.png',
+        'pirat/png/1/1_entity_000_IDLE_006.png',
+    ];
+
     Image_Walking = [
-        'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
-        'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-22.png',
-        'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-23.png',
-        'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-24.png',
-        'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-25.png',
-        'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-26.png'
+        'pirat/png/1/1_entity_000_RUN_000.png',
+        'pirat/png/1/1_entity_000_RUN_001.png',
+        'pirat/png/1/1_entity_000_RUN_002.png',
+        'pirat/png/1/1_entity_000_RUN_003.png',
+        'pirat/png/1/1_entity_000_RUN_004.png',
+        'pirat/png/1/1_entity_000_RUN_005.png',
+        'pirat/png/1/1_entity_000_RUN_006.png',
     ];
     world;
     walking_sound = new Audio('audio/walk.mp3');
@@ -15,13 +29,13 @@ class Character extends MovableObject {
 
 
     constructor() {
-        super().loadImage('img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png');
-        this.x = 0
-        this.y = 150
+        super().loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
+
+        // this.loadImagesArray(this.Image_Idle);
         this.loadImagesArray(this.Image_Walking);
 
 
-        this.moveRight(0);
+        // this.moveRight(0);
 
         this.animationCharater(150);
     }
@@ -36,7 +50,7 @@ class Character extends MovableObject {
          */
         setInterval(() => {
             this.walking_sound.pause();
-            this.walking_sound.playbackRate = 2.2;
+            this.walking_sound.playbackRate = 2.4;
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.x += 5;
                 this.otherDierection = false;

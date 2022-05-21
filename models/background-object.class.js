@@ -1,7 +1,7 @@
 class BackgroundObject extends MovableObject {
     // y = 0;
-    height = 480;
-    width = 721;
+    height = 495;
+    width = 880;
 
     /**
      * draw all background images
