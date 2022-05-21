@@ -23,13 +23,14 @@ class Character extends MovableObject {
         this.animationCharater(150);
     }
 
+    /**
+     * animation of the character
+     */
+    animationCharater() {
 
-
-
-
-    animationCharater(runspeed) {
-
-
+        /**
+         * movement of the character and the background
+         */
         setInterval(() => {
             if (this.world.keyboard.RIGHT) {
                 this.x += 5;
@@ -39,13 +40,17 @@ class Character extends MovableObject {
                 this.x -= 5;
                 this.otherDierection = true;
             }
+
             this.world.camera_x = -this.x;
+
+
         }, 1000 / 60);
 
-
+        /**
+         * Play the animation only when you press a key
+         */
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-
                 // walk animation
                 let i = this.currentImage % this.Image_Walking.length; // i = 0,1,2,3,4,5,6,0,1,2,3,4,5,6,...
                 let path = this.Image_Walking[i];
@@ -59,12 +64,3 @@ class Character extends MovableObject {
 
     }
 }
-
-// animation() {
-//     setInterval(() => {
-//         let i = this.currentImage % this.Image_Walking.length; // i = 0,1,2,3,4,5,6,0,1,2,3,4,5,6,...
-//         let path = this.Image_Walking[i];
-//         this.img = this.imageCache[path]
-//         this.currentImage++;
-//               }, 200);
-// }

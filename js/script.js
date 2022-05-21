@@ -2,11 +2,17 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
+/**
+ * canvas initiate
+ */
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
 
+/**
+ * key pressed = true
+ */
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;
@@ -19,6 +25,9 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
+/**
+ * key released = false
+ */
 window.addEventListener('keyup', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = false;
