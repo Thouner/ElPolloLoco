@@ -17,7 +17,7 @@ class Endboss extends MovableObject {
     ];
 
     speed = 0.7;
-    walking_sound = new Audio('audio/chicken.mp3');
+    // walking_sound = new Audio('audio/chicken.mp3');
 
     constructor() {
         super().loadImage('troll/Troll_01_1_WALK_000.png');
@@ -31,8 +31,8 @@ class Endboss extends MovableObject {
             this.walkleft(this.speed);
         }, 1000 / 60);
         this.animationEnemie();
-        this.walking_sound.volume = 0.2;
-        this.walking_sound.loop = true;
+        // this.walking_sound.volume = 0.2;
+        // this.walking_sound.loop = true;
         // this.walking_sound.play();
     }
 

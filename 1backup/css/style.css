@@ -1,0 +1,61 @@
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    height: 100vvh;
+    width: 100vw;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+::-webkit-scrollbar {
+    height: 5px;
+    width: 12px;
+}
+
+ ::-webkit-scrollbar-track {
+    background-color: #F8F5F2;
+}
+
+ ::-webkit-scrollbar-thumb {
+    background-color: #dddddd;
+}
+
+ ::-webkit-scrollbar-thumb:active {
+    background-color: rgb(128, 128, 128);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-default {
+    cursor: default;
+}
+
+.transi-125 {
+    transition: 125ms;
+}
+
+.transi-75 {
+    transition: 75ms;
+}
+
+canvas {
+    /* height: 480px;
+    width: 720px; */
+    background: black;
+    /* background: url('/img/5.Fondo/Capas/5.cielo_1920-1080px.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center; */
+    margin: 5% auto;
+    border-radius: 20px;
+}
