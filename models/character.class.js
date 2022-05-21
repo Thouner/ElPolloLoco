@@ -13,7 +13,7 @@ class Character extends MovableObject {
 
     constructor() {
         super().loadImage('img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png');
-        this.x = 100
+        this.x = 0
         this.y = 150
         this.loadImagesArray(this.Image_Walking);
 
@@ -32,16 +32,18 @@ class Character extends MovableObject {
          * movement of the character and the background
          */
         setInterval(() => {
-            if (this.world.keyboard.RIGHT) {
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.x += 5;
                 this.otherDierection = false;
             }
-            if (this.world.keyboard.LEFT) {
+            if (this.world.keyboard.LEFT && this.x > -600) {
                 this.x -= 5;
                 this.otherDierection = true;
             }
 
-            this.world.camera_x = -this.x;
+
+            this.world.camera_x = -this.x + 100;
+
 
 
         }, 1000 / 60);

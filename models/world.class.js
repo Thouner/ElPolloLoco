@@ -1,34 +1,15 @@
 class World {
     character = new Character();
-    enemies = [
-        new Chicken(),
-        new Chicken(),
-        new Chicken()
-    ];
-    clouds = new Cloud();
-    backgroundObjects = [
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', -1439, 0),
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/completo.png', -1439, -20),
-        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/completo.png', -1439, -10),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/completo.png', -1439, 0),
+    level = level1;
 
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 0, 0),
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/completo.png', 0, -20),
-        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/completo.png', 0, -10),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/completo.png', 0, 0),
-
-        // new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 1439, 0),
-        // new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/completo.png', 1439, -20),
-        // new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/completo.png', 1439, -10),
-        // new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/completo.png', 1439, 0)
-    ]
     canvas;
     ctx; // context
     keyboard;
     camera_x = 0;
 
     distanceTraveled = 700;
-    backgroundWidthToAdd = 1439;
+    backgroundWidthToAdd1png = 1440;
+    backgroundWidthToAdd2png = 2160;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -38,9 +19,6 @@ class World {
         this.setWorld();
 
     }
-
-
-
 
     /**
      * pass "world" in character
@@ -57,28 +35,14 @@ class World {
 
         this.ctx.translate(this.camera_x, 0); //movement of the camera
 
-        this.addObjectsToMap(this.backgroundObjects); //drawing the backgrounds
-        this.addToMap(this.clouds) //drawing the clouds
+        this.addObjectsToMap(this.level.backgroundObjects); //drawing the backgrounds
+        this.addObjectsToMap(this.level.clouds) //drawing the clouds
         this.addToMap(this.character) //drawing the character
-        this.addObjectsToMap(this.enemies); //drawing the enemies
+        this.addObjectsToMap(this.level.enemies); //drawing the enemies
 
         this.ctx.translate(-this.camera_x, 0); //back movement of the camera
 
         this.addbackground();
-
-        // if (this.character.x == this.distanceTraveled) {
-        //     console.log('bin bei ', this.distanceTraveled)
-        //     console.log(' einfügen bei ', this.backgroundWidthToAdd)
-
-        //     this.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', this.backgroundWidthToAdd, 0));
-        //     this.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/completo.png', this.backgroundWidthToAdd, -20));
-        //     this.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/completo.png', this.backgroundWidthToAdd, -10));
-        //     this.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/completo.png', this.backgroundWidthToAdd, 0));
-
-        //     this.distanceTraveled = this.distanceTraveled + 700;
-        //     this.backgroundWidthToAdd = this.backgroundWidthToAdd + 1439;
-        // }
-
 
         // draw() wird immer wieder aufgerufen
         let self = this;
@@ -87,24 +51,29 @@ class World {
         });
     }
 
-
+    /**
+     * background extension from a certain distance
+     */
     addbackground() {
         if (this.character.x == this.distanceTraveled) {
             console.log('bin bei ', this.distanceTraveled)
-            console.log(' einfügen bei ', this.backgroundWidthToAdd)
+            console.log(' einfügen bei ', this.backgroundWidthToAdd1png)
+            console.log(' einfügen bei ', this.backgroundWidthToAdd2png)
 
-            this.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', this.backgroundWidthToAdd, 0));
-            this.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/completo.png', this.backgroundWidthToAdd, -20));
-            this.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/completo.png', this.backgroundWidthToAdd, -10));
-            this.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/completo.png', this.backgroundWidthToAdd, 0));
+            this.level.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', this.backgroundWidthToAdd1png, 0));
+            this.level.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', this.backgroundWidthToAdd2png, 0));
+            this.level.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', this.backgroundWidthToAdd1png, -30));
+            this.level.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', this.backgroundWidthToAdd2png, -30));
+            this.level.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/1.png', this.backgroundWidthToAdd1png, -20));
+            this.level.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', this.backgroundWidthToAdd2png, -20));
+            this.level.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', this.backgroundWidthToAdd1png, 0));
+            this.level.backgroundObjects.push(new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', this.backgroundWidthToAdd2png, 0));
 
-            this.distanceTraveled = this.distanceTraveled + 700;
-            this.backgroundWidthToAdd = this.backgroundWidthToAdd + 1439;
+            this.distanceTraveled = this.distanceTraveled + 1400;
+            this.backgroundWidthToAdd1png = this.backgroundWidthToAdd1png + 1440;
+            this.backgroundWidthToAdd2png = this.backgroundWidthToAdd2png + 1440;
         }
     }
-
-
-
 
     /**
      * draw each object from an array
