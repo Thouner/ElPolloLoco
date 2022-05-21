@@ -1,7 +1,8 @@
 class Endboss extends MovableObject {
     height = 800;
     width = 800;
-    y = -250;
+    y = -220;
+
     Image_Walking = [
         'troll/1_TROLL/Troll_01_1_WALK_000.png',
         'troll/1_TROLL/Troll_01_1_WALK_001.png',
@@ -21,20 +22,25 @@ class Endboss extends MovableObject {
 
     constructor() {
         super().loadImage('troll/1_TROLL/Troll_01_1_WALK_000.png');
+        this.otherDierection = true;
 
-        this.x = 720;
+        this.x = 1420;
 
 
         this.loadImagesArray(this.Image_Walking);
         this.moveLeft(this.speed);
-        this.animation(200);
+        this.animationEnemie();
         this.walking_sound.volume = 0.2;
         this.walking_sound.loop = true;
         // this.walking_sound.play();
     }
 
 
-
+    animationEnemie() {
+        setInterval(() => {
+            this.animationRepeat(this.Image_Walking);
+        }, 200);
+    }
 
 
 }

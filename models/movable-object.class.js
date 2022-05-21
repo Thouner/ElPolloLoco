@@ -6,8 +6,23 @@ class MovableObject {
     width;
     imageCache = {};
     currentImage = 0;
-    // speed = 0.5;
     otherDierection = false;
+    speedY = 0;
+    acceleration = 2.5;
+
+    applyGravity(groundHight) {
+        setInterval(() => {
+            if (this.isAboveGround(groundHight) || this.speedY > 0) {
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
+            }
+        }, 1000 / 25);
+    }
+
+
+    isAboveGround(groundHight) {
+        return this.y < groundHight;
+    }
 
     /**
      * loadImage('img/image1.png')
@@ -33,23 +48,13 @@ class MovableObject {
 
     }
 
-    /**
-     * animate the individual objects
-     * 
-     * @param {number} runspeed - number of milliseconds the animation is played
-     */
-    animation(runspeed) {
-        setInterval(() => {
-            this.animationRepeat();
-        }, runspeed);
-    }
 
     /**
      * run through the individual images of the animation
      */
-    animationRepeat() {
-        let i = this.currentImage % this.Image_Walking.length; // i = 0,1,2,3,4,5,6,0,1,2,3,4,5,6,...
-        let path = this.Image_Walking[i];
+    animationRepeat(animationArray) {
+        let i = this.currentImage % animationArray.length; // i = 0,1,2,3,4,5,6,0,1,2,3,4,5,6,...
+        let path = animationArray[i];
         this.img = this.imageCache[path]
         this.currentImage++;
     }
@@ -77,5 +82,9 @@ class MovableObject {
             this.x -= speed;
 
         }, 1000 / 60);
+    }
+
+    jump() {
+        his.speedY = 30;
     }
 }

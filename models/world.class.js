@@ -9,7 +9,7 @@ class World {
 
 
 
-    distanceTraveled = 600;
+    distanceTraveled = 400;
     backgroundWidthToAdd1png = 880;
 
     constructor(canvas, keyboard) {
@@ -58,17 +58,13 @@ class World {
      */
     addbackground() {
         if (this.character.x == this.distanceTraveled) {
-            console.log('bin bei ', this.distanceTraveled)
-            console.log(' einfügen bei ', this.backgroundWidthToAdd1png)
+            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sky.png', this.backgroundWidthToAdd1png, 0));
+            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sea.png', this.backgroundWidthToAdd1png, 0));
+            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/island.png', this.backgroundWidthToAdd1png, 0));
+            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/land.png', this.backgroundWidthToAdd1png, 0));
+            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/decor.png', this.backgroundWidthToAdd1png, 0));
 
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sky.png', this.backgroundWidthToAdd1png));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sea.png', this.backgroundWidthToAdd1png));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/island.png', this.backgroundWidthToAdd1png));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/land.png', this.backgroundWidthToAdd1png));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/decor.png', this.backgroundWidthToAdd1png));
-
-
-            this.distanceTraveled = this.distanceTraveled + 700;
+            this.distanceTraveled = this.distanceTraveled + 400;
             this.backgroundWidthToAdd1png = this.backgroundWidthToAdd1png + 880;
         }
     }

@@ -2,7 +2,7 @@ class Chicken extends MovableObject {
     height = 300;
     width = 300;
     x = 720 + Math.random() * 160;
-    y = 150 + Math.random() * 20;
+    y = 180 + Math.random() * 40;
 
     Image_Walking = [
         'ork/1_ORK/ORK_01_WALK_000.png',
@@ -22,19 +22,23 @@ class Chicken extends MovableObject {
 
     constructor() {
         super().loadImage('ork/1_ORK/ORK_01_WALK_000.png');
-        // this.Image_Walking.translate(this.Image_Walking.width, 0);
-        // this.Image_Walking.scale(-1, 1);
-        // this.Image_Walking.x = this.Image_Walking.x * -1;
-        // this.x = 720 + Math.random() * 160;
-        // this.y = 350 + Math.random() * 20;
+
+        this.otherDierection = true;
 
         this.loadImagesArray(this.Image_Walking);
         this.moveLeft(this.speed);
-        this.animation(200);
+        this.animationEnemie();
+
+
+
         this.walking_sound.volume = 0.2;
         this.walking_sound.loop = true;
         // this.walking_sound.play();
     }
 
-
+    animationEnemie() {
+        setInterval(() => {
+            this.animationRepeat(this.Image_Walking);
+        }, 200);
+    }
 }
