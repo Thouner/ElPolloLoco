@@ -7,8 +7,6 @@ class World {
     keyboard;
     camera_x = 0;
 
-
-
     distanceTraveled = 400;
     backgroundWidthToAdd1png = 880;
 

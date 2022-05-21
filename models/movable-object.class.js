@@ -20,8 +20,8 @@ class MovableObject {
     }
 
 
-    isAboveGround(groundHight) {
-        return this.y < groundHight;
+    isAboveGround() {
+        return this.y < 180;
     }
 
     /**
@@ -60,31 +60,19 @@ class MovableObject {
     }
 
 
-    /**
-     * movement of the object to the right
-     * 
-     * @param {number} speed - number of pixels to be moved
-     */
-    moveRight(speed) {
-        setInterval(() => {
-            this.x += speed;
+    walkRight(walkspeed) {
+        this.x += walkspeed;
+        this.otherDierection = false;
 
-        }, 1000 / 60);
     }
 
-    /**
-     * movement of the object to the left
-     * 
-     * @param {number} speed - number of pixels to be moved
-     */
-    moveLeft(speed) {
-        setInterval(() => {
-            this.x -= speed;
-
-        }, 1000 / 60);
+    walkleft(walkspeed) {
+        this.x -= walkspeed;
+        this.otherDierection = true;
     }
+
 
     jump() {
-        his.speedY = 30;
+        this.speedY = 30;
     }
 }
