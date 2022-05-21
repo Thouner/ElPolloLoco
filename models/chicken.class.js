@@ -7,6 +7,7 @@ class Chicken extends MovableObject {
         'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/3.Ga_paso izquierdo.png'
     ];
     speed = 0.3 + Math.random() * 0.5;
+    walking_sound = new Audio('audio/chicken.mp3');
 
     constructor() {
         super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/3.Ga_paso izquierdo.png');
@@ -18,7 +19,9 @@ class Chicken extends MovableObject {
         this.loadImagesArray(this.Image_Walking);
         this.moveLeft(this.speed);
         this.animation(200);
-
+        this.walking_sound.volume = 0.2;
+        this.walking_sound.loop = true;
+        // this.walking_sound.play();
     }
 
 

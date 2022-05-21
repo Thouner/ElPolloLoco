@@ -34,18 +34,26 @@ class MovableObject {
     }
 
     /**
-     * run through the individual images of the animation
+     * animate the individual objects
      * 
      * @param {number} runspeed - number of milliseconds the animation is played
      */
     animation(runspeed) {
         setInterval(() => {
-            let i = this.currentImage % this.Image_Walking.length; // i = 0,1,2,3,4,5,6,0,1,2,3,4,5,6,...
-            let path = this.Image_Walking[i];
-            this.img = this.imageCache[path]
-            this.currentImage++;
+            this.animationRepeat();
         }, runspeed);
     }
+
+    /**
+     * run through the individual images of the animation
+     */
+    animationRepeat() {
+        let i = this.currentImage % this.Image_Walking.length; // i = 0,1,2,3,4,5,6,0,1,2,3,4,5,6,...
+        let path = this.Image_Walking[i];
+        this.img = this.imageCache[path]
+        this.currentImage++;
+    }
+
 
     /**
      * movement of the object to the right
