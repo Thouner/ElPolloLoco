@@ -2,31 +2,30 @@ class Endboss extends MovableObject {
     height = 800;
     width = 800;
     y = -220;
-
-    Image_Walking = [
-        'troll/Troll_01_1_WALK_000.png',
-        'troll/Troll_01_1_WALK_001.png',
-        'troll/Troll_01_1_WALK_002.png',
-        'troll/Troll_01_1_WALK_003.png',
-        'troll/Troll_01_1_WALK_004.png',
-        'troll/Troll_01_1_WALK_005.png',
-        'troll/Troll_01_1_WALK_006.png',
-        'troll/Troll_01_1_WALK_007.png',
-        'troll/Troll_01_1_WALK_008.png',
-        'troll/Troll_01_1_WALK_009.png',
-    ];
+    imges;
 
     speed = 0.7;
     // walking_sound = new Audio('audio/chicken.mp3');
 
     constructor() {
-        super().loadImage('troll/Troll_01_1_WALK_000.png');
+        super().loadImage('troll/1/Troll_01_1_WALK_000.png');
+
+        if (this.enemyIndex == 1) {
+            this.imges = new Troll_Image1;
+        } else if (this.enemyIndex == 2) {
+            this.imges = new Troll_Image2;
+        } else if (this.enemyIndex == 3) {
+            this.imges = new Troll_Image3;
+        }
+
+
+
         this.otherDierection = true;
 
         this.x = 1420;
 
 
-        this.loadImagesArray(this.Image_Walking);
+        this.loadImagesArray(this.imges.Image_Walking);
         setInterval(() => {
             this.walkleft(this.speed);
         }, 1000 / 60);
@@ -39,7 +38,7 @@ class Endboss extends MovableObject {
 
     animationEnemie() {
         setInterval(() => {
-            this.animationRepeat(this.Image_Walking);
+            this.animationRepeat(this.imges.Image_Walking);
         }, 200);
     }
 

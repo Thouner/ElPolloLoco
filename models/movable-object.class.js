@@ -1,14 +1,15 @@
 class MovableObject {
-    y;
-    x;
+    // y;
+    // x;
     img;
-    height;
-    width;
+    // height;
+    // width;
     imageCache = {};
     currentImage = 0;
     otherDierection = false;
     speedY = 0;
     acceleration = 2.5;
+    enemyIndex = Math.floor(Math.random() * (3 - 1 + 1) + 1);
 
     applyGravity(groundHight) {
         setInterval(() => {
