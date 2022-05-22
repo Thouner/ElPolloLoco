@@ -3,13 +3,11 @@ class Endboss extends MovableObject {
     width = 800;
     y = -220;
     imges;
-
     speed = 0.7;
     // walking_sound = new Audio('audio/chicken.mp3');
 
     constructor() {
         super().loadImage('troll/1/Troll_01_1_WALK_000.png');
-
         if (this.enemyIndex == 1) {
             this.imges = new Troll_Image1;
         } else if (this.enemyIndex == 2) {
@@ -17,14 +15,8 @@ class Endboss extends MovableObject {
         } else if (this.enemyIndex == 3) {
             this.imges = new Troll_Image3;
         }
-
-
-
         this.otherDierection = true;
-
         this.x = 1420;
-
-
         this.loadImagesArray(this.imges.Image_Walking);
         setInterval(() => {
             this.walkleft(this.speed);

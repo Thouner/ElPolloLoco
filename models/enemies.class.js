@@ -1,4 +1,4 @@
-class Ork extends MovableObject {
+class Enemies extends MovableObject {
     // height = 300;
     height = Math.floor(Math.random() * (370 - 300 + 1) + 300);
     // width = 300;

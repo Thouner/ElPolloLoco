@@ -1,9 +1,9 @@
 class MovableObject {
     // y;
     // x;
-    img;
     // height;
     // width;
+    img;
     imageCache = {};
     currentImage = 0;
     otherDierection = false;

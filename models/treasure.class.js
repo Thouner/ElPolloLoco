@@ -1,5 +1,9 @@
-class Treasure extends Stationary_Objects {
+class Treasure extends MovableObject {
+    height = 70;
+    width = 70;
+    x = 400;
+    y = 410;
     constructor() {
-        super().loadImage('ork/1/ORK_01_WALK_000.png');
+        super().loadImage('treasures/3.png');
     }
 }

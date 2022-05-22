@@ -4,7 +4,7 @@ class Character extends MovableObject {
     x = 0;
     y = -150;
     speed = 5;
-    characterSelection = 2;
+    characterSelection = 1;
     imges;
 
     world;

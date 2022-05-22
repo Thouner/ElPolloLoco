@@ -1,6 +1,4 @@
 class Stationary_Objects {
-
-
     y;
     x;
     img;
