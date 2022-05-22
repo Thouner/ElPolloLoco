@@ -27,17 +27,12 @@ class Character extends MovableObject {
             this.loadImage('pirat/png/2/2_entity_000_IDLE_000.png');
             this.imges = new Pirat_Image2;
         }
-
         this.loadImagesArray(this.imges.Image_Walking);
-
         this.loadImagesArray(this.imges.Image_Jump);
         this.loadImagesArray(this.imges.Image_Idle);
         this.loadImagesArray(this.imges.Image_Die);
         this.loadImagesArray(this.imges.Image_Attack);
         this.loadImagesArray(this.imges.Image_Hurt);
-
-
-
         this.animationCharater(150);
     }
 
@@ -69,17 +64,21 @@ class Character extends MovableObject {
 
         }, 1000 / 60);
 
-        /**
-         * Play the animation only when you press a key
-         */
+
+
         setInterval(() => {
+
+            if (this.isHurt()) {
+                console.log('aua')
+                    // this.animationRepeat(this.imges.Image_Hurt);
+            }
 
             if (this.isDead()) {
                 this.animationRepeat(this.imges.Image_Die);
                 // console.log('dead')
             }
 
-            if (!this.isAboveGround() && !this.isDead()) {
+            if (!this.isAboveGround() && !this.isDead() && !this.isHurt()) {
                 this.animationRepeat(this.imges.Image_Idle);
             }
             if (this.world.keyboard.RIGHT && !this.isAboveGround(180) || this.world.keyboard.LEFT && !this.isAboveGround(180)) {

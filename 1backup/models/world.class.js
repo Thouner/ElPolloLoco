@@ -1,7 +1,7 @@
 class World {
     character = new Character();
     level = level1;
-
+    movelO = new MovableObject;
     canvas;
     ctx; // context
     keyboard;
@@ -18,6 +18,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollisions();;
         // this.canvas.width = innerWidth;
         // this.canvas.height = innerHeight;
     }
@@ -28,6 +29,18 @@ class World {
     setWorld() {
         this.character.world = this;
     }
+
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    this.character.hit();
+                }
+            });
+        }, 200);
+    }
+
 
     /**
      * draw the world
@@ -46,7 +59,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0); //back movement of the camera
 
-        this.addbackground();
+        this.addBackGround();
 
         // draw() wird immer wieder aufgerufen
         let self = this;
@@ -58,7 +71,7 @@ class World {
     /**
      * background extension from a certain distance
      */
-    addbackground() {
+    addBackGround() {
         if (this.character.x == this.distanceTraveled) {
             this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sea.png', this.backgroundWidthToAdd1png));
             this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/island.png', this.backgroundWidthToAdd1png));
@@ -89,18 +102,28 @@ class World {
      */
     addToMap(mo) {
         if (mo.otherDierection) {
-            this.ctx.save();
-            this.ctx.translate(mo.width, 0);
-            this.ctx.scale(-1, 1);
-            mo.x = mo.x * -1;
+            this.flipImage(mo);
         }
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);
         if (mo.otherDierection) {
-            mo.x = mo.x * -1;
-            this.ctx.restore();
+            this.flipImageBack(mo);
         }
     }
 
+
+    flipImage(mo) {
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0);
+        this.ctx.scale(-1, 1);
+        mo.x = mo.x * -1;
+    }
+
+
+    flipImageBack(mo) {
+        mo.x = mo.x * -1;
+        this.ctx.restore();
+    }
 
 
 }

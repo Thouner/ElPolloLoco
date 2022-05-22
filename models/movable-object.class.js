@@ -19,6 +19,8 @@ class MovableObject {
 
     ernergy = 100;
 
+    lastHit = 0;
+
 
     applyGravity(groundHight) {
         setInterval(() => {
@@ -69,10 +71,23 @@ class MovableObject {
     }
 
     hit() {
-        if (this.ernergy > 0)
+        if (this.ernergy > 0) {
+
             this.ernergy -= 5;
-        console.log(this.ernergy)
+            console.log(this.ernergy)
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+
     }
+
+
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
+        return timepassed < 5;
+    }
+
 
     isDead() {
         return this.ernergy == 0;

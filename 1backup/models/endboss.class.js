@@ -2,9 +2,16 @@ class Endboss extends MovableObject {
     height = 800;
     width = 800;
     y = -220;
+    x = 1420;
     imges;
     speed = 0.7;
     // walking_sound = new Audio('audio/chicken.mp3');
+
+    xBox = this.x + 270;
+    yBox = this.y + 270;
+    heightBox = this.height - 370;
+    widthBox = this.width - 550;
+
 
     constructor() {
         super().loadImage('troll/1/Troll_01_1_WALK_000.png');
@@ -16,7 +23,7 @@ class Endboss extends MovableObject {
             this.imges = new Troll_Image3;
         }
         this.otherDierection = true;
-        this.x = 1420;
+
         this.loadImagesArray(this.imges.Image_Walking);
         setInterval(() => {
             this.walkleft(this.speed);
