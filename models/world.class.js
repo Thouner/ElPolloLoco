@@ -18,6 +18,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollisions();;
         // this.canvas.width = innerWidth;
         // this.canvas.height = innerHeight;
     }
@@ -28,6 +29,18 @@ class World {
     setWorld() {
         this.character.world = this;
     }
+
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level1.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    console.log(enemy)
+                }
+            });
+        }, 1000);
+    }
+
 
     /**
      * draw the world
@@ -60,11 +73,11 @@ class World {
      */
     addbackground() {
         if (this.character.x == this.distanceTraveled) {
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sea.png', this.backgroundWidthToAdd1png, 0));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/island.png', this.backgroundWidthToAdd1png, 0));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/land.png', this.backgroundWidthToAdd1png, 0));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/decor.png', this.backgroundWidthToAdd1png, 0));
-            this.level.sky.push(new Sky('beach/game_background_2/layers/sky.png', this.backgroundWidthToAdd1png, 0));
+            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sea.png', this.backgroundWidthToAdd1png));
+            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/island.png', this.backgroundWidthToAdd1png));
+            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/land.png', this.backgroundWidthToAdd1png));
+            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/decor.png', this.backgroundWidthToAdd1png));
+            this.level.sky.push(new Sky('beach/game_background_2/layers/sky.png', this.backgroundWidthToAdd1png));
 
             this.distanceTraveled = this.distanceTraveled + 400;
             this.backgroundWidthToAdd1png = this.backgroundWidthToAdd1png + 880;
@@ -89,18 +102,28 @@ class World {
      */
     addToMap(mo) {
         if (mo.otherDierection) {
-            this.ctx.save();
-            this.ctx.translate(mo.width, 0);
-            this.ctx.scale(-1, 1);
-            mo.x = mo.x * -1;
+            this.flipImage(mo);
         }
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);
         if (mo.otherDierection) {
-            mo.x = mo.x * -1;
-            this.ctx.restore();
+            this.flipImageBack(mo);
         }
     }
 
+
+    flipImage(mo) {
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0);
+        this.ctx.scale(-1, 1);
+        mo.x = mo.x * -1;
+    }
+
+
+    flipImageBack(mo) {
+        mo.x = mo.x * -1;
+        this.ctx.restore();
+    }
 
 
 }

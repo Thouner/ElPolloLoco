@@ -1,5 +1,5 @@
 class BackgroundObject extends MovableObject {
-    // y = 0;
+    y = 0;
     height = 495;
     width = 880;
 
@@ -10,10 +10,10 @@ class BackgroundObject extends MovableObject {
      * @param {number} x - positioning on the x axis
      * @param {number} y - positioning on the y axis
      */
-    constructor(imagePath, x, y) {
+    constructor(imagePath, x) {
         super().loadImage(imagePath);
         this.x = x;
-        this.y = y;
+        // this.y = y;
 
     }
 }

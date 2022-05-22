@@ -7,6 +7,8 @@ class World {
     keyboard;
     camera_x = 0;
 
+
+
     distanceTraveled = 400;
     backgroundWidthToAdd1png = 880;
 
@@ -35,8 +37,10 @@ class World {
 
         this.ctx.translate(this.camera_x, 0); //movement of the camera
 
-        this.addObjectsToMap(this.level.backgroundObjects); //drawing the backgrounds
+        this.addObjectsToMap(this.level.sky) //drawing the clouds
         this.addObjectsToMap(this.level.clouds) //drawing the clouds
+        this.addObjectsToMap(this.level.backgroundObjects); //drawing the backgrounds
+        this.addObjectsToMap(this.level.treasure); //drawing the treasure
         this.addToMap(this.character) //drawing the character
         this.addObjectsToMap(this.level.enemies); //drawing the enemies
 
@@ -56,11 +60,11 @@ class World {
      */
     addbackground() {
         if (this.character.x == this.distanceTraveled) {
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sky.png', this.backgroundWidthToAdd1png, 0));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sea.png', this.backgroundWidthToAdd1png, 0));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/island.png', this.backgroundWidthToAdd1png, 0));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/land.png', this.backgroundWidthToAdd1png, 0));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/decor.png', this.backgroundWidthToAdd1png, 0));
+            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sea.png', this.backgroundWidthToAdd1png));
+            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/island.png', this.backgroundWidthToAdd1png));
+            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/land.png', this.backgroundWidthToAdd1png));
+            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/decor.png', this.backgroundWidthToAdd1png));
+            this.level.sky.push(new Sky('beach/game_background_2/layers/sky.png', this.backgroundWidthToAdd1png));
 
             this.distanceTraveled = this.distanceTraveled + 400;
             this.backgroundWidthToAdd1png = this.backgroundWidthToAdd1png + 880;

@@ -5,9 +5,9 @@ class Cloud extends MovableObject {
     width = 880;
     speed = 0.3;
 
-    constructor() {
+    constructor(x) {
         super().loadImage('beach/game_background_2/layers/cloud.png');
-
+        this.x = x;
         this.animate();
     }
     animate() {
