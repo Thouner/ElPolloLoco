@@ -1,7 +1,7 @@
 class World {
     character = new Character();
     level = level1;
-
+    movelO = new MovableObject;
     canvas;
     ctx; // context
     keyboard;
@@ -33,12 +33,12 @@ class World {
 
     checkCollisions() {
         setInterval(() => {
-            this.level1.enemies.forEach((enemy) => {
+            this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
-                    console.log(enemy)
+                    this.character.hit();
                 }
             });
-        }, 1000);
+        }, 200);
     }
 
 
@@ -59,7 +59,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0); //back movement of the camera
 
-        this.addbackground();
+        this.addBackGround();
 
         // draw() wird immer wieder aufgerufen
         let self = this;
@@ -71,7 +71,7 @@ class World {
     /**
      * background extension from a certain distance
      */
-    addbackground() {
+    addBackGround() {
         if (this.character.x == this.distanceTraveled) {
             this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sea.png', this.backgroundWidthToAdd1png));
             this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/island.png', this.backgroundWidthToAdd1png));

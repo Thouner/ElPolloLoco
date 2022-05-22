@@ -10,6 +10,11 @@ class Enemies extends MovableObject {
 
     imges;
 
+    xBox = this.x + 120;
+    yBox = this.y + 130;
+    heightBox = this.height - 170;
+    widthBox = this.width - 240;
+
     speed = 0.3 + Math.random() * 0.5;
     // walking_sound = new Audio('audio/chicken.mp3');
 

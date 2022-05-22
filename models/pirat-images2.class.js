@@ -26,4 +26,32 @@ class Pirat_Image2 {
         'pirat/png/2/2_entity_000_JUMP_005.png',
         'pirat/png/2/2_entity_000_JUMP_006.png',
     ];
+    Image_Hurt = [
+        'pirat/png/2/2_entity_000_HURT_000.png',
+        'pirat/png/2/2_entity_000_HURT_001.png',
+        'pirat/png/2/2_entity_000_HURT_002.png',
+        'pirat/png/2/2_entity_000_HURT_003.png',
+        'pirat/png/2/2_entity_000_HURT_004.png',
+        'pirat/png/2/2_entity_000_HURT_005.png',
+        'pirat/png/2/2_entity_000_HURT_006.png',
+    ];
+    Image_Die = [
+        'pirat/png/2/2_entity_000_DIE_000.png',
+        'pirat/png/2/2_entity_000_DIE_001.png',
+        'pirat/png/2/2_entity_000_DIE_002.png',
+        'pirat/png/2/2_entity_000_DIE_003.png',
+        'pirat/png/2/2_entity_000_DIE_004.png',
+        'pirat/png/2/2_entity_000_DIE_005.png',
+        'pirat/png/2/2_entity_000_DIE_006.png',
+    ];
+    Image_Attack = [
+        'pirat/png/2/2_entity_000_ATTACK_000.png',
+        'pirat/png/2/2_entity_000_ATTACK_001.png',
+        'pirat/png/2/2_entity_000_ATTACK_002.png',
+        'pirat/png/2/2_entity_000_ATTACK_003.png',
+        'pirat/png/2/2_entity_000_ATTACK_004.png',
+        'pirat/png/2/2_entity_000_ATTACK_005.png',
+        'pirat/png/2/2_entity_000_ATTACK_006.png',
+    ];
+
 }
