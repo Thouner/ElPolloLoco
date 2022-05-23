@@ -71,10 +71,11 @@ class MovableObject {
     }
 
     hit() {
-        if (this.ernergy > 0) {
 
-            this.ernergy -= 5;
-            console.log(this.ernergy)
+        this.ernergy -= 15;
+        // console.log(this.ernergy)
+        if (this.ernergy < 0) {
+            this.ernergy = 0;
         } else {
             this.lastHit = new Date().getTime();
         }
@@ -82,10 +83,13 @@ class MovableObject {
     }
 
 
+
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
-        return timepassed < 5;
+
+        // console.log(timepassed);
+        return timepassed < 1;
     }
 
 
@@ -96,11 +100,35 @@ class MovableObject {
 
     // character.isColliding(enemie);
     isColliding(mo) {
-        return this.xBox + this.widthBox > mo.xBox &&
+        if (this.xBox + this.widthBox > mo.xBox &&
             this.yBox + this.heightBox > mo.yBox &&
             this.xBox < mo.xBox &&
-            this.yBox < mo.yBox + mo.heightBox;
+            this.yBox < mo.yBox + mo.heightBox) {
+            // collision detected!
+            return true;
+
+        } else {
+            // no collision
+            return false;
+        }
     }
+
+    // isColliding(mo) {
+    //     if (this.xBox < mo.xBox + mo.widthBox &&
+    //         this.xBox + this.widthBox > mo.xBox &&
+    //         this.yBox < mo.yBox + mo.heightBox &&
+    //         this.heightBox + this.yBox > mo.yBox) {
+    //         // collision detected!
+    //         return true;
+    //     } else {
+    //         // no collision
+    //         return false;
+    //     }
+    // }
+
+
+
+
 
     /**
      * loadImage('img/image1.png')

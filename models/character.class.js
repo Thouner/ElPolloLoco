@@ -16,6 +16,20 @@ class Character extends MovableObject {
     heightBox = this.height - 90;
     widthBox = this.width - 150;
 
+    time = 2;
+    myInterval = setInterval(() => {
+        if (this.isDead()) {
+            this.animationRepeat(this.imges.Image_Die);
+            // console.log('dead')
+        }
+        if (this.time <= 0) {
+            clearInterval(myInterval);
+        }
+    }, 200);
+
+
+
+
 
     constructor() {
         // super().loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
@@ -33,6 +47,9 @@ class Character extends MovableObject {
         this.loadImagesArray(this.imges.Image_Die);
         this.loadImagesArray(this.imges.Image_Attack);
         this.loadImagesArray(this.imges.Image_Hurt);
+
+
+
         this.animationCharater(150);
     }
 
@@ -67,26 +84,25 @@ class Character extends MovableObject {
 
 
         setInterval(() => {
-
-            if (this.isHurt()) {
-                console.log('aua')
-                    // this.animationRepeat(this.imges.Image_Hurt);
-            }
-
-            if (this.isDead()) {
-                this.animationRepeat(this.imges.Image_Die);
-                // console.log('dead')
-            }
-
+            // if (this.isDead()) {
+            //     this.animationRepeat(this.imges.Image_Die);
+            //     // console.log('dead')
+            // }
             if (!this.isAboveGround() && !this.isDead() && !this.isHurt()) {
                 this.animationRepeat(this.imges.Image_Idle);
+            }
+            if (this.isHurt() && !this.isDead()) {
+                console.log('aua')
+                this.animationRepeat(this.imges.Image_Hurt);
             }
             if (this.world.keyboard.RIGHT && !this.isAboveGround(180) || this.world.keyboard.LEFT && !this.isAboveGround(180)) {
                 // walk animation
                 this.animationRepeat(this.imges.Image_Walking);
             }
-
         }, 80);
+
+
+        this.myInterval;
 
 
         setInterval(() => {
