@@ -9,7 +9,7 @@ class Character extends MovableObject {
     imges;
     world;
     walking_sound = new Audio('audio/walk.mp3');
-
+    ernergy;
     groundlevel = 180;
 
 

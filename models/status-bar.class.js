@@ -6,12 +6,12 @@ class StatusBar extends DrawableObject {
 
 
     IMAGES = [
-        'img/Naranja/0_ .png',
-        'img/Naranja/20__1.png',
-        'img/Naranja/40_ .png',
-        'img/Naranja/60_ .png',
-        'img/Naranja/80_ .png',
-        'img/Naranja/100_ .png',
+        'img/Naranja/0.png',
+        'img/Naranja/20.png',
+        'img/Naranja/40.png',
+        'img/Naranja/60.png',
+        'img/Naranja/80.png',
+        'img/Naranja/100.png',
     ];
 
     percentage = 100;
@@ -20,7 +20,9 @@ class StatusBar extends DrawableObject {
 
 
     constructor() {
-        super().loadImage('img/Naranja/100_ .png');
+        super();
+        this.loadImage('img/Naranja/100.png');
+
         // this.setPercentage(100);
 
     }

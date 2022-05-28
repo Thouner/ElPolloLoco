@@ -1,3 +1,17 @@
-@media screen and (max-width: 1024px) {}
+@media only screen and (max-width: 880px) {
+    canvas {
+        width: 100%;
+    }
+}
 
-@media screen and (max-width: 650px) {}
+@media only screen and (max-height: 570px) {
+    canvas {
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-height: 495px) {
+    canvas {
+        height: 100vh;
+    }
+}
