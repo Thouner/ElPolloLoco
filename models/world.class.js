@@ -1,11 +1,12 @@
 class World {
     character = new Character();
     level = level1;
-    movelO = new MovableObject;
+    // movelO = new MovableObject;
     canvas;
     ctx; // context
     keyboard;
     camera_x = 0;
+    statusBar = new StatusBar;
 
 
 
@@ -38,7 +39,7 @@ class World {
                 if (this.character.isColliding(enemy)) {
 
                     this.character.hit();
-
+                    this.statusBar.setPercentage(this.character.ernergy);
                 }
             });
         }, 200);
@@ -63,6 +64,8 @@ class World {
         this.ctx.translate(-this.camera_x, 0); //back movement of the camera
 
         this.addBackGround();
+
+        this.addToMap(this.statusBar);
 
         // draw() wird immer wieder aufgerufen
         let self = this;
@@ -108,7 +111,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        // mo.drawFrame(this.ctx);
         if (mo.otherDierection) {
             this.flipImageBack(mo);
         }

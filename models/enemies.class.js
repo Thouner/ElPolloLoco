@@ -1,8 +1,8 @@
 class Enemies extends MovableObject {
     // height = 300;
-    height = Math.floor(Math.random() * (370 - 300 + 1) + 300);
+    height = Math.floor(Math.random() * (350 - 320 + 1) + 320);
     // width = 300;
-    width = Math.floor(Math.random() * (370 - 300 + 1) + 300);
+    width = Math.floor(Math.random() * (350 - 320 + 1) + 320);
     // x = 720 + Math.random() * 160;
     x = Math.floor(Math.random() * (850 - 720 + 1) + 720);
     // y = 180 + Math.random() * 30;

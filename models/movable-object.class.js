@@ -1,23 +1,12 @@
-class MovableObject {
-    // x;
-    // y;
-    // height;
-    // width;
+class MovableObject extends DrawableObject {
 
-    // xBox;
-    // yBox;
-    // heightBox;
-    // widthBox;
 
-    img;
-    imageCache = {};
-    currentImage = 0;
+
     otherDierection = false;
     speedY = 0;
     acceleration = 2.5;
     enemyIndex = Math.floor(Math.random() * (3 - 1 + 1) + 1);
 
-    ernergy = 100;
 
     lastHit = 0;
 
@@ -33,62 +22,24 @@ class MovableObject {
     }
 
 
-    isAboveGround() {
-        return this.y < 180;
+    isAboveGround(groundHight) {
+        return this.y < groundHight;
     }
 
-
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
-
-    drawFrame(ctx) {
-        if (this instanceof Character) {
-
-            ctx.beginPath();
-            ctx.lineWidth = '1';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.xBox, this.yBox, this.widthBox, this.heightBox);
-            ctx.stroke();
-        }
-        if (this instanceof Enemies) {
-
-            ctx.beginPath();
-            ctx.lineWidth = '1';
-            ctx.strokeStyle = 'red';
-            ctx.rect(this.x + 120, this.y + 130, this.width - 240, this.height - 170);
-            ctx.stroke();
-        }
-        if (this instanceof Endboss) {
-
-            ctx.beginPath();
-            ctx.lineWidth = '1';
-            ctx.strokeStyle = 'black';
-            ctx.rect(this.x + 270, this.y + 270, this.width - 550, this.height - 370);
-            ctx.stroke();
-        }
-
-    }
 
     hit() {
-
         this.ernergy -= 15;
-        // console.log(this.ernergy)
         if (this.ernergy < 0) {
             this.ernergy = 0;
         } else {
             this.lastHit = new Date().getTime();
         }
-
     }
-
 
 
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
-
-        // console.log(timepassed);
         return timepassed < 1;
     }
 
@@ -126,35 +77,6 @@ class MovableObject {
     //     }
     // }
 
-
-
-
-
-    /**
-     * loadImage('img/image1.png')
-     * 
-     * @param {string} path - 'img/image1.png'
-     */
-    loadImage(path) {
-        this.img = new Image(); // this.img = document.getElementById('image') <img id="image" scr>
-        this.img.src = path;
-    }
-
-    /**
-     * loadImage Array
-     * 
-     * @param {Array} arr - ['img/image1.png', 'img/image2.png', 'img/image3.png',...] 
-     */
-    loadImagesArray(arr) {
-        arr.forEach(path => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
-
-    }
-
-
     /**
      * run through the individual images of the animation
      */
@@ -165,15 +87,6 @@ class MovableObject {
         this.currentImage++;
     }
 
-    animationRepeatToDead(animationArray) {
-        for (let i = 0; index < animationArray.length; index++) {
-
-            // this.img = this.imageCache[i]
-
-        }
-
-    }
-
 
     walkRight(walkspeed) {
         this.x += walkspeed;
@@ -181,6 +94,7 @@ class MovableObject {
         this.otherDierection = false;
 
     }
+
 
     walkleft(walkspeed) {
         this.x -= walkspeed;

@@ -1,8 +1,8 @@
 const level1 = new Level(
     [
         new Enemies(),
-        new Enemies(),
-        new Enemies(),
+        // new Enemies(),
+        // new Enemies(),
         new Endboss(),
     ], [
         new Cloud(-880),

@@ -1,4 +1,5 @@
 class Character extends MovableObject {
+    drawFrame
     height = 280;
     width = 280;
     x = 0;
@@ -6,9 +7,11 @@ class Character extends MovableObject {
     speed = 5;
     characterSelection = 1;
     imges;
-
     world;
     walking_sound = new Audio('audio/walk.mp3');
+
+    groundlevel = 180;
+
 
 
     xBox = this.x + 40;
@@ -16,31 +19,44 @@ class Character extends MovableObject {
     heightBox = this.height - 90;
     widthBox = this.width - 150;
 
-    time = 2;
-    myInterval = setInterval(() => {
-        if (this.isDead()) {
+
+    time = 6;
+
+
+    dieAnimation = setInterval(() => {
+        if (this.isDead() && this.time > 0) {
             this.animationRepeat(this.imges.Image_Die);
-            // console.log('dead')
+            this.time--;
+            if (this.time == 1) {
+                this.imges.Image_Die.splice(0, 6)
+            }
+        } else if (this.time == 0 && this.characterSelection == 1) {
+            this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
+        } else if (this.time == 0 && this.characterSelection == 2) {
+            this.dieAnimation = this.loadImage('pirat/png/2/2_entity_000_DIE_006.png');
+        } else if (this.time == 0 && this.characterSelection == 3) {
+            this.dieAnimation = this.loadImage('pirat/png/3/Dead8.png');
         }
-        if (this.time <= 0) {
-            clearInterval(myInterval);
-        }
-    }, 200);
-
-
-
+    }, 150);
 
 
     constructor() {
-        // super().loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
-        super().applyGravity(200);
+        super().applyGravity(this.groundlevel);
         if (this.characterSelection == 1) {
             this.loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
             this.imges = new Pirat_Image1;
         } else if (this.characterSelection == 2) {
             this.loadImage('pirat/png/2/2_entity_000_IDLE_000.png');
             this.imges = new Pirat_Image2;
+        } else if (this.characterSelection == 3) {
+            this.loadImage('pirat/png/3/Idle1.png');
+            this.imges = new Pirat_Image3;
+            this.height = 200;
+            this.width = 200;
+            this.y = -100;
         }
+
+        this.setgroundLevel();
         this.loadImagesArray(this.imges.Image_Walking);
         this.loadImagesArray(this.imges.Image_Jump);
         this.loadImagesArray(this.imges.Image_Idle);
@@ -48,61 +64,59 @@ class Character extends MovableObject {
         this.loadImagesArray(this.imges.Image_Attack);
         this.loadImagesArray(this.imges.Image_Hurt);
 
-
-
         this.animationCharater(150);
     }
 
+
+    setgroundLevel() {
+        if (this.characterSelection == 3) {
+            this.groundlevel = 250;
+            this.applyGravity(this.groundlevel)
+        }
+    }
 
     /**
      * animation of the character
      */
     animationCharater() {
-
         /**
          * movement of the character and the background
          */
         setInterval(() => {
-            this.walking_sound.pause();
-            this.walking_sound.playbackRate = 2.4;
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.walkRight(this.speed);
-                this.walking_sound.play();
-            }
-            if (this.world.keyboard.LEFT && this.x > -600) {
-                this.walkleft(this.speed);
-                this.walking_sound.play();
-            }
-            if (this.world.keyboard.SPACE && !this.isAboveGround(180)) {
-                this.jump();
-            }
+            if (!this.isDead()) {
+                this.walking_sound.pause();
+                this.walking_sound.playbackRate = 2.4;
+                if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+                    this.walkRight(this.speed);
+                    this.walking_sound.play();
+                }
+                if (this.world.keyboard.LEFT && this.x > -600) {
+                    this.walkleft(this.speed);
+                    this.walking_sound.play();
+                }
+                if (this.world.keyboard.SPACE && !this.isAboveGround(180)) {
+                    this.jump();
+                }
 
-            this.world.camera_x = -this.x + 100;
-
+                this.world.camera_x = -this.x + 100;
+            }
         }, 1000 / 60);
 
 
-
         setInterval(() => {
-            // if (this.isDead()) {
-            //     this.animationRepeat(this.imges.Image_Die);
-            //     // console.log('dead')
-            // }
-            if (!this.isAboveGround() && !this.isDead() && !this.isHurt()) {
-                this.animationRepeat(this.imges.Image_Idle);
+            if (!this.isDead()) {
+                if (!this.isAboveGround() && !this.isDead() && !this.isHurt()) {
+                    this.animationRepeat(this.imges.Image_Idle);
+                }
+                if (this.isHurt() && !this.isDead()) {
+                    this.animationRepeat(this.imges.Image_Hurt);
+                }
+                if (this.world.keyboard.RIGHT && !this.isAboveGround(180) || this.world.keyboard.LEFT && !this.isAboveGround(180)) {
+                    // walk animation
+                    this.animationRepeat(this.imges.Image_Walking);
+                }
             }
-            if (this.isHurt() && !this.isDead()) {
-                console.log('aua')
-                this.animationRepeat(this.imges.Image_Hurt);
-            }
-            if (this.world.keyboard.RIGHT && !this.isAboveGround(180) || this.world.keyboard.LEFT && !this.isAboveGround(180)) {
-                // walk animation
-                this.animationRepeat(this.imges.Image_Walking);
-            }
-        }, 80);
-
-
-        this.myInterval;
+        }, 120);
 
 
         setInterval(() => {
@@ -112,6 +126,7 @@ class Character extends MovableObject {
 
         }, 400);
 
+        this.dieAnimation;
     }
 
 }
