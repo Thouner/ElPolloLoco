@@ -9,7 +9,7 @@ class Character extends MovableObject {
     imges;
     world;
     walking_sound = new Audio('audio/walk.mp3');
-    ernergy;
+
     groundlevel = 180;
 
 
@@ -41,7 +41,8 @@ class Character extends MovableObject {
 
 
     constructor() {
-        super().applyGravity(this.groundlevel);
+        super();
+        this.applyGravity(this.groundlevel);
         if (this.characterSelection == 1) {
             this.loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
             this.imges = new Pirat_Image1;

@@ -17,6 +17,8 @@ class DrawableObject {
 
 
 
+
+
     /**
      * loadImage('img/image1.png')
      * 
@@ -32,7 +34,7 @@ class DrawableObject {
         try {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         } catch (e) {
-            console.warn('Error', e);
+            console.warn('Error type:', e);
             // debugger;
             console.log('image', this.img.src);
         }

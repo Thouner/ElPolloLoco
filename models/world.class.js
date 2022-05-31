@@ -6,7 +6,8 @@ class World {
     ctx; // context
     keyboard;
     camera_x = 0;
-    statusBar = new StatusBar;
+    statusBar = new StatusBar();
+
 
 
 
@@ -20,7 +21,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();;
+        this.checkCollisions();
         // this.canvas.width = innerWidth;
         // this.canvas.height = innerHeight;
     }

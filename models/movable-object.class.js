@@ -1,12 +1,9 @@
 class MovableObject extends DrawableObject {
 
-
-
     otherDierection = false;
     speedY = 0;
     acceleration = 2.5;
     enemyIndex = Math.floor(Math.random() * (3 - 1 + 1) + 1);
-
 
     lastHit = 0;
 
@@ -29,6 +26,7 @@ class MovableObject extends DrawableObject {
 
     hit() {
         this.ernergy -= 15;
+        console.log(this.ernergy)
         if (this.ernergy < 0) {
             this.ernergy = 0;
         } else {
