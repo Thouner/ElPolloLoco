@@ -8,6 +8,8 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
 
 
+    ernergy = 100;
+
     applyGravity(groundHight) {
         setInterval(() => {
             if (this.isAboveGround(groundHight) || this.speedY > 0) {
@@ -26,7 +28,7 @@ class MovableObject extends DrawableObject {
 
     hit() {
         this.ernergy -= 15;
-        console.log(this.ernergy)
+        // console.log(this.ernergy)
         if (this.ernergy < 0) {
             this.ernergy = 0;
         } else {

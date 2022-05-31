@@ -41,6 +41,7 @@ class World {
 
                     this.character.hit();
                     this.statusBar.setPercentage(this.character.energy);
+                    // console.log(this.character.energy);
                 }
             });
         }, 200);

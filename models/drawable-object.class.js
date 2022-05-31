@@ -13,7 +13,7 @@ class DrawableObject {
     heightBox;
     widthBox;
 
-    ernergy = 100;
+   
 
 
 

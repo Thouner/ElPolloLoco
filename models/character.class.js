@@ -42,7 +42,6 @@ class Character extends MovableObject {
 
     constructor() {
         super();
-        this.applyGravity(this.groundlevel);
         if (this.characterSelection == 1) {
             this.loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
             this.imges = new Pirat_Image1;
@@ -56,6 +55,7 @@ class Character extends MovableObject {
             this.width = 200;
             this.y = -100;
         }
+        this.applyGravity(this.groundlevel);
 
         this.setgroundLevel();
         this.loadImagesArray(this.imges.Image_Walking);
