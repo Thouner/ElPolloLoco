@@ -27,8 +27,7 @@ class MovableObject extends DrawableObject {
 
 
     hit() {
-        this.energy -= 15;
-        // console.log(this.energy)
+        this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
         } else {
@@ -51,10 +50,10 @@ class MovableObject extends DrawableObject {
 
     // character.isColliding(enemie);
     isColliding(mo) {
-        if (this.xBox + this.widthBox > mo.xBox &&
-            this.yBox + this.heightBox > mo.yBox &&
-            this.xBox < mo.xBox &&
-            this.yBox < mo.yBox + mo.heightBox) {
+        if (this.x + 40 + this.width - 150 > mo.xBox &&
+            this.y + 65 + this.height - 90 > mo.yBox &&
+            this.x + 40 < mo.xBox + mo.widthBox &&
+            this.y + 65 < mo.yBox + mo.heightBox) {
             // collision detected!
             return true;
 
@@ -104,6 +103,6 @@ class MovableObject extends DrawableObject {
 
 
     jump() {
-        this.speedY = 30;
+        this.speedY = 32;
     }
 }

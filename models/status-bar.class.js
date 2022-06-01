@@ -14,24 +14,6 @@ class StatusBar extends DrawableObject {
         'img/Naranja/100.png',
     ];
 
-    IMAGES_Money = [
-        'img/Naranja/0.png',
-        'img/Naranja/20.png',
-        'img/Naranja/40.png',
-        'img/Naranja/60.png',
-        'img/Naranja/80.png',
-        'img/Naranja/100.png',
-    ];
-
-    IMAGES_Ammo = [
-        'img/Naranja/0.png',
-        'img/Naranja/20.png',
-        'img/Naranja/40.png',
-        'img/Naranja/60.png',
-        'img/Naranja/80.png',
-        'img/Naranja/100.png',
-    ];
-
     percentage = 100;
 
 
@@ -52,7 +34,6 @@ class StatusBar extends DrawableObject {
      */
     setPercentage(percentage) {
         this.percentage = percentage; // -> 0 ... 5
-        console.log(this.percentage)
         let path = this.IMAGES_Heart[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }

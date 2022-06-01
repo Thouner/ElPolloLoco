@@ -1,20 +1,18 @@
 class World {
     character = new Character();
     level = level1;
-    // movelO = new MovableObject;
     canvas;
     ctx; // context
     keyboard;
     camera_x = 0;
+
     statusBar = new StatusBar();
-
-
-
-
-
+    moneyBar = new MoneyBar();
+    ammoBar = new AmmoBar();
 
     distanceTraveled = 400;
     backgroundWidthToAdd1png = 880;
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -26,6 +24,7 @@ class World {
         // this.canvas.width = innerWidth;
         // this.canvas.height = innerHeight;
     }
+
 
     /**
      * pass "world" in character
@@ -39,10 +38,19 @@ class World {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
-
                     this.character.hit();
                     this.statusBar.setPercentage(this.character.energy);
-                    // console.log(this.character.energy);
+                }
+            });
+        }, 200);
+
+        setInterval(() => {
+
+            this.level.treasure.forEach((treas) => {
+                if (this.character.isColliding(treas)) {
+                    console.log('geld');
+                    // this.character.hit();
+                    // this.statusBar.setPercentage(this.character.energy);
                 }
             });
         }, 200);
@@ -55,10 +63,12 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height) //erase the world
 
-        this.ctx.translate(this.camera_x, 0); //movement of the camera
 
         this.addObjectsToMap(this.level.sky) //drawing the clouds
         this.addObjectsToMap(this.level.clouds) //drawing the clouds
+
+        this.ctx.translate(this.camera_x, 0); //movement of the camera
+
         this.addObjectsToMap(this.level.backgroundObjects); //drawing the backgrounds
         this.addObjectsToMap(this.level.treasure); //drawing the treasure
         this.addToMap(this.character) //drawing the character
@@ -69,6 +79,8 @@ class World {
         this.addBackGround();
 
         this.addToMap(this.statusBar);
+        this.addToMap(this.moneyBar);
+        this.addToMap(this.ammoBar);
 
         // draw() wird immer wieder aufgerufen
         let self = this;
@@ -76,6 +88,7 @@ class World {
             self.draw();
         });
     }
+
 
     /**
      * background extension from a certain distance
@@ -93,6 +106,7 @@ class World {
         }
     }
 
+
     /**
      * draw each object from an array
      * 
@@ -103,6 +117,7 @@ class World {
             this.addToMap(object);
         });
     }
+
 
     /**
      * object drawn in the world
@@ -133,6 +148,4 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
-
-
 }

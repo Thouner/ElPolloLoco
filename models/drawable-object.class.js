@@ -60,7 +60,7 @@ class DrawableObject {
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'blue';
-            ctx.rect(this.xBox, this.yBox, this.widthBox, this.heightBox);
+            ctx.rect(this.x + 40, this.y + 65, this.width - 150, this.height - 90);
             ctx.stroke();
         }
         if (this instanceof Enemies) {

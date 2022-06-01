@@ -9,6 +9,8 @@ class Character extends MovableObject {
     world;
     walking_sound = new Audio('audio/walk.mp3');
 
+
+
     groundlevel = 180;
 
 
@@ -83,12 +85,14 @@ class Character extends MovableObject {
          * movement of the character and the background
          */
         setInterval(() => {
+
             if (!this.isDead()) {
                 this.walking_sound.pause();
                 this.walking_sound.playbackRate = 2.4;
                 if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                     this.walkRight(this.speed);
                     this.walking_sound.play();
+                    this.currentPosion = this.x;
                 }
                 if (this.world.keyboard.LEFT && this.x > -600) {
                     this.walkleft(this.speed);
@@ -99,6 +103,8 @@ class Character extends MovableObject {
                 }
 
                 this.world.camera_x = -this.x + 100;
+
+
             }
         }, 1000 / 60);
 
