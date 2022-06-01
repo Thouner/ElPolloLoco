@@ -13,7 +13,7 @@ class DrawableObject {
     heightBox;
     widthBox;
 
-   
+
 
 
 
@@ -75,6 +75,13 @@ class DrawableObject {
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'black';
             ctx.rect(this.x + 270, this.y + 270, this.width - 550, this.height - 370);
+            ctx.stroke();
+        }
+        if (this instanceof Treasure) {
+            ctx.beginPath();
+            ctx.lineWidth = '1';
+            ctx.strokeStyle = 'yellow';
+            ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
     }
