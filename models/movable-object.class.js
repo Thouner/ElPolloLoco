@@ -8,7 +8,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
 
 
-    ernergy = 100;
+    energy = 100;
 
     applyGravity(groundHight) {
         setInterval(() => {
@@ -27,10 +27,10 @@ class MovableObject extends DrawableObject {
 
 
     hit() {
-        this.ernergy -= 15;
-        // console.log(this.ernergy)
-        if (this.ernergy < 0) {
-            this.ernergy = 0;
+        this.energy -= 15;
+        // console.log(this.energy)
+        if (this.energy < 0) {
+            this.energy = 0;
         } else {
             this.lastHit = new Date().getTime();
         }
@@ -45,7 +45,7 @@ class MovableObject extends DrawableObject {
 
 
     isDead() {
-        return this.ernergy == 0;
+        return this.energy == 0;
     }
 
 
