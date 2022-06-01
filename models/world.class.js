@@ -6,11 +6,8 @@ class World {
     ctx; // context
     keyboard;
     camera_x = 0;
-    statusBar = [
-        new StatusBar(),
-        new StatusBar(),
-        new StatusBar(),
-    ];
+    statusBar = new StatusBar();
+
 
 
 
@@ -71,7 +68,7 @@ class World {
 
         this.addBackGround();
 
-        this.addObjectsToMap(this.statusBar);
+        this.addToMap(this.statusBar);
 
         // draw() wird immer wieder aufgerufen
         let self = this;
