@@ -144,6 +144,9 @@ class World {
 
     drawNummber(mo) {
         mo.draw(this.ctx);
+        setInterval(() => {
+            mo.drawMoneyNumber(this.ctx);
+        }, 200);
     }
 
 

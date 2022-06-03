@@ -13,7 +13,7 @@ class DrawableObject {
     heightBox;
     widthBox;
 
-
+    treasure = 0;
 
 
 
@@ -38,6 +38,13 @@ class DrawableObject {
             // debugger;
             console.log('image', this.img.src);
         }
+    }
+
+
+    drawMoneyNumber(ctx) {
+        ctx.font = "30px Comic Sans MS";
+        ctx.fillStyle = "red";
+        ctx.fillText(this.treasure, 70, 80);
     }
 
     /**
