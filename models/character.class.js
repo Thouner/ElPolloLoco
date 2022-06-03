@@ -8,6 +8,7 @@ class Character extends MovableObject {
     imges;
     world;
     walking_sound = new Audio('audio/walk.mp3');
+    treasure = 0;
 
 
 
@@ -133,6 +134,11 @@ class Character extends MovableObject {
         }, 400);
 
         this.dieAnimation;
+    }
+
+
+    collectTreasure() {
+        this.treasure++;
     }
 
 }

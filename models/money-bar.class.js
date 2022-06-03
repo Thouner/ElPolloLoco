@@ -1,8 +1,8 @@
 class MoneyBar extends DrawableObject {
     x = 10;
-    y = 30;
-    width = 250;
-    height = 60;
+    y = 40;
+    width = 50;
+    height = 50;
 
 
     IMAGES_Money = [
@@ -15,7 +15,7 @@ class MoneyBar extends DrawableObject {
     ];
     constructor() {
         super();
-        this.loadImage('img/azul/0.png');
+        this.loadImage('treasures/3.png');
         this.loadImagesArray(this.IMAGES_Money);
 
 

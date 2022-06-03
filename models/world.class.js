@@ -46,9 +46,13 @@ class World {
 
         setInterval(() => {
 
-            this.level.treasure.forEach((treas) => {
+            this.level.treasure.forEach((treas, index) => {
                 if (this.character.isCollidingThings(treas)) {
                     console.log('geld');
+                    this.character.collectTreasure();
+                    console.log(this.character.treasure);
+                    this.level.treasure.splice(index, 1);
+
                     // this.character.hit();
                     // this.statusBar.setPercentage(this.character.energy);
                 }
@@ -79,7 +83,9 @@ class World {
         this.addBackGround();
 
         this.addToMap(this.statusBar);
-        this.addToMap(this.moneyBar);
+        // this.addToMap(this.moneyBar);
+        this.drawNummber(this.moneyBar);
+
         this.addToMap(this.ammoBar);
 
         // draw() wird immer wieder aufgerufen
@@ -133,6 +139,11 @@ class World {
         if (mo.otherDierection) {
             this.flipImageBack(mo);
         }
+    }
+
+
+    drawNummber(mo) {
+        mo.draw(this.ctx);
     }
 
 
