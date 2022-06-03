@@ -49,7 +49,8 @@ class MovableObject extends DrawableObject {
 
 
     // character.isColliding(enemie);
-    isColliding(mo) {
+    isCollidingEnemies(mo) {
+
         if (this.x + 40 + this.width - 150 > mo.xBox &&
             this.y + 65 + this.height - 90 > mo.yBox &&
             this.x + 40 < mo.xBox + mo.widthBox &&
@@ -63,18 +64,23 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    // isColliding(mo) {
-    //     if (this.xBox < mo.xBox + mo.widthBox &&
-    //         this.xBox + this.widthBox > mo.xBox &&
-    //         this.yBox < mo.yBox + mo.heightBox &&
-    //         this.heightBox + this.yBox > mo.yBox) {
-    //         // collision detected!
-    //         return true;
-    //     } else {
-    //         // no collision
-    //         return false;
-    //     }
-    // }
+    // character.isColliding(treaser);
+    isCollidingThings(mo) {
+
+        if (this.x + 40 + this.width - 150 > mo.x &&
+            this.y + 65 + this.height - 90 > mo.y &&
+            this.x + 40 < mo.x + mo.width &&
+            this.y + 65 < mo.y + mo.height) {
+            // collision detected!
+            return true;
+
+        } else {
+            // no collision
+            return false;
+        }
+    }
+
+
 
     /**
      * run through the individual images of the animation

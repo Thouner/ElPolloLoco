@@ -9,8 +9,8 @@ class Endboss extends MovableObject {
 
     xBox = this.x + 270;
     yBox = this.y + 270;
-    heightBox = this.height - 370;
     widthBox = this.width - 550;
+    heightBox = this.height - 370;
 
 
     constructor() {

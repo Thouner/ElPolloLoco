@@ -17,8 +17,8 @@ class Character extends MovableObject {
 
     xBox = this.x + 40;
     yBox = this.y + 65;
-    heightBox = this.height - 90;
     widthBox = this.width - 150;
+    heightBox = this.height - 90;
 
 
     time = 6;

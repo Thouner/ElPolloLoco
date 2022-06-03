@@ -37,7 +37,7 @@ class World {
     checkCollisions() {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
+                if (this.character.isCollidingEnemies(enemy)) {
                     this.character.hit();
                     this.statusBar.setPercentage(this.character.energy);
                 }
@@ -47,7 +47,7 @@ class World {
         setInterval(() => {
 
             this.level.treasure.forEach((treas) => {
-                if (this.character.isColliding(treas)) {
+                if (this.character.isCollidingThings(treas)) {
                     console.log('geld');
                     // this.character.hit();
                     // this.statusBar.setPercentage(this.character.energy);
