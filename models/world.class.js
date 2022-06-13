@@ -6,6 +6,11 @@ class World {
     keyboard;
     camera_x = 0;
 
+    throwableObject = [];
+
+
+    drawableObject = new DrawableObject();
+    movableObject = new MovableObject();
     statusBar = new StatusBar();
     moneyBar = new MoneyBar();
     ammoBar = new AmmoBar();
@@ -36,28 +41,44 @@ class World {
 
     checkCollisions() {
         setInterval(() => {
+
+
+            console.log(this.movableObject.attackEnemy);
+
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isCollidingEnemies(enemy)) {
-                    this.character.hit();
+
+
+                    this.character.hit(3);
                     this.statusBar.setPercentage(this.character.energy);
                 }
             });
-        }, 200);
 
-        setInterval(() => {
+            this.level.endboss.forEach((boss) => {
+                if (this.character.isCollidingEnemies(boss)) {
+                    this.character.hit(6);
+                    this.statusBar.setPercentage(this.character.energy);
+                }
+            });
 
             this.level.treasure.forEach((treas, index) => {
                 if (this.character.isCollidingThings(treas)) {
-                    console.log('geld');
+                    // console.log('geld');
                     this.character.collectTreasure();
                     console.log(this.character.treasure);
                     this.level.treasure.splice(index, 1);
-
-                    // this.character.hit();
-                    // this.statusBar.setPercentage(this.character.energy);
                 }
             });
+
+
+
+            if (this.keyboard.SHIFT) {
+                let bomb = new ThrowableObject(this.character.x, this.character.y);
+                this.throwableObject.push(bomb);
+            }
         }, 200);
+
+
     }
 
 
@@ -77,6 +98,8 @@ class World {
         this.addObjectsToMap(this.level.treasure); //drawing the treasure
         this.addToMap(this.character) //drawing the character
         this.addObjectsToMap(this.level.enemies); //drawing the enemies
+        this.addObjectsToMap(this.level.endboss); //drawing the endboss
+        this.addObjectsToMap(this.throwableObject); //drawing the bomb
 
         this.ctx.translate(-this.camera_x, 0); //back movement of the camera
 

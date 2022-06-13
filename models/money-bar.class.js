@@ -13,12 +13,12 @@ class MoneyBar extends DrawableObject {
         'img/azul/80.png',
         'img/azul/100.png',
     ];
+
+
     constructor() {
         super();
         this.loadImage('treasures/3.png');
         this.loadImagesArray(this.IMAGES_Money);
-
-
     }
 
 }

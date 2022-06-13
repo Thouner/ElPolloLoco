@@ -52,4 +52,9 @@ class Enemies extends MovableObject {
             this.animationRepeat(this.imges.Image_Walking);
         }, 200);
     }
+
+ 
+
+
+
 }

@@ -1,8 +1,8 @@
 class Treasure extends MovableObject {
-    height = 70;
-    width = 70;
-    x = 400;
-    y = 410;
+    height = 60;
+    width = 60;
+    // x = 400;
+    // y = 410;
 
     xBox = this.x;
     yBox = this.y;

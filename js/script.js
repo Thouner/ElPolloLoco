@@ -22,7 +22,12 @@ window.addEventListener('keydown', (e) => {
     }
     if (e.keyCode == 32) {
         keyboard.SPACE = true;
-
+    }
+    if (e.keyCode == 17) {
+        keyboard.STRG = true;
+    }
+    if (e.keyCode == 16) {
+        keyboard.SHIFT = true;
     }
 });
 
@@ -38,5 +43,11 @@ window.addEventListener('keyup', (e) => {
     }
     if (e.keyCode == 32) {
         keyboard.SPACE = false;
+    }
+    if (e.keyCode == 17) {
+        keyboard.STRG = false;
+    }
+    if (e.keyCode == 16) {
+        keyboard.SHIFT = false;
     }
 });

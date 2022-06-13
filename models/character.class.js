@@ -8,7 +8,7 @@ class Character extends MovableObject {
     imges;
     world;
     walking_sound = new Audio('audio/walk.mp3');
-    treasure = 0;
+
 
 
 
@@ -20,26 +20,29 @@ class Character extends MovableObject {
     yBox = this.y + 65;
     widthBox = this.width - 150;
     heightBox = this.height - 90;
+    attackWidth = this.width - 90;
 
 
-    time = 6;
+    dieTime = 6;
+
 
 
     dieAnimation = setInterval(() => {
-        if (this.isDead() && this.time > 0) {
+        if (this.isDead() && this.dieTime > 0) {
             this.animationRepeat(this.imges.Image_Die);
-            this.time--;
-            if (this.time == 1) {
+            this.dieTime--;
+            if (this.dieTime == 1) {
                 this.imges.Image_Die.splice(0, 6)
             }
-        } else if (this.time == 0 && this.characterSelection == 1) {
+        } else if (this.dieTime == 0 && this.characterSelection == 1) {
             this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
-        } else if (this.time == 0 && this.characterSelection == 2) {
+        } else if (this.dieTime == 0 && this.characterSelection == 2) {
             this.dieAnimation = this.loadImage('pirat/png/2/2_entity_000_DIE_006.png');
-        } else if (this.time == 0 && this.characterSelection == 3) {
+        } else if (this.dieTime == 0 && this.characterSelection == 3) {
             this.dieAnimation = this.loadImage('pirat/png/3/Dead8.png');
         }
     }, 150);
+
 
 
     constructor() {
@@ -119,9 +122,13 @@ class Character extends MovableObject {
                     this.animationRepeat(this.imges.Image_Hurt);
                 }
                 if (this.world.keyboard.RIGHT && !this.isAboveGround(180) || this.world.keyboard.LEFT && !this.isAboveGround(180)) {
-                    // walk animation
-                    this.animationRepeat(this.imges.Image_Walking);
+
+                    this.animationRepeat(this.imges.Image_Walking); // walk animation
                 }
+                if (this.isAttack() && !this.isDead()) {
+                    this.animationRepeat(this.imges.Image_Attack);
+                }
+                this.attack();
             }
         }, 120);
 
@@ -140,5 +147,19 @@ class Character extends MovableObject {
     collectTreasure() {
         this.treasure++;
     }
+
+    // collisionWithEnemie() {
+    //     this.world.level.chicken.forEach((chicken) => {
+    //         if (this.isColliding(chicken) && !chicken.isDead && !this.isAboveGround()) {
+    //             this.hit();
+    //         }
+
+    //         if (this.jumpsOnTop(chicken) && this.speedY < 0) {
+    //             chicken.isDead = true;
+    //         }
+    //     })
+
+    // }
+
 
 }

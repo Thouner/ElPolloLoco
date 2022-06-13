@@ -35,7 +35,6 @@ class DrawableObject {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         } catch (e) {
             console.warn('Error type:', e);
-            // debugger;
             console.log('image', this.img.src);
         }
     }
@@ -44,7 +43,7 @@ class DrawableObject {
     drawMoneyNumber(ctx) {
         ctx.font = "30px Comic Sans MS";
         ctx.fillStyle = "red";
-        ctx.fillText(this.treasure, 70, 80);
+        ctx.fillText("55", 170, 180);
     }
 
     /**
@@ -67,7 +66,7 @@ class DrawableObject {
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'blue';
-            ctx.rect(this.x + 40, this.y + 65, this.width - 150, this.height - 90);
+            ctx.rect(this.x + 40, this.y + 65, this.width - 170, this.height - 90);
             ctx.stroke();
         }
         if (this instanceof Enemies) {
