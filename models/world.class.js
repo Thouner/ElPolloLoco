@@ -9,8 +9,6 @@ class World {
     throwableObject = [];
 
 
-    drawableObject = new DrawableObject();
-    movableObject = new MovableObject();
     statusBar = new StatusBar();
     moneyBar = new MoneyBar();
     ammoBar = new AmmoBar();
@@ -42,15 +40,19 @@ class World {
     checkCollisions() {
         setInterval(() => {
 
-
-            console.log('world', this.movableObject.attackEnemy);
-
-            this.level.enemies.forEach((enemy) => {
+            this.level.enemies.forEach((enemy, index) => {
                 if (this.character.isCollidingEnemies(enemy)) {
+                    if (this.character.attackEnemy) {
 
 
-                    this.character.hit(3);
-                    this.statusBar.setPercentage(this.character.energy);
+                        this.level.enemies[index].setDieAnmimate();
+                        setTimeout(() => {
+                            this.level.enemies.splice(index, 1);
+                        }, 2000);
+                    } else {
+                        this.character.hit(3);
+                        this.statusBar.setPercentage(this.character.energy);
+                    }
                 }
             });
 
@@ -65,19 +67,16 @@ class World {
                 if (this.character.isCollidingThings(treas)) {
                     // console.log('geld');
                     this.character.collectTreasure();
-                    console.log(this.character.treasure);
+                    // console.log(this.character.treasure);
                     this.level.treasure.splice(index, 1);
                 }
             });
 
-
-
             if (this.keyboard.SHIFT) {
-                let bomb = new ThrowableObject(this.character.x, this.character.y);
+                let bomb = new ThrowableObject(this.character.x, this.character.y, this.character.otherDierection);
                 this.throwableObject.push(bomb);
             }
         }, 200);
-
 
     }
 
@@ -107,7 +106,7 @@ class World {
 
         this.addToMap(this.statusBar);
         // this.addToMap(this.moneyBar);
-        this.drawNummber(this.moneyBar);
+        // this.drawNummber(this.moneyBar);
 
         this.addToMap(this.ammoBar);
 

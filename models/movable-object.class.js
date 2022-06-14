@@ -104,7 +104,7 @@ class MovableObject extends DrawableObject {
 
         if ((this.x + 40) + (this.width - 170) > mo.x &&
             (this.y + 65) + (this.height - 90) > mo.y &&
-            this.x + 40 < mo.x + mo.width &&
+            this.x + 40 < mo.x + mo.width - 60 &&
             this.y + 65 < mo.y + mo.height) {
             // collision detected!
             return true;
@@ -113,19 +113,6 @@ class MovableObject extends DrawableObject {
             // no collision
             return false;
         }
-
-        // if (
-        //     // no collision
-        //     this.x + 40 > mo.xBox + mo.widthBox ||
-        //     this.x + 40 + this.width - 150 < mo.xBox ||
-        //     this.y + 65 > mo.yBox + mo.heightBox ||
-        //     this.y + 65 + this.height - 90 < mo.yBox) {
-        //     return false;
-        // } else {
-        //     // collision detected!
-        //     return true;
-        // }
-
 
     }
 

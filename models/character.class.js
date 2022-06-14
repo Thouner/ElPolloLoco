@@ -56,8 +56,8 @@ class Character extends MovableObject {
         } else if (this.characterSelection == 3) {
             this.loadImage('pirat/png/3/Idle1.png');
             this.imges = new Pirat_Image3;
-            this.height = 200;
-            this.width = 200;
+            // this.height = 200;
+            // this.width = 200;
             this.y = -100;
         }
         this.applyGravity(this.groundlevel);
@@ -70,7 +70,7 @@ class Character extends MovableObject {
         this.loadImagesArray(this.imges.Image_Attack);
         this.loadImagesArray(this.imges.Image_Hurt);
 
-        this.animationCharater(150);
+        this.animationCharater();
     }
 
 
@@ -128,19 +128,17 @@ class Character extends MovableObject {
                 if (this.isAttack() && !this.isDead()) {
                     this.animationRepeat(this.imges.Image_Attack);
                 }
+                if (this.isAboveGround(180)) {
+                    this.animationRepeat(this.imges.Image_Jump);
+                }
+
                 this.attack();
+            } else {
+                this.dieAnimation;
             }
+
         }, 120);
 
-
-        setInterval(() => {
-            if (this.isAboveGround(180)) {
-                this.animationRepeat(this.imges.Image_Jump);
-            }
-
-        }, 400);
-
-        this.dieAnimation;
     }
 
 

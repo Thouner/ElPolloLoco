@@ -9,6 +9,7 @@ class Enemies extends MovableObject {
     y = Math.floor(Math.random() * (160 - 140 + 1) + 140);
 
     imges;
+    enemyDead = false;
 
     xBox = this.x + 120;
     yBox = this.y + 130;
@@ -34,13 +35,10 @@ class Enemies extends MovableObject {
         this.otherDierection = true;
 
         this.loadImagesArray(this.imges.Image_Walking);
+        this.loadImagesArray(this.imges.Image_Die);
 
-        setInterval(() => {
-            this.walkleft(this.speed);
-        }, 1000 / 60);
+
         this.animationEnemie();
-
-
 
         // this.walking_sound.volume = 0.2;
         // this.walking_sound.loop = true;
@@ -48,13 +46,28 @@ class Enemies extends MovableObject {
     }
 
     animationEnemie() {
-        setInterval(() => {
-            this.animationRepeat(this.imges.Image_Walking);
-        }, 200);
+        if (!this.enemyDead) {
+            setInterval(() => {
+                console.log(this.enemyDead);
+                this.walkleft(this.speed);
+            }, 1000 / 60);
+
+            setInterval(() => {
+                this.animationRepeat(this.imges.Image_Walking);
+            }, 200);
+        } else if (this.enemyDead) {
+            this.animateDie();
+        }
     }
 
- 
+    setDieAnmimate() {
+        this.enemyDead = true;
+    }
 
+    animateDie() {
 
-
+        setInterval(() => {
+            this.animationRepeat(this.imges.Image_Die);
+        }, 200);
+    }
 }
