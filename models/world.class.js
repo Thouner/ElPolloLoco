@@ -45,13 +45,16 @@ class World {
                     if (this.character.attackEnemy) {
 
 
-                        this.level.enemies[index].setDieAnmimate();
-                        setTimeout(() => {
-                            this.level.enemies.splice(index, 1);
-                        }, 2000);
+                        this.level.enemies[index].setEnemyDead();
+                        // setTimeout(() => {
+                        //     this.level.enemies.splice(index, 1);
+                        // }, 2200);
                     } else {
-                        this.character.hit(3);
-                        this.statusBar.setPercentage(this.character.energy);
+                        console.log(this.level.enemies[index].enemyDead)
+                        if (!this.level.enemies[index].enemyDead) {
+                            this.character.hit(3);
+                            this.statusBar.setPercentage(this.character.energy);
+                        }
                     }
                 }
             });

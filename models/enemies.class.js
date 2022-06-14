@@ -46,28 +46,42 @@ class Enemies extends MovableObject {
     }
 
     animationEnemie() {
-        if (!this.enemyDead) {
-            setInterval(() => {
-                console.log(this.enemyDead);
-                this.walkleft(this.speed);
-            }, 1000 / 60);
 
-            setInterval(() => {
+        setInterval(() => {
+            // console.log(this.enemyDead);
+            if (!this.enemyDead) {
+                this.walkleft(this.speed);
+            }
+        }, 1000 / 60);
+
+        setInterval(() => {
+            if (!this.enemyDead) {
                 this.animationRepeat(this.imges.Image_Walking);
-            }, 200);
-        } else if (this.enemyDead) {
-            this.animateDie();
-        }
+            } else {
+                this.animationRepeat(this.imges.Image_Die);
+            }
+        }, 200);
+
+
     }
 
-    setDieAnmimate() {
+    setEnemyDead() {
         this.enemyDead = true;
     }
 
-    animateDie() {
-
-        setInterval(() => {
-            this.animationRepeat(this.imges.Image_Die);
-        }, 200);
-    }
+    // dieEnemyAnimation = setInterval(() => {
+    //     if (this.isDead() && this.dieTime > 0) {
+    //         this.animationRepeat(this.imges.Image_Die);
+    //         this.dieTime--;
+    //         if (this.dieTime == 1) {
+    //             this.imges.Image_Die.splice(0, 6)
+    //         }
+    //     } else if (this.dieTime == 0 && this.characterSelection == 1) {
+    //         this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
+    //     } else if (this.dieTime == 0 && this.characterSelection == 2) {
+    //         this.dieAnimation = this.loadImage('pirat/png/2/2_entity_000_DIE_006.png');
+    //     } else if (this.dieTime == 0 && this.characterSelection == 3) {
+    //         this.dieAnimation = this.loadImage('pirat/png/3/Dead8.png');
+    //     }
+    // }, 150);
 }
