@@ -73,7 +73,7 @@ class MovableObject extends DrawableObject {
     // character.isColliding(enemie);
     isCollidingEnemies(mo) {
             if (this.attackEnemy) {
-                // console.log(this.attackEnemy);
+                // console.log('MovableObject', this.attackEnemy);
                 if (
                     // no collision
                     this.x + 40 > mo.xBox + mo.widthBox ||

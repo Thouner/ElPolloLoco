@@ -43,7 +43,7 @@ class World {
         setInterval(() => {
 
 
-            console.log(this.movableObject.attackEnemy);
+            console.log('world', this.movableObject.attackEnemy);
 
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isCollidingEnemies(enemy)) {
