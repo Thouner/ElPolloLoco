@@ -23,17 +23,18 @@ class Character extends MovableObject {
     attackWidth = this.width - 90;
 
 
-    dieTime = 6;
+    dieTime = 7;
+
+
 
 
 
     dieAnimation = setInterval(() => {
         if (this.isDead() && this.dieTime > 0) {
             this.animationRepeat(this.imges.Image_Die);
+            this.imges.Image_Die.splice(0, 1)
             this.dieTime--;
-            if (this.dieTime == 1) {
-                this.imges.Image_Die.splice(0, 6)
-            }
+
         } else if (this.dieTime == 0 && this.characterSelection == 1) {
             this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
         } else if (this.dieTime == 0 && this.characterSelection == 2) {
@@ -45,17 +46,18 @@ class Character extends MovableObject {
 
 
 
+
     constructor() {
         super();
         if (this.characterSelection == 1) {
             this.loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
-            this.imges = new Pirat_Image1;
+            this.imges = new Pirat_Image1();
         } else if (this.characterSelection == 2) {
             this.loadImage('pirat/png/2/2_entity_000_IDLE_000.png');
-            this.imges = new Pirat_Image2;
+            this.imges = new Pirat_Image2();
         } else if (this.characterSelection == 3) {
             this.loadImage('pirat/png/3/Idle1.png');
-            this.imges = new Pirat_Image3;
+            this.imges = new Pirat_Image3();
             // this.height = 200;
             // this.width = 200;
             this.y = -100;
@@ -71,6 +73,8 @@ class Character extends MovableObject {
         this.loadImagesArray(this.imges.Image_Hurt);
 
         this.animationCharater();
+
+
     }
 
 
@@ -158,6 +162,7 @@ class Character extends MovableObject {
     //     })
 
     // }
+
 
 
 }

@@ -13,6 +13,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
 
     applyGravity(groundHight) {
+
         setInterval(() => {
             if (this.isAboveGround(groundHight) || this.speedY > 0) {
                 this.y -= this.speedY;
@@ -24,6 +25,11 @@ class MovableObject extends DrawableObject {
 
 
     isAboveGround(groundHight) {
+        if (this instanceof Enemies) {
+            if (this.enemyDead) {
+                return true
+            }
+        }
         return this.y < groundHight;
     }
 

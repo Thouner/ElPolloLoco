@@ -10,6 +10,7 @@ class Enemies extends MovableObject {
 
     imges;
     enemyDead = false;
+    dieTime = 10;
 
     xBox = this.x + 120;
     yBox = this.y + 130;
@@ -20,16 +21,31 @@ class Enemies extends MovableObject {
     // walking_sound = new Audio('audio/chicken.mp3');
 
 
+    dieAnimationEnemy = setInterval(() => {
+        if (this.dieTime > 0) {
+            this.animationRepeat(this.imges.Image_Die);
+            this.imges.Image_Die.splice(0, 1)
+            this.dieTime--;
+        } else if (this.dieTime == 0 && this.enemyIndex == 1) {
+            this.dieAnimation = this.loadImage('ork/1/ORK_01_DIE_009.png');
+        } else if (this.dieTime == 0 && this.enemyIndex == 2) {
+            this.dieAnimation = this.loadImage('ork/2/ORK_02_DIE_009.png');
+        } else if (this.dieTime == 0 && this.enemyIndex == 3) {
+            this.dieAnimation = this.loadImage('ork/3/ORK_03_DIE_009.png');
+        }
+    }, 150);
+
+
 
     constructor() {
         super().loadImage('ork/1/ORK_01_WALK_000.png');
 
         if (this.enemyIndex == 1) {
-            this.imges = new Ork_Image1;
+            this.imges = new Ork_Image1();
         } else if (this.enemyIndex == 2) {
-            this.imges = new Ork_Image2;
+            this.imges = new Ork_Image2();
         } else if (this.enemyIndex == 3) {
-            this.imges = new Ork_Image3;
+            this.imges = new Ork_Image3();
         }
 
         this.otherDierection = true;
@@ -58,9 +74,13 @@ class Enemies extends MovableObject {
             if (!this.enemyDead) {
                 this.animationRepeat(this.imges.Image_Walking);
             } else {
-                this.animationRepeat(this.imges.Image_Die);
+                // this.animationRepeat(this.imges.Image_Die);
+                this.dieAnimationEnemy;
+                setTimeout(() => {
+                    this.y += 1;
+                }, 3000);
             }
-        }, 200);
+        }, 120);
 
 
     }
@@ -69,19 +89,6 @@ class Enemies extends MovableObject {
         this.enemyDead = true;
     }
 
-    // dieEnemyAnimation = setInterval(() => {
-    //     if (this.isDead() && this.dieTime > 0) {
-    //         this.animationRepeat(this.imges.Image_Die);
-    //         this.dieTime--;
-    //         if (this.dieTime == 1) {
-    //             this.imges.Image_Die.splice(0, 6)
-    //         }
-    //     } else if (this.dieTime == 0 && this.characterSelection == 1) {
-    //         this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
-    //     } else if (this.dieTime == 0 && this.characterSelection == 2) {
-    //         this.dieAnimation = this.loadImage('pirat/png/2/2_entity_000_DIE_006.png');
-    //     } else if (this.dieTime == 0 && this.characterSelection == 3) {
-    //         this.dieAnimation = this.loadImage('pirat/png/3/Dead8.png');
-    //     }
-    // }, 150);
+
+
 }
