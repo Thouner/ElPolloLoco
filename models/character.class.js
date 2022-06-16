@@ -7,6 +7,7 @@ class Character extends MovableObject {
     characterSelection = 1;
     imges;
     world;
+
     walking_sound = new Audio('audio/walk.mp3');
 
 
@@ -43,25 +44,6 @@ class Character extends MovableObject {
             this.dieAnimation = this.loadImage('pirat/png/3/Dead8.png');
         }
     }, 150);
-
-
-
-    // dieAnimation = setInterval(() => {
-    //     if (this.isDead() && this.dieTime > 0) {
-    //         this.animationRepeat(this.imges.Image_Die);
-    //         this.imges.Image_Die.splice(0, 1)
-    //         this.dieTime--;
-
-    //     } else if (this.dieTime == 0 && this.characterSelection == 1) {
-    //         this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
-    //     } else if (this.dieTime == 0 && this.characterSelection == 2) {
-    //         this.dieAnimation = this.loadImage('pirat/png/2/2_entity_000_DIE_006.png');
-    //     } else if (this.dieTime == 0 && this.characterSelection == 3) {
-    //         this.dieAnimation = this.loadImage('pirat/png/3/Dead8.png');
-    //     }
-    // }, 150);
-
-
 
 
     constructor() {
@@ -166,18 +148,7 @@ class Character extends MovableObject {
         this.treasure++;
     }
 
-    // collisionWithEnemie() {
-    //     this.world.level.chicken.forEach((chicken) => {
-    //         if (this.isColliding(chicken) && !chicken.isDead && !this.isAboveGround()) {
-    //             this.hit();
-    //         }
 
-    //         if (this.jumpsOnTop(chicken) && this.speedY < 0) {
-    //             chicken.isDead = true;
-    //         }
-    //     })
-
-    // }
 
 
 

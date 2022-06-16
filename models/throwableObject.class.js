@@ -8,6 +8,8 @@ class ThrowableObject extends MovableObject {
     bombtimer = 10;
     exploNow = false;
     smokeNow = false;
+    positionOptimize = false;
+    world;
 
     images_Explo = [
         'Bomb/bomb_0009_Layer-1.png',
@@ -34,22 +36,28 @@ class ThrowableObject extends MovableObject {
 
 
     exploAnimation = setInterval(() => {
-        if (this.exploNow && this.bombtimer > 0) {
+        if (this.exploNow) {
             this.animationRepeat(this.images_Explo);
             this.bombtimer--;
             this.images_Explo.splice(0, 1)
 
         }
-        if (this.bombtimer == 0) {
+        if (this.bombtimer <= 0) {
+            if (!this.positionOptimize) {
+                this.x += 80;
+                this.y += 40;
+                this.positionOptimize = true;
+            }
             this.smokeNow = true
-            this.x + 100;
-            this.y + 100;
             this.height = 100;
             this.width = 100;
             this.animationRepeat(this.images_Smoke);
-
         }
-
+        if (this.bombtimer == -10) {
+            // console.log(this.world.throwableObject);
+            let i = this.world.throwableObject.indexOf(this);
+            this.world.level.throwableObject.splice(i, 1);
+        }
     }, 100);
 
 

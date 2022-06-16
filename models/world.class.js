@@ -5,6 +5,8 @@ class World {
     ctx; // context
     keyboard;
     camera_x = 0;
+    throwBombTime;
+
 
     throwableObject = [];
 
@@ -34,7 +36,11 @@ class World {
      */
     setWorld() {
         this.character.world = this;
+        this.level.endboss.world = this;
+
+        this.throwableObject.world = this;
     }
+
 
 
     checkCollisions() {
@@ -44,9 +50,9 @@ class World {
                 if (this.character.isCollidingEnemies(enemy)) {
                     if (this.character.attackEnemy) {
                         this.level.enemies[index].setEnemyDead();
-                        // setTimeout(() => {
-                        //     this.level.enemies.splice(index, 1);
-                        // }, 2200);
+                        setTimeout(() => {
+                            this.level.enemies.splice(index, 1);
+                        }, 20000);
                     } else {
                         if (!this.level.enemies[index].enemyDead) {
                             this.character.hit(3);
@@ -72,14 +78,29 @@ class World {
                 }
             });
 
-            if (this.keyboard.SHIFT) {
-                let bomb = new ThrowableObject(this.character.x, this.character.y, this.character.otherDierection);
-                this.throwableObject.push(bomb);
+            if (this.keyboard.SHIFT && !this.character.isDead()) {
+                if (!this.throwBombTime) {
+                    this.throwThebomb();
+                } else {
+                    let delta = Date.now();
+                    delta = delta - this.throwBombTime;
+                    if (delta > 2000) {
+                        this.throwThebomb();
+                    }
+                }
             }
         }, 100);
 
     }
 
+    throwThebomb() {
+
+        this.throwBombTime = Date.now();
+        let bomb = new ThrowableObject(this.character.x, this.character.y, this.character.otherDierection);
+        this.throwableObject.push(bomb);
+
+
+    }
 
     /**
      * draw the world
@@ -95,10 +116,10 @@ class World {
 
         this.addObjectsToMap(this.level.backgroundObjects); //drawing the backgrounds
         this.addObjectsToMap(this.level.treasure); //drawing the treasure
+        this.addObjectsToMap(this.throwableObject); //drawing the bomb
         this.addToMap(this.character) //drawing the character
         this.addObjectsToMap(this.level.enemies); //drawing the enemies
         this.addObjectsToMap(this.level.endboss); //drawing the endboss
-        this.addObjectsToMap(this.throwableObject); //drawing the bomb
 
         this.ctx.translate(-this.camera_x, 0); //back movement of the camera
 

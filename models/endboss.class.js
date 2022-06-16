@@ -5,6 +5,8 @@ class Endboss extends MovableObject {
     x = 1420;
     imges;
     speed = 0.7;
+    world;
+    bossEnergy = 100;
     // walking_sound = new Audio('audio/chicken.mp3');
 
     xBox = this.x + 270;
@@ -29,6 +31,7 @@ class Endboss extends MovableObject {
             this.walkleft(this.speed);
         }, 1000 / 60);
         this.animationEnemie();
+        // this.checkCollision();
         // this.walking_sound.volume = 0.2;
         // this.walking_sound.loop = true;
         // this.walking_sound.play();
@@ -40,6 +43,5 @@ class Endboss extends MovableObject {
             this.animationRepeat(this.imges.Image_Walking);
         }, 200);
     }
-
 
 }

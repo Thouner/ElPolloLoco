@@ -8,6 +8,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     lastAtack = 0;
     attackEnemy = false;
+    attackTime;
 
 
     energy = 100;
@@ -53,13 +54,27 @@ class MovableObject extends DrawableObject {
 
     attack() {
         if (this.world.keyboard.STRG) {
-            this.attackEnemy = true;
-            this.lastAtack = new Date().getTime();
-            setTimeout(() => {
-                this.attackEnemy = false;
-            }, 1000);
+            if (!this.attackTime) {
+                this.setAttackTimer();
+            } else {
+                let delta = Date.now();
+                delta = delta - this.attackTime;
+                if (delta > 1500) {
+                    this.setAttackTimer();
+                }
+            }
         }
 
+    }
+
+
+    setAttackTimer() {
+        this.attackTime = Date.now();
+        this.attackEnemy = true;
+        this.lastAtack = new Date().getTime();
+        setTimeout(() => {
+            this.attackEnemy = false;
+        }, 1000);
     }
 
 
