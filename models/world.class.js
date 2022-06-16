@@ -43,14 +43,11 @@ class World {
             this.level.enemies.forEach((enemy, index) => {
                 if (this.character.isCollidingEnemies(enemy)) {
                     if (this.character.attackEnemy) {
-
-
                         this.level.enemies[index].setEnemyDead();
                         // setTimeout(() => {
                         //     this.level.enemies.splice(index, 1);
                         // }, 2200);
                     } else {
-                        console.log(this.level.enemies[index].enemyDead)
                         if (!this.level.enemies[index].enemyDead) {
                             this.character.hit(3);
                             this.statusBar.setPercentage(this.character.energy);
@@ -79,7 +76,7 @@ class World {
                 let bomb = new ThrowableObject(this.character.x, this.character.y, this.character.otherDierection);
                 this.throwableObject.push(bomb);
             }
-        }, 200);
+        }, 100);
 
     }
 

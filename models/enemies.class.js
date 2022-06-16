@@ -22,18 +22,19 @@ class Enemies extends MovableObject {
 
 
     dieAnimationEnemy = setInterval(() => {
-        if (this.dieTime > 0) {
+        if (this.enemyDead && this.dieTime > 0) {
             this.animationRepeat(this.imges.Image_Die);
             this.imges.Image_Die.splice(0, 1)
             this.dieTime--;
-        } else if (this.dieTime == 0 && this.enemyIndex == 1) {
+        }
+        if (this.dieTime == 0 && this.enemyIndex == 1) {
             this.dieAnimation = this.loadImage('ork/1/ORK_01_DIE_009.png');
         } else if (this.dieTime == 0 && this.enemyIndex == 2) {
             this.dieAnimation = this.loadImage('ork/2/ORK_02_DIE_009.png');
         } else if (this.dieTime == 0 && this.enemyIndex == 3) {
             this.dieAnimation = this.loadImage('ork/3/ORK_03_DIE_009.png');
         }
-    }, 150);
+    }, 100);
 
 
 
@@ -64,7 +65,7 @@ class Enemies extends MovableObject {
     animationEnemie() {
 
         setInterval(() => {
-            // console.log(this.enemyDead);
+
             if (!this.enemyDead) {
                 this.walkleft(this.speed);
             }
@@ -74,11 +75,10 @@ class Enemies extends MovableObject {
             if (!this.enemyDead) {
                 this.animationRepeat(this.imges.Image_Walking);
             } else {
-                // this.animationRepeat(this.imges.Image_Die);
                 this.dieAnimationEnemy;
                 setTimeout(() => {
                     this.y += 1;
-                }, 3000);
+                }, 2000);
             }
         }, 120);
 

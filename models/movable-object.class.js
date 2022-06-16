@@ -140,6 +140,10 @@ class MovableObject extends DrawableObject {
         let path = animationArray[i];
         this.img = this.imageCache[path]
         this.currentImage++;
+        // if (this.smokeNow) {
+        //     console.log(this.smokeNow);
+        //     this.img.globalAlpha = 0.2;
+        // }
     }
 
 

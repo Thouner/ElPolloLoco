@@ -28,14 +28,14 @@ class Character extends MovableObject {
 
 
 
-
     dieAnimation = setInterval(() => {
         if (this.isDead() && this.dieTime > 0) {
             this.animationRepeat(this.imges.Image_Die);
             this.imges.Image_Die.splice(0, 1)
             this.dieTime--;
 
-        } else if (this.dieTime == 0 && this.characterSelection == 1) {
+        }
+        if (this.dieTime == 0 && this.characterSelection == 1) {
             this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
         } else if (this.dieTime == 0 && this.characterSelection == 2) {
             this.dieAnimation = this.loadImage('pirat/png/2/2_entity_000_DIE_006.png');
@@ -43,6 +43,23 @@ class Character extends MovableObject {
             this.dieAnimation = this.loadImage('pirat/png/3/Dead8.png');
         }
     }, 150);
+
+
+
+    // dieAnimation = setInterval(() => {
+    //     if (this.isDead() && this.dieTime > 0) {
+    //         this.animationRepeat(this.imges.Image_Die);
+    //         this.imges.Image_Die.splice(0, 1)
+    //         this.dieTime--;
+
+    //     } else if (this.dieTime == 0 && this.characterSelection == 1) {
+    //         this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
+    //     } else if (this.dieTime == 0 && this.characterSelection == 2) {
+    //         this.dieAnimation = this.loadImage('pirat/png/2/2_entity_000_DIE_006.png');
+    //     } else if (this.dieTime == 0 && this.characterSelection == 3) {
+    //         this.dieAnimation = this.loadImage('pirat/png/3/Dead8.png');
+    //     }
+    // }, 150);
 
 
 
@@ -58,8 +75,7 @@ class Character extends MovableObject {
         } else if (this.characterSelection == 3) {
             this.loadImage('pirat/png/3/Idle1.png');
             this.imges = new Pirat_Image3();
-            // this.height = 200;
-            // this.width = 200;
+
             this.y = -100;
         }
         this.applyGravity(this.groundlevel);

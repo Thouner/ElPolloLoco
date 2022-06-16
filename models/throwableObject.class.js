@@ -1,11 +1,13 @@
 class ThrowableObject extends MovableObject {
 
-    // height = 220;
-    // width = 220;
-    // x = 200;
-    // y = 200;
+    height = 220;
+    width = 220;
+    x = 200;
+    y = 200;
     speedForX = 10;
-    bombtimer = 9;
+    bombtimer = 10;
+    exploNow = false;
+    smokeNow = false;
 
     images_Explo = [
         'Bomb/bomb_0009_Layer-1.png',
@@ -20,13 +22,49 @@ class ThrowableObject extends MovableObject {
         'Bomb/bomb_0000_Layer-10.png',
     ];
 
+    images_Smoke = [
+        'Bomb/smoke/Explosion_1_1.png',
+        'Bomb/smoke/Explosion_1_2.png',
+        'Bomb/smoke/Explosion_1_3.png',
+        'Bomb/smoke/Explosion_1_4.png',
+        'Bomb/smoke/Explosion_1_5.png',
+        'Bomb/smoke/Explosion_1_6.png',
+
+    ];
+
+
+    exploAnimation = setInterval(() => {
+        if (this.exploNow && this.bombtimer > 0) {
+            this.animationRepeat(this.images_Explo);
+            this.bombtimer--;
+            this.images_Explo.splice(0, 1)
+
+        }
+        if (this.bombtimer == 0) {
+            this.smokeNow = true
+            this.height = 100;
+            this.width = 100;
+            this.animationRepeat(this.images_Smoke);
+        }
+
+    }, 100);
+
 
     constructor(x, y, playerDierection) {
         super();
         this.loadImage('Bomb/bomb_0009_Layer-1.png');
         this.loadImagesArray(this.images_Explo);
+        this.loadImagesArray(this.images_Smoke);
         this.x = x;
         this.y = y;
+
+        setInterval(() => {
+            if (this.smokeNow) {
+                this.x + 200;
+                this.y + 200;
+            }
+        }, 200);
+
         this.height = 250;
         this.width = 250;
         this.throw(playerDierection);
@@ -35,76 +73,64 @@ class ThrowableObject extends MovableObject {
 
 
     throw (playerDierection) {
+        this.speedY = 32;
+        this.applyGravity(280);
+
+
         if (playerDierection) {
-            this.speedY = 32;
-            this.applyGravity(280);
             setInterval(() => {
                 this.x -= this.speedForX;
                 if (this.y > 275) {
                     this.speedForX = 0;
-                    // this.exploAnimation;
+                    this.exploNow = true;
+                    this.exploAnimation;
+                    // setInterval(() => {
+                    //     if (this.bombtimer > 0) {
+                    //         this.animationRepeat(this.images_Explo);
+                    //         this.bombtimer--;
+                    //         if (this.bombtimer == 1) {
+                    //             this.images_Explo.splice(0, 9)
+                    //         }
+                    //     } else {
+                    //         this.animationRepeat(this.images_Smoke);
+                    //     }
 
-                    console.log(this.bombtimer);
-                    setInterval(() => {
-                        if (this.bombtimer > 0) {
-                            this.animationRepeat(this.images_Explo);
-                            this.bombtimer--;
-                            if (this.bombtimer == 1) {
-                                this.images_Explo.splice(0, 9)
-                            }
-                        } else {
-                            this.dieAnimation = this.loadImage('Bomb/bomb_0000_Layer-10.png');
-                        }
+                    // }, 2000);
 
-                    }, 150);
 
-                    // this.animationRepeat(this.images_Explo);
                 }
 
             }, 25);
         } else {
-            this.speedY = 32;
-            this.applyGravity(280);
+
             setInterval(() => {
                 this.x += this.speedForX;
                 if (this.y > 275) {
                     this.speedForX = 0;
-                    // this.exploAnimation;
+                    this.exploNow = true;
+                    this.exploAnimation;
+                    // setInterval(() => {
 
-                    setInterval(() => {
+                    //     if (this.bombtimer > 0) {
+                    //         this.animationRepeat(this.images_Explo);
+                    //         this.bombtimer--;
+                    //         if (this.bombtimer == 1) {
+                    //             this.images_Explo.splice(0, 9)
+                    //         }
+                    //     } else {
+                    //         this.animationRepeat(this.images_Smoke);
+                    //     }
 
-                        if (this.bombtimer > 0) {
-                            this.animationRepeat(this.images_Explo);
-                            this.bombtimer--;
-                            if (this.bombtimer == 1) {
-                                this.images_Explo.splice(0, 9)
-                            }
-                        } else {
-                            this.dieAnimation = this.loadImage('Bomb/bomb_0000_Layer-10.png');
-                        }
+                    // }, 2000);
 
-                    }, 150);
 
-                    // this.animationRepeat(this.images_Explo);
                 }
             }, 25);
         }
     }
 
 
-    exploAnimation = setInterval(() => {
 
-        if (this.bombtimer > 0) {
-            // this.animationRepeat(this.images_Explo);
-            this.bombtimer--;
-            if (this.bombtimer == 1) {
-                this.images_Explo.splice(0, 9)
-            }
-        } else {
-            this.dieAnimation = this.loadImage('Bomb/bomb_0000_Layer-10.png');
-        }
-
-    }, 150);
 
 
 }
