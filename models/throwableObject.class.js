@@ -42,9 +42,12 @@ class ThrowableObject extends MovableObject {
         }
         if (this.bombtimer == 0) {
             this.smokeNow = true
+            this.x + 100;
+            this.y + 100;
             this.height = 100;
             this.width = 100;
             this.animationRepeat(this.images_Smoke);
+
         }
 
     }, 100);
@@ -57,14 +60,6 @@ class ThrowableObject extends MovableObject {
         this.loadImagesArray(this.images_Smoke);
         this.x = x;
         this.y = y;
-
-        setInterval(() => {
-            if (this.smokeNow) {
-                this.x + 200;
-                this.y + 200;
-            }
-        }, 200);
-
         this.height = 250;
         this.width = 250;
         this.throw(playerDierection);
