@@ -112,14 +112,23 @@ class ThrowableObject extends MovableObject {
 
 
     checkEnemyCollusin() {
+        setInterval(() => {
 
-        this.world.level.enemies.forEach(enemie => {
-            if (this.isCollidingBomb(enemie)) {
-                // this.objectHit = true;
-                // boss.gotHit();
-                console.log('treffer');
-            }
-        });
+            this.world.level.enemies.forEach(enemie => {
+                if (this.isCollidingBomb(enemie)) {
+                    console.log('treffer');
+                    this.speedForX = 0;
+                    this.speedY = 0;
+                    this.applyGravity(this.y);
+                    this.exploNow = true;
+                    this.exploAnimation;
+                    let i = this.world.level.enemies.indexOf(enemie);
+                    this.world.level.enemies[i].setEnemyDead();
+                    // this.world.level.enemies.splice(i, 1);
+                    // this.world.level.enemies[index].setEnemyDead();
+                }
+            });
+        }, 120);
     }
 
 

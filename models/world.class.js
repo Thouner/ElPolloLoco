@@ -54,7 +54,7 @@ class World {
                         }, 20000);
                     } else {
                         if (!this.level.enemies[index].enemyDead) {
-                            this.character.hit(3);
+                            this.character.hit(2);
                             this.statusBar.setPercentage(this.character.energy);
                         }
                     }
@@ -63,7 +63,7 @@ class World {
 
             this.level.endboss.forEach((boss) => {
                 if (this.character.isCollidingEnemies(boss)) {
-                    this.character.hit(6);
+                    this.character.hit(4);
                     this.statusBar.setPercentage(this.character.energy);
                 }
             });
