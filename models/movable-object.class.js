@@ -137,6 +137,22 @@ class MovableObject extends DrawableObject {
 
     }
 
+    isCollidingBomb(mo) {
+
+        if ((this.x + 100) + (this.width - 200) > mo.xBox &&
+            (this.y + 100) + (this.height - 200) > mo.yBox &&
+            this.x + 100 < mo.xBox + mo.widthBox &&
+            this.y + 100 < mo.yBox + mo.heightBox) {
+            // collision detected!
+            return true;
+
+        } else {
+            // no collision
+            return false;
+        }
+
+    }
+
 
 
     jumpsOnTop(mo) {
@@ -155,10 +171,6 @@ class MovableObject extends DrawableObject {
         let path = animationArray[i];
         this.img = this.imageCache[path]
         this.currentImage++;
-        // if (this.smokeNow) {
-        //     console.log(this.smokeNow);
-        //     this.img.globalAlpha = 0.2;
-        // }
     }
 
 

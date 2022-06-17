@@ -90,6 +90,13 @@ class DrawableObject {
             ctx.rect(this.x, this.y, this.width - 60, this.height);
             ctx.stroke();
         }
+        if (this instanceof ThrowableObject) {
+            ctx.beginPath();
+            ctx.lineWidth = '1';
+            ctx.strokeStyle = 'grey';
+            ctx.rect(this.x + 100, this.y + 100, this.width - 200, this.height - 200);
+            ctx.stroke();
+        }
     }
 
 

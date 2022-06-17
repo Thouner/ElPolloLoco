@@ -53,17 +53,17 @@ class ThrowableObject extends MovableObject {
             this.width = 100;
             this.animationRepeat(this.images_Smoke);
         }
-        if (this.bombtimer == -10) {
-
-            // console.log(this.world.throwableObject);
+        if (this.bombtimer == -15) {
             let i = this.world.throwableObject.indexOf(this);
-            this.world.level.throwableObject.splice(i, 1);
+            this.world.throwableObject.splice(i, 1);
         }
-    }, 100);
+
+    }, 120);
 
 
-    constructor(x, y, playerDierection) {
+    constructor(x, y, playerDierection, world) {
         super();
+        this.world = world;
         this.loadImage('Bomb/bomb_0009_Layer-1.png');
         this.loadImagesArray(this.images_Explo);
         this.loadImagesArray(this.images_Smoke);
@@ -72,7 +72,11 @@ class ThrowableObject extends MovableObject {
         this.height = 250;
         this.width = 250;
         this.throw(playerDierection);
+        this.checkEnemyCollusin();
     }
+
+
+
 
 
 
@@ -104,6 +108,19 @@ class ThrowableObject extends MovableObject {
         }
     }
 
+
+
+
+    checkEnemyCollusin() {
+
+        this.world.level.enemies.forEach(enemie => {
+            if (this.isCollidingBomb(enemie)) {
+                // this.objectHit = true;
+                // boss.gotHit();
+                console.log('treffer');
+            }
+        });
+    }
 
 
 

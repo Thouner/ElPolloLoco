@@ -70,9 +70,7 @@ class World {
 
             this.level.treasure.forEach((treas, index) => {
                 if (this.character.isCollidingThings(treas)) {
-                    // console.log('geld');
                     this.character.collectTreasure();
-                    // console.log(this.character.treasure);
                     this.level.treasure.splice(index, 1);
                 }
             });
@@ -92,6 +90,9 @@ class World {
                     }
                 }
             }
+
+
+
         }, 100);
 
     }
@@ -99,8 +100,8 @@ class World {
     throwThebomb() {
 
         this.throwBombTime = Date.now();
-        let bomb = new ThrowableObject(this.character.x, this.character.y, this.character.otherDierection);
-        bomb.world = this;
+        let bomb = new ThrowableObject(this.character.x, this.character.y, this.character.otherDierection, this);
+        // bomb.world = this;
         this.throwableObject.push(bomb);
 
 
@@ -129,12 +130,13 @@ class World {
 
         this.addBackGround();
 
-        this.drawStatusBar(120);
+        this.drawStatusBar(this.character.energy);
         this.addToMap(this.statusBar);
 
-        this.drawNumber();
+        this.drawNumber(85, this.character.treasure, '#ECBC00');
         this.addToMap(this.moneyBar);
 
+        this.drawNumber(130, '159', '#6B98A7');
         this.addToMap(this.ammoBar);
 
 
@@ -195,22 +197,22 @@ class World {
 
     drawStatusBar(breite) {
         this.ctx.fillStyle = '#ffffff';
-        this.ctx.fillRect(30, 12.5, 220, 35);
+        this.ctx.fillRect(30, 12.5, 225, 35);
 
         this.ctx.strokeStyle = 'red';
-        this.ctx.strokeRect(30, 12.5, 220, 35);
+        this.ctx.strokeRect(30, 12.5, 225, 35);
 
-        this.ctx.fillStyle = '#FFA500'
-        this.ctx.fillRect(30, 17.5, breite, 25)
+        this.ctx.fillStyle = '#D84920'
+        this.ctx.fillRect(30, 17.5, (breite * 2.2), 25)
     }
 
 
 
 
-    drawNumber() {
+    drawNumber(y, text, color) {
         this.ctx.font = "30px Comic Sans MS";
-        this.ctx.fillStyle = "red";
-        this.ctx.fillText("55", 70, 80);
+        this.ctx.fillStyle = color;
+        this.ctx.fillText(text, 70, y);
     }
 
     // drawNummber(mo) {
