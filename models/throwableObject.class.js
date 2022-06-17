@@ -54,6 +54,7 @@ class ThrowableObject extends MovableObject {
             this.animationRepeat(this.images_Smoke);
         }
         if (this.bombtimer == -10) {
+
             // console.log(this.world.throwableObject);
             let i = this.world.throwableObject.indexOf(this);
             this.world.level.throwableObject.splice(i, 1);
@@ -87,20 +88,6 @@ class ThrowableObject extends MovableObject {
                     this.speedForX = 0;
                     this.exploNow = true;
                     this.exploAnimation;
-                    // setInterval(() => {
-                    //     if (this.bombtimer > 0) {
-                    //         this.animationRepeat(this.images_Explo);
-                    //         this.bombtimer--;
-                    //         if (this.bombtimer == 1) {
-                    //             this.images_Explo.splice(0, 9)
-                    //         }
-                    //     } else {
-                    //         this.animationRepeat(this.images_Smoke);
-                    //     }
-
-                    // }, 2000);
-
-
                 }
 
             }, 25);
@@ -112,21 +99,6 @@ class ThrowableObject extends MovableObject {
                     this.speedForX = 0;
                     this.exploNow = true;
                     this.exploAnimation;
-                    // setInterval(() => {
-
-                    //     if (this.bombtimer > 0) {
-                    //         this.animationRepeat(this.images_Explo);
-                    //         this.bombtimer--;
-                    //         if (this.bombtimer == 1) {
-                    //             this.images_Explo.splice(0, 9)
-                    //         }
-                    //     } else {
-                    //         this.animationRepeat(this.images_Smoke);
-                    //     }
-
-                    // }, 2000);
-
-
                 }
             }, 25);
         }

@@ -37,8 +37,7 @@ class World {
     setWorld() {
         this.character.world = this;
         this.level.endboss.world = this;
-
-        this.throwableObject.world = this;
+        // this.throwableObject.world = this;
     }
 
 
@@ -78,6 +77,10 @@ class World {
                 }
             });
 
+
+
+
+            //throw the bomb
             if (this.keyboard.SHIFT && !this.character.isDead()) {
                 if (!this.throwBombTime) {
                     this.throwThebomb();
@@ -97,6 +100,7 @@ class World {
 
         this.throwBombTime = Date.now();
         let bomb = new ThrowableObject(this.character.x, this.character.y, this.character.otherDierection);
+        bomb.world = this;
         this.throwableObject.push(bomb);
 
 
