@@ -1,24 +1,35 @@
-class AmmoBar extends DrawableObject {
+class AmmoBar extends MovableObject {
     x = 10;
-    y = 70;
-    width = 250;
-    height = 60;
+    y = 100;
+    width = 40;
+    height = 40;
 
 
     IMAGES_Ammo = [
-        'img/Verde/0.png',
-        'img/Verde/20.png',
-        'img/Verde/40.png',
-        'img/Verde/60.png',
-        'img/Verde/80.png',
-        'img/Verde/100.png',
+        'barImages/Silver/Silver_21.png',
+        'barImages/Silver/Silver_22.png',
+        'barImages/Silver/Silver_23.png',
+        'barImages/Silver/Silver_24.png',
+        'barImages/Silver/Silver_25.png',
+        'barImages/Silver/Silver_26.png',
+        'barImages/Silver/Silver_27.png',
+        'barImages/Silver/Silver_28.png',
+        'barImages/Silver/Silver_29.png',
+        'barImages/Silver/Silver_30.png',
+
     ];
     constructor() {
         super();
-        this.loadImage('img/Verde/0.png');
+        this.loadImage('barImages/Silver/Silver_21.png');
         this.loadImagesArray(this.IMAGES_Ammo);
-
-
+        this.animationCoin();
     }
 
+    animationCoin() {
+        setInterval(() => {
+
+            this.animationRepeat(this.IMAGES_Ammo);
+        }, 200);
+
+    }
 }

@@ -1,24 +1,37 @@
-class MoneyBar extends DrawableObject {
+class MoneyBar extends MovableObject {
     x = 10;
-    y = 40;
-    width = 50;
-    height = 50;
+    y = 55;
+    width = 40;
+    height = 40;
 
 
     IMAGES_Money = [
-        'img/azul/0.png',
-        'img/azul/20.png',
-        'img/azul/40.png',
-        'img/azul/60.png',
-        'img/azul/80.png',
-        'img/azul/100.png',
+        'barImages/Gold/Gold_1.png',
+        'barImages/Gold/Gold_2.png',
+        'barImages/Gold/Gold_3.png',
+        'barImages/Gold/Gold_4.png',
+        'barImages/Gold/Gold_5.png',
+        'barImages/Gold/Gold_6.png',
+        'barImages/Gold/Gold_7.png',
+        'barImages/Gold/Gold_8.png',
+        'barImages/Gold/Gold_9.png',
+        'barImages/Gold/Gold_10.png',
     ];
 
 
     constructor() {
         super();
-        this.loadImage('treasures/3.png');
+        this.loadImage('barImages/Gold/Gold_1.png');
         this.loadImagesArray(this.IMAGES_Money);
+        this.animationCoin();
+    }
+
+    animationCoin() {
+        setInterval(() => {
+
+            this.animationRepeat(this.IMAGES_Money);
+        }, 200);
+
     }
 
 }

@@ -1,18 +1,37 @@
-class StatusBar extends DrawableObject {
+class StatusBar extends MovableObject {
     x = 10;
-    y = -10;
-    width = 250;
-    height = 60;
+    y = 10;
+    // width = 250;
+    // height = 60;
+    width = 40;
+    height = 40;
 
+
+
+    // IMAGES_Heart = [
+    //     'img/Naranja/0.png',
+    //     'img/Naranja/20.png',
+    //     'img/Naranja/40.png',
+    //     'img/Naranja/60.png',
+    //     'img/Naranja/80.png',
+    //     'img/Naranja/100.png',
+    // ];
 
     IMAGES_Heart = [
-        'img/Naranja/0.png',
-        'img/Naranja/20.png',
-        'img/Naranja/40.png',
-        'img/Naranja/60.png',
-        'img/Naranja/80.png',
-        'img/Naranja/100.png',
+        'barImages/Bronze/Bronze_11.png',
+        'barImages/Bronze/Bronze_12.png',
+        'barImages/Bronze/Bronze_13.png',
+        'barImages/Bronze/Bronze_14.png',
+        'barImages/Bronze/Bronze_15.png',
+        'barImages/Bronze/Bronze_16.png',
+        'barImages/Bronze/Bronze_17.png',
+        'barImages/Bronze/Bronze_18.png',
+        'barImages/Bronze/Bronze_19.png',
+        'barImages/Bronze/Bronze_20.png',
     ];
+
+
+
 
     percentage = 100;
 
@@ -21,12 +40,22 @@ class StatusBar extends DrawableObject {
 
     constructor() {
         super();
-        this.loadImage('img/Naranja/100.png');
+        this.loadImage('barImages/Bronze/Bronze_11.png');
         this.loadImagesArray(this.IMAGES_Heart);
 
-        this.setPercentage(100);
+        // this.setPercentage(100);
+        this.animationCoin();
+    }
+
+
+    animationCoin() {
+        setInterval(() => {
+
+            this.animationRepeat(this.IMAGES_Heart);
+        }, 200);
 
     }
+
 
     /**
      * 

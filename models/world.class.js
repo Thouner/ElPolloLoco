@@ -129,11 +129,15 @@ class World {
 
         this.addBackGround();
 
+        this.drawStatusBar(120);
         this.addToMap(this.statusBar);
-        // this.addToMap(this.moneyBar);
-        // this.drawNummber(this.moneyBar);
+
+        this.drawNumber();
+        this.addToMap(this.moneyBar);
 
         this.addToMap(this.ammoBar);
+
+
 
         // draw() wird immer wieder aufgerufen
         let self = this;
@@ -189,12 +193,32 @@ class World {
     }
 
 
-    drawNummber(mo) {
-        mo.draw(this.ctx);
-        setInterval(() => {
-            mo.drawMoneyNumber(this.ctx);
-        }, 200);
+    drawStatusBar(breite) {
+        this.ctx.fillStyle = '#ffffff';
+        this.ctx.fillRect(30, 12.5, 220, 35);
+
+        this.ctx.strokeStyle = 'red';
+        this.ctx.strokeRect(30, 12.5, 220, 35);
+
+        this.ctx.fillStyle = '#FFA500'
+        this.ctx.fillRect(30, 17.5, breite, 25)
     }
+
+
+
+
+    drawNumber() {
+        this.ctx.font = "30px Comic Sans MS";
+        this.ctx.fillStyle = "red";
+        this.ctx.fillText("55", 70, 80);
+    }
+
+    // drawNummber(mo) {
+    //     mo.draw(this.ctx);
+    //     setInterval(() => {
+    //         mo.drawMoneyNumber(this.ctx);
+    //     }, 200);
+    // }
 
 
     flipImage(mo) {
