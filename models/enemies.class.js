@@ -12,10 +12,10 @@ class Enemies extends MovableObject {
     enemyDead = false;
     dieTime = 10;
 
-    xBox = this.x + 120;
-    yBox = this.y + 130;
-    widthBox = this.width - 240;
-    heightBox = this.height - 170;
+    xBox = 120;
+    yBox = 130;
+    widthBox = 280;
+    heightBox = 170;
 
     speed = 0.3 + Math.random() * 0.5;
     // walking_sound = new Audio('audio/chicken.mp3');
@@ -38,9 +38,9 @@ class Enemies extends MovableObject {
 
 
 
-    constructor() {
+    constructor(x) {
         super().loadImage('ork/1/ORK_01_WALK_000.png');
-
+        this.x = x;
         if (this.enemyIndex == 1) {
             this.imges = new Ork_Image1();
         } else if (this.enemyIndex == 2) {
@@ -80,6 +80,9 @@ class Enemies extends MovableObject {
                     this.y += 1;
                 }, 2000);
             }
+
+
+
         }, 120);
 
 

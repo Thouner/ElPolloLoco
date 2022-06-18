@@ -93,34 +93,65 @@ class MovableObject extends DrawableObject {
 
     // character.isColliding(enemie);
     isCollidingEnemies(mo) {
-            if (this.attackEnemy) {
-                // console.log('MovableObject', this.attackEnemy);
-                if (
-                    // no collision
-                    this.x + 40 > mo.xBox + mo.widthBox ||
-                    this.x + 40 + this.width - 90 < mo.xBox ||
-                    this.y + 65 > mo.yBox + mo.heightBox ||
-                    this.y + 65 + this.height - 90 < mo.yBox) {
-                    return false;
-                } else {
-                    // collision detected!
-                    return true;
-                }
-            } else {
-                if (
-                    // no collision
-                    this.x + 40 > mo.xBox + mo.widthBox ||
-                    this.x + 40 + this.width - 170 < mo.xBox ||
-                    this.y + 65 > mo.yBox + mo.heightBox ||
-                    this.y + 65 + this.height - 90 < mo.yBox) {
-                    return false;
-                } else {
-                    // collision detected!
-                    return true;
-                }
-            }
+
+        if (
+            // no collision
+            this.x + 40 > mo.x + 120 + mo.width - 240 ||
+            this.x + 40 + this.width - 170 < mo.x + 120 ||
+            this.y + 65 > mo.y + 130 + mo.height - 170 ||
+            this.y + 65 + this.height - 90 < mo.y + 130) {
+            return false;
+        } else {
+            // collision detected!
+            return true;
         }
-        // character.isColliding(treaser);
+    }
+
+    isCollidingAttackEnemies(mo) {
+        // if (this.attackEnemy) {
+        //     // console.log('MovableObject', this.attackEnemy);
+        //     if (
+        //         // no collision
+        //         this.x + 40 > mo.xBox + mo.widthBox ||
+        //         this.x + 40 + this.width - 90 < mo.xBox ||
+        //         this.y + 65 > mo.yBox + mo.heightBox ||
+        //         this.y + 65 + this.height - 90 < mo.yBox) {
+        //         return false;
+        //     } else {
+        //         // collision detected!
+        //         return true;
+        //     }
+        // } else {
+        if (
+            // no collision
+            this.x + 40 > mo.x + 120 + mo.width - 240 ||
+            this.x + 40 + this.width - 170 < mo.x + 120 ||
+            this.y + 65 > mo.y + 130 + mo.height - 170 ||
+            this.y + 65 + this.height - 90 < mo.y + 130) {
+            return false;
+        } else {
+            // collision detected!
+            return true;
+        }
+        // }
+    }
+
+    isCollidingBoss(mo) {
+        if (
+            // no collision
+            this.x + 40 > mo.x + 270 + mo.width - 550 ||
+            this.x + 40 + this.width - 170 < mo.x + 270 ||
+            this.y + 65 > mo.y + 270 + mo.height - 370 ||
+            this.y + 65 + this.height - 90 < mo.y + 270) {
+            return false;
+        } else {
+            // collision detected!
+            return true;
+        }
+    }
+
+
+    // character.isColliding(treaser);
     isCollidingThings(mo) {
 
         if ((this.x + 40) + (this.width - 170) > mo.x &&
@@ -137,7 +168,25 @@ class MovableObject extends DrawableObject {
 
     }
 
-    isCollidingBomb(mo) {
+
+    isCollidingBombs(mo) {
+
+        if ((this.x + 40) + (this.width - 170) > (mo.x + 100) &&
+            (this.y + 65) + (this.height - 90) > (mo.y + 100) &&
+            (this.x + 40) < (mo.x + 100) + (mo.width - 200) &&
+            (this.y + 65) < (mo.y + 100) + (mo.height - 200)) {
+            // collision detected!
+            return true;
+
+        } else {
+            // no collision
+            return false;
+        }
+
+    }
+
+
+    isCollidingThrowBomb(mo) {
 
         if ((this.x + 100) + (this.width - 200) > mo.xBox &&
             (this.y + 100) + (this.height - 200) > mo.yBox &&

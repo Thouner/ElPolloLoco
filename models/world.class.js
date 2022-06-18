@@ -45,28 +45,29 @@ class World {
     checkCollisions() {
         setInterval(() => {
 
-            this.level.enemies.forEach((enemy, index) => {
-                if (this.character.isCollidingEnemies(enemy)) {
-                    if (this.character.attackEnemy) {
-                        this.level.enemies[index].setEnemyDead();
-                        setTimeout(() => {
-                            this.level.enemies.splice(index, 1);
-                        }, 20000);
-                    } else {
-                        if (!this.level.enemies[index].enemyDead) {
-                            this.character.hit(2);
-                            this.statusBar.setPercentage(this.character.energy);
-                        }
-                    }
-                }
-            });
+            // this.level.enemies.forEach((enemy, index) => {
+            //     if (this.character.isCollidingEnemies(enemy)) {
+            //         if (this.character.attackEnemy) {
+            //             this.level.enemies[index].setEnemyDead();
+            //             console.log(index);
+            //             setTimeout(() => {
+            //                 this.level.enemies.splice(index, 1);
+            //             }, 20000);
+            //         } else {
+            //             if (!this.level.enemies[index].enemyDead) {
+            //                 this.character.hit(2);
+            //                 this.statusBar.setPercentage(this.character.energy);
+            //             }
+            //         }
+            //     }
+            // });
 
-            this.level.endboss.forEach((boss) => {
-                if (this.character.isCollidingEnemies(boss)) {
-                    this.character.hit(4);
-                    this.statusBar.setPercentage(this.character.energy);
-                }
-            });
+            // this.level.endboss.forEach((boss) => {
+            //     if (this.character.isCollidingEnemies(boss)) {
+            //         this.character.hit(4);
+            //         this.statusBar.setPercentage(this.character.energy);
+            //     }
+            // });
 
             this.level.treasure.forEach((treas, index) => {
                 if (this.character.isCollidingThings(treas)) {
@@ -76,6 +77,12 @@ class World {
             });
 
 
+            this.level.bomb.forEach((bomb, index) => {
+                if (this.character.isCollidingBombs(bomb)) {
+                    this.character.collectBombs();
+                    this.level.bomb.splice(index, 1);
+                }
+            });
 
 
             //throw the bomb
@@ -98,12 +105,13 @@ class World {
     }
 
     throwThebomb() {
-
-        this.throwBombTime = Date.now();
-        let bomb = new ThrowableObject(this.character.x, this.character.y, this.character.otherDierection, this);
-        // bomb.world = this;
-        this.throwableObject.push(bomb);
-
+        if (this.character.bombs > 0) {
+            this.character.minusBombs();
+            this.throwBombTime = Date.now();
+            let bomb = new ThrowableObject(this.character.x, this.character.y, this.character.otherDierection, this);
+            // bomb.world = this;
+            this.throwableObject.push(bomb);
+        }
 
     }
 
@@ -121,7 +129,8 @@ class World {
 
         this.addObjectsToMap(this.level.backgroundObjects); //drawing the backgrounds
         this.addObjectsToMap(this.level.treasure); //drawing the treasure
-        this.addObjectsToMap(this.throwableObject); //drawing the bomb
+        this.addObjectsToMap(this.level.bomb); //drawing the bomb
+        this.addObjectsToMap(this.throwableObject); //drawing the throw bomb
         this.addToMap(this.character) //drawing the character
         this.addObjectsToMap(this.level.enemies); //drawing the enemies
         this.addObjectsToMap(this.level.endboss); //drawing the endboss
@@ -136,7 +145,7 @@ class World {
         this.drawNumber(85, this.character.treasure, '#ECBC00');
         this.addToMap(this.moneyBar);
 
-        this.drawNumber(130, '159', '#6B98A7');
+        this.drawNumber(130, this.character.bombs, '#6B98A7');
         this.addToMap(this.ammoBar);
 
 

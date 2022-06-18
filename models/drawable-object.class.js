@@ -14,6 +14,7 @@ class DrawableObject {
     widthBox;
 
     treasure = 0;
+    bombs = 5;
 
 
 
@@ -73,7 +74,7 @@ class DrawableObject {
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'red';
-            ctx.rect(this.x + 120, this.y + 130, this.width - 240, this.height - 170);
+            ctx.rect(this.x + 120, this.y + 130, this.width - 250, this.height - 170);
             ctx.stroke();
         }
         if (this instanceof Endboss) {
@@ -83,13 +84,20 @@ class DrawableObject {
             ctx.rect(this.x + 270, this.y + 270, this.width - 550, this.height - 370);
             ctx.stroke();
         }
-        if (this instanceof Treasure) {
-            ctx.beginPath();
-            ctx.lineWidth = '1';
-            ctx.strokeStyle = 'yellow';
-            ctx.rect(this.x, this.y, this.width - 60, this.height);
-            ctx.stroke();
-        }
+        // if (this instanceof Treasure) {
+        //     ctx.beginPath();
+        //     ctx.lineWidth = '1';
+        //     ctx.strokeStyle = 'yellow';
+        //     ctx.rect(this.x, this.y, this.width - 60, this.height);
+        //     ctx.stroke();
+        // }
+        // if (this instanceof bomb) {
+        //     ctx.beginPath();
+        //     ctx.lineWidth = '1';
+        //     ctx.strokeStyle = 'grey';
+        //     ctx.rect(this.x + 100, this.y + 100, this.width - 200, this.height - 200);
+        //     ctx.stroke();
+        // }
         if (this instanceof ThrowableObject) {
             ctx.beginPath();
             ctx.lineWidth = '1';

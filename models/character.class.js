@@ -110,12 +110,14 @@ class Character extends MovableObject {
 
                 this.world.camera_x = -this.x + 100;
 
-
             }
         }, 1000 / 60);
 
 
         setInterval(() => {
+            this.checkBossCollusion();
+            this.checkOrkCollusion();
+
             if (!this.isDead()) {
                 if (!this.isAboveGround() && !this.isDead() && !this.isHurt()) {
                     this.animationRepeat(this.imges.Image_Idle);
@@ -144,11 +146,40 @@ class Character extends MovableObject {
     }
 
 
+    checkBossCollusion() {
+        this.world.level.endboss.forEach((boss) => {
+            if (this.isCollidingBoss(boss)) {
+                this.hit(4);
+                this.world.statusBar.setPercentage(this.energy);
+            }
+        });
+    }
+    checkOrkCollusion() {
+        this.world.level.enemies.forEach((boss) => {
+            if (this.isCollidingEnemies(boss)) {
+                this.hit(2);
+                this.world.statusBar.setPercentage(this.energy);
+            }
+        });
+    }
+
+
     collectTreasure() {
         this.treasure++;
     }
 
 
+    collectBombs() {
+        this.bombs++;
+    }
+
+
+    minusBombs() {
+        this.bombs--;
+        if (this.bombs < 0) {
+            this.bombs = 0
+        }
+    }
 
 
 

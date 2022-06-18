@@ -27,14 +27,23 @@ class Endboss extends MovableObject {
         this.otherDierection = true;
 
         this.loadImagesArray(this.imges.Image_Walking);
-        setInterval(() => {
-            this.walkleft(this.speed);
-        }, 1000 / 60);
+        this.loadImagesArray(this.imges.Image_Attack);
+        this.loadImagesArray(this.imges.Image_Die);
+        this.loadImagesArray(this.imges.Image_Hurt);
+        this.AnimationMove();
+
         this.animationEnemie();
         // this.checkCollision();
         // this.walking_sound.volume = 0.2;
         // this.walking_sound.loop = true;
         // this.walking_sound.play();
+    }
+
+
+    AnimationMove() {
+        setInterval(() => {
+            this.walkleft(this.speed);
+        }, 1000 / 60);
     }
 
 

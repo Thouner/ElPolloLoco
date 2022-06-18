@@ -29,23 +29,40 @@ const level1 = new Level(
         new BackgroundObject('beach/game_background_2/layers/land.png', 880),
         new BackgroundObject('beach/game_background_2/layers/decor.png', 880),
     ], [
-        // new Treasure(-325, 380),
-        // new Treasure(-350, 410),
-        // new Treasure(-300, 410),
-        // new Treasure(-225, 380),
-        // new Treasure(-250, 410),
-        // new Treasure(-200, 410),
+        new Treasure(-325, 380),
+        new Treasure(-350, 410),
+        new Treasure(-300, 410),
+        new Treasure(-225, 380),
+        new Treasure(-250, 410),
+        new Treasure(-200, 410),
 
-        new Treasure(325, 380),
-        new Treasure(350, 410),
-        new Treasure(300, 410),
-        new Treasure(225, 380),
-        new Treasure(250, 410),
-        new Treasure(200, 410),
+        new Treasure(200, 150),
+        new Treasure(250, 100),
+        new Treasure(300, 50),
+        new Treasure(350, 50),
+        new Treasure(400, 100),
+        new Treasure(450, 150),
+
+        new Treasure(1200, 150),
+        new Treasure(1250, 100),
+        new Treasure(1300, 50),
+        new Treasure(1350, 50),
+        new Treasure(1400, 100),
+        new Treasure(1450, 150),
+
+        new Treasure(2200, 150),
+        new Treasure(2250, 100),
+        new Treasure(2300, 50),
+        new Treasure(2350, 50),
+        new Treasure(2400, 100),
+        new Treasure(2450, 150),
     ], [
         new Sky('beach/game_background_2/layers/sky.png', -880),
         new Sky('beach/game_background_2/layers/sky.png', 0),
         new Sky('beach/game_background_2/layers/sky.png', 880),
+    ], [
+        new bomb(225, 300),
+
     ],
 )
 let cloudCount = 5;

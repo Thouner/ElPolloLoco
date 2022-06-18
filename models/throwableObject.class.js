@@ -8,7 +8,8 @@ class ThrowableObject extends MovableObject {
     bombtimer = 10;
     exploNow = false;
     smokeNow = false;
-    positionOptimize = false;
+    smokePositionOptimize = false;
+    bombContacktEnemy = false;
     world;
 
     images_Explo = [
@@ -43,10 +44,10 @@ class ThrowableObject extends MovableObject {
 
         }
         if (this.bombtimer <= 0) {
-            if (!this.positionOptimize) {
+            if (!this.smokePositionOptimize) {
                 this.x += 80;
                 this.y += 40;
-                this.positionOptimize = true;
+                this.smokePositionOptimize = true;
             }
             this.smokeNow = true
             this.height = 100;
@@ -72,7 +73,8 @@ class ThrowableObject extends MovableObject {
         this.height = 250;
         this.width = 250;
         this.throw(playerDierection);
-        this.checkEnemyCollusin();
+        // this.checkEnemyCollusin();
+        this.applyGravity(280);
     }
 
 
@@ -82,7 +84,6 @@ class ThrowableObject extends MovableObject {
 
     throw (playerDierection) {
         this.speedY = 32;
-        this.applyGravity(280);
 
 
         if (playerDierection) {
@@ -115,17 +116,19 @@ class ThrowableObject extends MovableObject {
         setInterval(() => {
 
             this.world.level.enemies.forEach(enemie => {
-                if (this.isCollidingBomb(enemie)) {
+                if (this.isCollidingThrowBomb(enemie)) {
                     console.log('treffer');
                     this.speedForX = 0;
-                    this.speedY = 0;
-                    this.applyGravity(this.y);
+                    if (!this.bombContacktEnemy) {
+                        this.x = this.x;
+                        this.y = this.y;
+                        this.bombContacktEnemy = true;
+                    }
                     this.exploNow = true;
                     this.exploAnimation;
                     let i = this.world.level.enemies.indexOf(enemie);
                     this.world.level.enemies[i].setEnemyDead();
-                    // this.world.level.enemies.splice(i, 1);
-                    // this.world.level.enemies[index].setEnemyDead();
+
                 }
             });
         }, 120);
