@@ -10,6 +10,7 @@ class ThrowableObject extends MovableObject {
     smokeNow = false;
     smokePositionOptimize = false;
     bombContacktEnemy = false;
+    addGavity = 280;
     world;
 
     images_Explo = [
@@ -32,7 +33,6 @@ class ThrowableObject extends MovableObject {
         'Bomb/smoke/Explosion_1_4.png',
         'Bomb/smoke/Explosion_1_5.png',
         'Bomb/smoke/Explosion_1_6.png',
-
     ];
 
 
@@ -62,6 +62,9 @@ class ThrowableObject extends MovableObject {
     }, 120);
 
 
+
+
+
     constructor(x, y, playerDierection, world) {
         super();
         this.world = world;
@@ -74,7 +77,8 @@ class ThrowableObject extends MovableObject {
         this.width = 250;
         this.throw(playerDierection);
         // this.checkEnemyCollusin();
-        this.applyGravity(280);
+        this.applyGravity(this.addGavity);
+        this.addGavity;
     }
 
 
@@ -94,7 +98,7 @@ class ThrowableObject extends MovableObject {
                     this.exploNow = true;
                     this.exploAnimation;
                 }
-
+                this.checkEnemyCollusin();
             }, 25);
         } else {
 
@@ -105,6 +109,7 @@ class ThrowableObject extends MovableObject {
                     this.exploNow = true;
                     this.exploAnimation;
                 }
+                this.checkEnemyCollusin();
             }, 25);
         }
     }
@@ -113,25 +118,49 @@ class ThrowableObject extends MovableObject {
 
 
     checkEnemyCollusin() {
-        setInterval(() => {
-
-            this.world.level.enemies.forEach(enemie => {
-                if (this.isCollidingThrowBomb(enemie)) {
-                    console.log('treffer');
-                    this.speedForX = 0;
-                    if (!this.bombContacktEnemy) {
-                        this.x = this.x;
-                        this.y = this.y;
-                        this.bombContacktEnemy = true;
-                    }
-                    this.exploNow = true;
-                    this.exploAnimation;
-                    let i = this.world.level.enemies.indexOf(enemie);
-                    this.world.level.enemies[i].setEnemyDead();
-
+        // console.log(this.y);
+        this.world.level.endboss.forEach(boss => {
+            if (this.isCollidingBossThrowBomb(boss) && !boss.enemyDead) {
+                this.speedForX = 0;
+                if (!this.bombContacktEnemy) {
+                    // this.x = this.x;
+                    this.addGavity = this.y;
+                    this.applyGravity(this.addGavity);
+                    // console.log(this.addGavity);
+                    // this.addGavity = '';
+                    this.bombContacktEnemy = true;
                 }
-            });
-        }, 120);
+                let i = this.world.level.endboss.indexOf(boss);
+                if (!this.exploNow) {
+                    this.world.level.endboss[i].setEnemyDead(25);
+                }
+                this.exploNow = true;
+                this.exploAnimation;
+            }
+        });
+
+
+        this.world.level.enemies.forEach(enemie => {
+            if (this.isCollidingThrowBomb(enemie) && !enemie.enemyDead) {
+                // console.log('treffer');
+                this.speedForX = 0;
+                if (!this.bombContacktEnemy) {
+                    // this.x = this.x;
+                    this.addGavity = this.y;
+                    this.applyGravity(this.addGavity);
+                    // console.log(this.addGavity);
+                    // this.addGavity = '';
+                    this.bombContacktEnemy = true;
+                }
+                let i = this.world.level.enemies.indexOf(enemie);
+                if (!this.exploNow) {
+                    this.world.level.enemies[i].setEnemyDead();
+                }
+                this.exploNow = true;
+                this.exploAnimation;
+            }
+        });
+        // }, 120);
     }
 
 

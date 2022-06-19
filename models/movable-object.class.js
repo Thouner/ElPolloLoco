@@ -5,6 +5,8 @@ class MovableObject extends DrawableObject {
     acceleration = 2.5;
     enemyIndex = Math.floor(Math.random() * (3 - 1 + 1) + 1);
 
+    characterSelection = 2;
+
     lastHit = 0;
     lastAtack = 0;
     attackEnemy = false;
@@ -26,7 +28,7 @@ class MovableObject extends DrawableObject {
 
 
     isAboveGround(groundHight) {
-        if (this instanceof Enemies) {
+        if (this instanceof Enemies || Endboss) {
             if (this.enemyDead) {
                 return true
             }
@@ -82,7 +84,7 @@ class MovableObject extends DrawableObject {
         let timepassed = new Date().getTime() - this.lastAtack;
         timepassed = timepassed / 1000;
 
-        return timepassed < 0.8;
+        return timepassed < 1.0;
     }
 
 
@@ -108,24 +110,10 @@ class MovableObject extends DrawableObject {
     }
 
     isCollidingAttackEnemies(mo) {
-        // if (this.attackEnemy) {
-        //     // console.log('MovableObject', this.attackEnemy);
-        //     if (
-        //         // no collision
-        //         this.x + 40 > mo.xBox + mo.widthBox ||
-        //         this.x + 40 + this.width - 90 < mo.xBox ||
-        //         this.y + 65 > mo.yBox + mo.heightBox ||
-        //         this.y + 65 + this.height - 90 < mo.yBox) {
-        //         return false;
-        //     } else {
-        //         // collision detected!
-        //         return true;
-        //     }
-        // } else {
         if (
             // no collision
             this.x + 40 > mo.x + 120 + mo.width - 240 ||
-            this.x + 40 + this.width - 170 < mo.x + 120 ||
+            this.x + 40 + this.width - 90 < mo.x + 120 ||
             this.y + 65 > mo.y + 130 + mo.height - 170 ||
             this.y + 65 + this.height - 90 < mo.y + 130) {
             return false;
@@ -133,8 +121,25 @@ class MovableObject extends DrawableObject {
             // collision detected!
             return true;
         }
-        // }
+
     }
+
+
+    isCollidingAttackBoss(mo) {
+        if (
+            // no collision
+            this.x + 40 > mo.x + 270 + mo.width - 550 ||
+            this.x + 40 + this.width - 170 < mo.x + 270 ||
+            this.y + 65 > mo.y + 270 + mo.height - 370 ||
+            this.y + 65 + this.height - 90 < mo.y + 270) {
+            return false;
+        } else {
+            // collision detected!
+            return true;
+        }
+
+    }
+
 
     isCollidingBoss(mo) {
         if (
@@ -170,14 +175,12 @@ class MovableObject extends DrawableObject {
 
 
     isCollidingBombs(mo) {
-
         if ((this.x + 40) + (this.width - 170) > (mo.x + 100) &&
             (this.y + 65) + (this.height - 90) > (mo.y + 100) &&
             (this.x + 40) < (mo.x + 100) + (mo.width - 200) &&
             (this.y + 65) < (mo.y + 100) + (mo.height - 200)) {
             // collision detected!
             return true;
-
         } else {
             // no collision
             return false;
@@ -187,28 +190,38 @@ class MovableObject extends DrawableObject {
 
 
     isCollidingThrowBomb(mo) {
-
-        if ((this.x + 100) + (this.width - 200) > mo.xBox &&
-            (this.y + 100) + (this.height - 200) > mo.yBox &&
-            this.x + 100 < mo.xBox + mo.widthBox &&
-            this.y + 100 < mo.yBox + mo.heightBox) {
+        if ((this.x + 100) + (this.width - 200) > mo.x + 120 &&
+            (this.y + 100) + (this.height - 200) > mo.y + 130 &&
+            this.x + 100 < mo.x + 120 + mo.width - 280 &&
+            this.y + 100 < mo.y + 130 + mo.height - 170) {
             // collision detected!
             return true;
-
         } else {
             // no collision
             return false;
         }
-
     }
 
 
+    isCollidingBossThrowBomb(mo) {
+        if ((this.x + 100) + (this.width - 200) > mo.x + 270 &&
+            (this.y + 100) + (this.height - 200) > mo.y + 270 &&
+            this.x + 100 < mo.x + 270 + mo.width - 550 &&
+            this.y + 100 < mo.y + 270 + mo.height - 370) {
+            // collision detected!
+            return true;
+        } else {
+            // no collision
+            return false;
+        }
+    }
+
 
     jumpsOnTop(mo) {
-        return this.y + this.height > mo.y &&
-            this.y + this.height < mo.y + mo.height &&
-            this.x + this.width > mo.x &&
-            this.x + this.width < (mo.x + mo.width + 70);
+        return this.y + 40 + this.height - 90 > mo.y + 130 &&
+            this.y + 65 + this.height - 90 < mo.y + 130 + mo.height - 170 &&
+            this.x + 40 + this.width - 170 > mo.x + 120 &&
+            this.x + 40 + this.width - 170 < (mo.x + 120 + mo.width - 280);
     }
 
 
@@ -227,7 +240,6 @@ class MovableObject extends DrawableObject {
         this.x += walkspeed;
         this.xBox += walkspeed;
         this.otherDierection = false;
-
     }
 
 

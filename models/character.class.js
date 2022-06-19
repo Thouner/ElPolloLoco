@@ -4,37 +4,19 @@ class Character extends MovableObject {
     x = 0;
     y = -150;
     speed = 5;
-    characterSelection = 1;
+
     imges;
     world;
-
-    walking_sound = new Audio('audio/walk.mp3');
-
-
-
-
     groundlevel = 180;
-
-
-
-    xBox = this.x + 40;
-    yBox = this.y + 65;
-    widthBox = this.width - 150;
-    heightBox = this.height - 90;
-    attackWidth = this.width - 90;
-
-
     dieTime = 7;
 
-
-
+    walking_sound = new Audio('audio/walk.mp3');
 
     dieAnimation = setInterval(() => {
         if (this.isDead() && this.dieTime > 0) {
             this.animationRepeat(this.imges.Image_Die);
             this.imges.Image_Die.splice(0, 1)
             this.dieTime--;
-
         }
         if (this.dieTime == 0 && this.characterSelection == 1) {
             this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
@@ -48,6 +30,23 @@ class Character extends MovableObject {
 
     constructor() {
         super();
+        this.selectCurrentCharacter();
+        this.applyGravity(this.groundlevel);
+
+        this.setgroundLevel();
+
+        this.loadImagesArray(this.imges.Image_Walking);
+        this.loadImagesArray(this.imges.Image_Jump);
+        this.loadImagesArray(this.imges.Image_Idle);
+        this.loadImagesArray(this.imges.Image_Die);
+        this.loadImagesArray(this.imges.Image_Attack);
+        this.loadImagesArray(this.imges.Image_Hurt);
+
+        this.animationCharater();
+    }
+
+
+    selectCurrentCharacter() {
         if (this.characterSelection == 1) {
             this.loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
             this.imges = new Pirat_Image1();
@@ -57,22 +56,9 @@ class Character extends MovableObject {
         } else if (this.characterSelection == 3) {
             this.loadImage('pirat/png/3/Idle1.png');
             this.imges = new Pirat_Image3();
-
-            this.y = -100;
+            this.width = 180;
+            this.height = 180;
         }
-        this.applyGravity(this.groundlevel);
-
-        this.setgroundLevel();
-        this.loadImagesArray(this.imges.Image_Walking);
-        this.loadImagesArray(this.imges.Image_Jump);
-        this.loadImagesArray(this.imges.Image_Idle);
-        this.loadImagesArray(this.imges.Image_Die);
-        this.loadImagesArray(this.imges.Image_Attack);
-        this.loadImagesArray(this.imges.Image_Hurt);
-
-        this.animationCharater();
-
-
     }
 
 
@@ -115,8 +101,14 @@ class Character extends MovableObject {
 
 
         setInterval(() => {
-            this.checkBossCollusion();
-            this.checkOrkCollusion();
+            this.jumpOnOrk();
+            if (this.attackEnemy) {
+                this.checkAttackCollusion();
+                this.checkAttackBossCollusion();
+            } else {
+                this.checkBossCollusion();
+                this.checkOrkCollusion();
+            }
 
             if (!this.isDead()) {
                 if (!this.isAboveGround() && !this.isDead() && !this.isHurt()) {
@@ -135,28 +127,62 @@ class Character extends MovableObject {
                 if (this.isAboveGround(180)) {
                     this.animationRepeat(this.imges.Image_Jump);
                 }
-
                 this.attack();
             } else {
                 this.dieAnimation;
             }
-
         }, 120);
+    }
 
+
+    jumpOnOrk() {
+        this.world.level.enemies.forEach((enemy) => {
+            if (this.jumpsOnTop(enemy) && this.isAboveGround()) {
+                let i = this.world.level.enemies.indexOf(enemy);
+                // console.log('treffer', i);
+                this.world.level.enemies[i].setEnemyDead();
+            }
+        });
     }
 
 
     checkBossCollusion() {
         this.world.level.endboss.forEach((boss) => {
-            if (this.isCollidingBoss(boss)) {
+            if (!boss.enemyDead && this.isCollidingBoss(boss)) {
                 this.hit(4);
                 this.world.statusBar.setPercentage(this.energy);
             }
         });
     }
+
+
+    checkAttackBossCollusion() {
+        this.world.level.endboss.forEach((boss) => {
+            if (this.isCollidingAttackEnemies(boss) && this.isAttack()) {
+                let i = this.world.level.endboss.indexOf(boss);
+                this.world.level.endboss[i].setEnemyDead(0.5);
+            }
+        });
+    }
+
+
+    checkAttackCollusion() {
+        this.world.level.enemies.forEach((enemy) => {
+            if (this.isCollidingAttackEnemies(enemy)) {
+                let i = this.world.level.enemies.indexOf(enemy);
+                this.world.level.enemies[i].setEnemyDead();
+                setTimeout(() => {
+                    this.world.level.enemies.splice(i, 1);
+                }, 20000);
+            }
+        });
+    }
+
+
+
     checkOrkCollusion() {
-        this.world.level.enemies.forEach((boss) => {
-            if (this.isCollidingEnemies(boss)) {
+        this.world.level.enemies.forEach((enemy) => {
+            if (!enemy.enemyDead && this.isCollidingEnemies(enemy)) {
                 this.hit(2);
                 this.world.statusBar.setPercentage(this.energy);
             }
@@ -180,7 +206,5 @@ class Character extends MovableObject {
             this.bombs = 0
         }
     }
-
-
 
 }

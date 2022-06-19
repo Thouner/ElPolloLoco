@@ -7,16 +7,6 @@ class StatusBar extends MovableObject {
     height = 40;
 
 
-
-    // IMAGES_Heart = [
-    //     'img/Naranja/0.png',
-    //     'img/Naranja/20.png',
-    //     'img/Naranja/40.png',
-    //     'img/Naranja/60.png',
-    //     'img/Naranja/80.png',
-    //     'img/Naranja/100.png',
-    // ];
-
     IMAGES_Heart = [
         'barImages/Bronze/Bronze_11.png',
         'barImages/Bronze/Bronze_12.png',
@@ -31,11 +21,7 @@ class StatusBar extends MovableObject {
     ];
 
 
-
-
     percentage = 100;
-
-
 
 
     constructor() {
@@ -43,7 +29,7 @@ class StatusBar extends MovableObject {
         this.loadImage('barImages/Bronze/Bronze_11.png');
         this.loadImagesArray(this.IMAGES_Heart);
 
-        // this.setPercentage(100);
+        this.setPercentage(100);
         this.animationCoin();
     }
 
@@ -63,8 +49,8 @@ class StatusBar extends MovableObject {
      */
     setPercentage(percentage) {
         this.percentage = percentage; // -> 0 ... 5
-        let path = this.IMAGES_Heart[this.resolveImageIndex()];
-        this.img = this.imageCache[path];
+        // let path = this.IMAGES_Heart[this.resolveImageIndex()];
+        // this.img = this.imageCache[path];
     }
 
 

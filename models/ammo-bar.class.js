@@ -6,8 +6,6 @@ class AmmoBar extends MovableObject {
 
 
     IMAGES_Ammo = [
-        'barImages/Silver/Silver_21.png',
-        'barImages/Silver/Silver_22.png',
         'barImages/Silver/Silver_23.png',
         'barImages/Silver/Silver_24.png',
         'barImages/Silver/Silver_25.png',
@@ -16,11 +14,12 @@ class AmmoBar extends MovableObject {
         'barImages/Silver/Silver_28.png',
         'barImages/Silver/Silver_29.png',
         'barImages/Silver/Silver_30.png',
-
+        'barImages/Silver/Silver_21.png',
+        'barImages/Silver/Silver_22.png',
     ];
     constructor() {
         super();
-        this.loadImage('barImages/Silver/Silver_21.png');
+        this.loadImage('barImages/Silver/Silver_23.png');
         this.loadImagesArray(this.IMAGES_Ammo);
         this.animationCoin();
     }

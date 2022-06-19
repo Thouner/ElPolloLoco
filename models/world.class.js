@@ -6,11 +6,13 @@ class World {
     keyboard;
     camera_x = 0;
     throwBombTime;
+    randomNumber;
+    insultBar = true;
 
 
     throwableObject = [];
 
-
+    insult = new Insults();
     statusBar = new StatusBar();
     moneyBar = new MoneyBar();
     ammoBar = new AmmoBar();
@@ -37,38 +39,13 @@ class World {
     setWorld() {
         this.character.world = this;
         this.level.endboss.world = this;
-        // this.throwableObject.world = this;
+
     }
 
 
 
     checkCollisions() {
         setInterval(() => {
-
-            // this.level.enemies.forEach((enemy, index) => {
-            //     if (this.character.isCollidingEnemies(enemy)) {
-            //         if (this.character.attackEnemy) {
-            //             this.level.enemies[index].setEnemyDead();
-            //             console.log(index);
-            //             setTimeout(() => {
-            //                 this.level.enemies.splice(index, 1);
-            //             }, 20000);
-            //         } else {
-            //             if (!this.level.enemies[index].enemyDead) {
-            //                 this.character.hit(2);
-            //                 this.statusBar.setPercentage(this.character.energy);
-            //             }
-            //         }
-            //     }
-            // });
-
-            // this.level.endboss.forEach((boss) => {
-            //     if (this.character.isCollidingEnemies(boss)) {
-            //         this.character.hit(4);
-            //         this.statusBar.setPercentage(this.character.energy);
-            //     }
-            // });
-
             this.level.treasure.forEach((treas, index) => {
                 if (this.character.isCollidingThings(treas)) {
                     this.character.collectTreasure();
@@ -134,6 +111,13 @@ class World {
         this.addToMap(this.character) //drawing the character
         this.addObjectsToMap(this.level.enemies); //drawing the enemies
         this.addObjectsToMap(this.level.endboss); //drawing the endboss
+        if (this.character.isAttack()) {
+            if (!this.randomNumber)
+                this.randomNumber = Math.floor(Math.random() * (15 - 0 + 1) + 0);
+            this.drawInsultBar();
+        } else {
+            this.randomNumber = null;
+        }
 
         this.ctx.translate(-this.camera_x, 0); //back movement of the camera
 
@@ -147,6 +131,8 @@ class World {
 
         this.drawNumber(130, this.character.bombs, '#6B98A7');
         this.addToMap(this.ammoBar);
+
+        this.drawBossStatusBar(this.level.endboss[0].bossEnergy);
 
 
 
@@ -215,7 +201,36 @@ class World {
         this.ctx.fillRect(30, 17.5, (breite * 2.2), 25)
     }
 
+    drawInsultBar(text) {
+        // let randomNumber = Math.floor(Math.random() * (15 - 0 + 1) + 0);
+        let randomText = this.insult.insults[this.randomNumber];
+        // console.log(this.insult.Insults);
+        // console.log(this.insult.insults[11]);
+        let textLength = randomText.length;
+        this.ctx.fillStyle = '#fff';
+        this.ctx.fillRect(this.character.x, this.character.y + 30, textLength * 10.2, 35);
 
+        this.ctx.font = "20px Comic Sans MS";
+        this.ctx.fillStyle = 'black';
+        this.ctx.fillText(randomText, this.character.x + 5, this.character.y + 55);
+
+        this.ctx.strokeStyle = 'red';
+        this.ctx.strokeRect(this.character.x, this.character.y + 30, textLength * 10.2, 35);
+
+
+    }
+
+
+    drawBossStatusBar(breite) {
+        this.ctx.fillStyle = '#ffffff';
+        this.ctx.fillRect(this.canvas.width - 30, 12.5, -225, 35);
+
+        this.ctx.strokeStyle = 'red';
+        this.ctx.strokeRect(this.canvas.width - 30, 12.5, -225, 35);
+
+        this.ctx.fillStyle = '#000'
+        this.ctx.fillRect(this.canvas.width - 30, 17.5, -(breite * 2.2), 25)
+    }
 
 
     drawNumber(y, text, color) {

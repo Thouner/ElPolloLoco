@@ -6,7 +6,7 @@ class MoneyBar extends MovableObject {
 
 
     IMAGES_Money = [
-        'barImages/Gold/Gold_1.png',
+
         'barImages/Gold/Gold_2.png',
         'barImages/Gold/Gold_3.png',
         'barImages/Gold/Gold_4.png',
@@ -16,12 +16,13 @@ class MoneyBar extends MovableObject {
         'barImages/Gold/Gold_8.png',
         'barImages/Gold/Gold_9.png',
         'barImages/Gold/Gold_10.png',
+        'barImages/Gold/Gold_1.png',
     ];
 
 
     constructor() {
         super();
-        this.loadImage('barImages/Gold/Gold_1.png');
+        this.loadImage('barImages/Gold/Gold_2.png');
         this.loadImagesArray(this.IMAGES_Money);
         this.animationCoin();
     }

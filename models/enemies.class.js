@@ -80,9 +80,6 @@ class Enemies extends MovableObject {
                     this.y += 1;
                 }, 2000);
             }
-
-
-
         }, 120);
 
 

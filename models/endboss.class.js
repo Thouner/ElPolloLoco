@@ -7,6 +7,8 @@ class Endboss extends MovableObject {
     speed = 0.7;
     world;
     bossEnergy = 100;
+    enemyDead = false;
+    dieTime = 10;
     // walking_sound = new Audio('audio/chicken.mp3');
 
     xBox = this.x + 270;
@@ -14,8 +16,23 @@ class Endboss extends MovableObject {
     widthBox = this.width - 550;
     heightBox = this.height - 370;
 
+    dieAnimationEnemy = setInterval(() => {
+        if (this.enemyDead && this.dieTime > 0) {
+            this.animationRepeat(this.imges.Image_Die);
+            this.imges.Image_Die.splice(0, 1)
+            this.dieTime--;
+        }
+        if (this.dieTime == 0 && this.enemyIndex == 1) {
+            this.dieAnimation = this.loadImage('troll/1/Troll_01_1_DIE_009.png');
+        } else if (this.dieTime == 0 && this.enemyIndex == 2) {
+            this.dieAnimation = this.loadImage('troll/2/Troll_02_1_DIE_009.png');
+        } else if (this.dieTime == 0 && this.enemyIndex == 3) {
+            this.dieAnimation = this.loadImage('troll/3/Troll_03_1_DIE_009.png');
+        }
+    }, 100);
 
-    constructor() {
+
+    constructor(world) {
         super().loadImage('troll/1/Troll_01_1_WALK_000.png');
         if (this.enemyIndex == 1) {
             this.imges = new Troll_Image1;
@@ -25,7 +42,7 @@ class Endboss extends MovableObject {
             this.imges = new Troll_Image3;
         }
         this.otherDierection = true;
-
+        this.world = world;
         this.loadImagesArray(this.imges.Image_Walking);
         this.loadImagesArray(this.imges.Image_Attack);
         this.loadImagesArray(this.imges.Image_Die);
@@ -42,15 +59,47 @@ class Endboss extends MovableObject {
 
     AnimationMove() {
         setInterval(() => {
-            this.walkleft(this.speed);
+            if (!this.enemyDead) {
+                this.walkleft(this.speed);
+            }
+            this.checkBossAlife();
         }, 1000 / 60);
     }
 
 
     animationEnemie() {
         setInterval(() => {
-            this.animationRepeat(this.imges.Image_Walking);
+            if (!this.enemyDead) {
+                this.animationRepeat(this.imges.Image_Walking);
+            } else {
+                this.dieAnimationEnemy;
+                setTimeout(() => {
+                    this.y += 1;
+                }, 2000);
+            }
+
+
+
+
         }, 200);
     }
 
+
+    setEnemyDead(damage) {
+        this.bossEnergy = this.bossEnergy - damage;
+        if (this.bossEnergy <= 0) {
+            this.bossEnergy = 0;
+
+        }
+    }
+
+
+
+    checkBossAlife() {
+        // console.log(this.bossEnergy);
+        if (this.bossEnergy == 0) {
+            this.enemyDead = true;
+        }
+
+    }
 }
