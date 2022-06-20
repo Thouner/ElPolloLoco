@@ -13,6 +13,11 @@ class ThrowableObject extends MovableObject {
     addGavity = 280;
     world;
 
+    offSetX = 100;
+    offSetY = 100;
+    offSetWidth = 200;
+    offSetHeight = 200;
+
     images_Explo = [
         'Bomb/bomb_0009_Layer-1.png',
         'Bomb/bomb_0008_Layer-2.png',
@@ -101,7 +106,6 @@ class ThrowableObject extends MovableObject {
                 this.checkEnemyCollusin();
             }, 25);
         } else {
-
             setInterval(() => {
                 this.x += this.speedForX;
                 if (this.y > 275) {
@@ -118,16 +122,12 @@ class ThrowableObject extends MovableObject {
 
 
     checkEnemyCollusin() {
-        // console.log(this.y);
         this.world.level.endboss.forEach(boss => {
-            if (this.isCollidingBossThrowBomb(boss) && !boss.enemyDead) {
+            if (this.isCollidingEnemies(boss) && !boss.enemyDead) {
                 this.speedForX = 0;
                 if (!this.bombContacktEnemy) {
-                    // this.x = this.x;
                     this.addGavity = this.y;
                     this.applyGravity(this.addGavity);
-                    // console.log(this.addGavity);
-                    // this.addGavity = '';
                     this.bombContacktEnemy = true;
                 }
                 let i = this.world.level.endboss.indexOf(boss);
@@ -141,15 +141,11 @@ class ThrowableObject extends MovableObject {
 
 
         this.world.level.enemies.forEach(enemie => {
-            if (this.isCollidingThrowBomb(enemie) && !enemie.enemyDead) {
-                // console.log('treffer');
+            if (this.isCollidingEnemies(enemie) && !enemie.enemyDead) {
                 this.speedForX = 0;
                 if (!this.bombContacktEnemy) {
-                    // this.x = this.x;
                     this.addGavity = this.y;
                     this.applyGravity(this.addGavity);
-                    // console.log(this.addGavity);
-                    // this.addGavity = '';
                     this.bombContacktEnemy = true;
                 }
                 let i = this.world.level.enemies.indexOf(enemie);
@@ -160,7 +156,6 @@ class ThrowableObject extends MovableObject {
                 this.exploAnimation;
             }
         });
-        // }, 120);
     }
 
 

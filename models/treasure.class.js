@@ -4,10 +4,11 @@ class Treasure extends MovableObject {
     // x = 400;
     // y = 410;
 
-    xBox = this.x;
-    yBox = this.y;
-    heightBox = this.height;
-    widthBox = this.width;
+    offSetX = 0;
+    offSetY = 0;
+    offSetWidth = 0;
+    offSetHeight = 0;
+
     constructor(x, y) {
         super().loadImage('treasures/3.png');
         this.x = x;

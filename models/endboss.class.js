@@ -11,10 +11,12 @@ class Endboss extends MovableObject {
     dieTime = 10;
     // walking_sound = new Audio('audio/chicken.mp3');
 
-    xBox = this.x + 270;
-    yBox = this.y + 270;
-    widthBox = this.width - 550;
-    heightBox = this.height - 370;
+    offSetX = 270;
+    offSetY = 270;
+    offSetWidth = 550;
+    offSetHeight = 370;
+
+    offSetWidthAttack = 90;
 
     dieAnimationEnemy = setInterval(() => {
         if (this.enemyDead && this.dieTime > 0) {

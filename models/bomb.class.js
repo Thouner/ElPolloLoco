@@ -2,11 +2,11 @@ class bomb extends MovableObject {
     height = 250;
     width = 250;
 
+    offSetX = 100;
+    offSetY = 100;
+    offSetWidth = 200;
+    offSetHeight = 200;
 
-    xBox = this.x;
-    yBox = this.y;
-    heightBox = this.height;
-    widthBox = this.width;
     constructor(x, y) {
         super().loadImage('Bomb/bomb_0008_Layer-2.png');
         this.x = x;

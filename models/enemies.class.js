@@ -12,13 +12,14 @@ class Enemies extends MovableObject {
     enemyDead = false;
     dieTime = 10;
 
-    xBox = 120;
-    yBox = 130;
-    widthBox = 280;
-    heightBox = 170;
 
     speed = 0.3 + Math.random() * 0.5;
     // walking_sound = new Audio('audio/chicken.mp3');
+
+    offSetX = 120;
+    offSetY = 130;
+    offSetWidth = 250;
+    offSetHeight = 170;
 
 
     dieAnimationEnemy = setInterval(() => {

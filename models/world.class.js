@@ -47,7 +47,7 @@ class World {
     checkCollisions() {
         setInterval(() => {
             this.level.treasure.forEach((treas, index) => {
-                if (this.character.isCollidingThings(treas)) {
+                if (this.character.isCollidingEnemies(treas)) {
                     this.character.collectTreasure();
                     this.level.treasure.splice(index, 1);
                 }
@@ -55,7 +55,7 @@ class World {
 
 
             this.level.bomb.forEach((bomb, index) => {
-                if (this.character.isCollidingBombs(bomb)) {
+                if (this.character.isCollidingEnemies(bomb)) {
                     this.character.collectBombs();
                     this.level.bomb.splice(index, 1);
                 }
@@ -191,23 +191,46 @@ class World {
 
 
     drawStatusBar(breite) {
-        this.ctx.fillStyle = '#ffffff';
-        this.ctx.fillRect(30, 12.5, 225, 35);
+        if (this.character.characterSelection == 2) {
+            this.ctx.fillStyle = '#ffffff';
+            this.ctx.fillRect(30, 12.5, 181, 35);
 
-        this.ctx.strokeStyle = 'red';
-        this.ctx.strokeRect(30, 12.5, 225, 35);
+            this.ctx.strokeStyle = 'D84920';
+            this.ctx.strokeRect(30, 12.5, 181, 35);
 
-        this.ctx.fillStyle = '#D84920'
-        this.ctx.fillRect(30, 17.5, (breite * 2.2), 25)
+            if (breite > 66) {
+                this.ctx.fillStyle = 'green';
+            } else if (breite > 33 && breite <= 66) {
+                this.ctx.fillStyle = 'orange';
+            } else {
+                this.ctx.fillStyle = 'red';
+            }
+            this.ctx.fillRect(30, 17.5, (breite * 2.2), 25)
+        } else {
+            this.ctx.fillStyle = '#ffffff';
+            this.ctx.fillRect(30, 12.5, 225, 35);
+
+            this.ctx.strokeStyle = '#D84920';
+            this.ctx.strokeRect(30, 12.5, 225, 35);
+
+            if (breite > 66) {
+                this.ctx.fillStyle = 'green';
+            } else if (breite > 33 && breite <= 66) {
+                this.ctx.fillStyle = 'orange';
+            } else {
+                this.ctx.fillStyle = 'red';
+            }
+
+            this.ctx.fillRect(30, 17.5, (breite * 2.2), 25)
+        }
     }
 
     drawInsultBar(text) {
-        // let randomNumber = Math.floor(Math.random() * (15 - 0 + 1) + 0);
+
         let randomText = this.insult.insults[this.randomNumber];
-        // console.log(this.insult.Insults);
-        // console.log(this.insult.insults[11]);
+
         let textLength = randomText.length;
-        this.ctx.fillStyle = '#fff';
+        this.ctx.fillStyle = 'rgba(255,255,255,0.7)';
         this.ctx.fillRect(this.character.x, this.character.y + 30, textLength * 10.2, 35);
 
         this.ctx.font = "20px Comic Sans MS";

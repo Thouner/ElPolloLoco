@@ -5,7 +5,7 @@ class MovableObject extends DrawableObject {
     acceleration = 2.5;
     enemyIndex = Math.floor(Math.random() * (3 - 1 + 1) + 1);
 
-    characterSelection = 2;
+    characterSelection = 1;
 
     lastHit = 0;
     lastAtack = 0;
@@ -98,10 +98,10 @@ class MovableObject extends DrawableObject {
 
         if (
             // no collision
-            this.x + 40 > mo.x + 120 + mo.width - 240 ||
-            this.x + 40 + this.width - 170 < mo.x + 120 ||
-            this.y + 65 > mo.y + 130 + mo.height - 170 ||
-            this.y + 65 + this.height - 90 < mo.y + 130) {
+            this.x + this.offSetX > mo.x + mo.offSetX + mo.width - mo.offSetWidth ||
+            this.x + this.offSetX + this.width - this.offSetWidth < mo.x + mo.offSetX ||
+            this.y + this.offSetY > mo.y + mo.offSetY + mo.height - mo.offSetHeight ||
+            this.y + this.offSetY + this.height - this.offSetHeight < mo.y + mo.offSetY) {
             return false;
         } else {
             // collision detected!
@@ -112,10 +112,10 @@ class MovableObject extends DrawableObject {
     isCollidingAttackEnemies(mo) {
         if (
             // no collision
-            this.x + 40 > mo.x + 120 + mo.width - 240 ||
-            this.x + 40 + this.width - 90 < mo.x + 120 ||
-            this.y + 65 > mo.y + 130 + mo.height - 170 ||
-            this.y + 65 + this.height - 90 < mo.y + 130) {
+            this.x + this.offSetX > mo.x + mo.offSetX + mo.width - mo.offSetWidth ||
+            this.x + this.offSetX + this.width - this.offSetWidthAttack < mo.x + mo.offSetX ||
+            this.y + this.offSetY > mo.y + mo.offSetY + mo.height - mo.offSetHeight ||
+            this.y + this.offSetY + this.height - this.offSetHeight < mo.y + mo.offSetY) {
             return false;
         } else {
             // collision detected!
@@ -125,103 +125,29 @@ class MovableObject extends DrawableObject {
     }
 
 
-    isCollidingAttackBoss(mo) {
-        if (
-            // no collision
-            this.x + 40 > mo.x + 270 + mo.width - 550 ||
-            this.x + 40 + this.width - 170 < mo.x + 270 ||
-            this.y + 65 > mo.y + 270 + mo.height - 370 ||
-            this.y + 65 + this.height - 90 < mo.y + 270) {
-            return false;
-        } else {
-            // collision detected!
-            return true;
-        }
+    // // character.isColliding(treaser);
+    // isCollidingThings(mo) {
 
-    }
+    //     if ((this.x + this.offSetX) + (this.width - this.offSetWidth) > mo.x + mo.offSetX &&
+    //         (this.y + this.offSetY) + (this.height - this.offSetHeight) > mo.y + mo.offSetY &&
+    //         this.x + this.offSetX < mo.x + mo.offSetX + mo.width - mo.offSetWidth &&
+    //         this.y + this.offSetY < mo.y + mo.offSetY + mo.height - mo.offSetHeight) {
+    //         // collision detected!
+    //         return true;
 
+    //     } else {
+    //         // no collision
+    //         return false;
+    //     }
 
-    isCollidingBoss(mo) {
-        if (
-            // no collision
-            this.x + 40 > mo.x + 270 + mo.width - 550 ||
-            this.x + 40 + this.width - 170 < mo.x + 270 ||
-            this.y + 65 > mo.y + 270 + mo.height - 370 ||
-            this.y + 65 + this.height - 90 < mo.y + 270) {
-            return false;
-        } else {
-            // collision detected!
-            return true;
-        }
-    }
-
-
-    // character.isColliding(treaser);
-    isCollidingThings(mo) {
-
-        if ((this.x + 40) + (this.width - 170) > mo.x &&
-            (this.y + 65) + (this.height - 90) > mo.y &&
-            this.x + 40 < mo.x + mo.width - 60 &&
-            this.y + 65 < mo.y + mo.height) {
-            // collision detected!
-            return true;
-
-        } else {
-            // no collision
-            return false;
-        }
-
-    }
-
-
-    isCollidingBombs(mo) {
-        if ((this.x + 40) + (this.width - 170) > (mo.x + 100) &&
-            (this.y + 65) + (this.height - 90) > (mo.y + 100) &&
-            (this.x + 40) < (mo.x + 100) + (mo.width - 200) &&
-            (this.y + 65) < (mo.y + 100) + (mo.height - 200)) {
-            // collision detected!
-            return true;
-        } else {
-            // no collision
-            return false;
-        }
-
-    }
-
-
-    isCollidingThrowBomb(mo) {
-        if ((this.x + 100) + (this.width - 200) > mo.x + 120 &&
-            (this.y + 100) + (this.height - 200) > mo.y + 130 &&
-            this.x + 100 < mo.x + 120 + mo.width - 280 &&
-            this.y + 100 < mo.y + 130 + mo.height - 170) {
-            // collision detected!
-            return true;
-        } else {
-            // no collision
-            return false;
-        }
-    }
-
-
-    isCollidingBossThrowBomb(mo) {
-        if ((this.x + 100) + (this.width - 200) > mo.x + 270 &&
-            (this.y + 100) + (this.height - 200) > mo.y + 270 &&
-            this.x + 100 < mo.x + 270 + mo.width - 550 &&
-            this.y + 100 < mo.y + 270 + mo.height - 370) {
-            // collision detected!
-            return true;
-        } else {
-            // no collision
-            return false;
-        }
-    }
+    // }
 
 
     jumpsOnTop(mo) {
-        return this.y + 40 + this.height - 90 > mo.y + 130 &&
-            this.y + 65 + this.height - 90 < mo.y + 130 + mo.height - 170 &&
-            this.x + 40 + this.width - 170 > mo.x + 120 &&
-            this.x + 40 + this.width - 170 < (mo.x + 120 + mo.width - 280);
+        return this.y + this.offSetX + this.height - this.offSetHeight > mo.y + mo.offSetY &&
+            this.y + this.offSetY + this.height - this.offSetHeight < mo.y + mo.offSetY + mo.height - mo.offSetHeight &&
+            this.x + this.offSetX + this.width - this.offSetWidth > mo.x + mo.offSetX &&
+            this.x + this.offSetX + this.width - this.offSetWidth < (mo.x + mo.offSetX + mo.width - mo.offSetWidth);
     }
 
 

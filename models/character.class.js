@@ -10,6 +10,13 @@ class Character extends MovableObject {
     groundlevel = 180;
     dieTime = 7;
 
+    offSetX = 40;
+    offSetY = 65;
+    offSetWidth = 170;
+    offSetHeight = 90;
+
+    offSetWidthAttack = 90;
+
     walking_sound = new Audio('audio/walk.mp3');
 
     dieAnimation = setInterval(() => {
@@ -51,6 +58,8 @@ class Character extends MovableObject {
             this.loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
             this.imges = new Pirat_Image1();
         } else if (this.characterSelection == 2) {
+            this.offSetWidthAttack = 0;
+            this.energy = 80;
             this.loadImage('pirat/png/2/2_entity_000_IDLE_000.png');
             this.imges = new Pirat_Image2();
         } else if (this.characterSelection == 3) {
@@ -139,18 +148,7 @@ class Character extends MovableObject {
         this.world.level.enemies.forEach((enemy) => {
             if (this.jumpsOnTop(enemy) && this.isAboveGround()) {
                 let i = this.world.level.enemies.indexOf(enemy);
-                // console.log('treffer', i);
                 this.world.level.enemies[i].setEnemyDead();
-            }
-        });
-    }
-
-
-    checkBossCollusion() {
-        this.world.level.endboss.forEach((boss) => {
-            if (!boss.enemyDead && this.isCollidingBoss(boss)) {
-                this.hit(4);
-                this.world.statusBar.setPercentage(this.energy);
             }
         });
     }
@@ -161,6 +159,7 @@ class Character extends MovableObject {
             if (this.isCollidingAttackEnemies(boss) && this.isAttack()) {
                 let i = this.world.level.endboss.indexOf(boss);
                 this.world.level.endboss[i].setEnemyDead(0.5);
+
             }
         });
     }
@@ -179,12 +178,21 @@ class Character extends MovableObject {
     }
 
 
+    checkBossCollusion() {
+        this.world.level.endboss.forEach((boss) => {
+            if (!boss.enemyDead && this.isCollidingEnemies(boss)) {
+                this.hit(4);
+                // this.world.statusBar.setPercentage(this.energy);
+            }
+        });
+    }
+
 
     checkOrkCollusion() {
         this.world.level.enemies.forEach((enemy) => {
             if (!enemy.enemyDead && this.isCollidingEnemies(enemy)) {
                 this.hit(2);
-                this.world.statusBar.setPercentage(this.energy);
+                // this.world.statusBar.setPercentage(this.energy);
             }
         });
     }
