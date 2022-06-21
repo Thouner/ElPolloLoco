@@ -8,6 +8,8 @@ class World {
     throwBombTime;
     randomNumber;
     insultBar = true;
+    orkDistance = 400;
+    orkMultiplikator = 1;
 
 
     throwableObject = [];
@@ -27,7 +29,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.checkCollekting();
         // this.canvas.width = innerWidth;
         // this.canvas.height = innerHeight;
     }
@@ -44,7 +46,7 @@ class World {
 
 
 
-    checkCollisions() {
+    checkCollekting() {
         setInterval(() => {
             this.level.treasure.forEach((treas, index) => {
                 if (this.character.isCollidingEnemies(treas)) {
@@ -74,7 +76,6 @@ class World {
                     }
                 }
             }
-
 
 
         }, 100);
@@ -118,10 +119,10 @@ class World {
         } else {
             this.randomNumber = null;
         }
-
+        this.addOrk();
         this.ctx.translate(-this.camera_x, 0); //back movement of the camera
 
-        this.addBackGround();
+        // this.addBackGround();
 
         this.drawStatusBar(this.character.energy);
         this.addToMap(this.statusBar);
@@ -144,21 +145,28 @@ class World {
     }
 
 
-    /**
-     * background extension from a certain distance
-     */
-    addBackGround() {
-        if (this.character.x == this.distanceTraveled) {
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sea.png', this.backgroundWidthToAdd1png));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/island.png', this.backgroundWidthToAdd1png));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/land.png', this.backgroundWidthToAdd1png));
-            this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/decor.png', this.backgroundWidthToAdd1png));
-            this.level.sky.push(new Sky('beach/game_background_2/layers/sky.png', this.backgroundWidthToAdd1png));
-
-            this.distanceTraveled = this.distanceTraveled + 400;
-            this.backgroundWidthToAdd1png = this.backgroundWidthToAdd1png + 880;
-        }
+    addOrk() {
+        setTimeout(() => {
+            this.level.enemies.push(new Enemies(800 + this.orkDistance * this.orkMultiplikator));
+            this.orkMultiplikator += 1;
+        }, 1000);
     }
+
+    // /**
+    //  * background extension from a certain distance
+    //  */
+    // addBackGround() {
+    //     if (this.character.x == this.distanceTraveled) {
+    //         this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sea.png', this.backgroundWidthToAdd1png));
+    //         this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/island.png', this.backgroundWidthToAdd1png));
+    //         this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/land.png', this.backgroundWidthToAdd1png));
+    //         this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/decor.png', this.backgroundWidthToAdd1png));
+    //         this.level.sky.push(new Sky('beach/game_background_2/layers/sky.png', this.backgroundWidthToAdd1png));
+
+    //         this.distanceTraveled = this.distanceTraveled + 400;
+    //         this.backgroundWidthToAdd1png = this.backgroundWidthToAdd1png + 880;
+    //     }
+    // }
 
 
     /**

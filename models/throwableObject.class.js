@@ -67,9 +67,6 @@ class ThrowableObject extends MovableObject {
     }, 120);
 
 
-
-
-
     constructor(x, y, playerDierection, world) {
         super();
         this.world = world;
@@ -87,14 +84,8 @@ class ThrowableObject extends MovableObject {
     }
 
 
-
-
-
-
     throw (playerDierection) {
         this.speedY = 32;
-
-
         if (playerDierection) {
             setInterval(() => {
                 this.x -= this.speedForX;

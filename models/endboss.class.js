@@ -8,6 +8,7 @@ class Endboss extends MovableObject {
     world;
     bossEnergy = 100;
     enemyDead = false;
+    bossWalk = false;
     dieTime = 10;
     // walking_sound = new Audio('audio/chicken.mp3');
 

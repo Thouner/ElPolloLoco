@@ -1,8 +1,8 @@
 const level1 = new Level(
     [
         new Enemies(800),
-        new Enemies(1200),
-        new Enemies(1600),
+        // new Enemies(1200),
+        // new Enemies(1600),
 
     ], [
         new Endboss(),
@@ -28,6 +28,11 @@ const level1 = new Level(
         new BackgroundObject('beach/game_background_2/layers/island.png', 880),
         new BackgroundObject('beach/game_background_2/layers/land.png', 880),
         new BackgroundObject('beach/game_background_2/layers/decor.png', 880),
+
+        new BackgroundObject('beach/game_background_2/layers/sea.png', 880 * 2),
+        new BackgroundObject('beach/game_background_2/layers/island.png', 880 * 2),
+        new BackgroundObject('beach/game_background_2/layers/land.png', 880 * 2),
+        new BackgroundObject('beach/game_background_2/layers/decor.png', 880 * 2),
     ], [
         new Treasure(-325, 380),
         new Treasure(-350, 410),
@@ -61,18 +66,24 @@ const level1 = new Level(
         new Sky('beach/game_background_2/layers/sky.png', 0),
         new Sky('beach/game_background_2/layers/sky.png', 880),
     ], [
-        new bomb(225, 300),
+        new bomb(250, 300),
+        new bomb(750, 300),
+        new bomb(1250, 300),
+        new bomb(1750, 300),
+        new bomb(2250, 300),
 
     ],
 )
 let cloudCount = 5;
+let backgroundCount = 3;
 let minusDistanceMultiplier = 1;
 
 
-timecount();
+timecountCloud();
+timecountBackground();
 
 
-function timecount() {
+function timecountCloud() {
     setInterval(() => {
         addClouds();
         cloudCount += 1
@@ -80,7 +91,23 @@ function timecount() {
     }, 15000);
 }
 
+function timecountBackground() {
+    setInterval(() => {
+        addBackgrounds();
+        backgroundCount += 1
+    }, 5000);
+}
+
 
 function addClouds() {
     level1.clouds.push(new Cloud(880 * cloudCount - 282 * minusDistanceMultiplier));
+}
+
+function addBackgrounds() {
+
+    level1.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sea.png', 880 * backgroundCount));
+    level1.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/island.png', 880 * backgroundCount));
+    level1.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/land.png', 880 * backgroundCount));
+    level1.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/decor.png', 880 * backgroundCount));
+    level1.sky.push(new Sky('beach/game_background_2/layers/sky.png', 880 * backgroundCount));
 }
