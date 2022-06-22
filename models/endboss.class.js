@@ -2,7 +2,7 @@ class Endboss extends MovableObject {
     height = 800;
     width = 800;
     y = -220;
-    x = 1420;
+    x = 2750;
     imges;
     speed = 0.7;
     world;
@@ -53,6 +53,7 @@ class Endboss extends MovableObject {
         this.AnimationMove();
 
         this.animationEnemie();
+        this.dieTime = this.imges.Image_Die.lenght;
         // this.checkCollision();
         // this.walking_sound.volume = 0.2;
         // this.walking_sound.loop = true;
@@ -62,7 +63,8 @@ class Endboss extends MovableObject {
 
     AnimationMove() {
         setInterval(() => {
-            if (!this.enemyDead) {
+            if (!this.enemyDead && this.bossWalk) {
+
                 this.walkleft(this.speed);
             }
             this.checkBossAlife();
@@ -73,7 +75,9 @@ class Endboss extends MovableObject {
     animationEnemie() {
         setInterval(() => {
             if (!this.enemyDead) {
-                this.animationRepeat(this.imges.Image_Walking);
+                if (this.bossWalk) {
+                    this.animationRepeat(this.imges.Image_Walking);
+                }
             } else {
                 this.dieAnimationEnemy;
                 setTimeout(() => {

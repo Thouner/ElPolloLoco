@@ -50,6 +50,7 @@ class Character extends MovableObject {
         this.loadImagesArray(this.imges.Image_Hurt);
 
         this.animationCharater();
+        this.dieTime = this.imges.Image_Die.length;
     }
 
 

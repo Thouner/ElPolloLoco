@@ -8,11 +8,6 @@ class DrawableObject {
     height;
     width;
 
-    xBox;
-    yBox;
-    heightBox;
-    widthBox;
-
     treasure = 0;
     bombs = 5;
 

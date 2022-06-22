@@ -77,11 +77,25 @@ const level1 = new Level(
 let cloudCount = 5;
 let backgroundCount = 3;
 let minusDistanceMultiplier = 1;
+// let orkDistance = 400;
+// let orkMultiplikator = 1;
 
-
+// addOrk();
 timecountCloud();
 timecountBackground();
 
+
+function addOrk() {
+    setTimeout(() => {
+        timeOrk()
+        orkMultiplikator += 1;
+    }, 1000);
+}
+
+
+function timeOrk() {
+    level1.enemies.push(new Enemies(800 + this.orkDistance * this.orkMultiplikator));
+}
 
 function timecountCloud() {
     setInterval(() => {

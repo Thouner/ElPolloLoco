@@ -30,6 +30,7 @@ class World {
         this.draw();
         this.setWorld();
         this.checkCollekting();
+
         // this.canvas.width = innerWidth;
         // this.canvas.height = innerHeight;
     }
@@ -76,7 +77,11 @@ class World {
                     }
                 }
             }
+            if (this.character.x == 2500) {
 
+                console.log(this.character.x);
+                this.level.endboss[0].bossWalk = true;
+            }
 
         }, 100);
 
@@ -119,7 +124,7 @@ class World {
         } else {
             this.randomNumber = null;
         }
-        this.addOrk();
+
         this.ctx.translate(-this.camera_x, 0); //back movement of the camera
 
         // this.addBackGround();
@@ -135,7 +140,7 @@ class World {
 
         this.drawBossStatusBar(this.level.endboss[0].bossEnergy);
 
-
+        // this.addOrk();
 
         // draw() wird immer wieder aufgerufen
         let self = this;
@@ -145,12 +150,12 @@ class World {
     }
 
 
-    addOrk() {
-        setTimeout(() => {
-            this.level.enemies.push(new Enemies(800 + this.orkDistance * this.orkMultiplikator));
-            this.orkMultiplikator += 1;
-        }, 1000);
-    }
+    // addOrk() {
+    //     setTimeout(() => {
+    //         this.level.enemies.push(new Enemies(800 + this.orkDistance * this.orkMultiplikator));
+    //         this.orkMultiplikator += 1;
+    //     }, 5000);
+    // }
 
     // /**
     //  * background extension from a certain distance

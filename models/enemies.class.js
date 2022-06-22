@@ -57,7 +57,7 @@ class Enemies extends MovableObject {
 
 
         this.animationEnemie();
-
+        this.dieTime = this.imges.Image_Die.lenght;
         // this.walking_sound.volume = 0.2;
         // this.walking_sound.loop = true;
         // this.walking_sound.play();
