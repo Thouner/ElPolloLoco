@@ -15,6 +15,8 @@ class Character extends MovableObject {
     offSetWidth = 170;
     offSetHeight = 90;
 
+    enemyIndex = Math.floor(Math.random() * (3 - 1 + 1) + 1);
+
     offSetWidthAttack = 90;
 
     walking_sound = new Audio('audio/walk.mp3');
@@ -103,10 +105,9 @@ class Character extends MovableObject {
                 if (this.world.keyboard.SPACE && !this.isAboveGround(180)) {
                     this.jump();
                 }
-
                 this.world.camera_x = -this.x + 100;
-
             }
+            this.goBoss();
         }, 1000 / 60);
 
 
@@ -198,6 +199,17 @@ class Character extends MovableObject {
         });
     }
 
+
+    goBoss() {
+        if (this.x == 2500) {
+
+            // console.log(this.x);
+            this.world.level.endboss[0].bossAttack = true;
+            setTimeout(() => {
+                this.world.level.endboss[0].speed = 0.7;
+            }, 1500);
+        }
+    }
 
     collectTreasure() {
         this.treasure++;

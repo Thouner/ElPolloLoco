@@ -11,6 +11,7 @@ class Enemies extends MovableObject {
     imges;
     enemyDead = false;
     dieTime = 10;
+    attackTime = 10;
 
 
     speed = 0.3 + Math.random() * 0.5;
@@ -20,7 +21,6 @@ class Enemies extends MovableObject {
     offSetY = 130;
     offSetWidth = 250;
     offSetHeight = 170;
-
 
     dieAnimationEnemy = setInterval(() => {
         if (this.enemyDead && this.dieTime > 0) {
@@ -37,7 +37,13 @@ class Enemies extends MovableObject {
         }
     }, 100);
 
-
+    // attackAnimation = setInterval(() => {
+    //     if (this.attackTime > 0) {
+    //         this.animationRepeat(this.imges.Im)
+    //         this.imges.Image_Die.splice(0, 1)
+    //         this.attackTime--;
+    //     }
+    // }, 100);
 
     constructor(x) {
         super().loadImage('ork/1/ORK_01_WALK_000.png');
@@ -54,10 +60,11 @@ class Enemies extends MovableObject {
 
         this.loadImagesArray(this.imges.Image_Walking);
         this.loadImagesArray(this.imges.Image_Die);
+        // this.loadImagesArray(this.imges.Image_Attack);
 
 
         this.animationEnemie();
-        this.dieTime = this.imges.Image_Die.lenght;
+        // this.dieTime = this.imges.Image_Die.lenght;
         // this.walking_sound.volume = 0.2;
         // this.walking_sound.loop = true;
         // this.walking_sound.play();

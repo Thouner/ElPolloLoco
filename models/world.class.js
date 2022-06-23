@@ -42,7 +42,6 @@ class World {
     setWorld() {
         this.character.world = this;
         this.level.endboss.world = this;
-
     }
 
 
@@ -77,12 +76,8 @@ class World {
                     }
                 }
             }
-            if (this.character.x == 2500) {
 
-                console.log(this.character.x);
-                this.level.endboss[0].bossWalk = true;
-            }
-
+            this.addOrk();
         }, 100);
 
     }
@@ -92,7 +87,6 @@ class World {
             this.character.minusBombs();
             this.throwBombTime = Date.now();
             let bomb = new ThrowableObject(this.character.x, this.character.y, this.character.otherDierection, this);
-            // bomb.world = this;
             this.throwableObject.push(bomb);
         }
 
@@ -140,7 +134,7 @@ class World {
 
         this.drawBossStatusBar(this.level.endboss[0].bossEnergy);
 
-        // this.addOrk();
+
 
         // draw() wird immer wieder aufgerufen
         let self = this;
@@ -150,12 +144,12 @@ class World {
     }
 
 
-    // addOrk() {
-    //     setTimeout(() => {
-    //         this.level.enemies.push(new Enemies(800 + this.orkDistance * this.orkMultiplikator));
-    //         this.orkMultiplikator += 1;
-    //     }, 5000);
-    // }
+    addOrk() {
+        // setTimeout(() => {
+        this.level.enemies.push(new Enemies(800 + this.orkDistance * this.orkMultiplikator));
+        this.orkMultiplikator += 1;
+        // }, 5000);
+    }
 
     // /**
     //  * background extension from a certain distance
@@ -192,6 +186,16 @@ class World {
      * @param {class} mo - class to draw in the world
      */
     addToMap(mo) {
+        if (this instanceof Character) {
+            if (mo.otherDierection) {
+                this.flipCharacter(mo);
+            }
+            mo.draw(this.ctx);
+            mo.drawFrame(this.ctx);
+            if (mo.otherDierection) {
+                this.flipImageBack(mo);
+            }
+        } else {}
         if (mo.otherDierection) {
             this.flipImage(mo);
         }
@@ -201,6 +205,7 @@ class World {
             this.flipImageBack(mo);
         }
     }
+
 
 
     drawStatusBar(breite) {
@@ -290,6 +295,12 @@ class World {
         mo.x = mo.x * -1;
     }
 
+    flipCharacter(mo) {
+        this.ctx.save();
+        this.ctx.translate(mo.width - 90, 0);
+        this.ctx.scale(-1, 1);
+        mo.x = mo.x * -1;
+    }
 
     flipImageBack(mo) {
         mo.x = mo.x * -1;

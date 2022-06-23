@@ -47,4 +47,16 @@ class Troll_Image3 {
         'troll/3/Troll_03_1_HURT_008.png',
         'troll/3/Troll_03_1_HURT_009.png',
     ];
+    Image_Run = [
+        'troll/3/Troll_03_1_RUN_000.png',
+        'troll/3/Troll_03_1_RUN_001.png',
+        'troll/3/Troll_03_1_RUN_002.png',
+        'troll/3/Troll_03_1_RUN_003.png',
+        'troll/3/Troll_03_1_RUN_004.png',
+        'troll/3/Troll_03_1_RUN_005.png',
+        'troll/3/Troll_03_1_RUN_006.png',
+        'troll/3/Troll_03_1_RUN_007.png',
+        'troll/3/Troll_03_1_RUN_008.png',
+        'troll/3/Troll_03_1_RUN_009.png',
+    ];
 }
