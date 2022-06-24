@@ -76,7 +76,8 @@ class World {
                     }
                 }
             }
-
+            this.gameWinning();
+            this.attackBoss();
             this.addOrk();
         }, 100);
 
@@ -107,8 +108,11 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects); //drawing the backgrounds
         this.addObjectsToMap(this.level.treasure); //drawing the treasure
         this.addObjectsToMap(this.level.bomb); //drawing the bomb
+        this.addObjectsToMap(this.level.goldChest); //drawing the bomb
+        this.addObjectsToMap(this.level.leftoverMeat); //drawing the bomb
         this.addObjectsToMap(this.throwableObject); //drawing the throw bomb
-        this.addToMap(this.character) //drawing the character
+
+        this.addToMapCharacter(this.character) //drawing the character
         this.addObjectsToMap(this.level.enemies); //drawing the enemies
         this.addObjectsToMap(this.level.endboss); //drawing the endboss
         if (this.character.isAttack()) {
@@ -145,27 +149,13 @@ class World {
 
 
     addOrk() {
-        // setTimeout(() => {
-        this.level.enemies.push(new Enemies(800 + this.orkDistance * this.orkMultiplikator));
-        this.orkMultiplikator += 1;
-        // }, 5000);
+        if (!this.level.endboss[0].bossWalk) {
+            this.level.enemies.push(new Enemies(800 + this.orkDistance * this.orkMultiplikator));
+            this.orkMultiplikator += 1;
+        }
+
     }
 
-    // /**
-    //  * background extension from a certain distance
-    //  */
-    // addBackGround() {
-    //     if (this.character.x == this.distanceTraveled) {
-    //         this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sea.png', this.backgroundWidthToAdd1png));
-    //         this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/island.png', this.backgroundWidthToAdd1png));
-    //         this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/land.png', this.backgroundWidthToAdd1png));
-    //         this.level.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/decor.png', this.backgroundWidthToAdd1png));
-    //         this.level.sky.push(new Sky('beach/game_background_2/layers/sky.png', this.backgroundWidthToAdd1png));
-
-    //         this.distanceTraveled = this.distanceTraveled + 400;
-    //         this.backgroundWidthToAdd1png = this.backgroundWidthToAdd1png + 880;
-    //     }
-    // }
 
 
     /**
@@ -186,16 +176,7 @@ class World {
      * @param {class} mo - class to draw in the world
      */
     addToMap(mo) {
-        if (this instanceof Character) {
-            if (mo.otherDierection) {
-                this.flipCharacter(mo);
-            }
-            mo.draw(this.ctx);
-            mo.drawFrame(this.ctx);
-            if (mo.otherDierection) {
-                this.flipImageBack(mo);
-            }
-        } else {}
+
         if (mo.otherDierection) {
             this.flipImage(mo);
         }
@@ -204,11 +185,23 @@ class World {
         if (mo.otherDierection) {
             this.flipImageBack(mo);
         }
+
     }
 
+    addToMapCharacter(mo) {
 
+        if (mo.otherDierection) {
+            this.flipCharacter(mo);
+        }
+        mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);
+        if (mo.otherDierection) {
+            this.flipImageBack(mo);
+        }
 
-    drawStatusBar(breite) {
+    }
+
+    drawStatusBar(widthText) {
         if (this.character.characterSelection == 2) {
             this.ctx.fillStyle = '#ffffff';
             this.ctx.fillRect(30, 12.5, 181, 35);
@@ -216,14 +209,14 @@ class World {
             this.ctx.strokeStyle = 'D84920';
             this.ctx.strokeRect(30, 12.5, 181, 35);
 
-            if (breite > 66) {
+            if (widthText > 66) {
                 this.ctx.fillStyle = 'green';
-            } else if (breite > 33 && breite <= 66) {
+            } else if (widthText > 33 && widthText <= 66) {
                 this.ctx.fillStyle = 'orange';
             } else {
                 this.ctx.fillStyle = 'red';
             }
-            this.ctx.fillRect(30, 17.5, (breite * 2.2), 25)
+            this.ctx.fillRect(30, 17.5, (widthText * 2.2), 25)
         } else {
             this.ctx.fillStyle = '#ffffff';
             this.ctx.fillRect(30, 12.5, 225, 35);
@@ -231,15 +224,15 @@ class World {
             this.ctx.strokeStyle = '#D84920';
             this.ctx.strokeRect(30, 12.5, 225, 35);
 
-            if (breite > 66) {
+            if (widthText > 66) {
                 this.ctx.fillStyle = 'green';
-            } else if (breite > 33 && breite <= 66) {
+            } else if (widthText > 33 && widthText <= 66) {
                 this.ctx.fillStyle = 'orange';
             } else {
                 this.ctx.fillStyle = 'red';
             }
 
-            this.ctx.fillRect(30, 17.5, (breite * 2.2), 25)
+            this.ctx.fillRect(30, 17.5, (widthText * 2.2), 25)
         }
     }
 
@@ -262,7 +255,7 @@ class World {
     }
 
 
-    drawBossStatusBar(breite) {
+    drawBossStatusBar(widthText) {
         this.ctx.fillStyle = '#ffffff';
         this.ctx.fillRect(this.canvas.width - 30, 12.5, -225, 35);
 
@@ -270,7 +263,7 @@ class World {
         this.ctx.strokeRect(this.canvas.width - 30, 12.5, -225, 35);
 
         this.ctx.fillStyle = '#000'
-        this.ctx.fillRect(this.canvas.width - 30, 17.5, -(breite * 2.2), 25)
+        this.ctx.fillRect(this.canvas.width - 30, 17.5, -(widthText * 2.2), 25)
     }
 
 
@@ -279,13 +272,6 @@ class World {
         this.ctx.fillStyle = color;
         this.ctx.fillText(text, 70, y);
     }
-
-    // drawNummber(mo) {
-    //     mo.draw(this.ctx);
-    //     setInterval(() => {
-    //         mo.drawMoneyNumber(this.ctx);
-    //     }, 200);
-    // }
 
 
     flipImage(mo) {
@@ -306,4 +292,32 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
+
+
+    gameWinning() {
+        if (this.level.endboss[0].bossisDead)
+        // console.log('gewonnen');
+            this.character.gameWon = true;
+    }
+
+
+    attackBoss() {
+        if (this.level.endboss[0].x - this.character.x <= -15 && this.character.energy > 0) {
+            this.level.endboss[0].bossAttack = true;
+            this.level.endboss[0].speed = 0;
+            setTimeout(() => {
+                if (this.level.endboss[0].x - this.character.x <= -15) {
+                    this.character.hit(2);
+                }
+            }, 1300);
+        } else if (this.level.endboss[0].bossWalk) {
+            setTimeout(() => {
+                this.level.endboss[0].bossWalk = true;
+                this.level.endboss[0].bossAttack = false;
+                this.level.endboss[0].speed = 0.7;
+            }, 1700);
+        }
+    }
+
+
 }

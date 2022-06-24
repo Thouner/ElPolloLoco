@@ -144,10 +144,10 @@ class MovableObject extends DrawableObject {
 
 
     jumpsOnTop(mo) {
-        return this.y + this.offSetX + this.height - this.offSetHeight > mo.y + mo.offSetY &&
+        return this.y + this.offSetY + this.height - this.offSetHeight > mo.y + mo.offSetY &&
             this.y + this.offSetY + this.height - this.offSetHeight < mo.y + mo.offSetY + mo.height - mo.offSetHeight &&
             this.x + this.offSetX + this.width - this.offSetWidth > mo.x + mo.offSetX &&
-            this.x + this.offSetX + this.width - this.offSetWidth < (mo.x + mo.offSetX + mo.width - mo.offSetWidth);
+            this.x + this.offSetX < (mo.x + mo.offSetX + mo.width - mo.offSetWidth);
     }
 
 

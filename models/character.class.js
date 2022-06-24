@@ -4,6 +4,8 @@ class Character extends MovableObject {
     x = 0;
     y = -150;
     speed = 5;
+    gameOver = false;
+    gameWon = false;
 
     imges;
     world;
@@ -107,6 +109,7 @@ class Character extends MovableObject {
                 }
                 this.world.camera_x = -this.x + 100;
             }
+
             this.goBoss();
         }, 1000 / 60);
 
@@ -140,6 +143,7 @@ class Character extends MovableObject {
                 }
                 this.attack();
             } else {
+                this.gameOver = true;
                 this.dieAnimation;
             }
         }, 120);
@@ -148,9 +152,13 @@ class Character extends MovableObject {
 
     jumpOnOrk() {
         this.world.level.enemies.forEach((enemy) => {
-            if (this.jumpsOnTop(enemy) && this.isAboveGround()) {
+            if (this.jumpsOnTop(enemy) && this.isAboveGround(180)) {
+
                 let i = this.world.level.enemies.indexOf(enemy);
                 this.world.level.enemies[i].setEnemyDead();
+                setTimeout(() => {
+                    this.world.level.enemies.splice(i, 1);
+                }, 20000);
             }
         });
     }
@@ -184,7 +192,6 @@ class Character extends MovableObject {
         this.world.level.endboss.forEach((boss) => {
             if (!boss.enemyDead && this.isCollidingEnemies(boss)) {
                 this.hit(4);
-                // this.world.statusBar.setPercentage(this.energy);
             }
         });
     }
@@ -194,20 +201,22 @@ class Character extends MovableObject {
         this.world.level.enemies.forEach((enemy) => {
             if (!enemy.enemyDead && this.isCollidingEnemies(enemy)) {
                 this.hit(2);
-                // this.world.statusBar.setPercentage(this.energy);
             }
         });
     }
 
 
     goBoss() {
-        if (this.x == 2500) {
-
-            // console.log(this.x);
+        if (this.x == 2500 && !this.world.level.endboss[0].bossWalk) {
             this.world.level.endboss[0].bossAttack = true;
             setTimeout(() => {
+                this.jump();
+            }, 1300);
+            setTimeout(() => {
+                this.world.level.endboss[0].bossWalk = true;
+                this.world.level.endboss[0].bossAttack = false;
                 this.world.level.endboss[0].speed = 0.7;
-            }, 1500);
+            }, 1700);
         }
     }
 

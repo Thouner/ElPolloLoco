@@ -82,7 +82,24 @@ const level1 = new Level(
         new bomb(1250, 300),
         new bomb(1750, 300),
         new bomb(2250, 300),
-
+    ], [
+        new goldChest(3000, 250),
+    ], [
+        new leftoverMeat(2450, 400, 1),
+        new leftoverMeat(2550, 420, 2),
+        new leftoverMeat(2650, 410, 3),
+        new leftoverMeat(2720, 430, 4),
+        new leftoverMeat(2770, 420, 5),
+        new leftoverMeat(2800, 400, 6),
+        new leftoverMeat(2830, 420, 7),
+        new leftoverMeat(2860, 410, 8),
+        new leftoverMeat(2890, 430, 9),
+        new leftoverMeat(2910, 410, 10),
+        new leftoverMeat(2940, 400, 11),
+        new leftoverMeat(2980, 420, 12),
+        new leftoverMeat(3000, 390, 13),
+        new leftoverMeat(3050, 420, 14),
+        new leftoverMeat(3100, 400, 15),
     ],
 )
 let cloudCount = 5;

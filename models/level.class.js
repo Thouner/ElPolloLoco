@@ -5,10 +5,12 @@ class Level {
     backgroundObjects;
     treasure;
     bomb;
+    goldChest;
+    leftoverMeat;
     sky;
     level_end_x = 3000;
 
-    constructor(enemies, endboss, clouds, backgroundObjects, treasure, sky, bomb) {
+    constructor(enemies, endboss, clouds, backgroundObjects, treasure, sky, bomb, goldChest, leftoverMeat) {
         this.enemies = enemies;
         this.endboss = endboss;
         this.clouds = clouds;
@@ -16,5 +18,7 @@ class Level {
         this.treasure = treasure;
         this.sky = sky;
         this.bomb = bomb;
+        this.goldChest = goldChest;
+        this.leftoverMeat = leftoverMeat;
     }
 }

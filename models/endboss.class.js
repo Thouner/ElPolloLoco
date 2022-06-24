@@ -11,6 +11,7 @@ class Endboss extends MovableObject {
     bossWalk = false;
     dieTime = 10;
     bossAttack = false;
+    bossisDead = false;
     // walking_sound = new Audio('audio/chicken.mp3');
 
     offSetX = 270;
@@ -35,6 +36,9 @@ class Endboss extends MovableObject {
     }, 100);
 
     attackAnimation = setInterval(() => {
+        // if (this.bossWalk) {
+        //     console.log(this.bossWalk);
+        // }
         if (this.attackTime >= 0) {
             this.animationRepeat(this.imges.Image_Attack)
             this.imges.Image_Die.splice(0, 1)
@@ -101,12 +105,14 @@ class Endboss extends MovableObject {
                     this.animationRepeat(this.imges.Image_Run);
                     this.speed = 2;
                 }
-                if (this.bossAttack) {
+                if (this.bossAttack && this.speed == 0) {
+                    this.speed = 0
                     this.animationRepeat(this.imges.Image_Attack);
 
                 }
 
             } else {
+                this.bossisDead = true;
                 this.dieAnimationEnemy;
                 setTimeout(() => {
                     this.y += 1;
@@ -125,12 +131,9 @@ class Endboss extends MovableObject {
     }
 
 
-
     checkBossAlife() {
-        // console.log(this.bossEnergy);
         if (this.bossEnergy == 0) {
             this.enemyDead = true;
         }
-
     }
 }
