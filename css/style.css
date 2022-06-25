@@ -1,61 +1,157 @@
-body {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    -webkit-user-drag: none;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    height: 100vvh;
-    width: 100vw;
-    display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
-}
-
-::-webkit-scrollbar {
-    height: 5px;
-    width: 12px;
-}
-
- ::-webkit-scrollbar-track {
-    background-color: #F8F5F2;
-}
-
- ::-webkit-scrollbar-thumb {
-    background-color: #dddddd;
-}
-
- ::-webkit-scrollbar-thumb:active {
-    background-color: rgb(128, 128, 128);
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-
-.cursor-default {
-    cursor: default;
-}
-
-.transi-125 {
-    transition: 125ms;
-}
-
-.transi-75 {
-    transition: 75ms;
-}
-
-canvas {
-    /* height: 480px;
+    body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+        -webkit-user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        height: 100vvh;
+        width: 100vw;
+        font-family: 'Skranji', cursive;
+        /* display: flex; */
+        /* justify-content: center; */
+        /* align-items: center; */
+        overflow: hidden;
+    }
+    
+     ::-webkit-scrollbar {
+        height: 5px;
+        width: 12px;
+    }
+    
+     ::-webkit-scrollbar-track {
+        background-color: #F8F5F2;
+    }
+    
+     ::-webkit-scrollbar-thumb {
+        background-color: #dddddd;
+    }
+    
+     ::-webkit-scrollbar-thumb:active {
+        background-color: rgb(128, 128, 128);
+    }
+    
+    .cursor-pointer {
+        cursor: pointer;
+    }
+    
+    .cursor-default {
+        cursor: default;
+    }
+    
+    .transi-125 {
+        transition: 125ms;
+    }
+    
+    .transi-75 {
+        transition: 75ms;
+    }
+    
+    canvas {
+        /* height: 480px;
     width: 720px; */
-    background: black;
-    /* background: url('/img/5.Fondo/Capas/5.cielo_1920-1080px.png');
+        background: black;
+        /* background: url('/img/5.Fondo/Capas/5.cielo_1920-1080px.png');
     background-size: cover;
     background-attachment: fixed;
     background-position: center; */
-    margin: 5% auto;
-    border-radius: 20px;
-}
+        margin: 5% auto;
+        border-radius: 20px;
+    }
+    
+    #intro {
+        height: 100vh;
+        width: 100vw;
+        /* background: #FEE883; */
+        background: rgb(147, 254, 255);
+        background: linear-gradient(180deg, rgba(147, 254, 255, 1) 0%, rgba(109, 188, 220, 1) 42%, rgba(136, 247, 226, 1) 63%, rgba(237, 216, 127, 1) 77%, rgba(253, 231, 131, 1) 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    
+    .flag {
+        max-width: 1000px;
+        width: 100%;
+    }
+    
+    .headline {
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 45px;
+        text-align: center;
+    }
+    
+    .boat {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 150px;
+        transform: rotate(-30deg);
+        animation: swim 3s infinite;
+        transition: 0.5s;
+    }
+    
+    @keyframes swim {
+        /* 0% {
+        transform: rotate(0);
+    } */
+        /* 33% {
+        transform: rotate(-30deg);
+    } */
+        /* 50% {
+        transform: rotate(0deg);
+    } */
+        50% {
+            transform: rotate(20deg);
+        }
+        /* 100% {
+        transform: rotate(0deg);
+    } */
+    }
+    
+    .help {
+        position: absolute;
+        /* bottom: -550px; */
+        bottom: 0px;
+        left: 50%;
+        transform: translate(-50%);
+        max-width: 800px;
+        width: 100%;
+    }
+    
+    .help_headline {
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .helpimg {
+        max-width: 800px;
+        width: 100%;
+    }
+    
+    .life {
+        position: absolute;
+        top: 180px;
+        left: 100px;
+    }
+    
+    .coin {
+        position: absolute;
+        top: 205px;
+        left: 100px;
+    }
+    
+    .bomb {
+        position: absolute;
+        top: 230px;
+        left: 100px;
+    }

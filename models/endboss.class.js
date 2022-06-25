@@ -36,9 +36,6 @@ class Endboss extends MovableObject {
     }, 100);
 
     attackAnimation = setInterval(() => {
-        // if (this.bossWalk) {
-        //     console.log(this.bossWalk);
-        // }
         if (this.attackTime >= 0) {
             this.animationRepeat(this.imges.Image_Attack)
             this.imges.Image_Die.splice(0, 1)
@@ -108,7 +105,6 @@ class Endboss extends MovableObject {
                 if (this.bossAttack && this.speed == 0) {
                     this.speed = 0
                     this.animationRepeat(this.imges.Image_Attack);
-
                 }
 
             } else {

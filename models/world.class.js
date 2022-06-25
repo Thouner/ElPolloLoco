@@ -76,6 +76,7 @@ class World {
                     }
                 }
             }
+            this.goEnemies();
             this.gameWinning();
             this.attackBoss();
             this.addOrk();
@@ -150,7 +151,7 @@ class World {
 
     addOrk() {
         if (!this.level.endboss[0].bossWalk) {
-            this.level.enemies.push(new Enemies(800 + this.orkDistance * this.orkMultiplikator));
+            this.level.enemies.push(new Enemies(400 + this.orkDistance * this.orkMultiplikator));
             this.orkMultiplikator += 1;
         }
 
@@ -256,14 +257,16 @@ class World {
 
 
     drawBossStatusBar(widthText) {
-        this.ctx.fillStyle = '#ffffff';
-        this.ctx.fillRect(this.canvas.width - 30, 12.5, -225, 35);
+        if (this.level.endboss[0].bossWalk) {
+            this.ctx.fillStyle = '#ffffff';
+            this.ctx.fillRect(this.canvas.width - 30, 12.5, -225, 35);
 
-        this.ctx.strokeStyle = 'red';
-        this.ctx.strokeRect(this.canvas.width - 30, 12.5, -225, 35);
+            this.ctx.strokeStyle = 'red';
+            this.ctx.strokeRect(this.canvas.width - 30, 12.5, -225, 35);
 
-        this.ctx.fillStyle = '#000'
-        this.ctx.fillRect(this.canvas.width - 30, 17.5, -(widthText * 2.2), 25)
+            this.ctx.fillStyle = '#000'
+            this.ctx.fillRect(this.canvas.width - 30, 17.5, -(widthText * 2.2), 25)
+        }
     }
 
 
@@ -295,14 +298,22 @@ class World {
 
 
     gameWinning() {
-        if (this.level.endboss[0].bossisDead)
-        // console.log('gewonnen');
+        if (this.level.endboss[0].bossisDead && this.character.x > 2900) {
+
+            // console.log('gewonnen');
             this.character.gameWon = true;
+            this.level.enemies.forEach(enemy => {
+                enemy.setEnemyDead();
+            });
+            setTimeout(() => {
+                this.world.level.enemies = [];
+            }, 20000);
+        }
     }
 
 
     attackBoss() {
-        if (this.level.endboss[0].x - this.character.x <= -15 && this.character.energy > 0) {
+        if (!this.level.endboss[0].bossisDead && this.level.endboss[0].x - this.character.x <= -15 && this.character.energy > 0) {
             this.level.endboss[0].bossAttack = true;
             this.level.endboss[0].speed = 0;
             setTimeout(() => {
@@ -310,14 +321,27 @@ class World {
                     this.character.hit(2);
                 }
             }, 1300);
-        } else if (this.level.endboss[0].bossWalk) {
+        } else if (!this.level.endboss[0].bossisDead && this.level.endboss[0].bossWalk) {
             setTimeout(() => {
                 this.level.endboss[0].bossWalk = true;
                 this.level.endboss[0].bossAttack = false;
-                this.level.endboss[0].speed = 0.7;
+                if (this.level.endboss[0].bossEnergy >= 51) {
+                    this.level.endboss[0].speed = 0.7;
+                } else if (this.level.endboss[0].bossEnergy < 51) {
+                    this.level.endboss[0].speed = 2;
+                }
+
             }, 1700);
         }
     }
 
+
+    goEnemies() {
+        if (this.character.x > 0) {
+            this.level.enemies.forEach(enemy => {
+                enemy.enemyWalk = true;
+            });
+        }
+    }
 
 }

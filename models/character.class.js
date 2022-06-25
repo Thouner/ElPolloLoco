@@ -207,10 +207,12 @@ class Character extends MovableObject {
 
 
     goBoss() {
-        if (this.x == 2500 && !this.world.level.endboss[0].bossWalk) {
+        if (this.x == 2450 && !this.world.level.endboss[0].bossWalk) {
             this.world.level.endboss[0].bossAttack = true;
             setTimeout(() => {
-                this.jump();
+                if (!this.isAboveGround(180)) {
+                    this.jump();
+                }
             }, 1300);
             setTimeout(() => {
                 this.world.level.endboss[0].bossWalk = true;

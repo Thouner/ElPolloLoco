@@ -13,6 +13,8 @@ class Enemies extends MovableObject {
     dieTime = 10;
     attackTime = 10;
 
+    enemyWalk = false;
+
 
     speed = 0.3 + Math.random() * 0.5;
     // walking_sound = new Audio('audio/chicken.mp3');
@@ -40,13 +42,17 @@ class Enemies extends MovableObject {
 
 
     constructor(x) {
-        super().loadImage('ork/1/ORK_01_WALK_000.png');
+        super();
+        this.loadImage('ork/1/ORK_01_WALK_000.png');
         this.x = x;
         if (this.enemyIndex == 1) {
+            this.loadImage('ork/1/ORK_01_WALK_000.png');
             this.imges = new Ork_Image1();
         } else if (this.enemyIndex == 2) {
+            this.loadImage('ork/2/ORK_02_WALK_000.png');
             this.imges = new Ork_Image2();
         } else if (this.enemyIndex == 3) {
+            this.loadImage('ork/3/ORK_03_WALK_000.png');
             this.imges = new Ork_Image3();
         }
 
@@ -67,15 +73,15 @@ class Enemies extends MovableObject {
 
         setInterval(() => {
 
-            if (!this.enemyDead) {
+            if (!this.enemyDead && this.enemyWalk) {
                 this.walkleft(this.speed);
             }
         }, 1000 / 60);
 
         setInterval(() => {
-            if (!this.enemyDead) {
+            if (!this.enemyDead && this.enemyWalk) {
                 this.animationRepeat(this.imges.Image_Walking);
-            } else {
+            } else if (this.enemyDead) {
                 this.dieAnimationEnemy;
                 setTimeout(() => {
                     this.y += 1;

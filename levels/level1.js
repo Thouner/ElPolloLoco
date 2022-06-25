@@ -1,6 +1,6 @@
 const level1 = new Level(
     [
-        new Enemies(800),
+        // new Enemies(800),
         // new Enemies(1200),
         // new Enemies(1600),
         // new Enemies(2000),
