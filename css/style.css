@@ -99,21 +99,9 @@
     }
     
     @keyframes swim {
-        /* 0% {
-        transform: rotate(0);
-    } */
-        /* 33% {
-        transform: rotate(-30deg);
-    } */
-        /* 50% {
-        transform: rotate(0deg);
-    } */
         50% {
             transform: rotate(20deg);
         }
-        /* 100% {
-        transform: rotate(0deg);
-    } */
     }
     
     .help {
@@ -122,8 +110,8 @@
         bottom: 0px;
         left: 50%;
         transform: translate(-50%);
-        max-width: 800px;
-        width: 100%;
+        width: 800px;
+        /* width: 100%; */
     }
     
     .help_headline {
@@ -134,8 +122,8 @@
     }
     
     .helpimg {
-        max-width: 800px;
-        width: 100%;
+        width: 800px;
+        /* width: 100%; */
     }
     
     .life {
@@ -154,4 +142,62 @@
         position: absolute;
         top: 230px;
         left: 100px;
+    }
+    
+    .help p {
+        position: relative;
+        display: inline-block;
+        height: 80px;
+        width: 80px;
+        /* padding: 5px 28px; */
+        border-radius: 10px;
+        background: linear-gradient(180deg, #808080, #727272);
+        box-shadow: inset -8px 0 8px rgba(0, 0, 0, 0.15), inset 0 -8px 8px rgba(0, 0, 0, 0.25), 0 0 0 1.5px rgba(0, 0, 0, 0.75), 10px 20px 25px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+    
+    .help p::before {
+        content: '';
+        position: absolute;
+        top: 3px;
+        left: 4px;
+        bottom: 14px;
+        right: 12px;
+        background: linear-gradient(90deg, #757575, #9f9f9f);
+        border-radius: 10px;
+        box-shadow: -10px -10px -10px rgba(255, 255, 255, 0.25), 10px 5px 10px rgba(0, 0, 0, 0.15);
+        border-left: 1px solid #0004;
+        border-bottom: 1px solid #0004;
+        border-top: 1px solid #0004;
+    }
+    
+    .help p i {
+        position: relative;
+        color: #fff;
+        font-style: normal;
+        text-transform: uppercase;
+    }
+    
+    .key1 {
+        font-size: 20px;
+    }
+    
+    .key2 {
+        font-size: 20px;
+    }
+    
+    .key3 {
+        width: 20% !important;
+        font-size: 20px;
+    }
+    
+    .key4 {
+        padding: 5px 28px;
+        font-size: 40px;
+    }
+    
+    .key5 {
+        padding: 5px 28px;
+        font-size: 40px;
     }
