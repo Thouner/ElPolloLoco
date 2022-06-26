@@ -50,8 +50,9 @@ class Character extends MovableObject {
     // }, 150);
 
 
-    constructor() {
+    constructor(number) {
         super();
+        this.characterSelection = number;
         this.energy = 100;
         this.selectCurrentCharacter();
         this.applyGravity(this.groundlevel);
@@ -112,7 +113,7 @@ class Character extends MovableObject {
          * movement of the character and the background
          */
         setInterval(() => {
-            if (!this.isDead()) {
+            if (!this.isDead() && !this.gameWon) {
                 this.walking_sound.pause();
                 this.walking_sound.playbackRate = 2.4;
                 if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -145,17 +146,17 @@ class Character extends MovableObject {
             }
 
             if (!this.isDead()) {
-                if (!this.isAboveGround() && !this.isDead() && !this.isHurt()) {
+                if (!this.isAboveGround() && !this.isDead() && !this.isHurt() && !this.gameWon) {
                     this.animationRepeat(this.imges.Image_Idle);
                 }
-                if (this.isHurt() && !this.isDead()) {
+                if (this.isHurt() && !this.isDead() && !this.gameWon) {
                     this.animationRepeat(this.imges.Image_Hurt);
                 }
                 if (this.world.keyboard.RIGHT && !this.isAboveGround(180) || this.world.keyboard.LEFT && !this.isAboveGround(180)) {
 
                     this.animationRepeat(this.imges.Image_Walking); // walk animation
                 }
-                if (this.isAttack() && !this.isDead()) {
+                if (this.isAttack() && !this.isDead() && !this.gameWon) {
                     this.animationRepeat(this.imges.Image_Attack);
                 }
                 if (this.isAboveGround(180)) {

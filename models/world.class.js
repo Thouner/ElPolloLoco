@@ -1,5 +1,6 @@
 class World {
-    character = new Character();
+    // character = new Character(this.characterSelectionWorld );
+    character;
     // character2 = new Character2();
     // character3 = new Character3();
     level = level1;
@@ -13,10 +14,12 @@ class World {
     orkDistance = 400;
     orkMultiplikator = 1;
     showGrave = false;
+    showWinMoney = false;
     characterSelectionWorld;
 
     throwableObject = [];
 
+    winMoney;
     graveyard;
     movableObject = new MovableObject();
     insult = new Insults();
@@ -31,7 +34,8 @@ class World {
     constructor(canvas, keyboard, number) {
         // console.log(number);
         this.ctx = canvas.getContext('2d');
-        // this.characterSelectionWorld = number;
+        this.characterSelectionWorld = number;
+        this.character = new Character(this.characterSelectionWorld);
         this.character.characterSelection = number;
         this.canvas = canvas;
         this.keyboard = keyboard;
@@ -151,6 +155,10 @@ class World {
         if (this.showGrave) {
             this.graveyard = new Graveyard(this.character.x, this.character.y);
             this.addToMap(this.graveyard); //drawing the graveyard
+        }
+        if (this.character.gameWon) {
+            this.winMoney = new MacGuffin(this.character.x, this.character.y);
+            this.addToMap(this.winMoney); //drawing the graveyard
         }
         this.ctx.translate(-this.camera_x, 0); //back movement of the camera
 
@@ -331,12 +339,19 @@ class World {
             this.level.enemies.forEach(enemy => {
                 enemy.setEnemyDead();
             });
-            setTimeout(() => {
-                this.world.level.enemies = [];
-            }, 20000);
+            this.removeOrks;
+            // setTimeout(() => {
+            //     this.world.level.enemies = [];
+            // }, 20000);
         }
     }
 
+    removeOrks = setTimeout(() => {
+        this.world.level.enemies = [];
+        setTimeout(() => {
+            clearTimeout(removeOrks);
+        }, );
+    }, 20000);
 
     attackBoss() {
         if (!this.level.endboss[0].bossisDead && this.level.endboss[0].x - this.character.x <= -15 && this.character.energy > 0) {
@@ -399,5 +414,6 @@ class World {
             }, 1500);
         }
     }
+
 
 }
