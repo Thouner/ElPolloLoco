@@ -4,8 +4,8 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 2.5;
     enemyIndex = Math.floor(Math.random() * (3 - 1 + 1) + 1);
-
-    characterSelection = 1;
+    world;
+    // characterSelection = 2;
 
     lastHit = 0;
     lastAtack = 0;
@@ -13,7 +13,7 @@ class MovableObject extends DrawableObject {
     attackTime;
 
 
-    energy = 100;
+    energy;
 
     applyGravity(groundHight) {
 

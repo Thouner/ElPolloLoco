@@ -1,6 +1,6 @@
-class Character extends MovableObject {
-    height = 280;
-    width = 280;
+class Character3 extends MovableObject {
+    height = 180;
+    width = 180;
     x = 0;
     y = -150;
     speed = 5;
@@ -9,7 +9,7 @@ class Character extends MovableObject {
 
     imges;
     world;
-    groundlevel = 180;
+    groundlevel = 250;
     dieTime = 7;
 
     offSetX = 40;
@@ -23,21 +23,6 @@ class Character extends MovableObject {
 
     walking_sound = new Audio('audio/walk.mp3');
 
-    // dieAnimation = setInterval(() => {
-    //     if (this.isDead() && this.dieTime > 0) {
-    //         this.animationRepeat(this.imges.Image_Die);
-    //         this.imges.Image_Die.splice(0, 1)
-    //         this.dieTime--;
-    //     }
-    //     if (this.dieTime == 0 && this.characterSelection == 1) {
-    //         this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
-    //     } else if (this.dieTime == 0 && this.characterSelection == 2) {
-    //         this.dieAnimation = this.loadImage('pirat/png/2/2_entity_000_DIE_006.png');
-    //     } else if (this.dieTime == 0 && this.characterSelection == 3) {
-    //         this.dieAnimation = this.loadImage('pirat/png/3/Dead8.png');
-    //     }
-    // }, 150);
-
     dieAnimation = setInterval(() => {
         if (this.isDead() && this.dieTime > 0) {
             this.animationRepeat(this.imges.Image_Die);
@@ -45,18 +30,15 @@ class Character extends MovableObject {
             this.dieTime--;
         }
         if (this.dieTime == 0) {
-            this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
+            this.dieAnimation = this.loadImage('pirat/png/3/Dead8.png');
         }
     }, 150);
 
 
     constructor() {
         super();
-        this.energy = 100;
         this.selectCurrentCharacter();
         this.applyGravity(this.groundlevel);
-
-        // this.setgroundLevel();
 
         this.loadImagesArray(this.imges.Image_Walking);
         this.loadImagesArray(this.imges.Image_Jump);
@@ -70,35 +52,12 @@ class Character extends MovableObject {
     }
 
 
-    // selectCurrentCharacter() {
-    //     if (this.characterSelection == 1) {
-    //         this.loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
-    //         this.imges = new Pirat_Image1();
-    //     } else if (this.characterSelection == 2) {
-    //         this.offSetWidthAttack = 0;
-    //         this.energy = 80;
-    //         this.loadImage('pirat/png/2/2_entity_000_IDLE_000.png');
-    //         this.imges = new Pirat_Image2();
-    //     } else if (this.characterSelection == 3) {
-    //         this.loadImage('pirat/png/3/Idle1.png');
-    //         this.imges = new Pirat_Image3();
-    //         this.width = 180;
-    //         this.height = 180;
-    //     }
-    // }
-
     selectCurrentCharacter() {
-        this.loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
-        this.imges = new Pirat_Image1();
+        this.loadImage('pirat/png/3/Idle1.png');
+        this.imges = new Pirat_Image3();
     }
 
 
-    setgroundLevel() {
-        if (this.characterSelection == 3) {
-            this.groundlevel = 250;
-            this.applyGravity(this.groundlevel)
-        }
-    }
 
     /**
      * animation of the character

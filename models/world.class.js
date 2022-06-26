@@ -1,5 +1,7 @@
 class World {
     character = new Character();
+    // character2 = new Character2();
+    // character3 = new Character3();
     level = level1;
     canvas;
     ctx; // context
@@ -11,9 +13,11 @@ class World {
     orkDistance = 400;
     orkMultiplikator = 1;
 
+    characterSelectionWorld;
 
     throwableObject = [];
 
+    movableObject = new MovableObject();
     insult = new Insults();
     statusBar = new StatusBar();
     moneyBar = new MoneyBar();
@@ -23,16 +27,30 @@ class World {
     backgroundWidthToAdd1png = 880;
 
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, number) {
+        // console.log(number);
         this.ctx = canvas.getContext('2d');
+        this.characterSelectionWorld = number;
         this.canvas = canvas;
         this.keyboard = keyboard;
+        // this.setCurrentCharacter();
         this.draw();
         this.setWorld();
         this.checkCollekting();
 
+        // canvas.requestFullscreen();
+
         // this.canvas.width = innerWidth;
         // this.canvas.height = innerHeight;
+    }
+
+
+    setCurrentCharacter() {
+        if (this.characterSelectionWorld == 1) {
+            this.character = new Character();
+        } else if (this.characterSelectionWorld == 2) {
+            this.character = new Character2();
+        }
     }
 
 
@@ -41,7 +59,10 @@ class World {
      */
     setWorld() {
         this.character.world = this;
+        // this.character2.world = this;
+        // this.character3.world = this;
         this.level.endboss.world = this;
+        this.movableObject = this;
     }
 
 
@@ -76,6 +97,8 @@ class World {
                     }
                 }
             }
+            this.setFullScreen();
+            this.goReturn();
             this.goEnemies();
             this.gameWinning();
             this.attackBoss();
@@ -112,7 +135,6 @@ class World {
         this.addObjectsToMap(this.level.goldChest); //drawing the bomb
         this.addObjectsToMap(this.level.leftoverMeat); //drawing the bomb
         this.addObjectsToMap(this.throwableObject); //drawing the throw bomb
-
         this.addToMapCharacter(this.character) //drawing the character
         this.addObjectsToMap(this.level.enemies); //drawing the enemies
         this.addObjectsToMap(this.level.endboss); //drawing the endboss
@@ -150,7 +172,7 @@ class World {
 
 
     addOrk() {
-        if (!this.level.endboss[0].bossWalk) {
+        if (!this.level.endboss[0].bossWalk && this.level.enemies.length < 10) {
             this.level.enemies.push(new Enemies(400 + this.orkDistance * this.orkMultiplikator));
             this.orkMultiplikator += 1;
         }
@@ -203,7 +225,7 @@ class World {
     }
 
     drawStatusBar(widthText) {
-        if (this.character.characterSelection == 2) {
+        if (this.characterSelectionWorld == 2) {
             this.ctx.fillStyle = '#ffffff';
             this.ctx.fillRect(30, 12.5, 181, 35);
 
@@ -344,4 +366,25 @@ class World {
         }
     }
 
+
+    goReturn() {
+        if (this.keyboard.RETURN) {
+            location.reload()
+                // document.getElementById('flag_container').classList.remove('biggerFlag');
+                // document.getElementById('headline').classList.remove('d-none');
+                // document.getElementById('boat').classList.remove('d-none');
+                // document.getElementById('help_Container').classList.remove('d-none');
+                // document.getElementById('flag_container').classList.remove('d-none');
+                // document.getElementById('canvas').classList.add('d-none');
+                // canvas = null;
+                // world = null;
+        }
+
+    }
+
+    setFullScreen() {
+        if (this.keyboard.F) {
+            canvas.requestFullscreen();
+        }
+    }
 }

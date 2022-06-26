@@ -20,6 +20,8 @@
     <script src="models/background-object.class.js"></script>
     <script src="models/sky.class.js"></script>
     <script src="models/character.class.js"></script>
+    <script src="models/character2.class.js"></script>
+    <script src="models/character3.class.js"></script>
     <script src="models/status-bar.class.js"></script>
     <script src="models/money-bar.class.js"></script>
     <script src="models/ammo-bar.class.js"></script>
@@ -47,24 +49,42 @@
     <script src="js/script.js"></script>
 </head>
 
-<body onload="init()">
-    <div id="intro">
-        <img class="boat" src="imageForIntro/boat.png" alt="">
-        <h1 class="headline">The Curse of Money Island</h1>
-        <img class="flag" src="imageForIntro/flage4.png" alt="">
-        <canvas class="d-none" id="canvas" width="880px" height="495px"></canvas>
-        <div class="help">
-            <h1 class="help_headline">Help</h1>
-            <span class="life">Life</span>
-            <span class="coin">Coins</span>
-            <span class="bomb">Bombs</span>
-            <img class="helpimg" src="imageForIntro/map-3.png" alt="">
-            <p class="key1"><i>Shift</i></p>
-            <p class="key2"><i>Strg</i></p>
-            <p class="key3"><i>Space</i></p>
-            <p class="key4"><i>&#8249;</i></p>
-            <p class="key5"><i>&#8250;</i></p>
+<body>
+    <div id="intro" class="introBG">
+        <img id="boat" src="imageForIntro/boat.png" alt="">
+        <h1 id="headline">The Curse of Money Island</h1>
+        <div id="flag_container" class="text-center p-relativ">
+            <img class="flag" src="imageForIntro/flage4.png" alt="">
+            <div class="clickme">
+                <img onclick="startgame(1)" src="imageForIntro/Character1.png" alt="">
+                <img onclick="startgame(2)" src="imageForIntro/Character2.png" alt="">
+            </div>
         </div>
+
+        <canvas class="d-none" id="canvas" width="880px" height="495px"></canvas>
+
+        <div id="help_Container" onclick="showHelp()" class="help helpdown">
+            <div>
+                <h1 class="help_headline">Help</h1>
+                <span class="life">Life</span>
+                <span class="coin">Coins</span>
+                <span class="bomb">Bombs</span>
+                <img class="helpimg" src="imageForIntro/map-3.png" alt="">
+                <p class="key1"><i>Shift</i><u class="functionKey1">throw bomb</u></p>
+                <p class="key2"><i>Strg</i><u class="functionKey2">attack</u></p>
+                <p class="key3"><i>Space</i><u class="functionKey3">jump</u></p>
+                <p class="key4"><i>&#8249;</i><u class="functionKey4">walk left</u></p>
+                <p class="key5"><i>&#8250;</i><u class="functionKey5">walk right</u></p>
+                <p class="key6"><i>f</i><u class="functionKey6">full screen</u></p>
+                <p class="key7"><i>&#8592;</i><u class="functionKey7">return</u></p>
+            </div>
+        </div>
+
+        <div>
+            <img class="p-absolute" src="imageForIntro/graveyard.png" alt="">
+            <img class="p-absolute" src="imageForIntro/graveyard-finish.png" alt="">
+        </div>
+
     </div>
 
 </body>

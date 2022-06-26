@@ -51,27 +51,34 @@
     }
     
     canvas {
-        /* height: 480px;
-    width: 720px; */
+        z-index: 3;
         background: black;
-        /* background: url('/img/5.Fondo/Capas/5.cielo_1920-1080px.png');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center; */
-        margin: 5% auto;
+        /* margin: 5% auto; */
         border-radius: 20px;
     }
     
     #intro {
         height: 100vh;
         width: 100vw;
-        /* background: #FEE883; */
-        background: rgb(147, 254, 255);
-        background: linear-gradient(180deg, rgba(147, 254, 255, 1) 0%, rgba(109, 188, 220, 1) 42%, rgba(136, 247, 226, 1) 63%, rgba(237, 216, 127, 1) 77%, rgba(253, 231, 131, 1) 100%);
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
+    }
+    
+    .introBG {
+        background: rgb(147, 254, 255);
+        background: linear-gradient(180deg, rgba(147, 254, 255, 1) 0%, rgba(109, 188, 220, 1) 42%, rgba(136, 247, 226, 1) 63%, rgba(237, 216, 127, 1) 77%, rgba(253, 231, 131, 1) 100%);
+    }
+    
+    .introBlack {
+        background: black;
+    }
+    
+    #flag_container.biggerFlag {
+        z-index: 3;
+        transition: 2s ease-in-out;
+        transform: scale(35) translateY(-9%);
     }
     
     .flag {
@@ -79,16 +86,36 @@
         width: 100%;
     }
     
-    .headline {
+    #headline {
+        z-index: 1;
         position: absolute;
-        top: 50px;
+        top: 0px;
         left: 50%;
         transform: translateX(-50%);
         font-size: 45px;
         text-align: center;
+        text-shadow: 2px 2px 5px #fff;
     }
     
-    .boat {
+    .clickme {
+        /* background: aqua; */
+        z-index: 1;
+        position: absolute;
+        bottom: 16%;
+        left: 51%;
+        transform: translate(-50%);
+        display: flex;
+        gap: 20px;
+    }
+    
+    .clickme img {
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+    }
+    
+    #boat {
+        z-index: 1;
         position: absolute;
         top: 20px;
         left: 20px;
@@ -96,6 +123,7 @@
         transform: rotate(-30deg);
         animation: swim 3s infinite;
         transition: 0.5s;
+        filter: drop-shadow(0px 0px 10px #222);
     }
     
     @keyframes swim {
@@ -105,20 +133,31 @@
     }
     
     .help {
+        z-index: 1;
         position: absolute;
         /* bottom: -550px; */
         bottom: 0px;
         left: 50%;
-        transform: translate(-50%);
+        margin-left: -400px;
         width: 800px;
+        transition: 1s;
         /* width: 100%; */
+    }
+    
+    .helpdown {
+        transform: translateY(600px);
+    }
+    
+    .helpup {
+        transform: translateY(0px);
     }
     
     .help_headline {
         position: absolute;
-        top: 50px;
+        top: 40px;
         left: 50%;
         transform: translateX(-50%);
+        text-shadow: 2px 2px 5px #fff;
     }
     
     .helpimg {
@@ -130,22 +169,25 @@
         position: absolute;
         top: 180px;
         left: 100px;
+        text-shadow: 2px 2px 5px #fff;
     }
     
     .coin {
         position: absolute;
         top: 205px;
         left: 100px;
+        text-shadow: 2px 2px 5px #fff;
     }
     
     .bomb {
         position: absolute;
         top: 230px;
         left: 100px;
+        text-shadow: 2px 2px 5px #fff;
     }
     
     .help p {
-        position: relative;
+        /* position: relative; */
         display: inline-block;
         height: 80px;
         width: 80px;
@@ -153,7 +195,7 @@
         border-radius: 10px;
         background: linear-gradient(180deg, #808080, #727272);
         box-shadow: inset -8px 0 8px rgba(0, 0, 0, 0.15), inset 0 -8px 8px rgba(0, 0, 0, 0.25), 0 0 0 1.5px rgba(0, 0, 0, 0.75), 10px 20px 25px rgba(0, 0, 0, 0.4);
-        overflow: hidden;
+        /* overflow: hidden; */
         box-sizing: border-box;
     }
     
@@ -179,25 +221,122 @@
         text-transform: uppercase;
     }
     
+    .help p u {
+        text-decoration: none;
+        font-size: 16px;
+        text-shadow: 2px 2px 5px #fff;
+    }
+    
     .key1 {
-        font-size: 20px;
+        position: absolute;
+        top: 470px;
+        left: 160px;
+        height: 8% !important;
+        width: 8% !important;
+        padding: 5px 12px;
+        font-size: 15px;
     }
     
     .key2 {
-        font-size: 20px;
+        position: absolute;
+        top: 550px;
+        left: 160px;
+        height: 8% !important;
+        width: 9% !important;
+        padding: 5px 14px;
+        font-size: 15px;
     }
     
     .key3 {
+        position: absolute;
+        top: 550px;
+        left: 275px;
+        height: 8% !important;
         width: 20% !important;
-        font-size: 20px;
+        padding: 5px 45px;
+        font-size: 15px;
     }
     
     .key4 {
-        padding: 5px 28px;
+        position: absolute;
+        top: 525px;
+        left: 498px;
+        height: 8% !important;
+        width: 7% !important;
+        padding: 0px 20px;
         font-size: 40px;
     }
     
     .key5 {
-        padding: 5px 28px;
+        position: absolute;
+        top: 525px;
+        left: 568px;
+        height: 8% !important;
+        width: 7% !important;
+        padding: 0px 20px;
         font-size: 40px;
+    }
+    
+    .key6 {
+        position: absolute;
+        top: 465px;
+        left: 295px;
+        height: 8% !important;
+        width: 7% !important;
+        padding: 5px 14px;
+        font-size: 20px;
+    }
+    
+    .key7 {
+        position: absolute;
+        top: 455px;
+        left: 465px;
+        height: 8% !important;
+        width: 9% !important;
+        padding: 0px 14px;
+        font-size: 30px;
+    }
+    
+    .functionKey1 {
+        position: absolute;
+        top: 15px;
+        left: -100px;
+    }
+    
+    .functionKey2 {
+        position: absolute;
+        top: 15px;
+        left: -50px;
+    }
+    
+    .functionKey3 {
+        position: absolute;
+        top: 60px;
+        transform: translate(-50%);
+    }
+    
+    .functionKey4 {
+        position: absolute;
+        top: 60px;
+        transform: translate(-50%);
+    }
+    
+    .functionKey5 {
+        position: absolute;
+        top: 60px;
+        transform: translate(-50%);
+    }
+    
+    .functionKey6 {
+        white-space: nowrap;
+        position: absolute;
+        top: 15px;
+        left: 65px;
+    }
+    
+    .functionKey7 {
+        white-space: nowrap;
+        position: absolute;
+        top: 15px;
+        left: 85px;
     }
