@@ -12,11 +12,12 @@ class World {
     insultBar = true;
     orkDistance = 400;
     orkMultiplikator = 1;
-
+    showGrave = false;
     characterSelectionWorld;
 
     throwableObject = [];
 
+    graveyard;
     movableObject = new MovableObject();
     insult = new Insults();
     statusBar = new StatusBar();
@@ -31,6 +32,7 @@ class World {
         // console.log(number);
         this.ctx = canvas.getContext('2d');
         this.characterSelectionWorld = number;
+        this.character.characterSelection = this.characterSelectionWorld;
         this.canvas = canvas;
         this.keyboard = keyboard;
         // this.setCurrentCharacter();
@@ -45,13 +47,13 @@ class World {
     }
 
 
-    setCurrentCharacter() {
-        if (this.characterSelectionWorld == 1) {
-            this.character = new Character();
-        } else if (this.characterSelectionWorld == 2) {
-            this.character = new Character2();
-        }
-    }
+    // setCurrentCharacter() {
+    //     if (this.characterSelectionWorld == 1) {
+    //         this.character = new Character();
+    //     } else if (this.characterSelectionWorld == 2) {
+    //         this.character = new Character2();
+    //     }
+    // }
 
 
     /**
@@ -97,6 +99,7 @@ class World {
                     }
                 }
             }
+            this.addGrave();
             this.setFullScreen();
             this.goReturn();
             this.goEnemies();
@@ -133,7 +136,7 @@ class World {
         this.addObjectsToMap(this.level.treasure); //drawing the treasure
         this.addObjectsToMap(this.level.bomb); //drawing the bomb
         this.addObjectsToMap(this.level.goldChest); //drawing the bomb
-        this.addObjectsToMap(this.level.leftoverMeat); //drawing the bomb
+        this.addObjectsToMap(this.level.leftoverMeat); //drawing the meat
         this.addObjectsToMap(this.throwableObject); //drawing the throw bomb
         this.addToMapCharacter(this.character) //drawing the character
         this.addObjectsToMap(this.level.enemies); //drawing the enemies
@@ -145,10 +148,11 @@ class World {
         } else {
             this.randomNumber = null;
         }
-
+        if (this.showGrave) {
+            this.graveyard = new Graveyard(this.character.x, this.character.y);
+            this.addToMap(this.graveyard); //drawing the graveyard
+        }
         this.ctx.translate(-this.camera_x, 0); //back movement of the camera
-
-        // this.addBackGround();
 
         this.drawStatusBar(this.character.energy);
         this.addToMap(this.statusBar);
@@ -225,7 +229,7 @@ class World {
     }
 
     drawStatusBar(widthText) {
-        if (this.characterSelectionWorld == 2) {
+        if (this.character.characterSelection == 2) {
             this.ctx.fillStyle = '#ffffff';
             this.ctx.fillRect(30, 12.5, 181, 35);
 
@@ -387,4 +391,13 @@ class World {
             canvas.requestFullscreen();
         }
     }
+
+    addGrave() {
+        if (this.character.gameOver && !this.showGrave && !this.character.characterSelection == 3) {
+            setTimeout(() => {
+                this.showGrave = true;
+            }, 1500);
+        }
+    }
+
 }

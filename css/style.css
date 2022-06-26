@@ -340,3 +340,17 @@
         top: 15px;
         left: 85px;
     }
+    
+    .grave {
+        z-index: 4;
+        height: 30%;
+        top: 20%;
+        left: 20%;
+    }
+    
+    .yard {
+        z-index: 4;
+        height: 30%;
+        top: 40%;
+        left: 20%;
+    }
