@@ -31,8 +31,8 @@ class World {
     constructor(canvas, keyboard, number) {
         // console.log(number);
         this.ctx = canvas.getContext('2d');
-        this.characterSelectionWorld = number;
-        this.character.characterSelection = this.characterSelectionWorld;
+        // this.characterSelectionWorld = number;
+        this.character.characterSelection = number;
         this.canvas = canvas;
         this.keyboard = keyboard;
         // this.setCurrentCharacter();

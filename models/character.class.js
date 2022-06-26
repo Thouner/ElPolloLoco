@@ -112,7 +112,6 @@ class Character extends MovableObject {
          * movement of the character and the background
          */
         setInterval(() => {
-
             if (!this.isDead()) {
                 this.walking_sound.pause();
                 this.walking_sound.playbackRate = 2.4;
