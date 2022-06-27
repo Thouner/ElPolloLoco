@@ -1,9 +1,6 @@
 class MacGuffin extends MovableObject {
     height = 200;
     width = 200;
-    otherDierection = false;
-
-
 
 
     constructor(x, y) {

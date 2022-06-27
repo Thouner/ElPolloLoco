@@ -84,3 +84,12 @@ function startgame(number) {
         document.getElementById('canvas').classList.add('d-block');
     }, 2000);
 }
+
+function goReturn() {
+    location.reload()
+}
+
+function startUndead() {
+    // location.reload()
+    startgame(2);
+}

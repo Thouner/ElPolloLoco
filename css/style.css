@@ -101,11 +101,14 @@
         /* background: aqua; */
         z-index: 1;
         position: absolute;
-        bottom: 16%;
-        left: 51%;
-        transform: translate(-50%);
+        top: 50%;
+        left: 50%;
+        right: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        width: 55%;
         display: flex;
-        gap: 20px;
+        justify-content: space-between;
+        /* gap: 50%; */
     }
     
     .clickme img {
@@ -353,4 +356,114 @@
         height: 30%;
         top: 40%;
         left: 20%;
+    }
+    
+    #winScreen {
+        width: 350px;
+        width: 50%;
+        height: 31%;
+        z-index: 5;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        /* display: flex; */
+        display: none;
+        justify-content: center;
+        align-items: center;
+        /* background: aqua; */
+    }
+    
+    #winScreen img {
+        width: 350px;
+    }
+    
+    .winContainer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        width: 90%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    #winScreen span {
+        min-width: 120px;
+        width: 30%;
+        border: 2px solid black;
+        border-radius: 10px;
+        text-align: center;
+        padding: 1% 0;
+    }
+    
+    .winUntercontainer {
+        width: 60%;
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    #loseScreen {
+        width: 350px;
+        width: 50%;
+        height: 31%;
+        z-index: 5;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        display: flex;
+        /* display: none; */
+        justify-content: center;
+        align-items: center;
+        /* background: aqua; */
+    }
+    
+    .firstimg {
+        width: 400px;
+    }
+    
+    .secoundimg {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        right: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        width: 200px;
+    }
+    
+    .loseContainer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        width: 300px;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    #loseScreen span {
+        white-space: nowrap;
+        min-width: 120px;
+        width: 30%;
+        border: 2px solid black;
+        border-radius: 10px;
+        text-align: center;
+        padding: 1% 0;
+    }
+    
+    .loseUntercontainer {
+        width: 300px;
+        display: flex;
+        justify-content: space-between;
     }

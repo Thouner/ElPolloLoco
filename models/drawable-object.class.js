@@ -58,13 +58,13 @@ class DrawableObject {
 
 
     drawFrame(ctx) {
-        if (this instanceof Character) {
-            ctx.beginPath();
-            ctx.lineWidth = '1';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x + this.offSetX, this.y + this.offSetY, this.width - this.offSetWidth, this.height - this.offSetHeight);
-            ctx.stroke();
-        }
+        // if (this instanceof Character) {
+        //     ctx.beginPath();
+        //     ctx.lineWidth = '1';
+        //     ctx.strokeStyle = 'blue';
+        //     ctx.rect(this.x + this.offSetX, this.y + this.offSetY, this.width - this.offSetWidth, this.height - this.offSetHeight);
+        //     ctx.stroke();
+        // }
         // if (this instanceof Enemies) {
         //     ctx.beginPath();
         //     ctx.lineWidth = '1';

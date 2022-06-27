@@ -85,9 +85,28 @@
             </div>
         </div>
 
-        <div>
-            <div>Return</div>
-            <div></div>
+        <div id="winScreen" class="">
+            <img src="imageForIntro/sideMap.png" alt="">
+            <div class="winContainer">
+                <h2 class="margin-0">YOU WON</h2>
+                <p class="margin-0 winUntercontainer">
+                    <span onclick="goReturn()">Return</span>
+                    <span id="coinNumber">0</span>
+                </p>
+            </div>
+        </div>
+
+
+        <div id="loseScreen" class="">
+            <img class="firstimg" src="imageForIntro/sideMap.png" alt="">
+            <img class="secoundimg" src="imageForIntro/graveyard-finish.png" alt="">
+            <div class="loseContainer">
+                <h2 class="margin-0">YOU LOST</h2>
+                <p class="margin-0 loseUntercontainer">
+                    <span onclick="goReturn()">Return</span>
+                    <span onclick="startUndead()">Use the Curse</span>
+                </p>
+            </div>
         </div>
 
     </div>

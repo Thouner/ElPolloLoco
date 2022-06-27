@@ -1,8 +1,5 @@
 class World {
-    // character = new Character(this.characterSelectionWorld );
     character;
-    // character2 = new Character2();
-    // character3 = new Character3();
     level = level1;
     canvas;
     ctx; // context
@@ -16,17 +13,14 @@ class World {
     showGrave = false;
     showWinMoney = false;
     characterSelectionWorld;
-
-    throwableObject = [];
-
     winMoney;
     graveyard;
+    throwableObject = [];
     movableObject = new MovableObject();
     insult = new Insults();
     statusBar = new StatusBar();
     moneyBar = new MoneyBar();
     ammoBar = new AmmoBar();
-
     distanceTraveled = 400;
     backgroundWidthToAdd1png = 880;
 
@@ -39,25 +33,10 @@ class World {
         this.character.characterSelection = number;
         this.canvas = canvas;
         this.keyboard = keyboard;
-        // this.setCurrentCharacter();
         this.draw();
         this.setWorld();
         this.checkCollekting();
-
-        // canvas.requestFullscreen();
-
-        // this.canvas.width = innerWidth;
-        // this.canvas.height = innerHeight;
     }
-
-
-    // setCurrentCharacter() {
-    //     if (this.characterSelectionWorld == 1) {
-    //         this.character = new Character();
-    //     } else if (this.characterSelectionWorld == 2) {
-    //         this.character = new Character2();
-    //     }
-    // }
 
 
     /**
@@ -389,14 +368,6 @@ class World {
     goReturn() {
         if (this.keyboard.RETURN) {
             location.reload()
-                // document.getElementById('flag_container').classList.remove('biggerFlag');
-                // document.getElementById('headline').classList.remove('d-none');
-                // document.getElementById('boat').classList.remove('d-none');
-                // document.getElementById('help_Container').classList.remove('d-none');
-                // document.getElementById('flag_container').classList.remove('d-none');
-                // document.getElementById('canvas').classList.add('d-none');
-                // canvas = null;
-                // world = null;
         }
 
     }
