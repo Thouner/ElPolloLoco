@@ -35,7 +35,9 @@
     <script src="models/ork-image2.class.js"></script>
     <script src="models/ork-image3.class.js"></script>
     <script src="models/cloud.class.js"></script>
+    <script src="models/cloud2.class.js"></script>
     <script src="models/treasure.class.js"></script>
+    <script src="models/brain.class.js"></script>
     <script src="models/bomb.class.js"></script>
     <script src="models/keybord.class.js"></script>
     <script src="models/level.class.js"></script>
@@ -45,7 +47,9 @@
     <script src="models/troll-images3.class.js"></script>
     <script src="models/throwableObject.class.js"></script>
     <script src="models/gaveyard.class.js"></script>
+    <script src="models/thunder.class.js"></script>
     <script src="levels/level1.js"></script>
+    <script src="levels/level2.js"></script>
     <script src="models/insults.class.js"></script>
     <script src="models/macGuffin.class.js"></script>
     <script src="js/script.js"></script>
@@ -64,9 +68,37 @@
         </div>
 
         <canvas class="d-none p-reletiv" id="canvas" width="880px" height="495px">
-
-           
+            <div class="topBar">
+                <div>sound aus</div>
+                <div> full screen</div>
+            </div>
+            <div class="bottumBar">
+                <div>
+                    <div>Links</div>
+                    <div>Rechts</div>
+                </div>
+                <div>
+                    <div>Springen</div>
+                    <div>Angreifen</div>
+                    <div>Werfen</div>
+                </div>
+            </div>   
         </canvas>
+        <!-- <div class="topBar">
+            <div>sound aus</div>
+            <div> full screen</div>
+        </div>
+        <div class="bottumBar">
+            <div>
+                <div>Links</div>
+                <div>Rechts</div>
+            </div>
+            <div>
+                <div>Springen</div>
+                <div>Angreifen</div>
+                <div>Werfen</div>
+            </div>
+        </div> -->
 
         <div id="help_Container" onclick="showHelp()" class="help helpdown">
             <div>
@@ -75,18 +107,19 @@
                 <span class="coin">Coins</span>
                 <span class="bomb">Bombs</span>
                 <img class="helpimg" src="imageForIntro/map-3.png" alt="">
-                <p class="key1"><i>Shift</i><u class="functionKey1">throw bomb</u></p>
-                <p class="key2"><i>Strg</i><u class="functionKey2">attack</u></p>
-                <p class="key3"><i>Space</i><u class="functionKey3">jump</u></p>
-                <p class="key4"><i>&#8249;</i><u class="functionKey4">walk left</u></p>
-                <p class="key5"><i>&#8250;</i><u class="functionKey5">walk right</u></p>
-                <p class="key6"><i>f</i><u class="functionKey6">full screen</u></p>
-                <p class="key7"><i>&#8592;</i><u class="functionKey7">return</u></p>
+                <p class="key1"><i>Shift</i><u class="functionKey1">Throw Bomb</u></p>
+                <p class="key2"><i>Strg</i><u class="functionKey2">Attack</u></p>
+                <p class="key3"><i>Space</i><u class="functionKey3">Jump</u></p>
+                <p class="key4"><i>&#8249;</i><u class="functionKey4">Walk Left</u></p>
+                <p class="key5"><i>&#8250;</i><u class="functionKey5">Walk Right</u></p>
+                <p class="key6"><i>f</i><u class="functionKey6">Full Screen</u></p>
+                <p class="key7"><i>&#8592;</i><u class="functionKey7">Return</u></p>
             </div>
         </div>
 
-        <div id="winScreen" class="">
-            <img src="imageForIntro/sideMap.png" alt="">
+        <div id="winScreen" class="d-none">
+            <img class="firstimg" src="imageForIntro/sideMap.png" alt="">
+            <img class="secoundimg" src="imageForIntro/much-money.png" alt="">
             <div class="winContainer">
                 <h2 class="margin-0">YOU WON</h2>
                 <p class="margin-0 winUntercontainer">
@@ -97,9 +130,9 @@
         </div>
 
 
-        <div id="loseScreen" class="">
+        <div id="loseScreen" class="d-none">
             <img class="firstimg" src="imageForIntro/sideMap.png" alt="">
-            <img class="secoundimg" src="imageForIntro/graveyard-finish.png" alt="">
+            <img class="secoundimg" src="imageForIntro/graveyard.png" alt="">
             <div class="loseContainer">
                 <h2 class="margin-0">YOU LOST</h2>
                 <p class="margin-0 loseUntercontainer">

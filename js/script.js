@@ -72,8 +72,6 @@ function showHelp() {
 
 function startgame(number) {
     init(number);
-    // world.characterSelectionWorld = 2;
-    // console.log('number', world.characterSelectionWorld);
     document.getElementById('flag_container').classList.add('biggerFlag');
     setTimeout(() => {
         document.getElementById('headline').classList.add('d-none');
@@ -90,6 +88,5 @@ function goReturn() {
 }
 
 function startUndead() {
-    // location.reload()
-    startgame(2);
+    world.undeadGame();
 }

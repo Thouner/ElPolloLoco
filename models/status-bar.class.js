@@ -1,8 +1,6 @@
 class StatusBar extends MovableObject {
     x = 10;
     y = 10;
-    // width = 250;
-    // height = 60;
     width = 40;
     height = 40;
 

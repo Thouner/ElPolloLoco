@@ -15,18 +15,19 @@ class World {
     characterSelectionWorld;
     winMoney;
     graveyard;
+    showThunder = false;
     throwableObject = [];
     movableObject = new MovableObject();
     insult = new Insults();
     statusBar = new StatusBar();
     moneyBar = new MoneyBar();
     ammoBar = new AmmoBar();
+    thunder = new Thunder();
     distanceTraveled = 400;
     backgroundWidthToAdd1png = 880;
 
 
     constructor(canvas, keyboard, number) {
-        // console.log(number);
         this.ctx = canvas.getContext('2d');
         this.characterSelectionWorld = number;
         this.character = new Character(this.characterSelectionWorld);
@@ -44,8 +45,6 @@ class World {
      */
     setWorld() {
         this.character.world = this;
-        // this.character2.world = this;
-        // this.character3.world = this;
         this.level.endboss.world = this;
         this.movableObject = this;
     }
@@ -121,9 +120,13 @@ class World {
         this.addObjectsToMap(this.level.goldChest); //drawing the bomb
         this.addObjectsToMap(this.level.leftoverMeat); //drawing the meat
         this.addObjectsToMap(this.throwableObject); //drawing the throw bomb
-        this.addToMapCharacter(this.character) //drawing the character
+        if (!this.showGrave) {
+            this.addToMapCharacter(this.character) //drawing the character
+        }
         this.addObjectsToMap(this.level.enemies); //drawing the enemies
         this.addObjectsToMap(this.level.endboss); //drawing the endboss
+
+
         if (this.character.isAttack()) {
             if (!this.randomNumber)
                 this.randomNumber = Math.floor(Math.random() * (15 - 0 + 1) + 0);
@@ -139,6 +142,10 @@ class World {
             this.winMoney = new MacGuffin(this.character.x, this.character.y);
             this.addToMap(this.winMoney); //drawing the graveyard
         }
+        if (this.showThunder) {
+            this.addToMap(this.thunder); //drawing the thunder
+        }
+
         this.ctx.translate(-this.camera_x, 0); //back movement of the camera
 
         this.drawStatusBar(this.character.energy);
@@ -251,21 +258,15 @@ class World {
     }
 
     drawInsultBar(text) {
-
         let randomText = this.insult.insults[this.randomNumber];
-
         let textLength = randomText.length;
         this.ctx.fillStyle = 'rgba(255,255,255,0.7)';
         this.ctx.fillRect(this.character.x, this.character.y + 30, textLength * 10.2, 35);
-
         this.ctx.font = "20px Comic Sans MS";
         this.ctx.fillStyle = 'black';
         this.ctx.fillText(randomText, this.character.x + 5, this.character.y + 55);
-
         this.ctx.strokeStyle = 'red';
         this.ctx.strokeRect(this.character.x, this.character.y + 30, textLength * 10.2, 35);
-
-
     }
 
 
@@ -273,10 +274,8 @@ class World {
         if (this.level.endboss[0].bossWalk) {
             this.ctx.fillStyle = '#ffffff';
             this.ctx.fillRect(this.canvas.width - 30, 12.5, -225, 35);
-
             this.ctx.strokeStyle = 'red';
             this.ctx.strokeRect(this.canvas.width - 30, 12.5, -225, 35);
-
             this.ctx.fillStyle = '#000'
             this.ctx.fillRect(this.canvas.width - 30, 17.5, -(widthText * 2.2), 25)
         }
@@ -319,9 +318,12 @@ class World {
                 enemy.setEnemyDead();
             });
             this.removeOrks;
-            // setTimeout(() => {
-            //     this.world.level.enemies = [];
-            // }, 20000);
+            setTimeout(() => {
+                document.getElementById('winScreen').classList.remove('d-none')
+                document.getElementById('winScreen').classList.add('d-flex')
+                document.getElementById('coinNumber').innerHTML = `You have ${this.character.treasure} Points`;
+
+            }, 1000);
         }
     }
 
@@ -374,17 +376,44 @@ class World {
 
     setFullScreen() {
         if (this.keyboard.F) {
-            canvas.requestFullscreen();
+            requestFullScreen();
         }
     }
 
     addGrave() {
-        if (this.character.gameOver && !this.showGrave && !this.character.characterSelection == 3) {
+        if (this.character.gameOver && !this.showGrave) {
             setTimeout(() => {
                 this.showGrave = true;
-            }, 1500);
+            }, 1200);
+
+            setTimeout(() => {
+                document.getElementById('loseScreen').classList.remove('d-none')
+                document.getElementById('loseScreen').classList.add('d-flex')
+            }, 2000);
         }
     }
 
-
+    undeadGame() {
+        console.log('Undead start');
+        document.getElementById('loseScreen').classList.add('d-none')
+        document.getElementById('loseScreen').classList.remove('d-flex')
+        this.level = level2;
+        this.character.x = 0;
+        this.showGrave = false;
+        setTimeout(() => {
+            this.showGrave = true;
+        }, );
+        setTimeout(() => {
+            this.showThunder = true;
+            this.characterSelectionWorld = 3;
+            this.character.characterSelection = 3;
+        }, 3000);
+        setTimeout(() => {
+            this.showThunder = false;
+            this.character.gameOver = false;
+            this.character.dieTime = 7;
+            this.character.energy = 100;
+            this.showGrave = false;
+        }, 4000);
+    }
 }
