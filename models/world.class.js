@@ -317,7 +317,7 @@ class World {
             this.level.enemies.forEach(enemy => {
                 enemy.setEnemyDead();
             });
-            this.removeOrks;
+            // this.removeOrks;
             setTimeout(() => {
                 document.getElementById('winScreen').classList.remove('d-none')
                 document.getElementById('winScreen').classList.add('d-flex')
@@ -327,12 +327,12 @@ class World {
         }
     }
 
-    removeOrks = setTimeout(() => {
-        this.world.level.enemies = [];
-        setTimeout(() => {
-            clearTimeout(removeOrks);
-        }, );
-    }, 20000);
+    // removeOrks = setTimeout(() => {
+    //     this.level.enemies = [];
+    //     setTimeout(() => {
+    //         clearTimeout(removeOrks);
+    //     }, );
+    // }, 20000);
 
     attackBoss() {
         if (!this.level.endboss[0].bossisDead && this.level.endboss[0].x - this.character.x <= -15 && this.character.energy > 0) {
@@ -376,7 +376,13 @@ class World {
 
     setFullScreen() {
         if (this.keyboard.F) {
-            requestFullScreen();
+            // canvas.requestFullscreen();
+            // this.canvas.width = window.innerWidth;
+            // this.canvas.height = window.innerHeight;
+            document.getElementById('canvas_container').requestFullscreen();
+            // document.getElementById('canvas').classList.toggle('width100');
+            // document.getElementById('canvas').classList.toggle('height100');
+
         }
     }
 

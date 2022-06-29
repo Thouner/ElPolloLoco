@@ -40,6 +40,18 @@ const level2 = new Level(
         new BackgroundObject('beach/game_background_4/layers/sea.png', 880 * 2),
         new BackgroundObject('beach/game_background_4/layers/land.png', 880 * 2),
         new BackgroundObject('beach/game_background_4/layers/decor.png', 880 * 2),
+
+        new BackgroundObject('beach/game_background_4/layers/sea.png', 880 * 3),
+        new BackgroundObject('beach/game_background_4/layers/land.png', 880 * 3),
+        new BackgroundObject('beach/game_background_4/layers/decor.png', 880 * 3),
+
+        new BackgroundObject('beach/game_background_4/layers/sea.png', 880 * 4),
+        new BackgroundObject('beach/game_background_4/layers/land.png', 880 * 4),
+        new BackgroundObject('beach/game_background_4/layers/decor.png', 880 * 4),
+
+        new BackgroundObject('beach/game_background_4/layers/sea.png', 880 * 5),
+        new BackgroundObject('beach/game_background_4/layers/land.png', 880 * 5),
+        new BackgroundObject('beach/game_background_4/layers/decor.png', 880 * 5),
     ], [
         new Treasure(-325, 380),
         new Treasure(-350, 410),
@@ -106,7 +118,7 @@ let backgroundCount2 = 3;
 let minusDistanceMultiplier2 = 1;
 
 timecountCloud();
-timecountBackground();
+// timecountBackground();
 
 
 
@@ -122,23 +134,23 @@ function timecountCloud() {
     }, 15000);
 }
 
-function timecountBackground() {
-    setInterval(() => {
-        addBackgrounds();
-        backgroundCount2 += 1
-    }, 5000);
-}
+// function timecountBackground() {
+//     setInterval(() => {
+//         addBackgrounds();
+//         backgroundCount2 += 1
+//     }, 5000);
+// }
 
 
 function addClouds() {
     level2.clouds.push(new Cloud2(880 * cloudCount2 - 282 * minusDistanceMultiplier2));
 }
 
-function addBackgrounds() {
+// function addBackgrounds() {
 
-    level2.backgroundObjects.push(new BackgroundObject('beach/game_background_4/layers/sea.png', 880 * backgroundCount2));
-    level2.backgroundObjects.push(new BackgroundObject('beach/game_background_4/layers/land.png', 880 * backgroundCount2));
-    level2.backgroundObjects.push(new BackgroundObject('beach/game_background_4/layers/decor.png', 880 * backgroundCount2));
-    level2.sky.push(new Sky('beach/game_background_4/layers/sky.png', 880 * backgroundCount2));
-    level2.sky.push(new Sky('beach/game_background_4/layers/sun.png', 880 * backgroundCount2));
-}
+//     level2.backgroundObjects.push(new BackgroundObject('beach/game_background_4/layers/sea.png', 880 * backgroundCount2));
+//     level2.backgroundObjects.push(new BackgroundObject('beach/game_background_4/layers/land.png', 880 * backgroundCount2));
+//     level2.backgroundObjects.push(new BackgroundObject('beach/game_background_4/layers/decor.png', 880 * backgroundCount2));
+//     level2.sky.push(new Sky('beach/game_background_4/layers/sky.png', 880 * backgroundCount2));
+//     level2.sky.push(new Sky('beach/game_background_4/layers/sun.png', 880 * backgroundCount2));
+// }

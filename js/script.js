@@ -78,8 +78,8 @@ function startgame(number) {
         document.getElementById('boat').classList.add('d-none');
         document.getElementById('help_Container').classList.add('d-none');
         document.getElementById('flag_container').classList.add('d-none');
-        document.getElementById('canvas').classList.remove('d-none');
-        document.getElementById('canvas').classList.add('d-block');
+        document.getElementById('canvas_container').classList.remove('d-none');
+        document.getElementById('canvas_container').classList.add('d-block');
     }, 2000);
 }
 

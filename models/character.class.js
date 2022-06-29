@@ -17,8 +17,6 @@ class Character extends MovableObject {
     offSetWidth = 170;
     offSetHeight = 90;
 
-    enemyIndex = Math.floor(Math.random() * (3 - 1 + 1) + 1);
-
     offSetWidthAttack = 90;
 
     walking_sound = new Audio('audio/walk.mp3');

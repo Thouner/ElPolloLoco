@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/style-padding-margin.css">
     <link rel="stylesheet" href="css/style-responsiv.css">
     <link rel="stylesheet" href="css/style-text.css">
-    <link rel="icon" type="image/x-icon" href="icon/bull.png">
+    <link rel="icon" type="image/x-icon" href="icon/ship.png">
     <script src="models/world.class.js"></script>
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
@@ -66,39 +66,24 @@
                 <img onclick="startgame(2)" src="imageForIntro/Character2.png" alt="">
             </div>
         </div>
-
-        <canvas class="d-none p-reletiv" id="canvas" width="880px" height="495px">
+        <div id="canvas_container" class="d-none">
             <div class="topBar">
-                <div>sound aus</div>
-                <div> full screen</div>
+                <div><img src="icon/baseline_volume_off_black_48dp.png" alt=""></div>
+                <div><img src="icon/baseline_open_in_full_black_48dp.png" alt=""></div>
             </div>
+            <canvas class="" id="canvas" width="880px" height="495px"></canvas>
             <div class="bottumBar">
-                <div>
-                    <div>Links</div>
-                    <div>Rechts</div>
+                <div class="d-flex">
+                    <div><img src="icon/baseline_west_black_48dp.png" alt=""></div>
+                    <div><img src="icon/baseline_east_black_48dp.png" alt=""></div>
                 </div>
-                <div>
-                    <div>Springen</div>
-                    <div>Angreifen</div>
-                    <div>Werfen</div>
+                <div class="d-flex">
+                    <div><img src="icon/baseline_airline_stops_black_48dp.png" alt=""></div>
+                    <div><img src="icon/military-knife-48.png" alt=""></div>
+                    <div><img src="icon/bomb-2-48.png" alt=""></div>
                 </div>
-            </div>   
-        </canvas>
-        <!-- <div class="topBar">
-            <div>sound aus</div>
-            <div> full screen</div>
+            </div>
         </div>
-        <div class="bottumBar">
-            <div>
-                <div>Links</div>
-                <div>Rechts</div>
-            </div>
-            <div>
-                <div>Springen</div>
-                <div>Angreifen</div>
-                <div>Werfen</div>
-            </div>
-        </div> -->
 
         <div id="help_Container" onclick="showHelp()" class="help helpdown">
             <div>
