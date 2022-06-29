@@ -51,11 +51,11 @@
     }
     
     .width100 {
-        width: 100vw;
+        width: 100%;
     }
     
     .height100 {
-        height: 100vh;
+        height: 100%;
     }
     
     canvas {
@@ -63,6 +63,8 @@
         background: black;
         /* margin: 5% auto; */
         border-radius: 20px;
+        height: 100%;
+        width: 100%;
     }
     
     #intro {
@@ -485,7 +487,7 @@
         top: 0;
         left: 0;
         right: 0;
-        padding: 5px;
+        padding: 1%;
         /* height: 60px; */
         /* background: aqua; */
         display: flex;
@@ -498,7 +500,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        padding: 5px;
+        padding: 1%;
         /* height: 60px; */
         /* background: aqua; */
         display: flex;

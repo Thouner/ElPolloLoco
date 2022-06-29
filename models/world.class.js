@@ -376,14 +376,7 @@ class World {
 
     setFullScreen() {
         if (this.keyboard.F) {
-            // canvas.requestFullscreen();
-            // this.canvas.width = window.innerWidth;
-            // this.canvas.height = window.innerHeight;
             document.getElementById('canvas_container').requestFullscreen();
-            // document.getElementById('canvas_container').classList.toggle('width100');
-            // document.getElementById('canvas_container').classList.toggle('height100');
-
-
         }
     }
 
