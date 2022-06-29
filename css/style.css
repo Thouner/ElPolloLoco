@@ -485,8 +485,9 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 50px;
-        background: aqua;
+        padding: 5px;
+        /* height: 60px; */
+        /* background: aqua; */
         display: flex;
         justify-content: end;
     }
@@ -497,19 +498,34 @@
         bottom: 0;
         left: 0;
         right: 0;
-        height: 50px;
-        background: aqua;
+        padding: 5px;
+        /* height: 60px; */
+        /* background: aqua; */
         display: flex;
         justify-content: space-between;
     }
     
-    .topBar div,
-    .bottumBar div {
+    .bottumBar span,
+    .topBar span {
         height: 50px;
         width: 50px;
         border-radius: 50%;
         border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .topBar img,
-    .bottumBar img {}
+    .bottumBar img {
+        height: 90%;
+        object-fit: contain;
+    }
+    
+    .gap20 {
+        gap: 20px;
+    }
+    
+    .gap40 {
+        gap: 40px;
+    }

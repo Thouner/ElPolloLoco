@@ -380,8 +380,9 @@ class World {
             // this.canvas.width = window.innerWidth;
             // this.canvas.height = window.innerHeight;
             document.getElementById('canvas_container').requestFullscreen();
-            // document.getElementById('canvas').classList.toggle('width100');
-            // document.getElementById('canvas').classList.toggle('height100');
+            // document.getElementById('canvas_container').classList.toggle('width100');
+            // document.getElementById('canvas_container').classList.toggle('height100');
+
 
         }
     }
