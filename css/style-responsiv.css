@@ -1,17 +1,288 @@
-@media only screen and (max-width: 880px) {
-    canvas {
-        width: 100%;
+    @media only screen and (max-width: 880px) {
+        canvas {
+            /* width: 100%; */
+            width: 100vw;
+        }
     }
-}
-
-@media only screen and (max-height: 570px) {
-    canvas {
-        margin: 0 auto;
+    
+    @media only screen and (max-width: 800px) {
+        .help {
+            margin-left: -200px;
+            width: 400px;
+        }
+        .helpimg {
+            width: 400px;
+        }
+        .helpdown {
+            transform: translateY(280px);
+        }
+        .help_headline {
+            top: 15px;
+        }
+        .help p::before {
+            top: 3px;
+            left: 4px;
+            bottom: 5px;
+            right: 4px;
+        }
+        .life {
+            top: 87px;
+            left: 40px;
+            font-size: 12px;
+        }
+        .coin {
+            top: 100px;
+            left: 40px;
+            font-size: 12px;
+        }
+        .bomb {
+            top: 115px;
+            left: 40px;
+            font-size: 12px;
+        }
+        .key1 {
+            top: 230px;
+            left: 90px;
+            font-size: 8px;
+            padding: 6px 6px;
+        }
+        .functionKey1 {
+            top: 5px;
+            left: -65px;
+            font-size: 10px !important;
+        }
+        .key2 {
+            top: 280px;
+            left: 90px;
+            font-size: 8px;
+            padding: 6px 6px;
+        }
+        .functionKey2 {
+            top: 5px;
+            left: -35px;
+            font-size: 10px !important;
+        }
+        .key3 {
+            top: 280px;
+            left: 140px;
+            font-size: 8px;
+            padding: 6px 26px;
+        }
+        .functionKey3 {
+            top: 30px;
+            left: 40px;
+            font-size: 10px !important;
+        }
+        .key4 {
+            top: 276px;
+            left: 240px;
+            font-size: 12px;
+            padding: 5px 12px;
+        }
+        .functionKey4 {
+            top: 30px;
+            left: 12px;
+            font-size: 10px !important;
+            white-space: nowrap;
+        }
+        .key5 {
+            top: 276px;
+            left: 290px;
+            font-size: 12px;
+            padding: 5px 12px;
+        }
+        .functionKey5 {
+            top: 30px;
+            left: 15px;
+            font-size: 10px !important;
+            white-space: nowrap;
+        }
+        .key6 {
+            top: 230px;
+            left: 140px;
+            font-size: 10px;
+            padding: 6px 10px;
+        }
+        .functionKey6 {
+            top: 5px;
+            left: 35px;
+            font-size: 10px !important;
+        }
+        .key7 {
+            top: 230px;
+            left: 250px;
+            font-size: 12px;
+            padding: 2px 10px;
+        }
+        .functionKey7 {
+            top: 5px;
+            left: 45px;
+            font-size: 10px !important;
+        }
     }
-}
-
-@media only screen and (max-height: 495px) {
-    canvas {
-        height: 100vh;
+    
+    @media only screen and (max-width: 660px) {
+        #boat {
+            display: none;
+        }
+        #headline {
+            font-size: 30px;
+        }
+        .clickme {
+            width: 75%;
+        }
     }
-}
+    
+    @media only screen and (max-width: 400px) {
+        .help {
+            margin-left: -125px;
+            width: 250px;
+        }
+        .helpimg {
+            width: 250px;
+        }
+        .helpdown {
+            transform: translateY(180px);
+        }
+        .help_headline {
+            top: 8px;
+            font-size: 18px;
+        }
+        .help p::before {
+            display: inline-block;
+            height: 0;
+            width: 0;
+            border-radius: none;
+            background: none;
+            box-shadow: none;
+            /* overflow: hidden; */
+            box-sizing: border-box;
+        }
+        .help p::before {
+            position: absolute;
+            top: 0;
+            left: 40;
+            bottom: 0;
+            right: 0;
+            background: none;
+            border-radius: none;
+            box-shadow: none;
+            border-left: none;
+            border-bottom: none;
+            border-top: none;
+        }
+        .life {
+            top: 54px;
+            left: 25px;
+            font-size: 8px;
+        }
+        .coin {
+            top: 62px;
+            left: 25px;
+            font-size: 8px;
+        }
+        .bomb {
+            top: 70px;
+            left: 25px;
+            font-size: 8px;
+        }
+        .key1 {
+            top: 140px;
+            left: 70px;
+            font-size: 8px;
+            padding: 3px 1px;
+        }
+        .functionKey1 {
+            top: 5px;
+            left: -50px;
+            font-size: 8px !important;
+        }
+        .key2 {
+            top: 170px;
+            left: 70px;
+            font-size: 8px;
+            padding: 3px 3px;
+        }
+        .functionKey2 {
+            top: 5px;
+            left: -30px;
+            font-size: 8px !important;
+        }
+        .key3 {
+            top: 170px;
+            left: 96px;
+            font-size: 8px;
+            padding: 3px 13px;
+        }
+        .functionKey3 {
+            top: 20px;
+            left: 25px;
+            font-size: 8px !important;
+        }
+        .key4 {
+            top: 166px;
+            left: 150px;
+            font-size: 12px;
+            padding: 0px 10px;
+        }
+        .functionKey4 {
+            top: 20px;
+            left: 7px;
+            font-size: 8px !important;
+            white-space: nowrap;
+        }
+        .key5 {
+            top: 166px;
+            left: 178px;
+            font-size: 12px;
+            padding: 0px 10px;
+        }
+        .functionKey5 {
+            top: 20px;
+            left: 18px;
+            font-size: 8px !important;
+            white-space: nowrap;
+        }
+        .key6 {
+            top: 138px;
+            left: 100px;
+            font-size: 10px;
+            padding: 2px 6px;
+        }
+        .functionKey6 {
+            top: 5px;
+            left: 20px;
+            font-size: 8px !important;
+        }
+        .key7 {
+            top: 138px;
+            left: 170px;
+            font-size: 12px;
+            padding: 0px 5px;
+        }
+        .functionKey7 {
+            top: 5px;
+            left: 25px;
+            font-size: 8px !important;
+        }
+    }
+    
+    @media only screen and (max-height: 570px) {
+        canvas {
+            margin: 0 auto;
+        }
+    }
+    
+    @media only screen and (max-height: 495px) {
+        canvas {
+            height: 100vh;
+        }
+    }
+    
+    @media only screen and (max-width: 400px) {
+        .bottumBar span,
+        .topBar span {
+            height: 30px;
+            width: 30px;
+        }
+    }

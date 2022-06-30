@@ -8,7 +8,26 @@ let keyboard = new Keyboard();
 function init(number) {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard, number);
+    checkWindowsize();
 }
+
+function checkWindowsize() {
+    setInterval(() => {
+        if (window.innerHeight < 495 || window.innerWidth < 880) {
+            document.getElementById('topBar_container').classList.remove('d-none');
+            document.getElementById('topBar_container').classList.add('d-flex');
+            document.getElementById('bottumBar_container').classList.remove('d-none');
+            document.getElementById('bottumBar_container').classList.add('d-flex');
+        }
+        if (window.innerHeight > 495 || window.innerWidth > 880) {
+            document.getElementById('topBar_container').classList.add('d-none');
+            document.getElementById('topBar_container').classList.remove('d-flex');
+            document.getElementById('bottumBar_container').classList.add('d-none');
+            document.getElementById('bottumBar_container').classList.remove('d-flex');
+        }
+    }, 200);
+}
+
 
 /**
  * key pressed = true
@@ -63,6 +82,7 @@ window.addEventListener('keyup', (e) => {
         keyboard.RETURNF = false;
     }
 });
+
 
 
 function showHelp() {

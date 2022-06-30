@@ -6,10 +6,11 @@ class Keyboard {
     SHIFT = false;
     F = false;
     RETURN = false;
+    Q = false;
 
-    constructor() {
-        this.touchPress();
-    }
+    // constructor() {
+    //     this.touchPress();
+    // }
 
 
     touchPress() {
@@ -23,11 +24,11 @@ class Keyboard {
         });
         document.getElementById('btnFullScreen').addEventListener('touchstart', (e) => {
             e.preventDefault();
-            this.F = true;
+            this.RETURN = true;
         });
         document.getElementById('btnFullScreen').addEventListener('touchend', (e) => {
             e.preventDefault();
-            this.F = false;
+            this.RETURN = false;
         });
         document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
             e.preventDefault();

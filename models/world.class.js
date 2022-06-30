@@ -37,6 +37,7 @@ class World {
         this.draw();
         this.setWorld();
         this.checkCollekting();
+        this.keyboard.touchPress();
     }
 
 
@@ -47,8 +48,24 @@ class World {
         this.character.world = this;
         this.level.endboss.world = this;
         this.movableObject = this;
+        // this.checkWindowsize();
     }
 
+
+    checkWindowsize() {
+        if (window.innerHeight < 495 || window.innerWidth < 880) {
+            document.getElementById('topBar_container').classList.remove('d-none');
+            document.getElementById('topBar_container').classList.add('d-flex');
+            document.getElementById('bottumBar_container').classList.remove('d-none');
+            document.getElementById('bottumBar_container').classList.add('d-flex');
+        }
+        if (window.innerHeight > 495 || window.innerWidth > 880) {
+            document.getElementById('topBar_container').classList.add('d-none');
+            document.getElementById('topBar_container').classList.remove('d-flex');
+            document.getElementById('bottumBar_container').classList.add('d-none');
+            document.getElementById('bottumBar_container').classList.remove('d-flex');
+        }
+    }
 
 
     checkCollekting() {
@@ -398,22 +415,30 @@ class World {
         document.getElementById('loseScreen').classList.add('d-none')
         document.getElementById('loseScreen').classList.remove('d-flex')
         this.level = level2;
+        world.camera_x = 0
         this.character.x = 0;
+        this.character.treasure = 0;
+        if (this.character.bombs < 5) {
+            this.character.bombs = 5;
+        }
         this.showGrave = false;
         setTimeout(() => {
             this.showGrave = true;
-        }, );
+        }, 10);
         setTimeout(() => {
             this.showThunder = true;
             this.characterSelectionWorld = 3;
             this.character.characterSelection = 3;
-        }, 3000);
+            // this.character.imges = new Pirat_Image3();
+        }, 1000);
         setTimeout(() => {
             this.showThunder = false;
+            this.showGrave = false;
             this.character.gameOver = false;
             this.character.dieTime = 7;
             this.character.energy = 100;
-            this.showGrave = false;
-        }, 4000);
+        }, 2000);
     }
+
+
 }
