@@ -105,6 +105,7 @@
         font-size: 45px;
         text-align: center;
         text-shadow: 2px 2px 5px #fff;
+        color: #222;
     }
     
     .clickme {
@@ -532,4 +533,19 @@
     
     .gap40 {
         gap: 40px;
+    }
+    
+    #rotateDevice {
+        z-index: 30;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: 50%;
+        transform: translateX(-50%);
+        background: #F0D3A9;
+        width: 80%;
+        padding: 10px 5px;
+        border: 2px solid black;
+        border-radius: 20px;
+        text-align: center;
     }

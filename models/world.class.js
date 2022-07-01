@@ -48,7 +48,6 @@ class World {
         this.character.world = this;
         this.level.endboss.world = this;
         this.movableObject = this;
-        // this.checkWindowsize();
     }
 
 
