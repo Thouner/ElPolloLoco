@@ -30,7 +30,7 @@ class World {
     constructor(canvas, keyboard, number) {
         this.ctx = canvas.getContext('2d');
         this.characterSelectionWorld = number;
-        this.character = new Character(this.characterSelectionWorld);
+        this.character = new Character(this.characterSelectionWorld, this);
         this.character.characterSelection = number;
         this.canvas = canvas;
         this.keyboard = keyboard;
@@ -45,7 +45,7 @@ class World {
      * pass "world" in character
      */
     setWorld() {
-        this.character.world = this;
+        // this.character.world = this;
         this.level.endboss.world = this;
         this.movableObject = this;
     }
@@ -398,14 +398,22 @@ class World {
 
     addGrave() {
         if (this.character.gameOver && !this.showGrave) {
-            setTimeout(() => {
-                this.showGrave = true;
-            }, 1200);
+            if (this.characterSelectionWorld == 3) {
+                setTimeout(() => {
+                    document.getElementById('loseScreen').classList.remove('d-none')
+                    document.getElementById('loseScreen').classList.add('d-flex')
+                    document.getElementById('undead').classList.add('d-none')
+                }, 1500);
+            } else {
+                setTimeout(() => {
+                    this.showGrave = true;
+                }, 1200);
 
-            setTimeout(() => {
-                document.getElementById('loseScreen').classList.remove('d-none')
-                document.getElementById('loseScreen').classList.add('d-flex')
-            }, 2000);
+                setTimeout(() => {
+                    document.getElementById('loseScreen').classList.remove('d-none')
+                    document.getElementById('loseScreen').classList.add('d-flex')
+                }, 2000);
+            }
         }
     }
 
@@ -417,22 +425,29 @@ class World {
         world.camera_x = 0
         this.character.x = 0;
         this.character.treasure = 0;
+        this.level.endboss[0].bossEnergy = 100;
+        this.level.endboss[0].bossWalk = false;
+        this.level.endboss[0].bossWalk = false;
         if (this.character.bombs < 5) {
             this.character.bombs = 5;
         }
         this.showGrave = false;
         setTimeout(() => {
+            document.getElementById('loseScreen').classList.add('d-none')
+            document.getElementById('loseScreen').classList.remove('d-flex')
             this.showGrave = true;
         }, 10);
         setTimeout(() => {
             this.showThunder = true;
-            this.characterSelectionWorld = 3;
-            this.character.characterSelection = 3;
-            // this.character.imges = new Pirat_Image3();
+
         }, 1000);
         setTimeout(() => {
+            this.addOrk();
             this.showThunder = false;
             this.showGrave = false;
+            this.characterSelectionWorld = 3;
+            this.character.characterSelection = 3;
+            this.character = new Character(this.characterSelectionWorld, this);
             this.character.gameOver = false;
             this.character.dieTime = 7;
             this.character.energy = 100;

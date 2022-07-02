@@ -1,31 +1,12 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-/**
- * canvas initiate
- */
+
+
 function init(number) {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard, number);
-    // checkWindowsize();
 }
-
-// function checkWindowsize() {
-//     setInterval(() => {
-//         if (window.innerHeight < 495 || window.innerWidth < 880) {
-//             document.getElementById('topBar_container').classList.remove('d-none');
-//             document.getElementById('topBar_container').classList.add('d-flex');
-//             document.getElementById('bottumBar_container').classList.remove('d-none');
-//             document.getElementById('bottumBar_container').classList.add('d-flex');
-//         }
-//         if (window.innerHeight > 495 || window.innerWidth > 880) {
-//             document.getElementById('topBar_container').classList.add('d-none');
-//             document.getElementById('topBar_container').classList.remove('d-flex');
-//             document.getElementById('bottumBar_container').classList.add('d-none');
-//             document.getElementById('bottumBar_container').classList.remove('d-flex');
-//         }
-//     }, 200);
-// }
 
 
 /**
@@ -54,6 +35,7 @@ window.addEventListener('keydown', (e) => {
         keyboard.RETURN = true;
     }
 });
+
 
 /**
  * key released = false
@@ -90,12 +72,11 @@ window.mobileAndTabletCheck = function() {
 };
 
 
-screen.orientation.onchange = function() {
+screen.orientation.onportrait = function() {
     let type = screen.orientation.type;
     let check = false;
     if (type.match(/portrait/)) {
         check = true;
-        // alert('Please flip to landscape, to use this app!');
     }
     return check;
 }
@@ -106,46 +87,58 @@ function showHelp() {
     document.getElementById('help_Container').classList.toggle('helpup');
 }
 
-function startgame(number) {
-    if (mobileAndTabletCheck() && screen.orientation.onchange()) {
-        document.getElementById('rotateDevice').classList.remove('d-none')
-        setTimeout(() => {
-            document.getElementById('rotateDevice').classList.add('d-none')
-        }, 1500);
-    } else {
-        init(number);
-        document.getElementById('flag_container').classList.add('biggerFlag');
-        setTimeout(() => {
-            document.getElementById('headline').classList.add('d-none');
-            document.getElementById('boat').classList.add('d-none');
-            document.getElementById('help_Container').classList.add('d-none');
-            document.getElementById('flag_container').classList.add('d-none');
-            document.getElementById('canvas_container').classList.remove('d-none');
-            document.getElementById('canvas_container').classList.add('d-block');
-            if (mobileAndTabletCheck()) {
-                document.getElementById('topBar_container').classList.remove('d-none');
-                document.getElementById('topBar_container').classList.add('d-flex');
-                document.getElementById('bottumBar_container').classList.remove('d-none');
-                document.getElementById('bottumBar_container').classList.add('d-flex');
-            }
 
-        }, 2000);
+function startgame(number) {
+    if (mobileAndTabletCheck() && screen.orientation.onportrait()) {
+        showRotateDevice();
+    } else {
+        removeStartScreen(number);
     }
 }
 
-// let checkRotateDevice = setInterval(() => {
-//     if (mobileAndTabletCheck() && !screen.orientation.onchange()) {
-//         // document.getElementById('rotateDevice').classList.remove('d-block')
-//         document.getElementById('rotateDevice').classList.add('d-none')
-//         clearInterval(checkRotateDevice);
-//     }
-// }, 100);
 
+function showRotateDevice() {
+    document.getElementById('rotateDevice').classList.remove('d-none')
+    setTimeout(() => {
+        document.getElementById('rotateDevice').classList.add('d-none')
+    }, 1500);
+}
+
+function removeStartScreen(number) {
+    init(number);
+    document.getElementById('flag_container').classList.add('biggerFlag');
+    setTimeout(() => {
+        showGame();
+        if (mobileAndTabletCheck()) {
+            showMobileButtons();
+        }
+    }, 2000);
+}
+
+
+function showGame() {
+    document.getElementById('headline').classList.add('d-none');
+    document.getElementById('boat').classList.add('d-none');
+    document.getElementById('help_Container').classList.add('d-none');
+    document.getElementById('flag_container').classList.add('d-none');
+    document.getElementById('canvas_container').classList.remove('d-none');
+    document.getElementById('canvas_container').classList.add('d-block');
+}
+
+
+function showMobileButtons() {
+    document.getElementById('topBar_container').classList.remove('d-none');
+    document.getElementById('topBar_container').classList.add('d-flex');
+    document.getElementById('bottumBar_container').classList.remove('d-none');
+    document.getElementById('bottumBar_container').classList.add('d-flex');
+
+}
 
 
 function goReturn() {
     location.reload()
 }
+
 
 function startUndead() {
     world.undeadGame();

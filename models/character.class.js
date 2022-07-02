@@ -48,8 +48,9 @@ class Character extends MovableObject {
     // }, 150);
 
 
-    constructor(number) {
+    constructor(number, world) {
         super();
+        this.world = world;
         this.characterSelection = number;
         this.energy = 100;
         this.selectCurrentCharacter();
@@ -236,7 +237,7 @@ class Character extends MovableObject {
             setTimeout(() => {
                 this.world.level.endboss[0].bossWalk = true;
                 this.world.level.endboss[0].bossAttack = false;
-                this.world.level.endboss[0].speed = 0.7;
+                this.world.level.endboss[0].speed = 1.2;
             }, 1700);
         }
     }

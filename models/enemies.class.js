@@ -16,7 +16,7 @@ class Enemies extends MovableObject {
     enemyWalk = false;
 
 
-    speed = 0.3 + Math.random() * 0.5;
+    speed = 0.5 + Math.random() * 0.7;
     // walking_sound = new Audio('audio/chicken.mp3');
 
     offSetX = 120;
