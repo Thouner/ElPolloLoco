@@ -16,6 +16,5 @@ class Insults {
         "I've heard you are a contemptible sneak.",
         "You're no match for my brains, you poor fool.",
         "You have the manners of a beggar",
-
     ]
 }

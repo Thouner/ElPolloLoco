@@ -31,7 +31,7 @@ class MoneyBar extends MovableObject {
         setInterval(() => {
 
             this.animationRepeat(this.IMAGES_Money);
-        }, 200);
+        }, 100);
 
     }
 

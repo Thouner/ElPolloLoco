@@ -31,18 +31,12 @@ class Character extends MovableObject {
             this.imges.Image_Die.splice(0, 1)
             this.dieTime--;
         }
-        if (this.dieTime == 0 && this.characterSelection == 1) {
-            this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
-        } else if (this.dieTime == 0 && this.characterSelection == 2) {
-            this.dieAnimation = this.loadImage('pirat/png/2/2_entity_000_DIE_006.png');
-        } else if (this.dieTime == 0 && this.characterSelection == 3) {
-            this.dieAnimation = this.loadImage('pirat/png/3/Dead8.png');
-        }
+        this.showCorpse();
     }, 150);
 
 
     /**
-     * draw the silver character
+     * draw the character
      * 
      * @param {number} number - number of selected character
      * @param {class} world - class of the world
@@ -57,6 +51,20 @@ class Character extends MovableObject {
         this.loadDifferentImages();
         this.animationCharater();
         this.dieTime = this.imges.Image_Die.length;
+    }
+
+
+    /**
+     * view the corpse depending on the selected character
+     */
+    showCorpse() {
+        if (this.dieTime == 0 && this.characterSelection == 1) {
+            this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
+        } else if (this.dieTime == 0 && this.characterSelection == 2) {
+            this.dieAnimation = this.loadImage('pirat/png/2/2_entity_000_DIE_006.png');
+        } else if (this.dieTime == 0 && this.characterSelection == 3) {
+            this.dieAnimation = this.loadImage('pirat/png/3/Dead8.png');
+        }
     }
 
 
@@ -163,13 +171,18 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * check the collision with enemies
+     */
     checkEnemieCollusion() {
-        // this.goBoss();
         this.jumpOnOrk();
         this.ckeckAttackOrDamage();
     }
 
 
+    /**
+     * animation of the different movements
+     */
     animateDifferentMovements() {
         this.animationToIdle();
         this.animationToHurt();
@@ -180,32 +193,58 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * character dies
+     */
     characterDies() {
         this.gameOver = true;
         this.dieAnimation;
     }
 
 
+    /**
+     * animation to idle
+     */
     animationToIdle() {
         if (!this.isAboveGround() && !this.isDead() && !this.isHurt() && !this.gameWon) {
             this.animationRepeat(this.imges.Image_Idle);
         }
     }
+
+
+    /**
+     * animation to hurt
+     */
     animationToHurt() {
         if (this.isHurt() && !this.isDead() && !this.gameWon) {
             this.animationRepeat(this.imges.Image_Hurt);
         }
     }
+
+
+    /**
+     * animation to walk
+     */
     animationToWalk() {
         if (this.world.keyboard.RIGHT && !this.isAboveGround(this.groundlevel) || this.world.keyboard.LEFT && !this.isAboveGround(this.groundlevel)) {
             this.animationRepeat(this.imges.Image_Walking);
         }
     }
+
+
+    /**
+     * animation to attack
+     */
     animationToAttack() {
         if (this.isAttack() && !this.isDead() && !this.gameWon) {
             this.animationRepeat(this.imges.Image_Attack);
         }
     }
+
+
+    /**
+     * animation to jump
+     */
     animationToJump() {
         if (this.isAboveGround(this.groundlevel)) {
             this.animationRepeat(this.imges.Image_Jump);
@@ -213,7 +252,9 @@ class Character extends MovableObject {
     }
 
 
-
+    /**
+     * check whether character attacks or takes damage
+     */
     ckeckAttackOrDamage() {
         if (this.attackEnemy) {
             this.checkAttackCollusion();
@@ -225,6 +266,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * moves the character to the right
+     */
     moveToTheRight() {
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.walkRight(this.speed);
@@ -233,6 +277,10 @@ class Character extends MovableObject {
         }
     }
 
+
+    /**
+     * moves the character to the left
+     */
     moveToTheLeft() {
         if (this.world.keyboard.LEFT && this.x > -600) {
             this.walkleft(this.speed);
@@ -240,6 +288,10 @@ class Character extends MovableObject {
         }
     }
 
+
+    /**
+     * makes the character jump
+     */
     jumpMovement() {
         if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel)) {
             this.jump();
@@ -247,12 +299,18 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * plays running sounds
+     */
     playWalkSound() {
         this.walking_sound.pause();
         this.walking_sound.playbackRate = 2.4;
     }
 
 
+    /**
+     * check jumping on an enemy
+     */
     jumpOnOrk() {
         this.world.level.enemies.forEach((enemy) => {
             if (this.jumpsOnTop(enemy) && this.isAboveGround(this.groundlevel)) {
@@ -264,6 +322,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * removing the dead orc
+     */
     removeDeadOrc(i) {
         setTimeout(() => {
             this.world.level.enemies.splice(i, 1);
@@ -271,6 +332,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * attack the boss
+     */
     checkAttackBossCollusion() {
         this.world.level.endboss.forEach((boss) => {
             if (this.isCollidingAttackEnemies(boss) && this.isAttack()) {
@@ -282,6 +346,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * attack the enemy
+     */
     checkAttackCollusion() {
         this.world.level.enemies.forEach((enemy) => {
             if (this.isCollidingAttackEnemies(enemy)) {
@@ -293,6 +360,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * get damage from boss
+     */
     checkBossCollusion() {
         this.world.level.endboss.forEach((boss) => {
             if (!boss.enemyDead && this.isCollidingEnemies(boss)) {
@@ -302,6 +372,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * get damage from enemy
+     */
     checkOrkCollusion() {
         this.world.level.enemies.forEach((enemy) => {
             if (!enemy.enemyDead && this.isCollidingEnemies(enemy)) {
@@ -311,23 +384,21 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * first attack and start movement of the boss
+     */
     goBoss() {
         if (this.x == 2450 && !this.world.level.endboss[0].bossWalk) {
             this.world.level.endboss[0].bossAttack = true;
-            setTimeout(() => {
-                if (!this.isAboveGround(this.groundlevel)) {
-                    this.jump();
-                }
-            }, 1300);
-            setTimeout(() => {
-                this.world.level.endboss[0].bossWalk = true;
-                this.world.level.endboss[0].bossAttack = false;
-                this.world.level.endboss[0].speed = 1.2;
-            }, 1700);
+            this.letCharacterJump();
+            this.letBossGo();
         }
     }
 
 
+    /**
+     * first attack of the boss makes the character jump
+     */
     letCharacterJump() {
         setTimeout(() => {
             if (!this.isAboveGround(this.groundlevel)) {
@@ -337,6 +408,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * start movement of the boss
+     */
     letBossGo() {
         setTimeout(() => {
             this.world.level.endboss[0].bossWalk = true;
@@ -346,16 +420,25 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * llect the points
+     */
     collectTreasure() {
         this.treasure++;
     }
 
 
+    /**
+     * collect the bombs
+     */
     collectBombs() {
         this.bombs++;
     }
 
 
+    /**
+     * reducing the bombs
+     */
     minusBombs() {
         this.bombs--;
         if (this.bombs < 0) {

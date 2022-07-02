@@ -2,23 +2,18 @@ class DrawableObject {
     img;
     imageCache = {};
     currentImage = 0;
-
     x;
     y;
     height;
     width;
-
     treasure = 0;
     bombs = 5;
 
 
-
-
-
     /**
-     * loadImage('img/image1.png')
+     * load the respective image
      * 
-     * @param {string} path - 'img/image1.png'
+     * @param {string} path 
      */
     loadImage(path) {
         this.img = new Image(); // this.img = document.getElementById('image') <img id="image" scr>
@@ -26,6 +21,11 @@ class DrawableObject {
     }
 
 
+    /**
+     * draw the object in the canvas
+     * 
+     * @param {class} ctx - context of the class
+     */
     draw(ctx) {
         try {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -36,16 +36,22 @@ class DrawableObject {
     }
 
 
+    /**
+     * draw a number
+     * 
+     * @param {class} ctx - context of the class
+     */
     drawMoneyNumber(ctx) {
         ctx.font = "30px Comic Sans MS";
         ctx.fillStyle = "red";
         ctx.fillText("55", 170, 180);
     }
 
+
     /**
-     * loadImage Array
+     * load the array to animate
      * 
-     * @param {Array} arr - ['img/image1.png', 'img/image2.png', 'img/image3.png',...] 
+     * @param {Array} arr - array with images to animate
      */
     loadImagesArray(arr) {
         arr.forEach(path => {
@@ -57,6 +63,11 @@ class DrawableObject {
     }
 
 
+    /**
+     * drawing the frame around objects
+     * 
+     * @param {class} ctx - context of the class 
+     */
     drawFrame(ctx) {
         // if (this instanceof Character) {
         //     ctx.beginPath();

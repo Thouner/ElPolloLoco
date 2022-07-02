@@ -20,21 +20,23 @@ class Endboss extends MovableObject {
     offSetHeight = 370;
     offSetWidthAttack = 90;
 
+
+    /**
+     * draw the death animation
+     */
     dieAnimationEnemy = setInterval(() => {
         if (this.enemyDead && this.dieTime > 0) {
             this.animationRepeat(this.imges.Image_Die);
             this.imges.Image_Die.splice(0, 1)
             this.dieTime--;
         }
-        if (this.dieTime == 0 && this.enemyIndex == 1) {
-            this.dieAnimation = this.loadImage('troll/1/Troll_01_1_DIE_009.png');
-        } else if (this.dieTime == 0 && this.enemyIndex == 2) {
-            this.dieAnimation = this.loadImage('troll/2/Troll_02_1_DIE_009.png');
-        } else if (this.dieTime == 0 && this.enemyIndex == 3) {
-            this.dieAnimation = this.loadImage('troll/3/Troll_03_1_DIE_009.png');
-        }
+        this.showCorpse();
     }, 100);
 
+
+    /**
+     * draw the attack animation
+     */
     attackAnimation = setInterval(() => {
         if (this.attackTime >= 0) {
             this.animationRepeat(this.imges.Image_Attack)
@@ -45,9 +47,53 @@ class Endboss extends MovableObject {
         }
     }, 100);
 
+
+    /**
+     * draw the boss
+     * 
+     * @param {class} world - class of the world
+     */
     constructor(world) {
         super();
+        this.selectCurrentImages();
+        this.otherDierection = true;
+        this.world = world;
+        this.loadDifferentImages();
+        this.AnimationMove();
+        this.animationEnemie();
+    }
 
+
+    /**
+     * view the corpse depending on the respective images
+     */
+    showCorpse() {
+        if (this.dieTime == 0 && this.enemyIndex == 1) {
+            this.dieAnimation = this.loadImage('troll/1/Troll_01_1_DIE_009.png');
+        } else if (this.dieTime == 0 && this.enemyIndex == 2) {
+            this.dieAnimation = this.loadImage('troll/2/Troll_02_1_DIE_009.png');
+        } else if (this.dieTime == 0 && this.enemyIndex == 3) {
+            this.dieAnimation = this.loadImage('troll/3/Troll_03_1_DIE_009.png');
+        }
+    }
+
+
+    /**
+     * load the different images of the boss
+     */
+    loadDifferentImages() {
+        this.loadImagesArray(this.imges.Image_Walking);
+        this.loadImagesArray(this.imges.Image_Attack);
+        this.loadImagesArray(this.imges.Image_Die);
+        this.loadImagesArray(this.imges.Image_Hurt);
+        this.loadImagesArray(this.imges.Image_Run);
+    }
+
+
+    /**
+     * Selection of images according to the selected index
+     */
+    selectCurrentImages() {
         if (this.enemyIndex == 1) {
             this.loadImage('troll/1/Troll_01_1_WALK_000.png');
             this.imges = new Troll_Image1;
@@ -58,37 +104,25 @@ class Endboss extends MovableObject {
             this.loadImage('troll/3/Troll_03_1_WALK_000.png');
             this.imges = new Troll_Image3;
         }
-        this.otherDierection = true;
-        this.world = world;
-        this.loadImagesArray(this.imges.Image_Walking);
-        this.loadImagesArray(this.imges.Image_Attack);
-        this.loadImagesArray(this.imges.Image_Die);
-        this.loadImagesArray(this.imges.Image_Hurt);
-        this.loadImagesArray(this.imges.Image_Run);
-        this.AnimationMove();
-
-        this.animationEnemie();
-        // this.dieTime = this.imges.Image_Die.lenght;
-        // this.checkCollision();
-        // this.walking_sound.volume = 0.2;
-        // this.walking_sound.loop = true;
-        // this.walking_sound.play();
     }
 
 
-
+    /**
+     * moves the boss to the left
+     */
     AnimationMove() {
         setInterval(() => {
             if (!this.enemyDead) {
-
                 this.walkleft(this.speed);
             }
             this.checkBossAlife();
-
         }, 1000 / 60);
     }
 
 
+    /**
+     * animation for run, attack or die
+     */
     animationEnemie() {
         setInterval(() => {
             if (!this.enemyDead) {
@@ -102,18 +136,30 @@ class Endboss extends MovableObject {
                     this.speed = 0
                     this.animationRepeat(this.imges.Image_Attack);
                 }
-
             } else {
-                this.bossisDead = true;
-                this.dieAnimationEnemy;
-                setTimeout(() => {
-                    this.y += 1;
-                }, 2000);
+                this.bossDies();
             }
         }, 200);
     }
 
 
+    /**
+     * boss dies
+     */
+    bossDies() {
+        this.bossisDead = true;
+        this.dieAnimationEnemy;
+        setTimeout(() => {
+            this.y += 1;
+        }, 2000);
+    }
+
+
+    /**
+     * query the boss energy
+     * 
+     * @param {number} damage - damage dealt to the boss
+     */
     setEnemyDead(damage) {
         this.bossEnergy = this.bossEnergy - damage;
         if (this.bossEnergy <= 0) {
@@ -123,6 +169,9 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * query if the boss is alive
+     */
     checkBossAlife() {
         if (this.bossEnergy == 0) {
             this.enemyDead = true;

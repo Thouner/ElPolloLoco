@@ -36,7 +36,7 @@ class StatusBar extends MovableObject {
         setInterval(() => {
 
             this.animationRepeat(this.IMAGES_Heart);
-        }, 200);
+        }, 100);
 
     }
 

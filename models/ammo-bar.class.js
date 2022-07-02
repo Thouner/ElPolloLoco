@@ -34,7 +34,7 @@ class AmmoBar extends MovableObject {
     animationCoin() {
         setInterval(() => {
             this.animationRepeat(this.IMAGES_Ammo);
-        }, 200);
+        }, 100);
 
     }
 }
