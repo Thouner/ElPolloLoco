@@ -1,19 +1,19 @@
 const level2 = new Level(
     [
-        // new Enemies(800),
-        // new Enemies(1200),
-        // new Enemies(1600),
-        // new Enemies(2000),
-        // new Enemies(2400),
-        // new Enemies(2800),
-        // new Enemies(3200),
-        // new Enemies(3600),
-        // new Enemies(4000),
-        // new Enemies(4400),
-        // new Enemies(4800),
-        // new Enemies(5200),
-        // new Enemies(5600),
-        // new Enemies(6000),
+        new Enemies(800),
+        new Enemies(1200),
+        new Enemies(1600),
+        new Enemies(2000),
+        new Enemies(2400),
+        new Enemies(2800),
+        new Enemies(3200),
+        new Enemies(3600),
+        new Enemies(4000),
+        new Enemies(4400),
+        new Enemies(4800),
+        new Enemies(5200),
+        new Enemies(5600),
+        new Enemies(6000),
 
     ], [
         new Endboss(),
@@ -113,19 +113,17 @@ const level2 = new Level(
         new leftoverMeat(3100, 400, 15),
     ],
 )
+
 let cloudCount2 = 5;
 let backgroundCount2 = 3;
 let minusDistanceMultiplier2 = 1;
 
 timecountCloud();
-// timecountBackground();
 
 
-
-function timeOrk() {
-    level2.enemies.push(new Enemies(800 + this.orkDistance * this.orkMultiplikator));
-}
-
+/**
+ * interval for adding the clouds
+ */
 function timecountCloud() {
     setInterval(() => {
         addClouds();
@@ -134,23 +132,10 @@ function timecountCloud() {
     }, 15000);
 }
 
-// function timecountBackground() {
-//     setInterval(() => {
-//         addBackgrounds();
-//         backgroundCount2 += 1
-//     }, 5000);
-// }
 
-
+/**
+ *  adding the next clouds
+ */
 function addClouds() {
-    level2.clouds.push(new Cloud2(880 * cloudCount2 - 282 * minusDistanceMultiplier2));
+    level2.clouds.push(new Cloud2(880 * cloudCount2 - 281 * minusDistanceMultiplier2));
 }
-
-// function addBackgrounds() {
-
-//     level2.backgroundObjects.push(new BackgroundObject('beach/game_background_4/layers/sea.png', 880 * backgroundCount2));
-//     level2.backgroundObjects.push(new BackgroundObject('beach/game_background_4/layers/land.png', 880 * backgroundCount2));
-//     level2.backgroundObjects.push(new BackgroundObject('beach/game_background_4/layers/decor.png', 880 * backgroundCount2));
-//     level2.sky.push(new Sky('beach/game_background_4/layers/sky.png', 880 * backgroundCount2));
-//     level2.sky.push(new Sky('beach/game_background_4/layers/sun.png', 880 * backgroundCount2));
-// }

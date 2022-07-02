@@ -21,6 +21,10 @@ class Character extends MovableObject {
 
     walking_sound = new Audio('audio/walk.mp3');
 
+
+    /**
+     * draw the death animation
+     */
     dieAnimation = setInterval(() => {
         if (this.isDead() && this.dieTime > 0) {
             this.animationRepeat(this.imges.Image_Die);
@@ -36,18 +40,13 @@ class Character extends MovableObject {
         }
     }, 150);
 
-    // dieAnimation = setInterval(() => {
-    //     if (this.isDead() && this.dieTime > 0) {
-    //         this.animationRepeat(this.imges.Image_Die);
-    //         this.imges.Image_Die.splice(0, 1)
-    //         this.dieTime--;
-    //     }
-    //     if (this.dieTime == 0) {
-    //         this.dieAnimation = this.loadImage('pirat/png/1/1_entity_000_DIE_006.png');
-    //     }
-    // }, 150);
 
-
+    /**
+     * draw the silver character
+     * 
+     * @param {number} number - number of selected character
+     * @param {class} world - class of the world
+     */
     constructor(number, world) {
         super();
         this.world = world;
@@ -55,132 +54,220 @@ class Character extends MovableObject {
         this.energy = 100;
         this.selectCurrentCharacter();
         this.applyGravity(this.groundlevel);
+        this.loadDifferentImages();
+        this.animationCharater();
+        this.dieTime = this.imges.Image_Die.length;
+    }
 
-        this.setgroundLevel();
 
+    /**
+     * load the different images of the character
+     */
+    loadDifferentImages() {
         this.loadImagesArray(this.imges.Image_Walking);
         this.loadImagesArray(this.imges.Image_Jump);
         this.loadImagesArray(this.imges.Image_Idle);
         this.loadImagesArray(this.imges.Image_Die);
         this.loadImagesArray(this.imges.Image_Attack);
         this.loadImagesArray(this.imges.Image_Hurt);
-
-        this.animationCharater();
-        this.dieTime = this.imges.Image_Die.length;
     }
 
 
+    /**
+     * Selection of images according to the selected character
+     */
     selectCurrentCharacter() {
         if (this.characterSelection == 1) {
-            this.loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
-            this.imges = new Pirat_Image1();
+            this.selectFirstCharacter();
         } else if (this.characterSelection == 2) {
-            this.offSetWidthAttack = 0;
-            this.energy = 80;
-            this.loadImage('pirat/png/2/2_entity_000_IDLE_000.png');
-            this.imges = new Pirat_Image2();
+            this.selectSecondCharacter();
         } else if (this.characterSelection == 3) {
-            this.loadImage('pirat/png/3/Idle1.png');
-            this.imges = new Pirat_Image3();
-            this.width = 180;
-            this.height = 180;
-            this.offSetX = 65;
-            this.offSetY = 15;
-            this.offSetWidth = 85;
-            this.offSetHeight = 10;
+            this.selectThirdCharacter();
         }
     }
 
-    // selectCurrentCharacter() {
-    //     this.loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
-    //     this.imges = new Pirat_Image1();
-    // }
 
-
-    setgroundLevel() {
-        if (this.characterSelection == 3) {
-            this.groundlevel = 250;
-            this.applyGravity(this.groundlevel)
-        }
+    /**
+     * loading the first character
+     */
+    selectFirstCharacter() {
+        this.loadImage('pirat/png/1/1_entity_000_IDLE_000.png');
+        this.imges = new Pirat_Image1();
     }
+
+
+    /**
+     * loading the secound character
+     */
+    selectSecondCharacter() {
+        this.offSetWidthAttack = 0;
+        this.energy = 80;
+        this.loadImage('pirat/png/2/2_entity_000_IDLE_000.png');
+        this.imges = new Pirat_Image2();
+    }
+
+
+    /**
+     * loading the third character
+     */
+    selectThirdCharacter() {
+        this.loadImage('pirat/png/3/Idle1.png');
+        this.imges = new Pirat_Image3();
+        this.width = 180;
+        this.height = 180;
+        this.offSetX = 65;
+        this.offSetY = 15;
+        this.offSetWidth = 85;
+        this.offSetHeight = 10;
+        this.groundlevel = 250;
+    }
+
 
     /**
      * animation of the character
      */
     animationCharater() {
-        /**
-         * movement of the character and the background
-         */
+        this.movementsOfCharacter();
+        this.animationTheMovementsOfCharacter();
+    }
+
+    /**
+     * movements of the character   
+     */
+    movementsOfCharacter() {
         setInterval(() => {
             if (!this.isDead() && !this.gameWon) {
-                this.walking_sound.pause();
-                this.walking_sound.playbackRate = 2.4;
-                if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                    this.walkRight(this.speed);
-                    this.walking_sound.play();
-                    this.currentPosion = this.x;
-                }
-                if (this.world.keyboard.LEFT && this.x > -600) {
-                    this.walkleft(this.speed);
-                    this.walking_sound.play();
-                }
-                if (this.world.keyboard.SPACE && !this.isAboveGround(180)) {
-                    this.jump();
-                }
+                this.playWalkSound();
+                this.moveToTheRight();
+                this.moveToTheLeft();
+                this.jumpMovement();
                 this.world.camera_x = -this.x + 100;
+                this.goBoss();
             }
-
-            this.goBoss();
         }, 1000 / 60);
+    }
 
 
+    /**
+     * animate the various movements of the character
+     */
+    animationTheMovementsOfCharacter() {
         setInterval(() => {
-            this.jumpOnOrk();
-            if (this.attackEnemy) {
-                this.checkAttackCollusion();
-                this.checkAttackBossCollusion();
-            } else {
-                this.checkBossCollusion();
-                this.checkOrkCollusion();
-            }
-
+            this.checkEnemieCollusion();
             if (!this.isDead()) {
-                if (!this.isAboveGround() && !this.isDead() && !this.isHurt() && !this.gameWon) {
-                    this.animationRepeat(this.imges.Image_Idle);
-                }
-                if (this.isHurt() && !this.isDead() && !this.gameWon) {
-                    this.animationRepeat(this.imges.Image_Hurt);
-                }
-                if (this.world.keyboard.RIGHT && !this.isAboveGround(180) || this.world.keyboard.LEFT && !this.isAboveGround(180)) {
-
-                    this.animationRepeat(this.imges.Image_Walking); // walk animation
-                }
-                if (this.isAttack() && !this.isDead() && !this.gameWon) {
-                    this.animationRepeat(this.imges.Image_Attack);
-                }
-                if (this.isAboveGround(180)) {
-                    this.animationRepeat(this.imges.Image_Jump);
-                }
-                this.attack();
+                this.animateDifferentMovements();
             } else {
-                this.gameOver = true;
-                this.dieAnimation;
+                this.characterDies();
             }
         }, 120);
+    }
+
+
+    checkEnemieCollusion() {
+        // this.goBoss();
+        this.jumpOnOrk();
+        this.ckeckAttackOrDamage();
+    }
+
+
+    animateDifferentMovements() {
+        this.animationToIdle();
+        this.animationToHurt();
+        this.animationToWalk();
+        this.animationToAttack();
+        this.animationToJump();
+        this.attack();
+    }
+
+
+    characterDies() {
+        this.gameOver = true;
+        this.dieAnimation;
+    }
+
+
+    animationToIdle() {
+        if (!this.isAboveGround() && !this.isDead() && !this.isHurt() && !this.gameWon) {
+            this.animationRepeat(this.imges.Image_Idle);
+        }
+    }
+    animationToHurt() {
+        if (this.isHurt() && !this.isDead() && !this.gameWon) {
+            this.animationRepeat(this.imges.Image_Hurt);
+        }
+    }
+    animationToWalk() {
+        if (this.world.keyboard.RIGHT && !this.isAboveGround(this.groundlevel) || this.world.keyboard.LEFT && !this.isAboveGround(this.groundlevel)) {
+            this.animationRepeat(this.imges.Image_Walking);
+        }
+    }
+    animationToAttack() {
+        if (this.isAttack() && !this.isDead() && !this.gameWon) {
+            this.animationRepeat(this.imges.Image_Attack);
+        }
+    }
+    animationToJump() {
+        if (this.isAboveGround(this.groundlevel)) {
+            this.animationRepeat(this.imges.Image_Jump);
+        }
+    }
+
+
+
+    ckeckAttackOrDamage() {
+        if (this.attackEnemy) {
+            this.checkAttackCollusion();
+            this.checkAttackBossCollusion();
+        } else {
+            this.checkBossCollusion();
+            this.checkOrkCollusion();
+        }
+    }
+
+
+    moveToTheRight() {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            this.walkRight(this.speed);
+            this.walking_sound.play();
+            this.currentPosion = this.x;
+        }
+    }
+
+    moveToTheLeft() {
+        if (this.world.keyboard.LEFT && this.x > -600) {
+            this.walkleft(this.speed);
+            this.walking_sound.play();
+        }
+    }
+
+    jumpMovement() {
+        if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel)) {
+            this.jump();
+        }
+    }
+
+
+    playWalkSound() {
+        this.walking_sound.pause();
+        this.walking_sound.playbackRate = 2.4;
     }
 
 
     jumpOnOrk() {
         this.world.level.enemies.forEach((enemy) => {
             if (this.jumpsOnTop(enemy) && this.isAboveGround(this.groundlevel)) {
-
                 let i = this.world.level.enemies.indexOf(enemy);
                 this.world.level.enemies[i].setEnemyDead();
-                setTimeout(() => {
-                    this.world.level.enemies.splice(i, 1);
-                }, 20000);
+                this.removeDeadOrc(i);
             }
         });
+    }
+
+
+    removeDeadOrc(i) {
+        setTimeout(() => {
+            this.world.level.enemies.splice(i, 1);
+        }, 20000);
     }
 
 
@@ -200,9 +287,7 @@ class Character extends MovableObject {
             if (this.isCollidingAttackEnemies(enemy)) {
                 let i = this.world.level.enemies.indexOf(enemy);
                 this.world.level.enemies[i].setEnemyDead();
-                setTimeout(() => {
-                    this.world.level.enemies.splice(i, 1);
-                }, 20000);
+                this.removeDeadOrc(i);
             }
         });
     }
@@ -230,7 +315,7 @@ class Character extends MovableObject {
         if (this.x == 2450 && !this.world.level.endboss[0].bossWalk) {
             this.world.level.endboss[0].bossAttack = true;
             setTimeout(() => {
-                if (!this.isAboveGround(180)) {
+                if (!this.isAboveGround(this.groundlevel)) {
                     this.jump();
                 }
             }, 1300);
@@ -241,6 +326,25 @@ class Character extends MovableObject {
             }, 1700);
         }
     }
+
+
+    letCharacterJump() {
+        setTimeout(() => {
+            if (!this.isAboveGround(this.groundlevel)) {
+                this.jump();
+            }
+        }, 1300);
+    }
+
+
+    letBossGo() {
+        setTimeout(() => {
+            this.world.level.endboss[0].bossWalk = true;
+            this.world.level.endboss[0].bossAttack = false;
+            this.world.level.endboss[0].speed = 1.2;
+        }, 1700);
+    }
+
 
     collectTreasure() {
         this.treasure++;

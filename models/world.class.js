@@ -327,13 +327,10 @@ class World {
 
     gameWinning() {
         if (this.level.endboss[0].bossisDead && this.character.x > 2900) {
-
-            // console.log('gewonnen');
             this.character.gameWon = true;
             this.level.enemies.forEach(enemy => {
                 enemy.setEnemyDead();
             });
-            // this.removeOrks;
             setTimeout(() => {
                 document.getElementById('winScreen').classList.remove('d-none')
                 document.getElementById('winScreen').classList.add('d-flex')
@@ -418,11 +415,11 @@ class World {
     }
 
     undeadGame() {
-        console.log('Undead start');
-        document.getElementById('loseScreen').classList.add('d-none')
-        document.getElementById('loseScreen').classList.remove('d-flex')
+        // console.log('Undead start');
+        // document.getElementById('loseScreen').classList.add('d-none')
+        // document.getElementById('loseScreen').classList.remove('d-flex')
         this.level = level2;
-        world.camera_x = 0
+        world.camera_x = 100
         this.character.x = 0;
         this.character.treasure = 0;
         this.level.endboss[0].bossEnergy = 100;
@@ -433,8 +430,6 @@ class World {
         }
         this.showGrave = false;
         setTimeout(() => {
-            document.getElementById('loseScreen').classList.add('d-none')
-            document.getElementById('loseScreen').classList.remove('d-flex')
             this.showGrave = true;
         }, 10);
         setTimeout(() => {
@@ -442,7 +437,6 @@ class World {
 
         }, 1000);
         setTimeout(() => {
-            this.addOrk();
             this.showThunder = false;
             this.showGrave = false;
             this.characterSelectionWorld = 3;
@@ -451,6 +445,9 @@ class World {
             this.character.gameOver = false;
             this.character.dieTime = 7;
             this.character.energy = 100;
+            this.orkDistance = 400;
+            this.orkMultiplikator = 1;
+            this.addOrk();
         }, 2000);
     }
 

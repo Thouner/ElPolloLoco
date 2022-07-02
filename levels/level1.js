@@ -117,14 +117,11 @@ let backgroundCount = 5;
 let minusDistanceMultiplier = 1;
 
 timecountCloud();
-// timecountBackground();
 
 
-
-function timeOrk() {
-    level1.enemies.push(new Enemies(800 + this.orkDistance * this.orkMultiplikator));
-}
-
+/**
+ * interval for adding the clouds
+ */
 function timecountCloud() {
     setInterval(() => {
         addClouds();
@@ -133,23 +130,10 @@ function timecountCloud() {
     }, 15000);
 }
 
-// function timecountBackground() {
-//     setInterval(() => {
-//         addBackgrounds();
-//         backgroundCount += 1
-//     }, 5000);
-// }
 
-
+/**
+ * adding the next clouds
+ */
 function addClouds() {
     level1.clouds.push(new Cloud(880 * cloudCount - 282 * minusDistanceMultiplier));
 }
-
-// function addBackgrounds() {
-
-//     level1.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/sea.png', 880 * backgroundCount));
-//     level1.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/island.png', 880 * backgroundCount));
-//     level1.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/land.png', 880 * backgroundCount));
-//     level1.backgroundObjects.push(new BackgroundObject('beach/game_background_2/layers/decor.png', 880 * backgroundCount));
-//     level1.sky.push(new Sky('beach/game_background_2/layers/sky.png', 880 * backgroundCount));
-// }

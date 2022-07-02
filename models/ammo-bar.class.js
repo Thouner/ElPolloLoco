@@ -3,8 +3,6 @@ class AmmoBar extends MovableObject {
     y = 100;
     width = 40;
     height = 40;
-
-
     IMAGES_Ammo = [
         'barImages/Silver/Silver_23.png',
         'barImages/Silver/Silver_24.png',
@@ -17,6 +15,11 @@ class AmmoBar extends MovableObject {
         'barImages/Silver/Silver_21.png',
         'barImages/Silver/Silver_22.png',
     ];
+
+
+    /**
+     * draw the silver coin
+     */
     constructor() {
         super();
         this.loadImage('barImages/Silver/Silver_23.png');
@@ -24,9 +27,12 @@ class AmmoBar extends MovableObject {
         this.animationCoin();
     }
 
+
+    /**
+     * animate the images
+     */
     animationCoin() {
         setInterval(() => {
-
             this.animationRepeat(this.IMAGES_Ammo);
         }, 200);
 
