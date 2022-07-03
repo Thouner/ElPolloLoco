@@ -1,22 +1,22 @@
 class MovableObject extends DrawableObject {
-
     otherDierection = false;
     speedY = 0;
     acceleration = 2.5;
     enemyIndex = Math.floor(Math.random() * (3 - 1 + 1) + 1);
     world;
-    // characterSelection = 2;
-
     lastHit = 0;
     lastAtack = 0;
     attackEnemy = false;
     attackTime;
-
-
     energy;
 
-    applyGravity(groundHight) {
 
+    /**
+     * falling of the object when above the ground
+     * 
+     * @param {number} groundHight - height on the y-axis at which the object stops falling
+     */
+    applyGravity(groundHight) {
         setInterval(() => {
             if (this.isAboveGround(groundHight) || this.speedY > 0) {
                 this.y -= this.speedY;
@@ -27,6 +27,12 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * query whether the object is above the ground
+     * 
+     * @param {number} groundHight - height on the y-axis at which the object stops falling
+     * @returns - true if y-value is above ground or the enemy  is dead
+     */
     isAboveGround(groundHight) {
         if (this instanceof Enemies || Endboss) {
             if (this.enemyDead) {
@@ -37,6 +43,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * damage is inflicted
+     * 
+     * @param {number} damages - amount of damage dealt
+     */
     hit(damages) {
         this.energy -= damages;
         if (this.energy < 0) {
@@ -47,6 +58,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * query the time after the last damage
+     * 
+     * @returns - true if the last damage was less than a second ago
+     */
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
@@ -54,6 +70,9 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * deals damage to the enemy when attacked
+     */
     attack() {
         if (this.world.keyboard.STRG) {
             if (!this.attackTime) {
@@ -66,10 +85,12 @@ class MovableObject extends DrawableObject {
                 }
             }
         }
-
     }
 
 
+    /**
+     * deals damage to the enemy for 1 second
+     */
     setAttackTimer() {
         this.attackTime = Date.now();
         this.attackEnemy = true;
@@ -80,22 +101,37 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * query when the last attack was carried out
+     * 
+     * @returns true if last attack was less than one second ago
+     */
     isAttack() {
         let timepassed = new Date().getTime() - this.lastAtack;
         timepassed = timepassed / 1000;
-
         return timepassed < 1.0;
     }
 
 
+    /**
+     * query the level of energy
+     * 
+     * @returns - true if energy is zero
+     */
     isDead() {
         return this.energy == 0;
     }
 
 
     // character.isColliding(enemie);
-    isCollidingEnemies(mo) {
 
+    /**
+     * query if the character collides with an enemy
+     * 
+     * @param {class} mo - class of the enemy or boss
+     * @returns - true if character collides with an enemy or boss
+     */
+    isCollidingEnemies(mo) {
         if (
             // no collision
             this.x + this.offSetX > mo.x + mo.offSetX + mo.width - mo.offSetWidth ||
@@ -109,6 +145,13 @@ class MovableObject extends DrawableObject {
         }
     }
 
+
+    /**
+     * Query if the character collides with an enemy when attacking
+     * 
+     * @param {class} mo - class of the enemy or boss
+     * @returns - true if the character collides with an enemy or boss when attacking
+     */
     isCollidingAttackEnemies(mo) {
         if (
             // no collision
@@ -125,24 +168,12 @@ class MovableObject extends DrawableObject {
     }
 
 
-    // // character.isColliding(treaser);
-    // isCollidingThings(mo) {
-
-    //     if ((this.x + this.offSetX) + (this.width - this.offSetWidth) > mo.x + mo.offSetX &&
-    //         (this.y + this.offSetY) + (this.height - this.offSetHeight) > mo.y + mo.offSetY &&
-    //         this.x + this.offSetX < mo.x + mo.offSetX + mo.width - mo.offSetWidth &&
-    //         this.y + this.offSetY < mo.y + mo.offSetY + mo.height - mo.offSetHeight) {
-    //         // collision detected!
-    //         return true;
-
-    //     } else {
-    //         // no collision
-    //         return false;
-    //     }
-
-    // }
-
-
+    /**
+     * Query if the character collides with an enemy when jumping
+     * 
+     * @param {class} mo - class of the enemy or boss
+     * @returns - True if the character collides with an enemy or boss when jumping
+     */
     jumpsOnTop(mo) {
         return this.y + this.offSetY + this.height - this.offSetHeight > mo.y + mo.offSetY &&
             this.y + this.offSetY + this.height - this.offSetHeight < mo.y + mo.offSetY + mo.height - mo.offSetHeight &&
@@ -162,6 +193,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * movement of the object to the right
+     * 
+     * @param {number} walkspeed - distance traveled on the x axis
+     */
     walkRight(walkspeed) {
         this.x += walkspeed;
         this.xBox += walkspeed;
@@ -169,6 +205,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * movement of the object to the left
+     * 
+     * @param {number} walkspeed - distance traveled on the x axis
+     */
     walkleft(walkspeed) {
         this.x -= walkspeed;
         this.xBox -= walkspeed;
@@ -176,6 +217,9 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * object is moved up on the y axis
+     */
     jump() {
         this.speedY = 32;
     }

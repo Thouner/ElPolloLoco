@@ -3,8 +3,6 @@ class Thunder extends MovableObject {
     y = 0;
     width = 140;
     height = 440;
-
-
     IMAGES_Thunder = [
         'thunder/Explosion_1.png',
         'thunder/Explosion_2.png',
@@ -14,9 +12,9 @@ class Thunder extends MovableObject {
     ];
 
 
-    percentage = 100;
-
-
+    /**
+     * draw the thunder
+     */
     constructor() {
         super();
         this.loadImage('thunder/Explosion_5.png');
@@ -25,6 +23,9 @@ class Thunder extends MovableObject {
     }
 
 
+    /**
+     * animate the images
+     */
     animationThunder() {
         setInterval(() => {
 

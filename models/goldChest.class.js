@@ -10,6 +10,9 @@ class goldChest extends MovableObject {
 
     /**
      * draw the chest
+     * 
+     * @param {*} x - positioning on the x axis
+     * @param {*} y - positioning on the y axis
      */
     constructor(x, y) {
         super().loadImage('Goldchest/treasure-chest-152499_640.png');

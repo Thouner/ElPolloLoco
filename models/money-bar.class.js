@@ -3,10 +3,7 @@ class MoneyBar extends MovableObject {
     y = 55;
     width = 40;
     height = 40;
-
-
     IMAGES_Money = [
-
         'barImages/Gold/Gold_2.png',
         'barImages/Gold/Gold_3.png',
         'barImages/Gold/Gold_4.png',
@@ -20,6 +17,9 @@ class MoneyBar extends MovableObject {
     ];
 
 
+    /**
+     * draw the gold coin
+     */
     constructor() {
         super();
         this.loadImage('barImages/Gold/Gold_2.png');
@@ -27,6 +27,10 @@ class MoneyBar extends MovableObject {
         this.animationCoin();
     }
 
+
+    /**
+     * animate the images
+     */
     animationCoin() {
         setInterval(() => {
 
@@ -34,5 +38,4 @@ class MoneyBar extends MovableObject {
         }, 100);
 
     }
-
 }

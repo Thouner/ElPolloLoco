@@ -12,16 +12,6 @@ class Ork_Image2 {
         'ork/2/ORK_02_WALK_009.png',
     ];
     Image_Die = [
-        // 'ork/2/ORK_02_HURT_000.png',
-        // 'ork/2/ORK_02_HURT_001.png',
-        // 'ork/2/ORK_02_HURT_002.png',
-        // 'ork/2/ORK_02_HURT_003.png',
-        // 'ork/2/ORK_02_HURT_004.png',
-        // 'ork/2/ORK_02_HURT_005.png',
-        // 'ork/2/ORK_02_HURT_006.png',
-        // 'ork/2/ORK_02_HURT_007.png',
-        // 'ork/2/ORK_02_HURT_008.png',
-        // 'ork/2/ORK_02_HURT_009.png',
         'ork/2/ORK_02_DIE_000.png',
         'ork/2/ORK_02_DIE_001.png',
         'ork/2/ORK_02_DIE_002.png',

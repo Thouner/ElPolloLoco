@@ -126,20 +126,36 @@ class Endboss extends MovableObject {
     animationEnemie() {
         setInterval(() => {
             if (!this.enemyDead) {
-                if (!this.bossAttack && this.speed > 0 && this.bossEnergy >= 51) {
-                    this.animationRepeat(this.imges.Image_Walking);
-                } else if (!this.bossAttack && this.speed > 0 && this.bossEnergy < 51) {
-                    this.animationRepeat(this.imges.Image_Run);
-                    this.speed = 3;
-                }
-                if (this.bossAttack && this.speed == 0) {
-                    this.speed = 0
-                    this.animationRepeat(this.imges.Image_Attack);
-                }
+                this.bossIsWalkOrRun();
+                this.bossIsAttacking();
             } else {
                 this.bossDies();
             }
         }, 200);
+    }
+
+
+    /**
+     * Increase boss speed when power is below 51%
+     */
+    bossIsWalkOrRun() {
+        if (!this.bossAttack && this.speed > 0 && this.bossEnergy >= 51) {
+            this.animationRepeat(this.imges.Image_Walking);
+        } else if (!this.bossAttack && this.speed > 0 && this.bossEnergy < 51) {
+            this.animationRepeat(this.imges.Image_Run);
+            this.speed = 3;
+        }
+    }
+
+
+    /**
+     * initiate attack animation
+     */
+    bossIsAttacking() {
+        if (this.bossAttack && this.speed == 0) {
+            this.speed = 0
+            this.animationRepeat(this.imges.Image_Attack);
+        }
     }
 
 

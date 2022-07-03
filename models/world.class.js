@@ -27,6 +27,13 @@ class World {
     backgroundWidthToAdd1png = 880;
 
 
+    /**
+     * draw the world
+     * 
+     * @param {string} canvas - Content for the canvas
+     * @param {class} keyboard - class for the keys or buttons that are pressed
+     * @param {number} number - number of selected character
+     */
     constructor(canvas, keyboard, number) {
         this.ctx = canvas.getContext('2d');
         this.characterSelectionWorld = number;
@@ -36,67 +43,25 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollekting();
+        this.checkInteraction();
         this.keyboard.touchPress();
     }
 
 
     /**
-     * pass "world" in character
+     * inserting "world" in another class
      */
     setWorld() {
-        // this.character.world = this;
         this.level.endboss.world = this;
         this.movableObject = this;
     }
 
 
-    checkWindowsize() {
-        if (window.innerHeight < 495 || window.innerWidth < 880) {
-            document.getElementById('topBar_container').classList.remove('d-none');
-            document.getElementById('topBar_container').classList.add('d-flex');
-            document.getElementById('bottumBar_container').classList.remove('d-none');
-            document.getElementById('bottumBar_container').classList.add('d-flex');
-        }
-        if (window.innerHeight > 495 || window.innerWidth > 880) {
-            document.getElementById('topBar_container').classList.add('d-none');
-            document.getElementById('topBar_container').classList.remove('d-flex');
-            document.getElementById('bottumBar_container').classList.add('d-none');
-            document.getElementById('bottumBar_container').classList.remove('d-flex');
-        }
-    }
-
-
-    checkCollekting() {
+    checkInteraction() {
         setInterval(() => {
-            this.level.treasure.forEach((treas, index) => {
-                if (this.character.isCollidingEnemies(treas)) {
-                    this.character.collectTreasure();
-                    this.level.treasure.splice(index, 1);
-                }
-            });
-
-
-            this.level.bomb.forEach((bomb, index) => {
-                if (this.character.isCollidingEnemies(bomb)) {
-                    this.character.collectBombs();
-                    this.level.bomb.splice(index, 1);
-                }
-            });
-
-
-            //throw the bomb
-            if (this.keyboard.SHIFT && !this.character.isDead()) {
-                if (!this.throwBombTime) {
-                    this.throwThebomb();
-                } else {
-                    let delta = Date.now();
-                    delta = delta - this.throwBombTime;
-                    if (delta > 2000) {
-                        this.throwThebomb();
-                    }
-                }
-            }
+            this.collectCoins();
+            this.collectBomb();
+            this.timerForBomb();
             this.addGrave();
             this.setFullScreen();
             this.goReturn();
@@ -108,6 +73,55 @@ class World {
 
     }
 
+
+    /**
+     * collect the coins
+     */
+    collectCoins() {
+        this.level.treasure.forEach((treas, index) => {
+            if (this.character.isCollidingEnemies(treas)) {
+                this.character.collectTreasure();
+                this.level.treasure.splice(index, 1);
+            }
+        });
+    }
+
+
+    /**
+     * collect the bombs
+     */
+    collectBomb() {
+        this.level.bomb.forEach((bomb, index) => {
+            if (this.character.isCollidingEnemies(bomb)) {
+                this.character.collectBombs();
+                this.level.bomb.splice(index, 1);
+            }
+        });
+
+    }
+
+
+    /**
+     * timer for next bomb
+     */
+    timerForBomb() {
+        if (this.keyboard.SHIFT && !this.character.isDead()) {
+            if (!this.throwBombTime) {
+                this.throwThebomb();
+            } else {
+                let delta = Date.now();
+                delta = delta - this.throwBombTime;
+                if (delta > 2000) {
+                    this.throwThebomb();
+                }
+            }
+        }
+    }
+
+
+    /**
+     * throw the next bomb
+     */
     throwThebomb() {
         if (this.character.bombs > 0) {
             this.character.minusBombs();
@@ -118,66 +132,51 @@ class World {
 
     }
 
+
     /**
      * draw the world
      */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height) //erase the world
-
-
-        this.addObjectsToMap(this.level.sky) //drawing the clouds
-        this.addObjectsToMap(this.level.clouds) //drawing the clouds
-
+        this.addSkyObjekts();
         this.ctx.translate(this.camera_x, 0); //movement of the camera
+        this.objectsThatMove();
+        this.ctx.translate(-this.camera_x, 0); //back movement of the camera
+        this.addBars();
+        this.selfDraw();
+    }
 
-        this.addObjectsToMap(this.level.backgroundObjects); //drawing the backgrounds
-        this.addObjectsToMap(this.level.treasure); //drawing the treasure
-        this.addObjectsToMap(this.level.bomb); //drawing the bomb
-        this.addObjectsToMap(this.level.goldChest); //drawing the bomb
-        this.addObjectsToMap(this.level.leftoverMeat); //drawing the meat
+
+    /**
+     * add the objects that move
+     */
+    objectsThatMove() {
+        this.addLevelObjekts();
         this.addObjectsToMap(this.throwableObject); //drawing the throw bomb
-        if (!this.showGrave) {
-            this.addToMapCharacter(this.character) //drawing the character
-        }
-        this.addObjectsToMap(this.level.enemies); //drawing the enemies
-        this.addObjectsToMap(this.level.endboss); //drawing the endboss
+        this.addCharacter();
+        this.addEnemies();
+        this.showInsultBar();
+        this.addTheGrave();
+        this.addGold();
+        this.addthunder();
+    }
 
 
-        if (this.character.isAttack()) {
-            if (!this.randomNumber)
-                this.randomNumber = Math.floor(Math.random() * (15 - 0 + 1) + 0);
-            this.drawInsultBar();
-        } else {
-            this.randomNumber = null;
-        }
+    /**
+     * adding the tombstone
+     */
+    addTheGrave() {
         if (this.showGrave) {
             this.graveyard = new Graveyard(this.character.x, this.character.y);
             this.addToMap(this.graveyard); //drawing the graveyard
         }
-        if (this.character.gameWon) {
-            this.winMoney = new MacGuffin(this.character.x, this.character.y);
-            this.addToMap(this.winMoney); //drawing the graveyard
-        }
-        if (this.showThunder) {
-            this.addToMap(this.thunder); //drawing the thunder
-        }
-
-        this.ctx.translate(-this.camera_x, 0); //back movement of the camera
-
-        this.drawStatusBar(this.character.energy);
-        this.addToMap(this.statusBar);
-
-        this.drawNumber(85, this.character.treasure, '#ECBC00');
-        this.addToMap(this.moneyBar);
-
-        this.drawNumber(130, this.character.bombs, '#6B98A7');
-        this.addToMap(this.ammoBar);
-
-        this.drawBossStatusBar(this.level.endboss[0].bossEnergy);
+    }
 
 
-
-        // draw() wird immer wieder aufgerufen
+    /**
+     * draw() is called again and again
+     */
+    selfDraw() {
         let self = this;
         requestAnimationFrame(function() {
             self.draw();
@@ -185,14 +184,105 @@ class World {
     }
 
 
+    /**
+     * adding the sky
+     */
+    addSkyObjekts() {
+        this.addObjectsToMap(this.level.sky) //drawing the clouds
+        this.addObjectsToMap(this.level.clouds) //drawing the clouds
+
+    }
+
+
+    /**
+     * add the character
+     */
+    addCharacter() {
+        if (!this.showGrave) {
+            this.addToMapCharacter(this.character) //drawing the character
+        }
+    }
+
+
+    /**
+     * add the enemies
+     */
+    addEnemies() {
+        this.addObjectsToMap(this.level.enemies); //drawing the enemies
+        this.addObjectsToMap(this.level.endboss); //drawing the endboss
+    }
+
+
+    /**
+     * add the level objects
+     */
+    addLevelObjekts() {
+        this.addObjectsToMap(this.level.backgroundObjects); //drawing the backgrounds
+        this.addObjectsToMap(this.level.treasure); //drawing the treasure
+        this.addObjectsToMap(this.level.bomb); //drawing the bomb
+        this.addObjectsToMap(this.level.goldChest); //drawing the bomb
+        this.addObjectsToMap(this.level.leftoverMeat); //drawing the meat
+    }
+
+
+    /**
+     * add the insult bar
+     */
+    showInsultBar() {
+        if (this.character.isAttack()) {
+            if (!this.randomNumber)
+                this.randomNumber = Math.floor(Math.random() * (15 - 0 + 1) + 0);
+            this.drawInsultBar();
+        } else {
+            this.randomNumber = null;
+        }
+    }
+
+
+    /**
+     * add the gold when winning the level
+     */
+    addGold() {
+        if (this.character.gameWon) {
+            this.winMoney = new MacGuffin(this.character.x, this.character.y);
+            this.addToMap(this.winMoney); //drawing the graveyard
+        }
+    }
+
+
+    /**
+     *  add the thunder
+     */
+    addthunder() {
+        if (this.showThunder) {
+            this.addToMap(this.thunder); //drawing the thunder
+        }
+    }
+
+
+    /**
+     * add the different bars
+     */
+    addBars() {
+        this.drawStatusBar(this.character.energy);
+        this.addToMap(this.statusBar);
+        this.drawNumber(85, this.character.treasure, '#ECBC00');
+        this.addToMap(this.moneyBar);
+        this.drawNumber(130, this.character.bombs, '#6B98A7');
+        this.addToMap(this.ammoBar);
+        this.drawBossStatusBar(this.level.endboss[0].bossEnergy);
+    }
+
+
+    /**
+     * add the orcs
+     */
     addOrk() {
         if (!this.level.endboss[0].bossWalk && this.level.enemies.length < 10) {
             this.level.enemies.push(new Enemies(400 + this.orkDistance * this.orkMultiplikator));
             this.orkMultiplikator += 1;
         }
-
     }
-
 
 
     /**
@@ -208,12 +298,11 @@ class World {
 
 
     /**
-     * object drawn in the world
+     * object drawn in the world and turn it over
      * 
      * @param {class} mo - class to draw in the world
      */
     addToMap(mo) {
-
         if (mo.otherDierection) {
             this.flipImage(mo);
         }
@@ -222,11 +311,15 @@ class World {
         if (mo.otherDierection) {
             this.flipImageBack(mo);
         }
-
     }
 
-    addToMapCharacter(mo) {
 
+    /**
+     * character drawn in the world and turn him over
+     * 
+     * @param {class} mo - class to draw in the world
+     */
+    addToMapCharacter(mo) {
         if (mo.otherDierection) {
             this.flipCharacter(mo);
         }
@@ -235,45 +328,72 @@ class World {
         if (mo.otherDierection) {
             this.flipImageBack(mo);
         }
-
     }
 
-    drawStatusBar(widthText) {
+
+    /**
+     * draw of character's life bar
+     * 
+     * @param {number} energy - energy of the character
+     */
+    drawStatusBar(energy) {
         if (this.character.characterSelection == 2) {
-            this.ctx.fillStyle = '#ffffff';
-            this.ctx.fillRect(30, 12.5, 181, 35);
-
-            this.ctx.strokeStyle = 'D84920';
-            this.ctx.strokeRect(30, 12.5, 181, 35);
-
-            if (widthText > 66) {
-                this.ctx.fillStyle = 'green';
-            } else if (widthText > 33 && widthText <= 66) {
-                this.ctx.fillStyle = 'orange';
-            } else {
-                this.ctx.fillStyle = 'red';
-            }
-            this.ctx.fillRect(30, 17.5, (widthText * 2.2), 25)
+            this.character2StatusBar(energy);
         } else {
-            this.ctx.fillStyle = '#ffffff';
-            this.ctx.fillRect(30, 12.5, 225, 35);
-
-            this.ctx.strokeStyle = '#D84920';
-            this.ctx.strokeRect(30, 12.5, 225, 35);
-
-            if (widthText > 66) {
-                this.ctx.fillStyle = 'green';
-            } else if (widthText > 33 && widthText <= 66) {
-                this.ctx.fillStyle = 'orange';
-            } else {
-                this.ctx.fillStyle = 'red';
-            }
-
-            this.ctx.fillRect(30, 17.5, (widthText * 2.2), 25)
+            this.character1And3StatusBar(energy);
         }
     }
 
-    drawInsultBar(text) {
+
+    /**
+     * draw Second character's life bar
+     * 
+     * @param {number} energy - energy of the character
+     */
+    character2StatusBar(energy) {
+        this.ctx.fillStyle = '#ffffff';
+        this.ctx.fillRect(30, 12.5, 181, 35);
+        this.ctx.strokeStyle = 'D84920';
+        this.ctx.strokeRect(30, 12.5, 181, 35);
+        this.changeBarColor(energy);
+    }
+
+
+    /**
+     * draw first and third character life bars
+     * 
+     * @param {number} energy - energy of the character
+     */
+    character1And3StatusBar(energy) {
+        this.ctx.fillStyle = '#ffffff';
+        this.ctx.fillRect(30, 12.5, 225, 35);
+        this.ctx.strokeStyle = '#D84920';
+        this.ctx.strokeRect(30, 12.5, 225, 35);
+        this.changeBarColor(energy);
+    }
+
+
+    /**
+     * changing the color of the life bar
+     * 
+     * @param {number} energy - energy of the character
+     */
+    changeBarColor(energy) {
+        if (energy > 66) {
+            this.ctx.fillStyle = 'green';
+        } else if (energy > 33 && energy <= 66) {
+            this.ctx.fillStyle = 'orange';
+        } else {
+            this.ctx.fillStyle = 'red';
+        }
+        this.ctx.fillRect(30, 17.5, (energy * 2.2), 25)
+    }
+
+
+    /**
+     * draw the insultbar
+     */
+    drawInsultBar() {
         let randomText = this.insult.insults[this.randomNumber];
         let textLength = randomText.length;
         this.ctx.fillStyle = 'rgba(255,255,255,0.7)';
@@ -286,25 +406,42 @@ class World {
     }
 
 
-    drawBossStatusBar(widthText) {
+    /**
+     * draw of the boss's life bar
+     * 
+     * @param {number} energy - energy of the character
+     */
+    drawBossStatusBar(energy) {
         if (this.level.endboss[0].bossWalk) {
             this.ctx.fillStyle = '#ffffff';
             this.ctx.fillRect(this.canvas.width - 30, 12.5, -225, 35);
             this.ctx.strokeStyle = 'red';
             this.ctx.strokeRect(this.canvas.width - 30, 12.5, -225, 35);
             this.ctx.fillStyle = '#000'
-            this.ctx.fillRect(this.canvas.width - 30, 17.5, -(widthText * 2.2), 25)
+            this.ctx.fillRect(this.canvas.width - 30, 17.5, -(energy * 2.2), 25)
         }
     }
 
 
-    drawNumber(y, text, color) {
+    /**
+     * 
+     * 
+     * @param {number} y - positioning on the x axis
+     * @param {number} number - number to be displayed
+     * @param {string} color - color of the number 
+     */
+    drawNumber(y, number, color) {
         this.ctx.font = "30px Comic Sans MS";
         this.ctx.fillStyle = color;
-        this.ctx.fillText(text, 70, y);
+        this.ctx.fillText(number, 70, y);
     }
 
 
+    /**
+     * rotate object
+     * 
+     * @param {class} mo - current class to rotate
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -312,6 +449,12 @@ class World {
         mo.x = mo.x * -1;
     }
 
+
+    /**
+     * rotate character
+     * 
+     * @param {class} mo - current class to rotate
+     */
     flipCharacter(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width - 90, 0);
@@ -319,12 +462,21 @@ class World {
         mo.x = mo.x * -1;
     }
 
+
+    /**
+     * rotate object back
+     * 
+     * @param {class} mo - current class to rotate
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
 
 
+    /**
+     * game was won
+     */
     gameWinning() {
         if (this.level.endboss[0].bossisDead && this.character.x > 2900) {
             this.character.gameWon = true;
@@ -332,45 +484,67 @@ class World {
                 enemy.setEnemyDead();
             });
             setTimeout(() => {
-                document.getElementById('winScreen').classList.remove('d-none')
-                document.getElementById('winScreen').classList.add('d-flex')
-                document.getElementById('coinNumber').innerHTML = `You have ${this.character.treasure} Points`;
-
+                this.displayWinScreen();
             }, 1000);
         }
     }
 
-    // removeOrks = setTimeout(() => {
-    //     this.level.enemies = [];
-    //     setTimeout(() => {
-    //         clearTimeout(removeOrks);
-    //     }, );
-    // }, 20000);
 
+    /**
+     * display the winscreen
+     */
+    displayWinScreen() {
+        document.getElementById('winScreen').classList.remove('d-none')
+        document.getElementById('winScreen').classList.add('d-flex')
+        document.getElementById('coinNumber').innerHTML = `You have ${this.character.treasure} Points`;
+    }
+
+
+    /**
+     * let the boss attack and gets anrage
+     */
     attackBoss() {
         if (!this.level.endboss[0].bossisDead && this.level.endboss[0].x - this.character.x <= -15 && this.character.energy > 0) {
-            this.level.endboss[0].bossAttack = true;
-            this.level.endboss[0].speed = 0;
-            setTimeout(() => {
-                if (this.level.endboss[0].x - this.character.x <= -15) {
-                    this.character.hit(2);
-                }
-            }, 1300);
+            this.bossAttackCharacter();
         } else if (!this.level.endboss[0].bossisDead && this.level.endboss[0].bossWalk) {
-            setTimeout(() => {
-                this.level.endboss[0].bossWalk = true;
-                this.level.endboss[0].bossAttack = false;
-                if (this.level.endboss[0].bossEnergy >= 51) {
-                    this.level.endboss[0].speed = 0.7;
-                } else if (this.level.endboss[0].bossEnergy < 51) {
-                    this.level.endboss[0].speed = 2;
-                }
-
-            }, 1700);
+            this.increaseBossSpeed();
         }
     }
 
 
+    /**
+     * boss attacks character when standing in front of him
+     */
+    bossAttackCharacter() {
+        this.level.endboss[0].bossAttack = true;
+        this.level.endboss[0].speed = 0;
+        setTimeout(() => {
+            if (this.level.endboss[0].x - this.character.x <= -15) {
+                this.character.hit(2);
+            }
+        }, 1300);
+    }
+
+
+    /**
+     * Increase boss speed when power is below 51%
+     */
+    increaseBossSpeed() {
+        setTimeout(() => {
+            this.level.endboss[0].bossWalk = true;
+            this.level.endboss[0].bossAttack = false;
+            if (this.level.endboss[0].bossEnergy >= 51) {
+                this.level.endboss[0].speed = 0.7;
+            } else if (this.level.endboss[0].bossEnergy < 51) {
+                this.level.endboss[0].speed = 2;
+            }
+        }, 1700);
+    }
+
+
+    /**
+     * enemy starts movement
+     */
     goEnemies() {
         if (this.character.x > 0) {
             this.level.enemies.forEach(enemy => {
@@ -380,6 +554,9 @@ class World {
     }
 
 
+    /**
+     * reload the page
+     */
     goReturn() {
         if (this.keyboard.RETURN) {
             location.reload()
@@ -387,55 +564,112 @@ class World {
 
     }
 
+
+    /**
+     * make the game fullscreen
+     */
     setFullScreen() {
         if (this.keyboard.F) {
             document.getElementById('canvas_container').requestFullscreen();
         }
     }
 
+
+    /**
+     * character has died
+     */
     addGrave() {
         if (this.character.gameOver && !this.showGrave) {
             if (this.characterSelectionWorld == 3) {
-                setTimeout(() => {
-                    document.getElementById('loseScreen').classList.remove('d-none')
-                    document.getElementById('loseScreen').classList.add('d-flex')
-                    document.getElementById('undead').classList.add('d-none')
-                }, 1500);
+                this.openLoseScreenUndead();
             } else {
-                setTimeout(() => {
-                    this.showGrave = true;
-                }, 1200);
-
-                setTimeout(() => {
-                    document.getElementById('loseScreen').classList.remove('d-none')
-                    document.getElementById('loseScreen').classList.add('d-flex')
-                }, 2000);
+                this.openLoseScreenNormal();
             }
         }
     }
 
+
+    /**
+     * opens losescreen at character three
+     */
+    openLoseScreenUndead() {
+        setTimeout(() => {
+            document.getElementById('loseScreen').classList.remove('d-none')
+            document.getElementById('loseScreen').classList.add('d-flex')
+            document.getElementById('undead').classList.add('d-none')
+        }, 1500);
+    }
+
+
+    /**
+     * opens normal losescreen
+     */
+    openLoseScreenNormal() {
+        setTimeout(() => {
+            this.showGrave = true;
+        }, 1200);
+        setTimeout(() => {
+            document.getElementById('loseScreen').classList.remove('d-none')
+            document.getElementById('loseScreen').classList.add('d-flex')
+        }, 2000);
+    }
+
+
+    /**
+     * start the undead game
+     */
     undeadGame() {
-        // console.log('Undead start');
-        // document.getElementById('loseScreen').classList.add('d-none')
-        // document.getElementById('loseScreen').classList.remove('d-flex')
+        this.initiateNextLevel();
+        this.showTheTombstone();
+        this.showTheThunder();
+        this.startUndeadGame();
+    }
+
+
+    /**
+     * initiate the next level
+     */
+    initiateNextLevel() {
         this.level = level2;
         world.camera_x = 100
         this.character.x = 0;
         this.character.treasure = 0;
         this.level.endboss[0].bossEnergy = 100;
         this.level.endboss[0].bossWalk = false;
-        this.level.endboss[0].bossWalk = false;
         if (this.character.bombs < 5) {
             this.character.bombs = 5;
         }
         this.showGrave = false;
+        document.getElementById('loseScreen').classList.add('d-none')
+        document.getElementById('loseScreen').classList.remove('d-flex')
+    }
+
+
+    /**
+     * diplay the tombstone
+     */
+    showTheTombstone() {
         setTimeout(() => {
             this.showGrave = true;
         }, 10);
+        this.showTheThunder
+    }
+
+
+    /**
+     * diplay the lightning
+     */
+    showTheThunder() {
         setTimeout(() => {
             this.showThunder = true;
-
         }, 1000);
+    }
+
+
+    /**
+     * resetting the variables for the next level
+     */
+    startUndeadGame() {
         setTimeout(() => {
             this.showThunder = false;
             this.showGrave = false;
@@ -445,11 +679,11 @@ class World {
             this.character.gameOver = false;
             this.character.dieTime = 7;
             this.character.energy = 100;
+            this.level.enemies = [];
             this.orkDistance = 400;
             this.orkMultiplikator = 1;
             this.addOrk();
         }, 2000);
     }
-
 
 }

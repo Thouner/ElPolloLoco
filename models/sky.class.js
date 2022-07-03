@@ -5,7 +5,7 @@ class Sky extends MovableObject {
 
 
     /**
-     * draw all background images
+     * draw sky background image
      * 
      * @param {string} imagePath - the path to the image
      * @param {number} x - positioning on the x axis
@@ -13,7 +13,5 @@ class Sky extends MovableObject {
     constructor(imagePath, x) {
         super().loadImage(imagePath);
         this.x = x;
-
-
     }
 }

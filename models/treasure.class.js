@@ -8,6 +8,11 @@ class Treasure extends MovableObject {
     offSetHeight = 0;
 
 
+    /**
+     * 
+     * @param {number} x - positioning on the x axis
+     * @param {number} y - positioning on the y axis
+     */
     constructor(x, y) {
         super().loadImage('treasures/3.png');
         this.x = x;

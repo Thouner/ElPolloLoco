@@ -1,21 +1,13 @@
 class Enemies extends MovableObject {
-    // height = 300;
     height = Math.floor(Math.random() * (350 - 320 + 1) + 320);
-    // width = 300;
     width = Math.floor(Math.random() * (350 - 320 + 1) + 320);
-    // x = 720 + Math.random() * 160;
     x = Math.floor(Math.random() * (850 - 720 + 1) + 720);
-    // y = 180 + Math.random() * 30;
     y = Math.floor(Math.random() * (160 - 140 + 1) + 140);
-
     imges;
     enemyDead = false;
     dieTime = 10;
     attackTime = 10;
-
     enemyWalk = false;
-
-
     speed = 0.5 + Math.random() * 0.7;
     // walking_sound = new Audio('audio/chicken.mp3');
 
@@ -24,12 +16,44 @@ class Enemies extends MovableObject {
     offSetWidth = 250;
     offSetHeight = 170;
 
+
+    /**
+     * draw the death animation
+     */
     dieAnimationEnemy = setInterval(() => {
         if (this.enemyDead && this.dieTime > 0) {
             this.animationRepeat(this.imges.Image_Die);
             this.imges.Image_Die.splice(0, 1)
             this.dieTime--;
         }
+        this.showCorpse();
+    }, 100);
+
+
+    /**
+     * draw the enemy
+     * 
+     * @param {number} x - positioning on the x axis
+     */
+    constructor(x) {
+        super();
+        this.loadImage('ork/1/ORK_01_WALK_000.png');
+        this.x = x;
+        this.selectCurrentImages();
+        this.otherDierection = true;
+        this.loadDifferentImages();
+        this.animationEnemie();
+        // this.dieTime = this.imges.Image_Die.lenght;
+        // this.walking_sound.volume = 0.2;
+        // this.walking_sound.loop = true;
+        // this.walking_sound.play();
+    }
+
+
+    /**
+     * view the corpse depending on the respective images
+     */
+    showCorpse() {
         if (this.dieTime == 0 && this.enemyIndex == 1) {
             this.dieAnimation = this.loadImage('ork/1/ORK_01_DIE_009.png');
         } else if (this.dieTime == 0 && this.enemyIndex == 2) {
@@ -37,14 +61,22 @@ class Enemies extends MovableObject {
         } else if (this.dieTime == 0 && this.enemyIndex == 3) {
             this.dieAnimation = this.loadImage('ork/3/ORK_03_DIE_009.png');
         }
-    }, 100);
+    }
 
 
+    /**
+     * load the different images of the enemy
+     */
+    loadDifferentImages() {
+        this.loadImagesArray(this.imges.Image_Walking);
+        this.loadImagesArray(this.imges.Image_Die);
+    }
 
-    constructor(x) {
-        super();
-        this.loadImage('ork/1/ORK_01_WALK_000.png');
-        this.x = x;
+
+    /**
+     * Selection of images according to the selected index
+     */
+    selectCurrentImages() {
         if (this.enemyIndex == 1) {
             this.loadImage('ork/1/ORK_01_WALK_000.png');
             this.imges = new Ork_Image1();
@@ -55,29 +87,35 @@ class Enemies extends MovableObject {
             this.loadImage('ork/3/ORK_03_WALK_000.png');
             this.imges = new Ork_Image3();
         }
-
-        this.otherDierection = true;
-
-        this.loadImagesArray(this.imges.Image_Walking);
-        this.loadImagesArray(this.imges.Image_Die);
-
-
-        this.animationEnemie();
-        // this.dieTime = this.imges.Image_Die.lenght;
-        // this.walking_sound.volume = 0.2;
-        // this.walking_sound.loop = true;
-        // this.walking_sound.play();
     }
 
+
+    /**
+     * animation for run or die
+     */
     animationEnemie() {
+        this.movementOfEnemy();
+        this.AnimationMove();
+    }
 
+
+
+    /**
+     * moves the enemy to the left
+     */
+    movementOfEnemy() {
         setInterval(() => {
-
             if (!this.enemyDead && this.enemyWalk) {
                 this.walkleft(this.speed);
             }
         }, 1000 / 60);
+    }
 
+
+    /**
+     * animation of enemy movement
+     */
+    AnimationMove() {
         setInterval(() => {
             if (!this.enemyDead && this.enemyWalk) {
                 this.animationRepeat(this.imges.Image_Walking);
@@ -88,14 +126,13 @@ class Enemies extends MovableObject {
                 }, 2000);
             }
         }, 120);
-
-
     }
 
+
+    /**
+     * query if the enemy is alive
+     */
     setEnemyDead() {
         this.enemyDead = true;
     }
-
-
-
 }
