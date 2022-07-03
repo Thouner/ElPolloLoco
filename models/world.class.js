@@ -25,6 +25,13 @@ class World {
     thunder = new Thunder();
     distanceTraveled = 400;
     backgroundWidthToAdd1png = 880;
+    playWinSound = true;
+    playDeadSound = true;
+    background_sound = new Audio('audio/bgSound.mp3');
+    end_sound = new Audio('audio/endSound.mp3');
+    win_sound = new Audio('audio/win.mp3');
+    dead_sound = new Audio('audio/playerDead.mp3');
+
 
 
     /**
@@ -41,10 +48,29 @@ class World {
         this.character.characterSelection = number;
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.playBgSound();
+        this.background_sound.play();
         this.draw();
         this.setWorld();
         this.checkInteraction();
         this.keyboard.touchPress();
+    }
+
+
+    /**
+     * play the background music
+     */
+    playBgSound() {
+        if (typeof this.background_sound.loop == 'boolean') {
+            this.background_sound.loop = true;
+        } else {
+            this.background_sound.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+                this.volume = 0.2;
+            }, false);
+        }
+        this.background_sound.play();
     }
 
 
@@ -108,6 +134,7 @@ class World {
         if (this.keyboard.SHIFT && !this.character.isDead()) {
             if (!this.throwBombTime) {
                 this.throwThebomb();
+
             } else {
                 let delta = Date.now();
                 delta = delta - this.throwBombTime;
@@ -479,13 +506,30 @@ class World {
      */
     gameWinning() {
         if (this.level.endboss[0].bossisDead && this.character.x > 2900) {
+            this.playTheWinSound();
             this.character.gameWon = true;
             this.level.enemies.forEach(enemy => {
                 enemy.setEnemyDead();
             });
             setTimeout(() => {
+                this.background_sound.pause();
+                this.end_sound.volume = 0.2;
+                this.end_sound.play();
                 this.displayWinScreen();
             }, 1000);
+        }
+    }
+
+
+    /**
+     * play the music when the game is won
+     */
+    playTheWinSound() {
+        if (this.playWinSound) {
+            this.win_sound.play();
+            setTimeout(() => {
+                this.playWinSound = false;
+            }, 1500);
         }
     }
 
@@ -580,6 +624,7 @@ class World {
      */
     addGrave() {
         if (this.character.gameOver && !this.showGrave) {
+            this.playTheDeadSound();
             if (this.characterSelectionWorld == 3) {
                 this.openLoseScreenUndead();
             } else {
@@ -590,10 +635,25 @@ class World {
 
 
     /**
+     * play the music when the game is lost
+     */
+    playTheDeadSound() {
+        if (this.playDeadSound) {
+            this.dead_sound.play();
+            setTimeout(() => {
+                this.playDeadSound = false;
+            }, 1500);
+        }
+    }
+
+    /**
      * opens losescreen at character three
      */
     openLoseScreenUndead() {
         setTimeout(() => {
+            this.background_sound.pause();
+            this.end_sound.volume = 0.2;
+            this.end_sound.play();
             document.getElementById('loseScreen').classList.remove('d-none')
             document.getElementById('loseScreen').classList.add('d-flex')
             document.getElementById('undead').classList.add('d-none')
@@ -609,6 +669,9 @@ class World {
             this.showGrave = true;
         }, 1200);
         setTimeout(() => {
+            this.background_sound.pause();
+            this.end_sound.volume = 0.2;
+            this.end_sound.play();
             document.getElementById('loseScreen').classList.remove('d-none')
             document.getElementById('loseScreen').classList.add('d-flex')
         }, 2000);
@@ -650,6 +713,7 @@ class World {
      */
     showTheTombstone() {
         setTimeout(() => {
+            this.end_sound.pause();
             this.showGrave = true;
         }, 10);
         this.showTheThunder
@@ -671,6 +735,7 @@ class World {
      */
     startUndeadGame() {
         setTimeout(() => {
+            this.playBgSound();
             this.showThunder = false;
             this.showGrave = false;
             this.characterSelectionWorld = 3;

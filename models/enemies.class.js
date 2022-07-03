@@ -9,8 +9,7 @@ class Enemies extends MovableObject {
     attackTime = 10;
     enemyWalk = false;
     speed = 0.5 + Math.random() * 0.7;
-    // walking_sound = new Audio('audio/chicken.mp3');
-
+    deadOrk_sound = new Audio('audio/orkDead.mp3');
     offSetX = 120;
     offSetY = 130;
     offSetWidth = 250;
@@ -133,6 +132,9 @@ class Enemies extends MovableObject {
      * query if the enemy is alive
      */
     setEnemyDead() {
-        this.enemyDead = true;
+        if (!this.enemyDead) {
+            this.deadOrk_sound.play();
+            this.enemyDead = true;
+        }
     }
 }

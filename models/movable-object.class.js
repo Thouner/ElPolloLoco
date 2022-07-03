@@ -9,6 +9,7 @@ class MovableObject extends DrawableObject {
     attackEnemy = false;
     attackTime;
     energy;
+    attack_sound = new Audio('audio/attack.mp3');
 
 
     /**

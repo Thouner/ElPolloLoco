@@ -12,7 +12,9 @@ class ThrowableObject extends MovableObject {
     bombContacktEnemy = false;
     addGavity = 280;
     world;
-
+    soundPlay = true;
+    throw_sound = new Audio('audio/throw.mp3');
+    explo_sound = new Audio('audio/bomb.mp3');
     offSetX = 100;
     offSetY = 100;
     offSetWidth = 200;
@@ -60,6 +62,7 @@ class ThrowableObject extends MovableObject {
      */
     constructor(x, y, playerDierection, world) {
         super();
+        this.playThrowsound();
         this.world = world;
         this.loadImage('Bomb/bomb_0009_Layer-1.png');
         this.loadImagesArray(this.images_Explo);
@@ -75,13 +78,36 @@ class ThrowableObject extends MovableObject {
 
 
     /**
+     * play the throw sound
+     */
+    playThrowsound() {
+        this.throw_sound.play();
+        this.throw_sound.loop = false;
+        this.throw_sound.volume = 0.3;
+    }
+
+
+    /**
      * animation for the exploding bomb
      */
     animateExplo() {
         if (this.exploNow) {
+            this.playExplosound();
             this.animationRepeat(this.images_Explo);
             this.bombtimer--;
             this.images_Explo.splice(0, 1)
+        }
+    }
+
+
+    playExplosound() {
+        if (this.soundPlay) {
+            this.explo_sound.play();
+            this.explo_sound.loop = false;
+            this.explo_sound.volume = 0.1;
+            setTimeout(() => {
+                this.soundPlay = false;
+            }, 250);
         }
     }
 

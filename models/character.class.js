@@ -20,6 +20,12 @@ class Character extends MovableObject {
     offSetWidthAttack = 90;
 
     walking_sound = new Audio('audio/walk.mp3');
+    jump_sound = new Audio('audio/jump.mp3');
+    attack_sound = new Audio('audio/attack.mp3');
+    collect_sound = new Audio('audio/collect.mp3');
+    deadOrk_sound = new Audio('audio/collect.mp3');
+
+
 
 
     /**
@@ -257,9 +263,12 @@ class Character extends MovableObject {
      */
     ckeckAttackOrDamage() {
         if (this.attackEnemy) {
+            this.attack_sound.play();
+            this.attack_sound.volume = 0.3;
             this.checkAttackCollusion();
             this.checkAttackBossCollusion();
         } else {
+            this.attack_sound.pause();
             this.checkBossCollusion();
             this.checkOrkCollusion();
         }
@@ -272,7 +281,10 @@ class Character extends MovableObject {
     moveToTheRight() {
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.walkRight(this.speed);
-            this.walking_sound.play();
+            if (!this.isAboveGround(this.groundlevel)) {
+                this.walking_sound.play();
+                this.walking_sound.volume = 0.3;
+            }
             this.currentPosion = this.x;
         }
     }
@@ -284,7 +296,10 @@ class Character extends MovableObject {
     moveToTheLeft() {
         if (this.world.keyboard.LEFT && this.x > -600) {
             this.walkleft(this.speed);
-            this.walking_sound.play();
+            if (!this.isAboveGround(this.groundlevel)) {
+                this.walking_sound.play();
+                this.walking_sound.volume = 0.3;
+            }
         }
     }
 
@@ -295,6 +310,8 @@ class Character extends MovableObject {
     jumpMovement() {
         if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel)) {
             this.jump();
+            this.jump_sound.play();
+            this.jump_sound.volume = 1;
         }
     }
 
@@ -424,6 +441,7 @@ class Character extends MovableObject {
      * llect the points
      */
     collectTreasure() {
+        this.collect_sound.play();
         this.treasure++;
     }
 
@@ -432,6 +450,7 @@ class Character extends MovableObject {
      * collect the bombs
      */
     collectBombs() {
+        this.collect_sound.play();
         this.bombs++;
     }
 

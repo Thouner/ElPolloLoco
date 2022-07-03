@@ -12,8 +12,7 @@ class Endboss extends MovableObject {
     dieTime = 10;
     bossAttack = false;
     bossisDead = false;
-    // walking_sound = new Audio('audio/chicken.mp3');
-
+    bossDead_sound = new Audio('audio/bossDead.mp3');
     offSetX = 270;
     offSetY = 270;
     offSetWidth = 550;
@@ -190,7 +189,10 @@ class Endboss extends MovableObject {
      */
     checkBossAlife() {
         if (this.bossEnergy == 0) {
-            this.enemyDead = true;
+            if (!this.enemyDead) {
+                this.bossDead_sound.play();
+                this.enemyDead = true;
+            }
         }
     }
 }

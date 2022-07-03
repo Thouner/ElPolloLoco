@@ -1,6 +1,29 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let introBgSound = new Audio('audio/IntorBgSong.mp3');
+let characterSound1 = new Audio('audio/Arr1.mp3');
+let characterSound2 = new Audio('audio/Arr2.mp3');
+
+
+/**
+ *  play the intro background music
+ */
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        if (typeof introBgSound.loop == 'boolean') {
+            introBgSound.loop = true;
+        } else {
+            introBgSound.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+                this.volume = 0.2;
+            }, false);
+        }
+        introBgSound.play();
+    }, 500);
+});
+
 
 /**
  * initiate the game
@@ -134,6 +157,8 @@ function showRotateDevice() {
  * @param {number} number - number of selected character
  */
 function removeStartScreen(number) {
+    introBgSound.pause();
+    playCharacterSound(number);
     init(number);
     document.getElementById('flag_container').classList.add('biggerFlag');
     setTimeout(() => {
@@ -142,6 +167,16 @@ function removeStartScreen(number) {
             showMobileButtons();
         }
     }, 2000);
+}
+
+
+
+function playCharacterSound(number) {
+    if (number == 1) {
+        characterSound1.play();
+    } else {
+        characterSound2.play();
+    }
 }
 
 
