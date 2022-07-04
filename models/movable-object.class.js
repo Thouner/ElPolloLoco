@@ -224,4 +224,69 @@ class MovableObject extends DrawableObject {
     jump() {
         this.speedY = 32;
     }
+
+
+    /**
+     * collect the points
+     */
+    collectTreasure() {
+        this.collect_sound.play();
+        this.treasure++;
+    }
+
+
+    /**
+     * collect the bombs
+     */
+    collectBombs() {
+        this.collect_sound.play();
+        this.bombs++;
+    }
+
+
+    /**
+     * reducing the bombs
+     */
+    minusBombs() {
+        this.bombs--;
+        if (this.bombs < 0) {
+            this.bombs = 0
+        }
+    }
+
+
+    /**
+     * first attack and start movement of the boss
+     */
+    goBoss() {
+        if (this.x == 2450 && !this.world.level.endboss[0].bossWalk) {
+            this.world.level.endboss[0].bossAttack = true;
+            this.letCharacterJump();
+            this.letBossGo();
+        }
+    }
+
+
+    /**
+     * first attack of the boss makes the character jump
+     */
+    letCharacterJump() {
+        setTimeout(() => {
+            if (!this.isAboveGround(this.groundlevel)) {
+                this.jump();
+            }
+        }, 1300);
+    }
+
+
+    /**
+     * start movement of the boss
+     */
+    letBossGo() {
+        setTimeout(() => {
+            this.world.level.endboss[0].bossWalk = true;
+            this.world.level.endboss[0].bossAttack = false;
+            this.world.level.endboss[0].speed = 1.2;
+        }, 1700);
+    }
 }
