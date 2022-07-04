@@ -394,6 +394,4 @@ class FunctionForWorld {
             this.addOrk();
         }, 2000);
     }
-
-
 }
