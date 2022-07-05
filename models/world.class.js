@@ -31,6 +31,7 @@ class World extends FunctionForWorld {
     end_sound = new Audio('audio/endSound.mp3');
     win_sound = new Audio('audio/win.mp3');
     dead_sound = new Audio('audio/playerDead.mp3');
+    thunder_sound = new Audio('audio/thunder.mp3');
 
 
 

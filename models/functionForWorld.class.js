@@ -370,6 +370,9 @@ class FunctionForWorld {
     showTheThunder() {
         setTimeout(() => {
             this.showThunder = true;
+            if (this.showThunder) {
+                this.thunder_sound.play();
+            }
         }, 1000);
     }
 
