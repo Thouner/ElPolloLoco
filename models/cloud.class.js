@@ -14,17 +14,15 @@ class Cloud extends MovableObject {
     constructor(x) {
         super().loadImage('beach/game_background_2/layers/cloud.png');
         this.x = x;
-        this.animate();
+        this.animate;
     }
 
 
     /**
      * animate the images
      */
-    animate() {
-        setInterval(() => {
-            this.walkleft(this.speed);
-        }, 1000 / 60);
-    }
+    animate = setInterval(() => {
+        this.walkleft(this.speed);
+    }, 1000 / 60);
 
 }

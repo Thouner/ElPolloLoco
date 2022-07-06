@@ -6,18 +6,35 @@ let characterSound1 = new Audio('audio/Arr1.mp3');
 let characterSound2 = new Audio('audio/Arr2.mp3');
 
 
+function audioVolume() {
+    world.audio[0].volume = 0.2;
+}
+
+
+function muteAudio() {
+    // if (world.keyboard.Q)
+    for (let i = 0; i < world.audio.length; i++) {
+        const element = world.audio[i];
+        element.muted = !element.muted;
+    }
+    // world.audio.forEach(sound => {
+    // sound.muted = !sound.muted;
+    // });
+}
+
+
 /**
  *  play the intro background music
  */
 window.addEventListener('load', function() {
+    introBgSound.volume = 0.2;
     setTimeout(() => {
         if (typeof introBgSound.loop == 'boolean') {
             introBgSound.loop = true;
         } else {
             introBgSound.addEventListener('ended', function() {
-                this.currentTime = 0;
-                this.play();
-                this.volume = 0.2;
+                introBgSound.currentTime = 0;
+                introBgSound.play();
             }, false);
         }
         introBgSound.play();
@@ -61,6 +78,10 @@ window.addEventListener('keydown', (e) => {
     if (e.keyCode == 8) {
         keyboard.RETURN = true;
     }
+    if (e.keyCode == 81) {
+        keyboard.Q = true;
+        muteAudio();
+    }
 });
 
 /**
@@ -86,7 +107,11 @@ window.addEventListener('keyup', (e) => {
         keyboard.F = false;
     }
     if (e.keyCode == 8) {
-        keyboard.RETURNF = false;
+        keyboard.RETURN = false;
+    }
+    if (e.keyCode == 81) {
+        keyboard.Q = false;
+        muteAudio();
     }
 });
 
@@ -220,4 +245,10 @@ function startUndead() {
     document.getElementById('loseScreen').classList.add('d-none')
     document.getElementById('loseScreen').classList.remove('d-flex')
     world.undeadGame();
+}
+
+
+function mutePage() {
+    let elem = document.getElementById('canvas');
+    elem.muted = true;
 }

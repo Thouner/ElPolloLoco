@@ -27,11 +27,15 @@ class World extends FunctionForWorld {
     backgroundWidthToAdd1png = 880;
     playWinSound = true;
     playDeadSound = true;
-    background_sound = new Audio('audio/bgSound.mp3');
-    end_sound = new Audio('audio/endSound.mp3');
-    win_sound = new Audio('audio/win.mp3');
-    dead_sound = new Audio('audio/playerDead.mp3');
-    thunder_sound = new Audio('audio/thunder.mp3');
+    audio = [
+        new Audio('audio/bgSound.mp3'),
+        new Audio('audio/endSound.mp3'),
+        new Audio('audio/win.mp3'),
+        new Audio('audio/playerDead.mp3'),
+        new Audio('audio/thunder.mp3')
+    ]
+    showEndScreeen = false;
+
 
 
 
@@ -51,7 +55,6 @@ class World extends FunctionForWorld {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.playBgSound();
-        this.background_sound.play();
         this.draw();
         this.setWorld();
         this.checkInteraction();
@@ -63,16 +66,16 @@ class World extends FunctionForWorld {
      * play the background music
      */
     playBgSound() {
-        if (typeof this.background_sound.loop == 'boolean') {
-            this.background_sound.loop = true;
+        if (typeof this.audio[0].loop == 'boolean') {
+            this.audio[0].loop = true;
         } else {
-            this.background_sound.addEventListener('ended', function() {
+            this.audio[0].addEventListener('ended', function() {
                 this.currentTime = 0;
                 this.play();
                 this.volume = 0.2;
             }, false);
         }
-        this.background_sound.play();
+        this.audio[0].play();
     }
 
 
@@ -85,8 +88,12 @@ class World extends FunctionForWorld {
     }
 
 
+    /**
+     * querying interactions
+     */
     checkInteraction() {
         setInterval(() => {
+            this.muteAudio();
             this.collectCoins();
             this.collectBomb();
             this.timerForBomb();
@@ -99,6 +106,14 @@ class World extends FunctionForWorld {
             this.addOrk();
         }, 100);
 
+    }
+
+
+    muteAudio() {
+        if (this.keyboard.Q)
+            this.audio.forEach(sound => {
+                sound.muted = !sound.muted;
+            });
     }
 
 

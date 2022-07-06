@@ -118,19 +118,17 @@ let cloudCount2 = 5;
 let backgroundCount2 = 3;
 let minusDistanceMultiplier2 = 1;
 
-timecountCloud();
+this.plusscloud;
 
 
 /**
  * interval for adding the clouds
  */
-function timecountCloud() {
-    setInterval(() => {
-        addClouds();
-        cloudCount2 += 1
-        minusDistanceMultiplier2 += 1
-    }, 15000);
-}
+plusscloud = setInterval(() => {
+    addClouds();
+    cloudCount2 += 1
+    minusDistanceMultiplier2 += 1
+}, 15000);
 
 
 /**

@@ -146,16 +146,16 @@ class Character extends MovableObject {
      * movements of the character   
      */
     movementsOfCharacter() {
-        setInterval(() => {
-            if (!this.isDead() && !this.gameWon) {
+        if (!this.isDead() && !this.gameWon) {
+            setInterval(() => {
                 this.playWalkSound();
                 this.moveToTheRight();
                 this.moveToTheLeft();
                 this.jumpMovement();
                 this.world.camera_x = -this.x + 100;
                 this.goBoss();
-            }
-        }, 1000 / 60);
+            }, 1000 / 60);
+        }
     }
 
 

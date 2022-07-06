@@ -157,8 +157,8 @@ class FunctionForWorld {
             });
             setTimeout(() => {
                 this.background_sound.pause();
-                this.end_sound.volume = 0.2;
-                this.end_sound.play();
+                this.audio[1].volume = 0.2;
+                this.audio[1].play();
                 this.displayWinScreen();
             }, 1000);
         }
@@ -170,7 +170,7 @@ class FunctionForWorld {
      */
     playTheWinSound() {
         if (this.playWinSound) {
-            this.win_sound.play();
+            this.audio[2].play();
             setTimeout(() => {
                 this.playWinSound = false;
             }, 1500);
@@ -283,7 +283,7 @@ class FunctionForWorld {
      */
     playTheDeadSound() {
         if (this.playDeadSound) {
-            this.dead_sound.play();
+            this.audio[3].play();
             setTimeout(() => {
                 this.playDeadSound = false;
             }, 1500);
@@ -296,8 +296,8 @@ class FunctionForWorld {
     openLoseScreenUndead() {
         setTimeout(() => {
             this.background_sound.pause();
-            this.end_sound.volume = 0.2;
-            this.end_sound.play();
+            this.audio[1].volume = 0.2;
+            this.audio[1].play();
             document.getElementById('loseScreen').classList.remove('d-none')
             document.getElementById('loseScreen').classList.add('d-flex')
             document.getElementById('undead').classList.add('d-none')
@@ -314,10 +314,13 @@ class FunctionForWorld {
         }, 1200);
         setTimeout(() => {
             this.background_sound.pause();
-            this.end_sound.volume = 0.2;
-            this.end_sound.play();
-            document.getElementById('loseScreen').classList.remove('d-none')
-            document.getElementById('loseScreen').classList.add('d-flex')
+            this.audio[1].volume = 0.2;
+            this.audio[1].play();
+            if (!this.showEndScreeen) {
+                document.getElementById('loseScreen').classList.remove('d-none')
+                document.getElementById('loseScreen').classList.add('d-flex')
+                this.showEndScreeen = true;
+            }
         }, 2000);
     }
 
@@ -337,6 +340,10 @@ class FunctionForWorld {
      * initiate the next level
      */
     initiateNextLevel() {
+        clearInterval(this.level.plusscloud);
+        this.level.clouds.forEach(cloud => {
+            console.log('wolke', cloud)
+        });
         this.level = level2;
         world.camera_x = 100
         this.character.x = 0;
@@ -357,7 +364,8 @@ class FunctionForWorld {
      */
     showTheTombstone() {
         setTimeout(() => {
-            this.end_sound.pause();
+            this.audio[1].pause();
+            this.audio[1].muted = true;
             this.showGrave = true;
         }, 10);
         this.showTheThunder
@@ -371,7 +379,7 @@ class FunctionForWorld {
         setTimeout(() => {
             this.showThunder = true;
             if (this.showThunder) {
-                this.thunder_sound.play();
+                this.audio[4].play();
             }
         }, 1000);
     }
