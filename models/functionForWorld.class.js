@@ -313,7 +313,7 @@ class FunctionForWorld {
             this.showGrave = true;
         }, 1200);
         setTimeout(() => {
-            this.background_sound.pause();
+            this.audio[0].pause();
             this.audio[1].volume = 0.2;
             this.audio[1].play();
             if (!this.showEndScreeen) {
@@ -342,7 +342,7 @@ class FunctionForWorld {
     initiateNextLevel() {
         clearInterval(this.level.plusscloud);
         this.level.clouds.forEach(cloud => {
-            console.log('wolke', cloud)
+            clearInterval(cloud.animate);
         });
         this.level = level2;
         world.camera_x = 100

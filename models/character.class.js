@@ -11,7 +11,7 @@ class Character extends MovableObject {
     world;
     groundlevel = 180;
     dieTime = 7;
-
+    hurtSound = true;
     offSetX = 40;
     offSetY = 65;
     offSetWidth = 170;
@@ -19,10 +19,10 @@ class Character extends MovableObject {
 
     offSetWidthAttack = 90;
 
-    walking_sound = new Audio('audio/walk.mp3');
-    jump_sound = new Audio('audio/jump.mp3');
-    attack_sound = new Audio('audio/attack.mp3');
-    collect_sound = new Audio('audio/collect.mp3');
+    // world.audio[5] = new Audio('audio/walk.mp3');
+    // world.audio[6] = new Audio('audio/jump.mp3');
+    // world.audio[7] = new Audio('audio/attack.mp3');
+    // collect_sound = new Audio('audio/collect.mp3');
 
 
     /**
@@ -221,6 +221,13 @@ class Character extends MovableObject {
     animationToHurt() {
         if (this.isHurt() && !this.isDead() && !this.gameWon) {
             this.animationRepeat(this.imges.Image_Hurt);
+            if (this.hurtSound) {
+                this.world.audio[9].play();
+                this.hurtSound = false;
+                setTimeout(() => {
+                    this.hurtSound = true;
+                }, 1500);
+            }
         }
     }
 
@@ -260,12 +267,12 @@ class Character extends MovableObject {
      */
     ckeckAttackOrDamage() {
         if (this.attackEnemy) {
-            this.attack_sound.play();
-            this.attack_sound.volume = 0.3;
+            this.world.audio[7].play();
+            this.world.audio[7].volume = 0.3;
             this.checkAttackCollusion();
             this.checkAttackBossCollusion();
         } else {
-            this.attack_sound.pause();
+            this.world.audio[7].pause();
             this.checkBossCollusion();
             this.checkOrkCollusion();
         }
@@ -279,8 +286,8 @@ class Character extends MovableObject {
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.walkRight(this.speed);
             if (!this.isAboveGround(this.groundlevel)) {
-                this.walking_sound.play();
-                this.walking_sound.volume = 0.3;
+                this.world.audio[5].play();
+                this.world.audio[5].volume = 0.3;
             }
             this.currentPosion = this.x;
         }
@@ -294,8 +301,8 @@ class Character extends MovableObject {
         if (this.world.keyboard.LEFT && this.x > -600) {
             this.walkleft(this.speed);
             if (!this.isAboveGround(this.groundlevel)) {
-                this.walking_sound.play();
-                this.walking_sound.volume = 0.3;
+                this.world.audio[5].play();
+                this.world.audio[5].volume = 0.3;
             }
         }
     }
@@ -307,8 +314,8 @@ class Character extends MovableObject {
     jumpMovement() {
         if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel)) {
             this.jump();
-            this.jump_sound.play();
-            this.jump_sound.volume = 1;
+            this.world.audio[6].play();
+            this.world.audio[6].volume = 1;
         }
     }
 
@@ -317,8 +324,8 @@ class Character extends MovableObject {
      * plays running sounds
      */
     playWalkSound() {
-        this.walking_sound.pause();
-        this.walking_sound.playbackRate = 2.4;
+        this.world.audio[5].pause();
+        this.world.audio[5].playbackRate = 2.4;
     }
 
 

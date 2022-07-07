@@ -1,25 +1,72 @@
 let canvas;
 let world;
+let mutetTime;
+let lastMute;
+let mutPossilble = false;
+let gameOn = false;
+let soundOn = true;
 let keyboard = new Keyboard();
 let introBgSound = new Audio('audio/IntorBgSong.mp3');
 let characterSound1 = new Audio('audio/Arr1.mp3');
 let characterSound2 = new Audio('audio/Arr2.mp3');
 
+letMute();
+
 
 function audioVolume() {
-    world.audio[0].volume = 0.2;
+    world.audio[0].volume = 0.1;
 }
 
 
 function muteAudio() {
-    // if (world.keyboard.Q)
-    for (let i = 0; i < world.audio.length; i++) {
-        const element = world.audio[i];
-        element.muted = !element.muted;
+    // soundOn = !soundOn;
+    console.log(soundOn);
+    if (!soundOn) {
+        introBgSound.muted = true;
+        characterSound1.muted = true;
+        characterSound2.muted = true;
+        if (gameOn) {
+            for (let i = 0; i < world.audio.length; i++) {
+                const element = world.audio[i];
+                element.muted = true;
+            }
+        }
+    } else {
+        introBgSound.muted = false;
+        characterSound1.muted = false;
+        characterSound2.muted = false;
+        if (gameOn) {
+            for (let i = 0; i < world.audio.length; i++) {
+                const element = world.audio[i];
+                element.muted = false;
+            }
+        }
     }
-    // world.audio.forEach(sound => {
-    // sound.muted = !sound.muted;
-    // });
+}
+
+
+function letMute() {
+    setInterval(() => {
+        if (keyboard.Q) {
+            if (!mutetTime) {
+                muteTimer();
+            } else {
+                let delta = Date.now();
+                delta = delta - mutetTime;
+                if (delta > 200) {
+                    muteTimer();
+                }
+            }
+        }
+    }, 200);
+}
+
+
+function muteTimer() {
+    mutetTime = Date.now();
+    lastMute = new Date().getTime();
+    soundOn = !soundOn;
+    muteAudio()
 }
 
 
@@ -49,7 +96,7 @@ window.addEventListener('load', function() {
  */
 function init(number) {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard, number);
+    world = new World(canvas, keyboard, number, soundOn);
 }
 
 
@@ -80,7 +127,6 @@ window.addEventListener('keydown', (e) => {
     }
     if (e.keyCode == 81) {
         keyboard.Q = true;
-        muteAudio();
     }
 });
 
@@ -111,7 +157,6 @@ window.addEventListener('keyup', (e) => {
     }
     if (e.keyCode == 81) {
         keyboard.Q = false;
-        muteAudio();
     }
 });
 
@@ -182,6 +227,7 @@ function showRotateDevice() {
  * @param {number} number - number of selected character
  */
 function removeStartScreen(number) {
+    gameOn = true;
     introBgSound.pause();
     playCharacterSound(number);
     init(number);
@@ -195,7 +241,11 @@ function removeStartScreen(number) {
 }
 
 
-
+/**
+ * sound for selected character
+ * 
+ * @param {number} number - number of selected character
+ */
 function playCharacterSound(number) {
     if (number == 1) {
         characterSound1.play();
@@ -245,10 +295,4 @@ function startUndead() {
     document.getElementById('loseScreen').classList.add('d-none')
     document.getElementById('loseScreen').classList.remove('d-flex')
     world.undeadGame();
-}
-
-
-function mutePage() {
-    let elem = document.getElementById('canvas');
-    elem.muted = true;
 }

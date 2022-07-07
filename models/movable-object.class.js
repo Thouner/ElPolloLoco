@@ -230,7 +230,7 @@ class MovableObject extends DrawableObject {
      * collect the points
      */
     collectTreasure() {
-        this.collect_sound.play();
+        this.world.audio[8].play();
         this.treasure++;
     }
 
@@ -239,7 +239,7 @@ class MovableObject extends DrawableObject {
      * collect the bombs
      */
     collectBombs() {
-        this.collect_sound.play();
+        this.world.audio[8].play();
         this.bombs++;
     }
 

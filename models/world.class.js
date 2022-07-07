@@ -32,9 +32,19 @@ class World extends FunctionForWorld {
         new Audio('audio/endSound.mp3'),
         new Audio('audio/win.mp3'),
         new Audio('audio/playerDead.mp3'),
-        new Audio('audio/thunder.mp3')
+        new Audio('audio/thunder.mp3'),
+        new Audio('audio/walk.mp3'),
+        new Audio('audio/jump.mp3'),
+        new Audio('audio/attack.mp3'),
+        new Audio('audio/collect.mp3'),
+        new Audio('audio/hurt.mp3'),
     ]
     showEndScreeen = false;
+    lmutetTime;
+    lastMute;
+    mutPossilble = false;
+    soundOn;
+
 
 
 
@@ -46,7 +56,7 @@ class World extends FunctionForWorld {
      * @param {class} keyboard - class for the keys or buttons that are pressed
      * @param {number} number - number of selected character
      */
-    constructor(canvas, keyboard, number) {
+    constructor(canvas, keyboard, number, soundOn) {
         super();
         this.ctx = canvas.getContext('2d');
         this.characterSelectionWorld = number;
@@ -59,6 +69,44 @@ class World extends FunctionForWorld {
         this.setWorld();
         this.checkInteraction();
         this.keyboard.touchPress();
+        this.soundOn = soundOn;
+        this.muteAudio();
+
+    }
+
+
+    muteAudio() {
+        // soundOn = !soundOn;
+        console.log(this.soundOn);
+        if (!this.soundOn) {
+            for (let i = 0; i < this.audio.length; i++) {
+                const element = this.audio[i];
+                element.muted = true;
+            }
+
+        } else {
+            for (let i = 0; i < this.audio.length; i++) {
+                const element = this.audio[i];
+                element.muted = false;
+            }
+        }
+    }
+
+
+    letMute() {
+        setInterval(() => {
+            if (keyboard.Q) {
+                if (!mutetTime) {
+                    muteTimer();
+                } else {
+                    let delta = Date.now();
+                    delta = delta - mutetTime;
+                    if (delta > 200) {
+                        muteTimer();
+                    }
+                }
+            }
+        }, 200);
     }
 
 
@@ -71,8 +119,8 @@ class World extends FunctionForWorld {
         } else {
             this.audio[0].addEventListener('ended', function() {
                 this.currentTime = 0;
+                audioVolume();
                 this.play();
-                this.volume = 0.2;
             }, false);
         }
         this.audio[0].play();
@@ -93,7 +141,7 @@ class World extends FunctionForWorld {
      */
     checkInteraction() {
         setInterval(() => {
-            this.muteAudio();
+            // this.muteAudio();
             this.collectCoins();
             this.collectBomb();
             this.timerForBomb();
@@ -109,12 +157,12 @@ class World extends FunctionForWorld {
     }
 
 
-    muteAudio() {
-        if (this.keyboard.Q)
-            this.audio.forEach(sound => {
-                sound.muted = !sound.muted;
-            });
-    }
+    // muteAudio() {
+    //     if (this.keyboard.Q)
+    //         this.audio.forEach(sound => {
+    //             sound.muted = !sound.muted;
+    //         });
+    // }
 
 
     /**
