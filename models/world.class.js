@@ -76,8 +76,6 @@ class World extends FunctionForWorld {
 
 
     muteAudio() {
-        // soundOn = !soundOn;
-        console.log(this.soundOn);
         if (!this.soundOn) {
             for (let i = 0; i < this.audio.length; i++) {
                 const element = this.audio[i];

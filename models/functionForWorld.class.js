@@ -1,7 +1,4 @@
 class FunctionForWorld {
-
-
-
     /**
      * draw of character's life bar
      * 
@@ -344,6 +341,7 @@ class FunctionForWorld {
         this.level.clouds.forEach(cloud => {
             clearInterval(cloud.animate);
         });
+        this.level = null;
         this.level = level2;
         world.camera_x = 100
         this.character.x = 0;
@@ -354,8 +352,8 @@ class FunctionForWorld {
             this.character.bombs = 5;
         }
         this.showGrave = false;
-        document.getElementById('loseScreen').classList.add('d-none')
-        document.getElementById('loseScreen').classList.remove('d-flex')
+        // document.getElementById('loseScreen').classList.add('d-none')
+        // document.getElementById('loseScreen').classList.remove('d-flex')
     }
 
 
@@ -399,7 +397,7 @@ class FunctionForWorld {
             this.character.gameOver = false;
             this.character.dieTime = 7;
             this.character.energy = 100;
-            this.level.enemies = [];
+            // this.level.enemies = [];
             this.orkDistance = 400;
             this.orkMultiplikator = 1;
             this.addOrk();

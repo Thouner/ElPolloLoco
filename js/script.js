@@ -3,8 +3,8 @@ let world;
 let mutetTime;
 let lastMute;
 let mutPossilble = false;
-let gameOn = false;
 let soundOn = true;
+let gameOn = false;
 let keyboard = new Keyboard();
 let introBgSound = new Audio('audio/IntorBgSong.mp3');
 let characterSound1 = new Audio('audio/Arr1.mp3');
@@ -13,38 +13,71 @@ let characterSound2 = new Audio('audio/Arr2.mp3');
 letMute();
 
 
+/**
+ * load the sound variables
+ */
+function loadSoundOn() {
+    soundOn = sessionStorage.getItem('soundOn');
+    console.log(soundOn);
+    muteAudio();
+}
+
+
+/**
+ * volume for background music in game
+ */
 function audioVolume() {
     world.audio[0].volume = 0.1;
 }
 
 
+/**
+ * mute the sound or turn it back on
+ */
 function muteAudio() {
-    // soundOn = !soundOn;
-    console.log(soundOn);
     if (!soundOn) {
-        introBgSound.muted = true;
-        characterSound1.muted = true;
-        characterSound2.muted = true;
-        if (gameOn) {
-            for (let i = 0; i < world.audio.length; i++) {
-                const element = world.audio[i];
-                element.muted = true;
-            }
-        }
+        muteTrue();
     } else {
-        introBgSound.muted = false;
-        characterSound1.muted = false;
-        characterSound2.muted = false;
-        if (gameOn) {
-            for (let i = 0; i < world.audio.length; i++) {
-                const element = world.audio[i];
-                element.muted = false;
-            }
+        muteFalse();
+    }
+}
+
+
+/**
+ * mute the sound
+ */
+function muteTrue() {
+    introBgSound.muted = true;
+    characterSound1.muted = true;
+    characterSound2.muted = true;
+    if (gameOn) {
+        for (let i = 0; i < world.audio.length; i++) {
+            const element = world.audio[i];
+            element.muted = true;
         }
     }
 }
 
 
+/**
+ * activate sound
+ */
+function muteFalse() {
+    introBgSound.muted = false;
+    characterSound1.muted = false;
+    characterSound2.muted = false;
+    if (gameOn) {
+        for (let i = 0; i < world.audio.length; i++) {
+            const element = world.audio[i];
+            element.muted = false;
+        }
+    }
+}
+
+
+/**
+ * mute every 200ms possible
+ */
 function letMute() {
     setInterval(() => {
         if (keyboard.Q) {
@@ -62,10 +95,14 @@ function letMute() {
 }
 
 
+/**
+ * mute if possible
+ */
 function muteTimer() {
     mutetTime = Date.now();
     lastMute = new Date().getTime();
     soundOn = !soundOn;
+    sessionStorage.setItem('soundOn', soundOn);
     muteAudio()
 }
 
