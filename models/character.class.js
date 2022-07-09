@@ -6,6 +6,7 @@ class Character extends MovableObject {
     speed = 5;
     gameOver = false;
     gameWon = false;
+    movePossilble = true;
     characterSelection = 1;
     imges;
     world;
@@ -16,13 +17,7 @@ class Character extends MovableObject {
     offSetY = 65;
     offSetWidth = 170;
     offSetHeight = 90;
-
     offSetWidthAttack = 90;
-
-    // world.audio[5] = new Audio('audio/walk.mp3');
-    // world.audio[6] = new Audio('audio/jump.mp3');
-    // world.audio[7] = new Audio('audio/attack.mp3');
-    // collect_sound = new Audio('audio/collect.mp3');
 
 
     /**
@@ -283,7 +278,7 @@ class Character extends MovableObject {
      * moves the character to the right
      */
     moveToTheRight() {
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.gameWon && !this.gameOver) {
             this.walkRight(this.speed);
             if (!this.isAboveGround(this.groundlevel)) {
                 this.world.audio[5].play();
@@ -298,7 +293,7 @@ class Character extends MovableObject {
      * moves the character to the left
      */
     moveToTheLeft() {
-        if (this.world.keyboard.LEFT && this.x > -600) {
+        if (this.world.keyboard.LEFT && this.x > -600 && !this.gameWon && !this.gameOver) {
             this.walkleft(this.speed);
             if (!this.isAboveGround(this.groundlevel)) {
                 this.world.audio[5].play();
@@ -312,7 +307,7 @@ class Character extends MovableObject {
      * makes the character jump
      */
     jumpMovement() {
-        if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel)) {
+        if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel) && !this.gameWon && !this.gameOver) {
             this.jump();
             this.world.audio[6].play();
             this.world.audio[6].volume = 1;

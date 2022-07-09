@@ -266,6 +266,8 @@ class World extends FunctionForWorld {
      * add the character
      */
     addCharacter() {
+        console.log('characterX', this.character.x);
+        console.log('camaraX', this.camera_x);
         if (!this.showGrave) {
             this.addToMapCharacter(this.character) //drawing the character
         }

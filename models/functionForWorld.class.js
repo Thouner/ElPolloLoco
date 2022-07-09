@@ -343,7 +343,7 @@ class FunctionForWorld {
         });
         this.level = null;
         this.level = level2;
-        world.camera_x = 100
+        this.camera_x = 0
         this.character.x = 0;
         this.character.treasure = 0;
         this.level.endboss[0].bossEnergy = 100;
@@ -393,7 +393,6 @@ class FunctionForWorld {
             this.characterSelectionWorld = 3;
             this.character.characterSelection = 3;
             this.character = null;
-            console.log(this.character);
             this.character = new Character(this.characterSelectionWorld, this);
             this.character.gameOver = false;
             this.character.dieTime = 7;
