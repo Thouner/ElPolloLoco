@@ -71,7 +71,10 @@ class World extends FunctionForWorld {
         this.keyboard.touchPress();
         this.soundOn = soundOn;
         this.muteAudio();
-
+        setInterval(() => {
+            console.log(this.character.x);
+            console.log(this.character.imges);
+        }, 1000);
     }
 
 
@@ -153,14 +156,6 @@ class World extends FunctionForWorld {
         }, 100);
 
     }
-
-
-    // muteAudio() {
-    //     if (this.keyboard.Q)
-    //         this.audio.forEach(sound => {
-    //             sound.muted = !sound.muted;
-    //         });
-    // }
 
 
     /**

@@ -119,6 +119,17 @@
             left: 45px;
             font-size: 10px !important;
         }
+        .key8 {
+            top: 70px;
+            right: 35px;
+            font-size: 10px;
+            padding: 5px 10px;
+        }
+        .functionKey8 {
+            top: 35px;
+            left: 5px;
+            font-size: 10px !important;
+        }
     }
     
     @media only screen and (max-width: 660px) {
@@ -264,6 +275,17 @@
             top: 5px;
             left: 25px;
             font-size: 8px !important;
+        }
+        .key8 {
+            top: 50px;
+            right: 20px;
+            font-size: 10px;
+            padding: 2px 5px;
+        }
+        .functionKey8 {
+            top: 20px;
+            left: -2px;
+            font-size: 10px !important;
         }
     }
     

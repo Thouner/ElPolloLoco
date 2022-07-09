@@ -310,6 +310,16 @@
         font-size: 30px;
     }
     
+    .key8 {
+        position: absolute;
+        top: 165px;
+        right: 60px;
+        height: 8% !important;
+        width: 7% !important;
+        padding: 5px 14px;
+        font-size: 20px;
+    }
+    
     .functionKey1 {
         position: absolute;
         top: 15px;
@@ -352,6 +362,13 @@
         position: absolute;
         top: 15px;
         left: 85px;
+    }
+    
+    .functionKey8 {
+        white-space: nowrap;
+        position: absolute;
+        top: 65px;
+        left: 10px;
     }
     
     .grave {

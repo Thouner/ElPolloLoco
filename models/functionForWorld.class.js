@@ -292,7 +292,7 @@ class FunctionForWorld {
      */
     openLoseScreenUndead() {
         setTimeout(() => {
-            this.background_sound.pause();
+            this.audio[0].pause();
             this.audio[1].volume = 0.2;
             this.audio[1].play();
             document.getElementById('loseScreen').classList.remove('d-none')
@@ -352,8 +352,6 @@ class FunctionForWorld {
             this.character.bombs = 5;
         }
         this.showGrave = false;
-        // document.getElementById('loseScreen').classList.add('d-none')
-        // document.getElementById('loseScreen').classList.remove('d-flex')
     }
 
 
@@ -397,7 +395,6 @@ class FunctionForWorld {
             this.character.gameOver = false;
             this.character.dieTime = 7;
             this.character.energy = 100;
-            // this.level.enemies = [];
             this.orkDistance = 400;
             this.orkMultiplikator = 1;
             this.addOrk();
