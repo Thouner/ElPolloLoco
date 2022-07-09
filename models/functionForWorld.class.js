@@ -153,7 +153,7 @@ class FunctionForWorld {
                 enemy.setEnemyDead();
             });
             setTimeout(() => {
-                this.background_sound.pause();
+                this.audio[0].pause();
                 this.audio[1].volume = 0.2;
                 this.audio[1].play();
                 this.displayWinScreen();

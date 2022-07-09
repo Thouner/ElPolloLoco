@@ -18,7 +18,7 @@ letMute();
  */
 function loadSoundOn() {
     soundOn = sessionStorage.getItem('soundOn');
-    console.log(soundOn);
+    // console.log(soundOn);
     muteAudio();
 }
 
