@@ -351,7 +351,6 @@ class FunctionForWorld {
         if (this.character.bombs < 5) {
             this.character.bombs = 5;
         }
-
         this.showGrave = false;
     }
 

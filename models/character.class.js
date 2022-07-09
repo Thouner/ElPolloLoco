@@ -278,7 +278,8 @@ class Character extends MovableObject {
      * moves the character to the right
      */
     moveToTheRight() {
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.gameWon && !this.gameOver) {
+        // if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.gameWon && !this.gameOver) {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.walkRight(this.speed);
             if (!this.isAboveGround(this.groundlevel)) {
                 this.world.audio[5].play();
@@ -293,7 +294,8 @@ class Character extends MovableObject {
      * moves the character to the left
      */
     moveToTheLeft() {
-        if (this.world.keyboard.LEFT && this.x > -600 && !this.gameWon && !this.gameOver) {
+        // if (this.world.keyboard.LEFT && this.x > -600 && !this.gameWon && !this.gameOver) {
+        if (this.world.keyboard.LEFT && this.x > -600) {
             this.walkleft(this.speed);
             if (!this.isAboveGround(this.groundlevel)) {
                 this.world.audio[5].play();
@@ -307,7 +309,8 @@ class Character extends MovableObject {
      * makes the character jump
      */
     jumpMovement() {
-        if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel) && !this.gameWon && !this.gameOver) {
+        // if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel) && !this.gameWon && !this.gameOver) {
+        if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel)) {
             this.jump();
             this.world.audio[6].play();
             this.world.audio[6].volume = 1;
