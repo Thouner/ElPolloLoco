@@ -351,6 +351,7 @@ class FunctionForWorld {
         if (this.character.bombs < 5) {
             this.character.bombs = 5;
         }
+
         this.showGrave = false;
     }
 
@@ -391,6 +392,8 @@ class FunctionForWorld {
             this.showGrave = false;
             this.characterSelectionWorld = 3;
             this.character.characterSelection = 3;
+            this.character = null;
+            console.log(this.character);
             this.character = new Character(this.characterSelectionWorld, this);
             this.character.gameOver = false;
             this.character.dieTime = 7;

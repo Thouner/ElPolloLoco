@@ -46,9 +46,6 @@ class World extends FunctionForWorld {
     soundOn;
 
 
-
-
-
     /**
      * draw the world
      * 
@@ -71,13 +68,16 @@ class World extends FunctionForWorld {
         this.keyboard.touchPress();
         this.soundOn = soundOn;
         this.muteAudio();
-        setInterval(() => {
-            console.log(this.character.x);
-            console.log(this.character.imges);
-        }, 1000);
+        // setInterval(() => {
+        //     console.log(this.character.x);
+        //     console.log(this.character.imges);
+        // }, 1000);
     }
 
 
+    /**
+     * mute the sound or turn it back on
+     */
     muteAudio() {
         if (!this.soundOn) {
             for (let i = 0; i < this.audio.length; i++) {
@@ -91,23 +91,6 @@ class World extends FunctionForWorld {
                 element.muted = false;
             }
         }
-    }
-
-
-    letMute() {
-        setInterval(() => {
-            if (keyboard.Q) {
-                if (!mutetTime) {
-                    muteTimer();
-                } else {
-                    let delta = Date.now();
-                    delta = delta - mutetTime;
-                    if (delta > 200) {
-                        muteTimer();
-                    }
-                }
-            }
-        }, 200);
     }
 
 
