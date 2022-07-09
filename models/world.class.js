@@ -38,6 +38,8 @@ class World extends FunctionForWorld {
         new Audio('audio/attack.mp3'),
         new Audio('audio/collect.mp3'),
         new Audio('audio/hurt.mp3'),
+        new Audio('audio/throw.mp3'),
+        new Audio('audio/bomb.mp3'),
     ]
     showEndScreeen = false;
     lmutetTime;
@@ -266,8 +268,8 @@ class World extends FunctionForWorld {
      * add the character
      */
     addCharacter() {
-        console.log('characterX', this.character.x);
-        console.log('camaraX', this.camera_x);
+        // console.log('characterX', this.character.x);
+        // console.log('camaraX', this.camera_x);
         if (!this.showGrave) {
             this.addToMapCharacter(this.character) //drawing the character
         }

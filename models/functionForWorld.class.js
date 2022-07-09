@@ -343,7 +343,7 @@ class FunctionForWorld {
         });
         this.level = null;
         this.level = level2;
-        this.camera_x = 0
+        // this.camera_x = 0
         this.character.x = 0;
         this.character.treasure = 0;
         this.level.endboss[0].bossEnergy = 100;
