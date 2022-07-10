@@ -343,7 +343,7 @@ class FunctionForWorld {
         });
         this.level = null;
         this.level = level2;
-        // this.camera_x = 0
+        this.camera_x = 0
         this.character.x = 0;
         this.character.treasure = 0;
         this.level.endboss[0].bossEnergy = 100;
@@ -391,7 +391,7 @@ class FunctionForWorld {
             this.showGrave = false;
             this.characterSelectionWorld = 3;
             this.character.characterSelection = 3;
-            this.character = null;
+            clearInterval(this.character.movementsOfCharacter);
             this.character = new Character(this.characterSelectionWorld, this, 'zomie');
             this.character.gameOver = false;
             this.character.dieTime = 7;

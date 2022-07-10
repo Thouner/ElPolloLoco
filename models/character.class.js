@@ -177,9 +177,8 @@ class Character extends MovableObject {
             // console.log('charX', this.x);
             // console.log('cameraX', this.world.camera_x);
             this.goBoss();
-        } else {
-            clearInterval(movementsOfCharacter);
         }
+
     }, 1000 / 60);
 
 
