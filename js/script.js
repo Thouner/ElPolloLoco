@@ -9,6 +9,8 @@ let keyboard = new Keyboard();
 let introBgSound = new Audio('audio/IntorBgSong.mp3');
 let characterSound1 = new Audio('audio/Arr1.mp3');
 let characterSound2 = new Audio('audio/Arr2.mp3');
+let characterName1 = 'Captin';
+let characterName2 = 'Lady';
 
 letMute();
 
@@ -132,8 +134,14 @@ window.addEventListener('load', function() {
  * @param {number} number - number of selected character
  */
 function init(number) {
+    let name;
+    if (number == 1) {
+        name = characterName1;
+    } else {
+        name = characterName2;
+    }
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard, number, soundOn);
+    world = new World(canvas, keyboard, number, soundOn, name);
 }
 
 

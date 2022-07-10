@@ -55,11 +55,12 @@ class World extends FunctionForWorld {
      * @param {class} keyboard - class for the keys or buttons that are pressed
      * @param {number} number - number of selected character
      */
-    constructor(canvas, keyboard, number, soundOn) {
+    constructor(canvas, keyboard, number, soundOn, name) {
         super();
+        // console.log(name);
         this.ctx = canvas.getContext('2d');
         this.characterSelectionWorld = number;
-        this.character = new Character(this.characterSelectionWorld, this);
+        this.character = new Character(this.characterSelectionWorld, this, name);
         this.character.characterSelection = number;
         this.canvas = canvas;
         this.keyboard = keyboard;
@@ -70,10 +71,6 @@ class World extends FunctionForWorld {
         this.keyboard.touchPress();
         this.soundOn = soundOn;
         this.muteAudio();
-        // setInterval(() => {
-        //     console.log(this.character.x);
-        //     console.log(this.character.imges);
-        // }, 1000);
     }
 
 
@@ -270,6 +267,7 @@ class World extends FunctionForWorld {
     addCharacter() {
         // console.log('characterX', this.character.x);
         // console.log('camaraX', this.camera_x);
+        console.log('charName', this.character.charName);
         if (!this.showGrave) {
             this.addToMapCharacter(this.character) //drawing the character
         }

@@ -18,6 +18,7 @@ class Character extends MovableObject {
     offSetWidth = 170;
     offSetHeight = 90;
     offSetWidthAttack = 90;
+    charName;
 
 
     /**
@@ -39,8 +40,9 @@ class Character extends MovableObject {
      * @param {number} number - number of selected character
      * @param {class} world - class of the world
      */
-    constructor(number, world) {
+    constructor(number, world, name) {
         super();
+        this.charName = name;
         this.world = world;
         this.characterSelection = number;
         this.energy = 100;
