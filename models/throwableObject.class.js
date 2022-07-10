@@ -82,6 +82,7 @@ class ThrowableObject extends MovableObject {
      */
     playThrowsound() {
         this.throw_sound.play();
+        // this.world.audio[10].play();
         this.throw_sound.loop = false;
         this.throw_sound.volume = 0.3;
     }

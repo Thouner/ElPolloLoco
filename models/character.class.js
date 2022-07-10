@@ -51,11 +51,6 @@ class Character extends MovableObject {
         this.loadDifferentImages();
         this.animationCharater();
         this.dieTime = this.imges.Image_Die.length;
-        setInterval(() => {
-            console.log('name', this.charName);
-            console.log('charX', this.x);
-            console.log('cameraX', this.world.camera_x);
-        }, 500);
     }
 
 
@@ -144,28 +139,10 @@ class Character extends MovableObject {
         this.animationTheMovementsOfCharacter();
     }
 
+
     /**
-     * movements of the character   
+     * movements of the character
      */
-    // movementsOfCharacter() {
-    //     if (!this.isDead() && !this.gameWon) {
-    //         characterMovements = setInterval(() => {
-    //             this.playWalkSound();
-    //             this.moveToTheRight();
-    //             this.moveToTheLeft();
-    //             this.jumpMovement();
-    //             this.world.camera_x = -this.x + 100;
-    //             // console.log('name', this.charName);
-    //             // console.log('charX', this.x);
-    //             // console.log('cameraX', this.world.camera_x);
-    //             this.goBoss();
-    //         }, 1000 / 60);
-    //     } else {
-    //         clearInterval(characterMovements);
-    //     }
-    // }
-
-
     movementsOfCharacter = setInterval(() => {
         if (!this.isDead() && !this.gameWon) {
             this.playWalkSound();
@@ -173,12 +150,8 @@ class Character extends MovableObject {
             this.moveToTheLeft();
             this.jumpMovement();
             this.world.camera_x = -this.x + 100;
-            // console.log('name', this.charName);
-            // console.log('charX', this.x);
-            // console.log('cameraX', this.world.camera_x);
             this.goBoss();
         }
-
     }, 1000 / 60);
 
 
@@ -308,7 +281,7 @@ class Character extends MovableObject {
      */
     moveToTheRight() {
         // if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.gameWon && !this.gameOver) {
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.gameOver) {
             this.walkRight(this.speed);
             if (!this.isAboveGround(this.groundlevel)) {
                 this.world.audio[5].play();
@@ -324,7 +297,7 @@ class Character extends MovableObject {
      */
     moveToTheLeft() {
         // if (this.world.keyboard.LEFT && this.x > -600 && !this.gameWon && !this.gameOver) {
-        if (this.world.keyboard.LEFT && this.x > -600) {
+        if (this.world.keyboard.LEFT && this.x > -600 && !this.gameOver) {
             this.walkleft(this.speed);
             if (!this.isAboveGround(this.groundlevel)) {
                 this.world.audio[5].play();
@@ -339,7 +312,7 @@ class Character extends MovableObject {
      */
     jumpMovement() {
         // if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel) && !this.gameWon && !this.gameOver) {
-        if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel)) {
+        if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel) && !this.gameOver) {
             this.jump();
             this.world.audio[6].play();
             this.world.audio[6].volume = 1;
