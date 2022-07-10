@@ -391,7 +391,7 @@ class FunctionForWorld {
             this.showGrave = false;
             this.characterSelectionWorld = 3;
             this.character.characterSelection = 3;
-            this.character = null;
+            // this.character = null;
             this.character = new Character(this.characterSelectionWorld, this, 'zomie');
             this.character.gameOver = false;
             this.character.dieTime = 7;
