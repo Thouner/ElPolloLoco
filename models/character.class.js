@@ -42,7 +42,6 @@ class Character extends MovableObject {
      */
     constructor(number, world, name) {
         super();
-        // console.log(name);
         this.charName = name;
         this.world = world;
         this.characterSelection = number;
@@ -52,6 +51,11 @@ class Character extends MovableObject {
         this.loadDifferentImages();
         this.animationCharater();
         this.dieTime = this.imges.Image_Die.length;
+        setInterval(() => {
+            console.log('name', this.charName);
+            console.log('charX', this.x);
+            console.log('cameraX', this.world.camera_x);
+        }, 500);
     }
 
 
@@ -136,28 +140,48 @@ class Character extends MovableObject {
      * animation of the character
      */
     animationCharater() {
-        this.movementsOfCharacter();
+        this.movementsOfCharacter;
         this.animationTheMovementsOfCharacter();
     }
 
     /**
      * movements of the character   
      */
-    movementsOfCharacter() {
+    // movementsOfCharacter() {
+    //     if (!this.isDead() && !this.gameWon) {
+    //         characterMovements = setInterval(() => {
+    //             this.playWalkSound();
+    //             this.moveToTheRight();
+    //             this.moveToTheLeft();
+    //             this.jumpMovement();
+    //             this.world.camera_x = -this.x + 100;
+    //             // console.log('name', this.charName);
+    //             // console.log('charX', this.x);
+    //             // console.log('cameraX', this.world.camera_x);
+    //             this.goBoss();
+    //         }, 1000 / 60);
+    //     } else {
+    //         clearInterval(characterMovements);
+    //     }
+    // }
+
+
+    movementsOfCharacter = setInterval(() => {
         if (!this.isDead() && !this.gameWon) {
-            setInterval(() => {
-                this.playWalkSound();
-                this.moveToTheRight();
-                this.moveToTheLeft();
-                this.jumpMovement();
-                this.world.camera_x = -this.x + 100;
-                console.log('name', this.charName);
-                console.log('charX', this.x);
-                console.log('cameraX', this.world.camera_x);
-                this.goBoss();
-            }, 1000 / 60);
+            this.playWalkSound();
+            this.moveToTheRight();
+            this.moveToTheLeft();
+            this.jumpMovement();
+            this.world.camera_x = -this.x + 100;
+            // console.log('name', this.charName);
+            // console.log('charX', this.x);
+            // console.log('cameraX', this.world.camera_x);
+            this.goBoss();
+        } else {
+            clearInterval(movementsOfCharacter);
         }
-    }
+    }, 1000 / 60);
+
 
 
     /**
