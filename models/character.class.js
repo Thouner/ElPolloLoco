@@ -42,6 +42,7 @@ class Character extends MovableObject {
      */
     constructor(number, world, name) {
         super();
+        // console.log(name);
         this.charName = name;
         this.world = world;
         this.characterSelection = number;
@@ -150,7 +151,7 @@ class Character extends MovableObject {
                 this.moveToTheLeft();
                 this.jumpMovement();
                 this.world.camera_x = -this.x + 100;
-                console.log('name', this.name);
+                console.log('name', this.charName);
                 console.log('charX', this.x);
                 console.log('cameraX', this.world.camera_x);
                 this.goBoss();
@@ -284,7 +285,7 @@ class Character extends MovableObject {
      */
     moveToTheRight() {
         // if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.gameWon && !this.gameOver) {
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.gameOver) {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.walkRight(this.speed);
             if (!this.isAboveGround(this.groundlevel)) {
                 this.world.audio[5].play();
@@ -300,7 +301,7 @@ class Character extends MovableObject {
      */
     moveToTheLeft() {
         // if (this.world.keyboard.LEFT && this.x > -600 && !this.gameWon && !this.gameOver) {
-        if (this.world.keyboard.LEFT && this.x > -600 && !this.gameOver) {
+        if (this.world.keyboard.LEFT && this.x > -600) {
             this.walkleft(this.speed);
             if (!this.isAboveGround(this.groundlevel)) {
                 this.world.audio[5].play();
@@ -315,7 +316,7 @@ class Character extends MovableObject {
      */
     jumpMovement() {
         // if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel) && !this.gameWon && !this.gameOver) {
-        if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel) && !this.gameOver) {
+        if (this.world.keyboard.SPACE && !this.isAboveGround(this.groundlevel)) {
             this.jump();
             this.world.audio[6].play();
             this.world.audio[6].volume = 1;
