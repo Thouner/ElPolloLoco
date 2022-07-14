@@ -40,6 +40,7 @@ class World extends FunctionForWorld {
         new Audio('audio/hurt.mp3'),
         new Audio('audio/throw.mp3'),
         new Audio('audio/bomb.mp3'),
+        new Audio('audio/bossDead.mp3'),
     ]
     showEndScreeen = false;
     lmutetTime;
@@ -114,8 +115,11 @@ class World extends FunctionForWorld {
      * inserting "world" in another class
      */
     setWorld() {
-        this.level.endboss.world = this;
-        this.movableObject = this;
+        this.level.endboss[0].world = this;
+        this.movableObject.world = this;
+        this.level.enemies.forEach(enemy => {
+            enemy.world = this;
+        });
     }
 
 
@@ -124,7 +128,6 @@ class World extends FunctionForWorld {
      */
     checkInteraction() {
         setInterval(() => {
-            // this.muteAudio();
             this.collectCoins();
             this.collectBomb();
             this.timerForBomb();

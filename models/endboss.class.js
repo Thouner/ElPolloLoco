@@ -190,7 +190,8 @@ class Endboss extends MovableObject {
     checkBossAlife() {
         if (this.bossEnergy == 0) {
             if (!this.enemyDead) {
-                this.bossDead_sound.play();
+                this.world.audio[12].play();
+                // this.bossDead_sound.play();
                 this.enemyDead = true;
             }
         }

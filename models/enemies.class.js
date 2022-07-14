@@ -14,6 +14,7 @@ class Enemies extends MovableObject {
     offSetY = 130;
     offSetWidth = 250;
     offSetHeight = 170;
+    world;
 
 
     /**
