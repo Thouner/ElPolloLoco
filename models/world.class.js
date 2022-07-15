@@ -41,6 +41,7 @@ class World extends FunctionForWorld {
         new Audio('audio/throw.mp3'),
         new Audio('audio/bomb.mp3'),
         new Audio('audio/bossDead.mp3'),
+        new Audio('audio/orkDead.mp3'),
     ]
     showEndScreeen = false;
     lmutetTime;
@@ -67,8 +68,8 @@ class World extends FunctionForWorld {
         this.keyboard = keyboard;
         this.playBgSound();
         this.draw();
-        this.setWorld();
         this.checkInteraction();
+        this.setWorld();
         this.keyboard.touchPress();
         this.soundOn = soundOn;
         this.muteAudio();
@@ -117,9 +118,10 @@ class World extends FunctionForWorld {
     setWorld() {
         this.level.endboss[0].world = this;
         this.movableObject.world = this;
-        this.level.enemies.forEach(enemy => {
-            enemy.world = this;
-        });
+        for (let i = 0; i < this.level.enemies.length; i++) {
+            const element = this.level.enemies[i];
+            element.world = this;
+        }
     }
 
 

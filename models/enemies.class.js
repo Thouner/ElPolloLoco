@@ -130,7 +130,8 @@ class Enemies extends MovableObject {
      */
     setEnemyDead() {
         if (!this.enemyDead) {
-            this.deadOrk_sound.play();
+            this.world.audio[13].play();
+            // this.deadOrk_sound.play();
             this.enemyDead = true;
         }
     }
