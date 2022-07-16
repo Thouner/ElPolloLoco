@@ -119,8 +119,7 @@ class World extends FunctionForWorld {
         this.level.endboss[0].world = this;
         this.movableObject.world = this;
         for (let i = 0; i < this.level.enemies.length; i++) {
-            const element = this.level.enemies[i];
-            element.world = this;
+            this.level.enemies[i].world = this;
         }
     }
 

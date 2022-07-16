@@ -43,6 +43,7 @@ class Enemies extends MovableObject {
         this.otherDierection = true;
         this.loadDifferentImages();
         this.animationEnemie();
+        console.log(this.world);
     }
 
 
