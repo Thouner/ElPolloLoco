@@ -7,7 +7,7 @@ class Enemies extends MovableObject {
     enemyDead = false;
     dieTime = 10;
     attackTime = 10;
-    enemyWalk = false;
+    enemyWalk = true;
     speed = 0.5 + Math.random() * 0.7;
     deadOrk_sound = new Audio('audio/orkDead.mp3');
     offSetX = 120;
@@ -35,15 +35,15 @@ class Enemies extends MovableObject {
      * 
      * @param {number} x - positioning on the x axis
      */
-    constructor(x) {
+    constructor(x, world) {
         super();
         this.loadImage('ork/1/ORK_01_WALK_000.png');
         this.x = x;
+        this.world = world;
         this.selectCurrentImages();
         this.otherDierection = true;
         this.loadDifferentImages();
         this.animationEnemie();
-        console.log(this.world);
     }
 
 

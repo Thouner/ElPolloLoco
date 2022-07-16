@@ -1,20 +1,20 @@
 const level1 = new Level(
     [
         // new Enemies(800),
+        // new Enemies(1000),
         // new Enemies(1200),
+        // new Enemies(1400),
         // new Enemies(1600),
+        // new Enemies(1800),
         // new Enemies(2000),
+        // new Enemies(2200),
         // new Enemies(2400),
+        // new Enemies(2600),
         // new Enemies(2800),
+        // new Enemies(3000),
         // new Enemies(3200),
+        // new Enemies(3400),
         // new Enemies(3600),
-        // new Enemies(4000),
-        // new Enemies(4400),
-        // new Enemies(4800),
-        // new Enemies(5200),
-        // new Enemies(5600),
-        // new Enemies(6000),
-
     ], [
         new Endboss(),
     ], [
@@ -115,7 +115,6 @@ const level1 = new Level(
 let cloudCount = 5;
 let backgroundCount = 5;
 let minusDistanceMultiplier = 1;
-
 this.plusscloud;
 
 

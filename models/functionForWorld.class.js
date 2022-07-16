@@ -150,7 +150,8 @@ class FunctionForWorld {
             this.playTheWinSound();
             this.character.gameWon = true;
             this.level.enemies.forEach(enemy => {
-                enemy.setEnemyDead();
+                // enemy.setEnemyDead();
+                enemy.enemyWalk = false;
             });
             setTimeout(() => {
                 this.audio[0].pause();

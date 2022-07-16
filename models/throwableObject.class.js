@@ -19,6 +19,7 @@ class ThrowableObject extends MovableObject {
     offSetY = 100;
     offSetWidth = 200;
     offSetHeight = 200;
+    audio10;
 
     images_Explo = [
         'Bomb/bomb_0009_Layer-1.png',
@@ -60,10 +61,11 @@ class ThrowableObject extends MovableObject {
      * @param {boolean} playerDierection - true if the character walks to the left
      * @param {class} world - class of the world
      */
-    constructor(x, y, playerDierection, world) {
+    constructor(x, y, playerDierection, world, audio10) {
         super();
         this.playThrowsound();
         this.world = world;
+        this.audio10 = audio10;
         this.loadImage('Bomb/bomb_0009_Layer-1.png');
         this.loadImagesArray(this.images_Explo);
         this.loadImagesArray(this.images_Smoke);
@@ -81,6 +83,7 @@ class ThrowableObject extends MovableObject {
      * play the throw sound
      */
     playThrowsound() {
+        // this.audio10.play();
         this.throw_sound.play();
         // this.world.audio[10].play();
         this.throw_sound.loop = false;

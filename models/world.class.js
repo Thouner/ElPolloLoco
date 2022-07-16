@@ -67,12 +67,13 @@ class World extends FunctionForWorld {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.playBgSound();
+        this.setWorld();
         this.draw();
         this.checkInteraction();
-        this.setWorld();
         this.keyboard.touchPress();
         this.soundOn = soundOn;
         this.muteAudio();
+        this.addOrk();
     }
 
 
@@ -85,7 +86,6 @@ class World extends FunctionForWorld {
                 const element = this.audio[i];
                 element.muted = true;
             }
-
         } else {
             for (let i = 0; i < this.audio.length; i++) {
                 const element = this.audio[i];
@@ -118,9 +118,6 @@ class World extends FunctionForWorld {
     setWorld() {
         this.level.endboss[0].world = this;
         this.movableObject.world = this;
-        for (let i = 0; i < this.level.enemies.length; i++) {
-            this.level.enemies[i].world = this;
-        }
     }
 
 
@@ -138,7 +135,6 @@ class World extends FunctionForWorld {
             this.goEnemies();
             this.gameWinning();
             this.attackBoss();
-            this.addOrk();
         }, 100);
 
     }
@@ -197,7 +193,7 @@ class World extends FunctionForWorld {
         if (this.character.bombs > 0) {
             this.character.minusBombs();
             this.throwBombTime = Date.now();
-            let bomb = new ThrowableObject(this.character.x, this.character.y, this.character.otherDierection, this);
+            let bomb = new ThrowableObject(this.character.x, this.character.y, this.character.otherDierection, this, this.audio[10]);
             this.throwableObject.push(bomb);
         }
 
@@ -352,10 +348,28 @@ class World extends FunctionForWorld {
      * add the orcs
      */
     addOrk() {
-        if (!this.level.endboss[0].bossWalk && this.level.enemies.length < 10) {
-            this.level.enemies.push(new Enemies(400 + this.orkDistance * this.orkMultiplikator));
-            this.orkMultiplikator += 1;
-        }
+        // if (!this.level.endboss[0].bossWalk) {
+        // this.level.enemies.push(new Enemies(400 + this.orkDistance * this.orkMultiplikator));
+        // this.orkMultiplikator += 1;
+        this.level.enemies.push(new Enemies(800, this),
+            new Enemies(1000, this),
+            new Enemies(1200, this),
+            new Enemies(1400, this),
+            new Enemies(1600, this),
+            new Enemies(1800, this),
+            new Enemies(2000, this),
+            new Enemies(2200, this),
+            new Enemies(2400, this),
+            new Enemies(2600, this),
+            new Enemies(2800, this),
+            new Enemies(3000, this),
+            new Enemies(3200, this),
+            new Enemies(3400, this),
+            new Enemies(3600, this), );
+        setInterval(() => {
+            this.level.enemies.push(new Enemies(3800));
+        }, 3500);
+        // }
     }
 
 
