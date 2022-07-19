@@ -63,7 +63,6 @@ class ThrowableObject extends MovableObject {
      */
     constructor(x, y, playerDierection, world, audio10) {
         super();
-        this.playThrowsound();
         this.world = world;
         this.audio10 = audio10;
         this.loadImage('Bomb/bomb_0009_Layer-1.png');
@@ -83,8 +82,8 @@ class ThrowableObject extends MovableObject {
      * play the throw sound
      */
     playThrowsound() {
-        // this.world.audio[11].play();
-        this.throw_sound.play();
+        this.world.audio[10].play();
+        // this.throw_sound.play();
     }
 
 
@@ -149,6 +148,7 @@ class ThrowableObject extends MovableObject {
      * @param {boolean} playerDierection - true if the character walks to the left
      */
     throw (playerDierection) {
+        this.playThrowsound();
         this.speedY = 32;
         if (playerDierection) {
             this.throwLeft();
