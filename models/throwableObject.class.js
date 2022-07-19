@@ -83,11 +83,8 @@ class ThrowableObject extends MovableObject {
      * play the throw sound
      */
     playThrowsound() {
-        // this.audio10.play();
+        // this.world.audio[11].play();
         this.throw_sound.play();
-        // this.world.audio[10].play();
-        this.throw_sound.loop = false;
-        this.throw_sound.volume = 0.3;
     }
 
 
@@ -104,11 +101,12 @@ class ThrowableObject extends MovableObject {
     }
 
 
+    /**
+     * play the explosions sound
+     */
     playExplosound() {
         if (this.soundPlay) {
-            this.explo_sound.play();
-            this.explo_sound.loop = false;
-            this.explo_sound.volume = 0.1;
+            this.world.audio[11].play();
             setTimeout(() => {
                 this.soundPlay = false;
             }, 250);
