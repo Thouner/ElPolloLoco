@@ -18,7 +18,7 @@ letMute();
 /**
  * load the sound variables
  */
-function loadSoundOn() {
+async function loadSoundOn() {
     soundOn = sessionStorage.getItem('soundOn');
     // console.log(soundOn);
     muteAudio();
@@ -100,7 +100,7 @@ function letMute() {
 /**
  * mute if possible
  */
-function muteTimer() {
+async function muteTimer() {
     mutetTime = Date.now();
     lastMute = new Date().getTime();
     soundOn = !soundOn;
@@ -112,7 +112,9 @@ function muteTimer() {
 /**
  *  play the intro background music
  */
-window.addEventListener('load', function() {
+function showFlag() {
+    document.getElementById('entern').style.display = 'none';
+    document.getElementById('flag_container').style.transform = 'scale(1)';
     introBgSound.volume = 0.2;
     setTimeout(() => {
         if (typeof introBgSound.loop == 'boolean') {
@@ -125,7 +127,7 @@ window.addEventListener('load', function() {
         }
         introBgSound.play();
     }, 500);
-});
+}
 
 
 /**
