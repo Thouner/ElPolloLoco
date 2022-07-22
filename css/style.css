@@ -86,7 +86,7 @@
     }
     
     #entern {
-        z-index: 50;
+        z-index: 4;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -169,7 +169,7 @@
     }
     
     .help {
-        z-index: 1;
+        z-index: 5;
         position: absolute;
         /* bottom: -550px; */
         bottom: 0px;
