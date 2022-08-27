@@ -279,6 +279,7 @@ function removeStartScreen(number) {
     playCharacterSound(number);
     init(number);
     document.getElementById('flag_container').classList.add('biggerFlag');
+    document.getElementById('help_Container').classList.add('d-none');
     setTimeout(() => {
         showGame();
         if (mobileAndTabletCheck()) {

@@ -365,10 +365,33 @@ class World extends FunctionForWorld {
             new Enemies(3000, this),
             new Enemies(3200, this),
             new Enemies(3400, this),
-            new Enemies(3600, this), );
-        setInterval(() => {
-            this.level.enemies.push(new Enemies(3800));
-        }, 3500);
+            new Enemies(3600, this),
+            new Enemies(3800, this),
+            new Enemies(4000, this),
+            new Enemies(4200, this),
+            new Enemies(4400, this),
+            new Enemies(4600, this),
+            new Enemies(4800, this),
+            new Enemies(5000, this),
+            new Enemies(5200, this),
+            new Enemies(5400, this),
+            new Enemies(5600, this),
+            new Enemies(5800, this),
+            new Enemies(6000, this),
+            new Enemies(6200, this),
+            new Enemies(6400, this),
+            new Enemies(6600, this),
+            new Enemies(6800, this),
+            new Enemies(7000, this),
+            new Enemies(7200, this),
+            new Enemies(7400, this),
+            new Enemies(7600, this),
+            new Enemies(7800, this),
+            new Enemies(8000, this),
+             );
+        // setInterval(() => {
+        //     this.level.enemies.push(new Enemies(3800));
+        // }, 3500);
         // }
     }
 
