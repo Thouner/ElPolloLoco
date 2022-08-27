@@ -102,7 +102,7 @@ class World extends FunctionForWorld {
         if (typeof this.audio[0].loop == 'boolean') {
             this.audio[0].loop = true;
         } else {
-            this.audio[0].addEventListener('ended', function() {
+            this.audio[0].addEventListener('ended', function () {
                 this.currentTime = 0;
                 audioVolume();
                 this.play();
@@ -245,7 +245,7 @@ class World extends FunctionForWorld {
      */
     selfDraw() {
         let self = this;
-        requestAnimationFrame(function() {
+        requestAnimationFrame(function () {
             self.draw();
         });
     }
@@ -347,55 +347,49 @@ class World extends FunctionForWorld {
     /**
      * add the orcs
      */
-    addOrk() {
-        // if (!this.level.endboss[0].bossWalk) {
-        // this.level.enemies.push(new Enemies(400 + this.orkDistance * this.orkMultiplikator));
-        // this.orkMultiplikator += 1;
-        this.level.enemies.push(new Enemies(800, this),
+    addOrk(){
+        this.level.enemies.push(
+            new Enemies(800, this),
             new Enemies(1000, this),
-            new Enemies(1200, this),
-            new Enemies(1400, this),
-            new Enemies(1600, this),
-            new Enemies(1800, this),
-            new Enemies(2000, this),
-            new Enemies(2200, this),
-            new Enemies(2400, this),
-            new Enemies(2600, this),
-            new Enemies(2800, this),
-            new Enemies(3000, this),
-            new Enemies(3200, this),
-            new Enemies(3400, this),
-            new Enemies(3600, this),
-            new Enemies(3800, this),
-            new Enemies(4000, this),
-            new Enemies(4200, this),
-            new Enemies(4400, this),
-            new Enemies(4600, this),
-            new Enemies(4800, this),
-            new Enemies(5000, this),
-            new Enemies(5200, this),
-            new Enemies(5400, this),
-            new Enemies(5600, this),
-            new Enemies(5800, this),
-            new Enemies(6000, this),
-            new Enemies(6200, this),
-            new Enemies(6400, this),
-            new Enemies(6600, this),
-            new Enemies(6800, this),
-            new Enemies(7000, this),
-            new Enemies(7200, this),
-            new Enemies(7400, this),
-            new Enemies(7600, this),
-            new Enemies(7800, this),
-            new Enemies(8000, this),
-             );
-        // setInterval(() => {
-        //     this.level.enemies.push(new Enemies(3800));
-        // }, 3500);
-        // }
+                    new Enemies(1200, this),
+                    new Enemies(1400, this),
+                    new Enemies(1600, this),
+                    new Enemies(1800, this),
+                    new Enemies(2000, this),
+                    new Enemies(2200, this),
+                    new Enemies(2400, this),
+                    new Enemies(2600, this),
+                    new Enemies(2800, this),
+                    new Enemies(3000, this),
+                    new Enemies(3200, this),
+                    new Enemies(3400, this),
+                    new Enemies(3600, this),
+                    new Enemies(3800, this),
+                    new Enemies(4000, this),
+                    new Enemies(4200, this),
+                    new Enemies(4400, this),
+                    new Enemies(4600, this),
+                    new Enemies(4800, this),
+                    new Enemies(5000, this),
+                    new Enemies(5200, this),
+                    new Enemies(5400, this),
+                    new Enemies(5600, this),
+                    new Enemies(5800, this),
+                    new Enemies(6000, this),
+                    new Enemies(6200, this),
+                    new Enemies(6400, this),
+                    new Enemies(6600, this),
+                    new Enemies(6800, this),
+                    new Enemies(7000, this),
+                    new Enemies(7200, this),
+                    new Enemies(7400, this),
+                    new Enemies(7600, this),
+                    new Enemies(7800, this),
+                    new Enemies(8000, this),
+        );
     }
 
-
+    
     /**
      * draw each object from an array
      * 

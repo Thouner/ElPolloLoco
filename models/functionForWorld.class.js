@@ -149,10 +149,10 @@ class FunctionForWorld {
         if (this.level.endboss[0].bossisDead && this.character.x > 2900) {
             this.playTheWinSound();
             this.character.gameWon = true;
-            // this.level.enemies.forEach(enemy => {
-            //     // enemy.setEnemyDead();
-            //     enemy.enemyWalk = false;
-            // });
+            this.level.enemies.forEach(enemy => {
+                // enemy.setEnemyDead();
+                enemy.enemyWalk = false;
+            });
             setTimeout(() => {
                 this.audio[0].pause();
                 this.audio[1].volume = 0.2;

@@ -347,9 +347,9 @@ class Character extends MovableObject {
      * removing the dead orc
      */
     removeDeadOrc(i) {
-        setTimeout(() => {
-            this.world.level.enemies.splice(i, 1);
-        }, 20000);
+        // setTimeout(() => {
+        //     this.world.level.enemies.splice(i, 1);
+        // }, 20000);
     }
 
 
